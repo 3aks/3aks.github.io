@@ -160,6 +160,14 @@ function setupHeader() {
         toggle.setAttribute('aria-expanded', 'false');
       });
     });
+
+    document.addEventListener('click', (e) => {
+      if (drawer.classList.contains('open') && !header.contains(e.target)) {
+        drawer.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
   // Active section observer
