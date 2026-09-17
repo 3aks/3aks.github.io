@@ -207,7 +207,9 @@ body.intro-running .hero-heading,
 body.intro-running .hero-lead,
 body.intro-running .hero-actions,
 body.intro-running .quick-facts,
-body.intro-running .code-card {
+body.intro-running .code-card,
+body.intro-running #about .scroll-item,
+body.intro-running #projects .scroll-item {
   opacity: 0;
 }
 

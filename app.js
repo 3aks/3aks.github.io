@@ -125,9 +125,9 @@ function initStartupAnimation(prefersReduced) {
   overlay.addEventListener('click', onUserInteraction);
   window.addEventListener('keydown', onUserInteraction);
 
-  // Step 1: Black screen to colour logo scramble
-  const totalFrames = 19;
-  const frameInterval = 28; // ~530ms total
+  // Step 1: Black screen to colour logo scramble (fast & snappy)
+  const totalFrames = 14;
+  const frameInterval = 24; // ~336ms total
   let currentFrame = 0;
 
   scrambleTimer = setInterval(() => {
@@ -145,11 +145,11 @@ function initStartupAnimation(prefersReduced) {
       clearInterval(scrambleTimer);
       scrambleBrand.innerHTML = buildScrambleHtml(TARGET_TEXT.length);
 
-      // Step 2: Brief pause (120ms), then glide colour logo to nav bar
+      // Step 2: Brief pause (75ms), then glide colour logo to nav bar
       setTimeout(() => {
         if (isDismissed) return;
         flyToHeader();
-      }, 120);
+      }, 75);
     }
   }, frameInterval);
 
@@ -173,17 +173,17 @@ function initStartupAnimation(prefersReduced) {
       translateX: [startX, endX],
       translateY: [startY, endY],
       scale: [1, targetScale],
-      duration: 520,
+      duration: 360,
       easing: 'cubicBezier(0.16, 1, 0.3, 1)',
       complete: () => {
         if (!isDismissed) {
-          // Hand off seamlessly to navbar logo — no black blink
+          // Hand off seamlessly to navbar logo — zero black blink
           targetLogo.style.opacity = '1';
           targetLogo.style.visibility = 'visible';
           document.body.classList.remove('intro-running');
           scrambleWrap.remove();
 
-          // Step 4: Load horizontal lines, THEN all text and buttons
+          // Step 4: Load horizontal lines, THEN all text and buttons (Hero, About, Projects)
           animateLinesAndContent();
         }
       }
@@ -192,8 +192,8 @@ function initStartupAnimation(prefersReduced) {
     anime({
       targets: overlay,
       opacity: [1, 0],
-      duration: 400,
-      delay: 40,
+      duration: 280,
+      delay: 30,
       easing: 'easeInOutQuad',
       complete: () => {
         overlay.style.display = 'none';
@@ -201,18 +201,18 @@ function initStartupAnimation(prefersReduced) {
     });
   }
 
-  // Step 4: Load horizontal lines, THEN all the text and buttons (Anime.js)
+  // Step 4: Load horizontal lines, THEN all the text and buttons (Anime.js - fast & punchy)
   function animateLinesAndContent() {
     const masterTimeline = anime.timeline({
       easing: 'easeOutQuart'
     });
 
-    // 1. Horizontal lines draw across
+    // 1. Horizontal lines slice across fast! (Header, Hero, About, Projects)
     masterTimeline.add({
-      targets: ['.header-line', '#heroLine'],
+      targets: ['.header-line', '#heroLine', '#about .section-line', '#projects .section-line'],
       scaleX: [0, 1],
-      duration: 480,
-      delay: anime.stagger(90),
+      duration: 280,
+      delay: anime.stagger(45),
       easing: 'easeOutQuart'
     })
     // 2. Header nav links & GitHub button
@@ -220,65 +220,85 @@ function initStartupAnimation(prefersReduced) {
       targets: ['.desktop-nav .nav-link', '#navGithubLink', '#mobileMenuBtn'],
       opacity: [0, 1],
       translateY: [-6, 0],
-      delay: anime.stagger(35),
-      duration: 320,
+      delay: anime.stagger(20),
+      duration: 200,
       easing: 'easeOutCubic'
-    }, '-=240')
+    }, '-=190')
     // 3. Hero status badge
     .add({
       targets: '.hero-status',
       opacity: [0, 1],
       translateY: [8, 0],
-      duration: 280,
+      duration: 190,
       easing: 'easeOutCubic'
-    }, '-=240')
+    }, '-=190')
     // 4. Hero heading
     .add({
       targets: '.hero-heading',
       opacity: [0, 1],
-      translateY: [12, 0],
-      duration: 340,
+      translateY: [10, 0],
+      duration: 220,
       easing: 'easeOutCubic'
-    }, '-=220')
+    }, '-=170')
     // 5. Hero lead text
     .add({
       targets: '.hero-lead',
       opacity: [0, 1],
-      translateY: [10, 0],
-      duration: 300,
+      translateY: [8, 0],
+      duration: 200,
       easing: 'easeOutCubic'
-    }, '-=200')
+    }, '-=160')
     // 6. Hero action buttons
     .add({
       targets: '.hero-actions .btn',
       opacity: [0, 1],
-      translateY: [8, 0],
-      delay: anime.stagger(50),
-      duration: 280,
+      translateY: [6, 0],
+      delay: anime.stagger(30),
+      duration: 190,
       easing: 'easeOutCubic'
-    }, '-=180')
+    }, '-=150')
     // 7. Quick facts
     .add({
       targets: '.quick-facts .fact',
       opacity: [0, 1],
-      translateY: [8, 0],
-      delay: anime.stagger(40),
-      duration: 260,
+      translateY: [6, 0],
+      delay: anime.stagger(25),
+      duration: 180,
       easing: 'easeOutCubic'
-    }, '-=160')
+    }, '-=140')
     // 8. Profile code card
     .add({
       targets: '.code-card',
       opacity: [0, 1],
       scale: [0.97, 1],
+      translateY: [10, 0],
+      duration: 250,
+      easing: 'easeOutQuad'
+    }, '-=190')
+    // 9. About Section: Title & text animate!
+    .add({
+      targets: '#about .scroll-item',
+      opacity: [0, 1],
       translateY: [12, 0],
-      duration: 400,
-      easing: 'easeOutQuad',
+      delay: anime.stagger(35),
+      duration: 220,
+      easing: 'easeOutCubic'
+    }, '-=180')
+    // 10. Projects Section: Header & cards animate!
+    .add({
+      targets: '#projects .scroll-item',
+      opacity: [0, 1],
+      translateY: [12, 0],
+      delay: anime.stagger(30),
+      duration: 220,
+      easing: 'easeOutCubic',
       complete: () => {
-        // Initialize scroll observer for sections below
+        document.querySelector('#about')?.classList.add('animated');
+        document.querySelector('#projects')?.classList.add('animated');
+        // Initialize scroll observer for remaining sections (Skills, Terminal, Contact)
         setupScrollReveals(false);
       }
-    }, '-=260');
+    }, '-=160');
   }
 }
 
@@ -287,7 +307,7 @@ function initStartupAnimation(prefersReduced) {
    ========================================================================== */
 function setupScrollReveals(immediate) {
   document.body.classList.add('js-ready');
-  const sections = document.querySelectorAll('main section.section');
+  const sections = document.querySelectorAll('main section.section:not(.animated)');
 
   if (immediate || !window.IntersectionObserver) {
     document.querySelectorAll('.section-line').forEach(l => l.style.transform = 'scaleX(1)');
@@ -303,6 +323,7 @@ function setupScrollReveals(immediate) {
       if (entry.isIntersecting) {
         const section = entry.target;
         obs.unobserve(section);
+        section.classList.add('animated');
 
         const line = section.querySelector('.section-line');
         const items = section.querySelectorAll('.scroll-item');
@@ -312,7 +333,7 @@ function setupScrollReveals(immediate) {
           secTl.add({
             targets: line,
             scaleX: [0, 1],
-            duration: 480,
+            duration: 280,
             easing: 'easeOutQuart'
           });
         }
@@ -321,17 +342,17 @@ function setupScrollReveals(immediate) {
           secTl.add({
             targets: items,
             opacity: [0, 1],
-            translateY: [18, 0],
-            delay: anime.stagger(50),
-            duration: 380,
+            translateY: [12, 0],
+            delay: anime.stagger(30),
+            duration: 220,
             easing: 'easeOutCubic'
-          }, line ? '-=240' : 0);
+          }, line ? '-=180' : 0);
         }
       }
     });
   }, {
-    rootMargin: '0px 0px -40px 0px',
-    threshold: 0.1
+    rootMargin: '0px 0px -20px 0px',
+    threshold: 0.05
   });
 
   sections.forEach(s => observer.observe(s));
