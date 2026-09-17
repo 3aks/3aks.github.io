@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTTP Error — 3aks.me</title>
-  <meta name="description" content="Custom HTTP Error Page for 3aks.me — Arjun Sharma">
+  <title>HTTP 401 Unauthorized — 3aks.me</title>
+  <meta name="description" content="401 Unauthorized Access — 3aks.me">
   <meta name="robots" content="noindex, nofollow">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2308080a'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='50' font-family='monospace' font-weight='700' fill='%2338bdf8'>3A</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2308080a'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='50' font-family='monospace' font-weight='700' fill='%23f97316'>401</text></svg>">
 
   <!-- Fonts: IBM Plex Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,29 +59,30 @@
   <main>
     <section class="error-page-section">
       <div class="error-card">
-        <div class="error-status-badge b-404" id="errBadge">
+        <div class="error-status-badge b-401" id="errBadge">
           <span class="status-indicator"></span>
-          <span id="errBadgeText">HTTP 404 NOT FOUND</span>
+          <span id="errBadgeText">HTTP 401 UNAUTHORIZED</span>
         </div>
 
-        <h1 class="error-title" id="errTitle">Resource Not Found</h1>
+        <h1 class="error-title" id="errTitle">Authentication Required</h1>
         <p class="error-desc" id="errDesc">
-          The requested endpoint or file does not exist on 3aks.me. Check the URL or return to the main engineering portfolio.
+          Access denied: You lack valid authentication tokens or hardware security credentials to inspect this endpoint.
         </p>
 
         <!-- Interactive Switcher for testing/viewing error codes -->
         <div class="error-code-switcher" aria-label="Simulate Error States">
-          <button class="error-code-btn" data-code="401">401 Unauthorized</button>
+          <button class="error-code-btn active" data-code="401">401 Unauthorized</button>
           <button class="error-code-btn" data-code="403">403 Forbidden</button>
-          <button class="error-code-btn active" data-code="404">404 Not Found</button>
+          <button class="error-code-btn" data-code="404">404 Not Found</button>
           <button class="error-code-btn" data-code="500">500 Server Error</button>
         </div>
 
         <div class="error-terminal-preview" id="errLog">
-          <span style="color: var(--accent-sky); font-weight: 600;">[SYS-DIAGNOSTIC]</span> route_resolution_fault<br>
-          &gt; target: <span id="errTargetUrl">/unknown-route</span><br>
-          &gt; status: 404 NOT_FOUND &bull; dispatcher: static_router<br>
-          &gt; action: fallback to root directory recommended
+          <span style="color: var(--accent-orange); font-weight: 600;">[AUTH-FAULT]</span> HTTP_401_UNAUTHORIZED<br>
+          &gt; session_id: GUEST_SESSION_0x8F<br>
+          &gt; token: NULL or EXPIRED<br>
+          &gt; scope: privileged_hardware_registers<br>
+          &gt; advice: authenticate via authorized developer session
         </div>
 
         <div class="error-actions">
@@ -120,7 +121,6 @@
   </footer>
 
   <script>
-    // Custom Error Data Dictionary
     const ERROR_DATA = {
       '401': {
         code: '401',
@@ -157,53 +157,20 @@
     };
 
     function renderErrorCode(code) {
-      const data = ERROR_DATA[code] || ERROR_DATA['404'];
-      const badge = document.getElementById('errBadge');
-      const badgeText = document.getElementById('errBadgeText');
-      const title = document.getElementById('errTitle');
-      const desc = document.getElementById('errDesc');
-      const log = document.getElementById('errLog');
-
+      const data = ERROR_DATA[code] || ERROR_DATA['401'];
       document.title = `${data.badge} — 3aks.me`;
-      badge.className = `error-status-badge ${data.badgeClass}`;
-      badgeText.textContent = data.badge;
-      title.textContent = data.title;
-      desc.textContent = data.desc;
-      log.innerHTML = data.log;
+      document.getElementById('errBadge').className = `error-status-badge ${data.badgeClass}`;
+      document.getElementById('errBadgeText').textContent = data.badge;
+      document.getElementById('errTitle').textContent = data.title;
+      document.getElementById('errDesc').textContent = data.desc;
+      document.getElementById('errLog').innerHTML = data.log;
 
       document.querySelectorAll('.error-code-btn').forEach(btn => {
-        if (btn.getAttribute('data-code') === code) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
+        btn.classList.toggle('active', btn.getAttribute('data-code') === code);
       });
     }
 
-    function getErrorCodeFromUrl() {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('code')) {
-        const c = urlParams.get('code');
-        if (ERROR_DATA[c]) return c;
-      }
-
-      const pathname = window.location.pathname.toLowerCase();
-      if (pathname.includes('401')) return '401';
-      if (pathname.includes('403')) return '403';
-      if (pathname.includes('500')) return '500';
-      if (pathname.includes('404')) return '404';
-
-      const hash = window.location.hash.toLowerCase();
-      if (hash.includes('401')) return '401';
-      if (hash.includes('403')) return '403';
-      if (hash.includes('500')) return '500';
-      if (hash.includes('404')) return '404';
-
-      return '404';
-    }
-
-    const initialCode = getErrorCodeFromUrl();
-    renderErrorCode(initialCode);
+    renderErrorCode('401');
 
     document.querySelectorAll('.error-code-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -219,7 +186,7 @@
 
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // Ambient background interactivity on 404 page
+    // Ambient background interactivity
     const orbBlue1 = document.getElementById('orbBlue1');
     const orbOrange1 = document.getElementById('orbOrange1');
     const orbBlue2 = document.getElementById('orbBlue2');
