@@ -28,8 +28,10 @@
   <!-- Header -->
   <header class="site-header" id="header">
     <div class="container nav-container">
-      <a href="#hero" class="brand-logo" aria-label="3aks.me home">
-        <span class="logo-mono">3aks<span class="logo-accent">.me</span></span>
+      <a href="#hero" class="brand-logo" aria-label="3aks.me Home">
+        <span class="logo-bracket">&lt;</span>
+        <span class="logo-text">3aks<span class="logo-accent">.me</span></span>
+        <span class="logo-bracket">/&gt;</span>
       </a>
 
       <nav class="desktop-nav" aria-label="Main Navigation">
@@ -373,44 +375,51 @@
       </div>
     </section>
 
-    <!-- Interactive Terminal Section -->
-    <section class="section" id="terminal">
+    <!-- Interactive Terminal CLI Section -->
+    <section class="section terminal-section" id="terminal">
       <div class="container">
         <div class="section-header-row">
           <div>
-            <h2 class="section-title">Terminal</h2>
-            <p class="section-subtitle">Type commands or click quick prompts below.</p>
+            <h2 class="section-title">Terminal Shell</h2>
+            <p class="section-subtitle">Type commands below or click quick shortcuts to inspect details right from the CLI.</p>
           </div>
         </div>
 
-        <div class="terminal-shell">
-          <div class="terminal-top">
-            <div class="window-buttons">
-              <span class="win-btn close"></span>
-              <span class="win-btn min"></span>
-              <span class="win-btn max"></span>
+        <div class="terminal-window">
+          <div class="terminal-titlebar">
+            <div class="terminal-dots">
+              <span class="terminal-dot close"></span>
+              <span class="terminal-dot minimize"></span>
+              <span class="terminal-dot zoom"></span>
             </div>
-            <div class="terminal-shell-title">sh — guest@3aks.me</div>
-            <button class="term-clear-btn" id="clearTerminalBtn">clear</button>
+            <div class="terminal-title">guest@3aks.me: ~ (bash)</div>
+            <div class="terminal-actions">
+              <button class="terminal-action-btn" id="clearTerminalBtn" title="Clear terminal">clear</button>
+            </div>
           </div>
 
-          <div class="term-shortcuts">
-            <span class="shortcuts-label">Run:</span>
-            <button class="quick-cmd" data-cmd="help">help</button>
-            <button class="quick-cmd" data-cmd="whoami">whoami</button>
-            <button class="quick-cmd" data-cmd="projects">projects</button>
-            <button class="quick-cmd" data-cmd="hardware">hardware</button>
-            <button class="quick-cmd" data-cmd="contact">contact</button>
+          <div class="terminal-quick-pills" id="terminalPills" aria-label="Suggested Commands">
+            <span class="pill-label">Suggested:</span>
+            <button class="term-pill" data-cmd="help">help</button>
+            <button class="term-pill" data-cmd="whoami">whoami</button>
+            <button class="term-pill" data-cmd="projects">projects</button>
+            <button class="term-pill" data-cmd="skills">skills</button>
+            <button class="term-pill" data-cmd="hardware">hardware</button>
+            <button class="term-pill" data-cmd="contact">contact</button>
           </div>
 
-          <div class="terminal-output" id="terminalBody">
-            <div class="term-row dim">3aks shell [version 1.1]</div>
-            <div class="term-row dim">Type 'help' to see commands.</div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line banner">
+              <span class="term-dim">Welcome to Arjun's interactive terminal [3aks.me v1.0.0]</span><br>
+              <span class="term-dim">Type <span class="term-highlight">'help'</span> or click any button above to see available commands.</span>
+            </div>
           </div>
 
-          <form class="terminal-prompt-line" id="terminalForm">
-            <label for="terminalInput" class="term-prompt-label">3aks.me:$&nbsp;</label>
-            <input type="text" id="terminalInput" class="term-input" autocomplete="off" spellcheck="false" placeholder="help">
+          <form class="terminal-input-row" id="terminalForm">
+            <label for="terminalInput" class="terminal-prompt">
+              <span class="prompt-user">visitor</span><span class="prompt-at">@</span><span class="prompt-host">3aks.me</span>:<span class="prompt-path">~</span>$&nbsp;
+            </label>
+            <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type a command...">
           </form>
         </div>
       </div>

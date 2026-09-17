@@ -234,73 +234,104 @@ function setupFilterTabs(prefersReduced) {
 function setupTerminal(prefersReduced) {
   const form = document.getElementById('terminalForm');
   const input = document.getElementById('terminalInput');
-  const output = document.getElementById('terminalBody');
+  const body = document.getElementById('terminalBody');
   const clearBtn = document.getElementById('clearTerminalBtn');
-  const shortcuts = document.querySelectorAll('.quick-cmd');
+  const quickPills = document.querySelectorAll('.term-pill');
 
-  if (!form || !input || !output) return;
+  if (!form || !input || !body) return;
 
   const history = [];
-  let historyIdx = -1;
+  let historyIndex = -1;
 
-  const cmds = {
+  const commands = {
     help: () => `
-Available commands:
-  whoami    - About Arjun
-  projects  - List active hardware and software projects
-  hardware  - Hardware builds & microcontrollers
-  contact   - GitHub profile and links
-  clear     - Clear screen
+<span class="term-highlight">Available Commands:</span>
+  <span class="term-cmd">whoami</span>    - Brief intro and identity
+  <span class="term-cmd">projects</span>  - List key hardware & software builds
+  <span class="term-cmd">skills</span>    - View engineering & microcontroller toolkit
+  <span class="term-cmd">hardware</span>  - Specific details on embedded hardware builds
+  <span class="term-cmd">contact</span>   - Show contact channels & links
+  <span class="term-cmd">github</span>    - Open Arjun's GitHub profile
+  <span class="term-cmd">clear</span>     - Wipe terminal screen
+  <span class="term-cmd">echo [text]</span>- Print text back
     `,
-    whoami: () => `Arjun Sharma (@3aks)
-Hardware builder and programmer based at 3aks.me.
-Focus: ESP32 microcontrollers, automotive bus bridges, circuit prototyping, and C/Python.`,
-    projects: () => `Projects:
-  1. BMW-Dual-MCU-Bluetooth-Audio-Bridge (C) - Dual-MCU audio bridge for BMW stereos
-  2. Camera-Switching-Macropad (Python) - Hack Club macropad for video switching
-  3. Custom-Mixer-ESP32 (C/Python) - Audio mixer on ESP32
-  4. VoltaMetric (Hardware) - Connected multimeter prototype
-  5. Media-Keys-Fixer (AutoHotkey) - Windows background key interceptor for Spotify`,
-    hardware: () => `Hardware Details:
-  - Microcontrollers: ESP32, STM32, Atmel AVR
-  - Buses: UART, I2C, SPI, CAN bus
-  - Lab Bench: Soldering, logic analyzer, multimeter`,
-    contact: () => `GitHub: https://github.com/3aks
-Site  : https://3aks.me`
+    whoami: () => `
+<span class="term-success">Arjun Sharma (@3aks)</span>
+Embedded Systems Developer &amp; Hardware Builder
+Focus: ESP32 microcontrollers, custom audio hardware, dual-MCU automotive bridges, and systems software.
+Domain: <span class="term-highlight">https://3aks.me</span>
+    `,
+    projects: () => `
+<span class="term-highlight">Recent Projects:</span>
+  1. <span class="term-cmd">BMW-Dual-MCU-Bluetooth-Audio-Bridge</span> (C) - Embedded audio interface for BMW headunits
+  2. <span class="term-cmd">Camera-Switching-Macropad</span> (Python) - Custom Hack Club physical macropad
+  3. <span class="term-cmd">Custom-Mixer-ESP32</span> (Python/C) - Multi-channel audio mixer
+  4. <span class="term-cmd">VoltaMetric</span> (Hardware) - Connected smart multimeter prototype
+  5. <span class="term-cmd">Media-Keys-Fixer</span> (AutoHotkey) - Windows background utility for Spotify
+    `,
+    skills: () => `
+<span class="term-highlight">Technical Toolkit:</span>
+  [Hardware] : ESP32, STM32, C/Embedded C, Circuit Design, I2C, SPI, UART, CAN Bus
+  [Software] : Python, AutoHotkey, Modern JavaScript, HTML/CSS, Git, Linux
+  [Lab Tools]: Logic Analyzers, Multimeters, PlatformIO, VS Code, Hack Club Blueprint
+    `,
+    hardware: () => `
+<span class="term-highlight">Embedded &amp; Hardware Highlights:</span>
+  &bull; <span class="term-cmd">BMW Bridge:</span> Built dual-microcontroller bus translator for factory automotive audio.
+  &bull; <span class="term-cmd">Hack Club Macropad:</span> Designed hardware layout and programmed custom video switcher.
+  &bull; <span class="term-cmd">ESP32 Mixer:</span> Multi-potentiometer DAC/ADC audio mixing board.
+    `,
+    contact: () => `
+<span class="term-highlight">Get in Touch:</span>
+  GitHub : <a href="https://github.com/3aks" target="_blank" class="term-highlight" style="text-decoration:underline;">https://github.com/3aks</a>
+  Website: <a href="https://3aks.me" class="term-highlight" style="text-decoration:underline;">https://3aks.me</a>
+  Status : Available for embedded systems collaborations & open-source projects.
+    `,
+    github: () => {
+      window.open('https://github.com/3aks', '_blank');
+      return `Opening <span class="term-highlight">https://github.com/3aks</span> in a new tab...`;
+    }
   };
 
-  function runCommand(raw) {
-    const trimmed = raw.trim();
+  function executeCommand(rawInput) {
+    const trimmed = rawInput.trim();
     if (!trimmed) return;
 
+    // Add to history
     history.push(trimmed);
-    historyIdx = history.length;
+    historyIndex = history.length;
 
-    const row = document.createElement('div');
-    row.className = 'term-row';
-    row.innerHTML = `<span class="term-prompt-label">3aks.me:$</span> <span>${escapeHtml(trimmed)}</span>`;
-    output.appendChild(row);
+    // Print command line
+    const cmdLine = document.createElement('div');
+    cmdLine.className = 'terminal-line';
+    cmdLine.innerHTML = `<span class="prompt-user">visitor</span><span class="prompt-at">@</span><span class="prompt-host">3aks.me</span>:<span class="prompt-path">~</span>$&nbsp;<span class="term-cmd">${escapeHtml(trimmed)}</span>`;
+    body.appendChild(cmdLine);
 
-    const cmd = trimmed.toLowerCase();
-    const resultRow = document.createElement('div');
-    resultRow.className = 'term-row';
+    // Process command
+    const parts = trimmed.split(' ');
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1).join(' ');
+
+    const outputLine = document.createElement('div');
+    outputLine.className = 'terminal-line';
 
     if (cmd === 'clear') {
-      output.innerHTML = '';
+      body.innerHTML = '';
       return;
-    } else if (cmds[cmd]) {
-      resultRow.innerHTML = `<pre style="font-family:inherit;margin:0;white-space:pre-wrap;">${escapeHtml(cmds[cmd]())}</pre>`;
+    } else if (cmd === 'echo') {
+      outputLine.innerHTML = `<span>${escapeHtml(args)}</span>`;
+    } else if (commands[cmd]) {
+      outputLine.innerHTML = commands[cmd]();
     } else {
-      resultRow.className = 'term-row error';
-      resultRow.textContent = `command not found: ${trimmed}. Type 'help' for commands.`;
+      outputLine.innerHTML = `<span class="term-error">command not found: '${escapeHtml(cmd)}'. Type <span class="term-highlight">'help'</span> for list of commands.</span>`;
     }
 
-    output.appendChild(resultRow);
-    output.scrollTop = output.scrollHeight;
+    body.appendChild(outputLine);
+    body.scrollTop = body.scrollHeight;
 
     if (!prefersReduced && window.anime) {
       anime({
-        targets: [row, resultRow],
+        targets: [cmdLine, outputLine],
         opacity: [0, 1],
         translateY: [4, 0],
         duration: 140,
@@ -309,41 +340,47 @@ Site  : https://3aks.me`
     }
   }
 
+  // Handle Form Submit
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    runCommand(input.value);
+    executeCommand(input.value);
     input.value = '';
   });
 
+  // Handle Up/Down Arrow History
   input.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowUp') {
-      if (historyIdx > 0) {
-        historyIdx--;
-        input.value = history[historyIdx];
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = history[historyIndex];
       }
       e.preventDefault();
     } else if (e.key === 'ArrowDown') {
-      if (historyIdx < history.length - 1) {
-        historyIdx++;
-        input.value = history[historyIdx];
+      if (historyIndex < history.length - 1) {
+        historyIndex++;
+        input.value = history[historyIndex];
       } else {
-        historyIdx = history.length;
+        historyIndex = history.length;
         input.value = '';
       }
       e.preventDefault();
     }
   });
 
-  shortcuts.forEach(sc => {
-    sc.addEventListener('click', () => {
-      const c = sc.getAttribute('data-cmd');
-      if (c) runCommand(c);
+  // Quick pills click
+  quickPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const cmd = pill.getAttribute('data-cmd');
+      if (cmd) {
+        executeCommand(cmd);
+      }
     });
   });
 
+  // Clear button click
   if (clearBtn) {
     clearBtn.addEventListener('click', () => {
-      output.innerHTML = '';
+      body.innerHTML = '';
     });
   }
 }
