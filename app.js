@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHeader();
   setupFilterTabs();
   setupTerminal();
-  setupCopyEmail();
   setupRepoSync();
   setupFooterYear();
 });
@@ -114,7 +113,7 @@ Available commands:
   whoami    - About Arjun
   projects  - List active hardware and software projects
   hardware  - Hardware builds & microcontrollers
-  contact   - Email and GitHub links
+  contact   - GitHub profile and links
   clear     - Clear screen
     `,
     whoami: () => `Arjun Sharma (@3aks)
@@ -130,8 +129,7 @@ Focus: ESP32 microcontrollers, automotive bus bridges, circuit prototyping, and 
   - Microcontrollers: ESP32, STM32, Atmel AVR
   - Buses: UART, I2C, SPI, CAN bus
   - Lab Bench: Soldering, logic analyzer, multimeter`,
-    contact: () => `Email : arjunsharma290808@gmail.com
-GitHub: https://github.com/3aks
+    contact: () => `GitHub: https://github.com/3aks
 Site  : https://3aks.me`
   };
 
@@ -205,41 +203,7 @@ Site  : https://3aks.me`
   }
 }
 
-/* Copy Email */
-function setupCopyEmail() {
-  const email = 'arjunsharma290808@gmail.com';
-  const heroBtn = document.getElementById('copyEmailHeroBtn');
-  const contactBtn = document.getElementById('copyEmailContactBtn');
 
-  const copy = () => {
-    if (navigator.clipboard?.writeText) {
-      navigator.clipboard.writeText(email)
-        .then(() => toast(`Copied ${email} to clipboard`))
-        .catch(() => fallback(email));
-    } else {
-      fallback(email);
-    }
-  };
-
-  if (heroBtn) heroBtn.addEventListener('click', copy);
-  if (contactBtn) contactBtn.addEventListener('click', copy);
-}
-
-function fallback(text) {
-  const el = document.createElement('textarea');
-  el.value = text;
-  el.style.position = 'fixed';
-  el.style.opacity = '0';
-  document.body.appendChild(el);
-  el.select();
-  try {
-    document.execCommand('copy');
-    toast(`Copied ${text}`);
-  } catch {
-    toast(`Email: ${text}`);
-  }
-  document.body.removeChild(el);
-}
 
 function toast(msg) {
   const container = document.getElementById('toastContainer');
