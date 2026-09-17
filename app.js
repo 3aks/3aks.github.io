@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupFooterYear();
 
   if (!prefersReduced) {
-    initMotionScroll();
     initHeroTimeline();
     initInViewReveals();
     initCardTilt();
@@ -22,20 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   Motion.dev: Scroll Progress & In-View
+   Motion.dev: In-View Reveals
    ========================================================================== */
-function initMotionScroll() {
-  const bar = document.getElementById('scrollProgressBar');
-  if (!bar || !window.Motion || !Motion.scroll || !Motion.animate) return;
-
-  try {
-    Motion.scroll(
-      Motion.animate(bar, { scaleX: [0, 1] }, { ease: 'linear' })
-    );
-  } catch (err) {
-    console.debug('Motion scroll skipped:', err);
-  }
-}
 
 function initInViewReveals() {
   if (!window.Motion || !Motion.inView || !Motion.animate) return;
