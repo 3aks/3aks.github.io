@@ -50,12 +50,15 @@ html {
   font-size: 16px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Centered Container */
@@ -301,9 +304,10 @@ h1, h2, h3 {
 }
 
 .hero-heading {
-  font-size: 2.6rem;
+  font-size: clamp(1.85rem, 5vw, 2.6rem);
   font-weight: 700;
   letter-spacing: -0.03em;
+  line-height: 1.2;
   margin-bottom: 12px;
 }
 
@@ -861,28 +865,34 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Comprehensive Responsive System
    ========================================================================== */
-@media (max-width: 800px) {
+
+/* Tablet Landscape & Medium Desktops (<= 900px) */
+@media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
+  }
+
+  .skills-columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet Portrait (<= 768px) */
+@media (max-width: 768px) {
+  .section {
+    padding: 32px 0;
   }
 
   .project-list {
     grid-template-columns: 1fr;
   }
-
-  .skills-columns {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-heading {
-    font-size: 2.2rem;
-  }
 }
 
-@media (max-width: 600px) {
+/* Phablets & Mobile Devices (<= 640px) */
+@media (max-width: 640px) {
   .desktop-nav {
     display: none;
   }
@@ -900,7 +910,7 @@ h1, h2, h3 {
     width: 100%;
     background: #141518;
     border-bottom: 1px solid var(--border-default);
-    padding: 14px 24px 20px;
+    padding: 14px 20px 18px;
     flex-direction: column;
     gap: 4px;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.75);
@@ -912,20 +922,174 @@ h1, h2, h3 {
   }
 
   .hero-section {
-    padding-top: 80px;
+    padding-top: 24px;
     padding-bottom: 24px;
   }
 
-  .hero-heading {
-    font-size: 1.9rem;
+  .section-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .filter-tabs {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 3px;
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skills-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .terminal-body {
+    padding: 14px 12px;
+    font-size: 0.82rem;
+    min-height: 180px;
+    max-height: 300px;
+  }
+
+  .terminal-quick-pills {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .term-pill {
+    font-size: 0.72rem;
+    padding: 3px 8px;
+  }
+}
+
+/* Standard Smartphones (<= 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero-status {
+    font-size: 0.72rem;
+    padding: 2px 7px;
+  }
+
+  .hero-lead {
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 9px 14px;
   }
 
   .quick-facts {
-    flex-wrap: wrap;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding-top: 14px;
+  }
+
+  .fact-val {
+    font-size: 0.95rem;
+  }
+
+  .fact-label {
+    font-size: 0.7rem;
   }
 
   .fact-separator {
     display: none;
+  }
+
+  .card-code {
+    font-size: 0.72rem;
+    padding: 10px 12px;
+  }
+
+  .project-item {
+    padding: 14px 16px;
+  }
+
+  .project-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .project-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .terminal-title {
+    font-size: 0.74rem;
+    max-width: 170px;
+  }
+
+  .terminal-input-row {
+    padding: 10px 12px;
+  }
+
+  /* Shorten CLI prompt on small mobile to maximize input typing room */
+  .prompt-user, .prompt-at {
+    display: none;
+  }
+
+  .contact-box {
+    padding: 20px 16px;
+  }
+
+  .contact-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .contact-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+}
+
+/* Compact Smartphones (<= 380px) */
+@media (max-width: 380px) {
+  .nav-actions #navGithubLink span {
+    display: none;
+  }
+
+  .nav-actions #navGithubLink {
+    padding: 6px 8px;
+  }
+
+  .brand-logo {
+    font-size: 1.05rem;
+  }
+
+  .terminal-title {
+    max-width: 130px;
+  }
+
+  .quick-facts {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 }
