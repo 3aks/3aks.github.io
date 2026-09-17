@@ -25,6 +25,72 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Startup Intro Screen (Anime.js Powered) -->
+  <div class="startup-loader" id="startupLoader" aria-hidden="true">
+    <div class="startup-backdrop"></div>
+
+    <div class="startup-content">
+      <!-- Geometric Circuit SVG Emblem -->
+      <div class="startup-emblem-wrap">
+        <svg class="startup-svg" viewBox="0 0 200 200" width="160" height="160">
+          <defs>
+            <linearGradient id="emblemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#818cf8" />
+            </linearGradient>
+            <filter id="emblemGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3.5" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
+
+          <!-- Outer Hexagon Circuit Frame -->
+          <polygon class="svg-shape hex-outer" points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" />
+          
+          <!-- Animated Accent Polygon (Draws with Anime.js) -->
+          <polygon class="svg-shape hex-accent" points="100,10 178,55 178,145 100,190 22,145 22,55" fill="none" stroke="url(#emblemGrad)" stroke-width="2" filter="url(#emblemGlow)" />
+          
+          <!-- Circuit Nodes -->
+          <circle class="svg-node node-1" cx="100" cy="10" r="3.5" fill="#38bdf8" />
+          <circle class="svg-node node-2" cx="178" cy="55" r="3.5" fill="#38bdf8" />
+          <circle class="svg-node node-3" cx="178" cy="145" r="3.5" fill="#38bdf8" />
+          <circle class="svg-node node-4" cx="100" cy="190" r="3.5" fill="#38bdf8" />
+          <circle class="svg-node node-5" cx="22" cy="145" r="3.5" fill="#38bdf8" />
+          <circle class="svg-node node-6" cx="22" cy="55" r="3.5" fill="#38bdf8" />
+
+          <!-- Center Crosshair Lines -->
+          <line class="svg-cross line-h" x1="45" y1="100" x2="155" y2="100" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4 4" />
+          <line class="svg-cross line-v" x1="100" y1="45" x2="100" y2="155" stroke="rgba(255,255,255,0.12)" stroke-width="1" stroke-dasharray="4 4" />
+
+          <!-- Center Diamond -->
+          <polygon class="svg-shape diamond-inner" points="100,52 148,100 100,148 52,100" fill="none" stroke="#38bdf8" stroke-width="1.5" />
+        </svg>
+
+        <!-- Brand Monogram Overlay -->
+        <div class="startup-brand">
+          <span class="startup-bracket-l">&lt;</span>
+          <span class="startup-core-text">3aks<span class="startup-dot">.me</span></span>
+          <span class="startup-bracket-r">/&gt;</span>
+        </div>
+      </div>
+
+      <!-- Telemetry & Counter -->
+      <div class="startup-meta">
+        <div class="startup-progress-bar">
+          <div class="startup-progress-fill" id="startupProgressFill"></div>
+        </div>
+        <div class="startup-telemetry">
+          <span class="startup-status" id="startupStatus">INITIALIZING CORE...</span>
+          <span class="startup-counter" id="startupCounter">0%</span>
+        </div>
+      </div>
+
+      <button class="startup-skip-btn" id="startupSkipBtn" title="Skip startup animation">
+        press <kbd>esc</kbd> or click to skip &rarr;
+      </button>
+    </div>
+  </div>
+
   <!-- Header -->
   <header class="site-header" id="header">
     <div class="container nav-container">

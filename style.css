@@ -88,6 +88,165 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
+   Startup Loader (Anime.js Powered)
+   ========================================================================== */
+.startup-loader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #08090b;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
+.startup-backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  background-position: center center;
+}
+
+.startup-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  max-width: 90vw;
+}
+
+.startup-emblem-wrap {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.startup-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.svg-node {
+  opacity: 0;
+  transform-origin: center;
+}
+
+.diamond-inner {
+  transform-origin: 100px 100px;
+}
+
+.startup-brand {
+  position: relative;
+  z-index: 3;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  letter-spacing: -0.02em;
+}
+
+.startup-bracket-l,
+.startup-bracket-r {
+  color: var(--accent-sky);
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+  opacity: 0;
+}
+
+.startup-core-text {
+  color: var(--text-main);
+  opacity: 0;
+}
+
+.startup-dot {
+  color: var(--accent-sky);
+}
+
+.startup-meta {
+  width: 210px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.startup-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.startup-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+  border-radius: 2px;
+}
+
+.startup-telemetry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+.startup-counter {
+  color: var(--accent-sky);
+  font-weight: 600;
+}
+
+.startup-skip-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  padding: 4px 8px;
+  margin-top: 2px;
+  letter-spacing: 0.03em;
+}
+
+.startup-skip-btn kbd {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-default);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 0.64rem;
+  color: var(--text-muted);
+}
+
+.startup-skip-btn:hover {
+  color: var(--text-main);
+}
+
+/* ==========================================================================
    Header & Nav (Sticky so it never overlaps content)
    ========================================================================== */
 .site-header {

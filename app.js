@@ -13,12 +13,157 @@ document.addEventListener('DOMContentLoaded', () => {
   setupRepoSync(prefersReduced);
   setupFooterYear();
 
+  initStartupAnimation(prefersReduced);
+
   if (!prefersReduced) {
-    initHeroTimeline();
     initInViewReveals();
     initCardTilt();
   }
 });
+
+/* ==========================================================================
+   Anime.js: Startup Sequence (Circuit / Telemetry Animation)
+   ========================================================================== */
+function initStartupAnimation(prefersReduced) {
+  const loader = document.getElementById('startupLoader');
+  if (!loader) {
+    if (!prefersReduced) initHeroTimeline();
+    return;
+  }
+
+  // If user prefers reduced motion or anime.js isn't available, skip immediately
+  if (prefersReduced || !window.anime) {
+    loader.style.display = 'none';
+    return;
+  }
+
+  const fill = document.getElementById('startupProgressFill');
+  const counter = document.getElementById('startupCounter');
+  const status = document.getElementById('startupStatus');
+  const skipBtn = document.getElementById('startupSkipBtn');
+
+  let isDismissed = false;
+
+  function dismissLoader() {
+    if (isDismissed) return;
+    isDismissed = true;
+
+    anime({
+      targets: loader,
+      opacity: [1, 0],
+      scale: [1, 1.04],
+      duration: 380,
+      easing: 'easeInOutQuad',
+      complete: () => {
+        loader.style.display = 'none';
+        initHeroTimeline();
+      }
+    });
+  }
+
+  // Allow skip via button, click anywhere on loader, or ESC key
+  if (skipBtn) skipBtn.addEventListener('click', dismissLoader);
+  loader.addEventListener('click', (e) => {
+    if (e.target !== skipBtn) dismissLoader();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') dismissLoader();
+  });
+
+  // Prepare initial SVG stroke dashoffset
+  const hexAccent = loader.querySelector('.hex-accent');
+  if (hexAccent && anime.setDashoffset) {
+    hexAccent.style.strokeDashoffset = anime.setDashoffset(hexAccent);
+  }
+
+  const diamondInner = loader.querySelector('.diamond-inner');
+  if (diamondInner && anime.setDashoffset) {
+    diamondInner.style.strokeDashoffset = anime.setDashoffset(diamondInner);
+  }
+
+  // Anime.js Timeline: Sequential Path Drawing & Micro-interactions
+  const tl = anime.timeline({
+    easing: 'easeOutExpo',
+    complete: () => {
+      setTimeout(dismissLoader, 160);
+    }
+  });
+
+  // 1. Draw outer SVG circuit hexagon
+  tl.add({
+    targets: '.hex-accent',
+    strokeDashoffset: [anime.setDashoffset, 0],
+    duration: 650,
+    easing: 'easeInOutQuart'
+  })
+  // 2. Light up the 6 circuit nodes with a stagger
+  .add({
+    targets: '.svg-node',
+    scale: [0, 1],
+    opacity: [0, 1],
+    delay: anime.stagger(45),
+    duration: 320,
+    easing: 'easeOutBack'
+  }, '-=380')
+  // 3. Center diamond draw and rotate
+  .add({
+    targets: '.diamond-inner',
+    strokeDashoffset: [anime.setDashoffset, 0],
+    scale: [0.75, 1],
+    rotate: [45, 0],
+    duration: 450,
+    easing: 'easeOutCubic'
+  }, '-=280')
+  // 4. Reveal brackets with smooth outward slide
+  .add({
+    targets: '.startup-bracket-l',
+    translateX: [-18, 0],
+    opacity: [0, 1],
+    duration: 340,
+    easing: 'easeOutExpo'
+  }, '-=320')
+  .add({
+    targets: '.startup-bracket-r',
+    translateX: [18, 0],
+    opacity: [0, 1],
+    duration: 340,
+    easing: 'easeOutExpo'
+  }, '-=340')
+  // 5. Reveal brand text
+  .add({
+    targets: '.startup-core-text',
+    opacity: [0, 1],
+    scale: [0.85, 1],
+    letterSpacing: ['0.08em', '-0.02em'],
+    duration: 340,
+    easing: 'easeOutQuad'
+  }, '-=300');
+
+  // Concurrently animate progress bar and counter from 0 to 100
+  const counterObj = { val: 0 };
+  anime({
+    targets: counterObj,
+    val: 100,
+    round: 1,
+    duration: 1050,
+    easing: 'easeInOutCubic',
+    update: () => {
+      if (counter) counter.textContent = `${counterObj.val}%`;
+      if (fill) fill.style.width = `${counterObj.val}%`;
+      if (status) {
+        if (counterObj.val < 32) {
+          status.textContent = 'INITIALIZING CORE...';
+        } else if (counterObj.val < 72) {
+          status.textContent = 'CHECKING MCU BUSES...';
+        } else if (counterObj.val < 100) {
+          status.textContent = 'HARDWARE SYSTEM READY';
+        } else {
+          status.textContent = 'WELCOME // 3AKS.ME';
+        }
+      }
+    }
+  });
+}
 
 /* ==========================================================================
    Motion.dev: In-View Reveals
@@ -51,41 +196,47 @@ function initHeroTimeline() {
     });
 
     tl.add({
+      targets: '.site-header',
+      opacity: [0, 1],
+      translateY: [-16, 0],
+      duration: 320
+    })
+    .add({
       targets: '.hero-status',
       opacity: [0, 1],
       translateY: [8, 0],
-      duration: 320
-    })
+      duration: 300
+    }, '-=180')
     .add({
       targets: '.hero-heading',
       opacity: [0, 1],
       translateY: [12, 0],
-      duration: 380
-    }, '-=140')
+      duration: 350
+    }, '-=180')
     .add({
       targets: '.hero-lead',
       opacity: [0, 1],
       translateY: [10, 0],
-      duration: 320
-    }, '-=180')
+      duration: 300
+    }, '-=200')
     .add({
       targets: '.hero-actions .btn',
       opacity: [0, 1],
       translateY: [8, 0],
       delay: anime.stagger(50),
-      duration: 280
-    }, '-=160')
+      duration: 260
+    }, '-=180')
     .add({
       targets: '.quick-facts .fact',
       opacity: [0, 1],
       translateY: [8, 0],
       delay: anime.stagger(40),
-      duration: 280
-    }, '-=140')
+      duration: 260
+    }, '-=160')
     .add({
       targets: '.code-card',
       opacity: [0, 1],
-      scale: [0.98, 1],
+      scale: [0.97, 1],
       duration: 400,
       easing: 'easeOutQuad'
     }, '-=260');
