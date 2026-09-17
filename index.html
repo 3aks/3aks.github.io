@@ -3,197 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arjun Sharma | Hardware & Software Engineer — 3aks.me</title>
-  <meta name="description" content="Personal portfolio of Arjun Sharma (3aks). Specializing in embedded systems, custom audio hardware, ESP32 microcontrollers, and software engineering.">
-  <meta name="keywords" content="Arjun Sharma, 3aks, 3aks.me, embedded systems, hardware engineer, ESP32, C, Python, microcontrollers, Hack Club, BMW Bluetooth bridge">
+  <title>Arjun Sharma | 3aks.me</title>
+  <meta name="description" content="Personal site of Arjun Sharma (3aks). Hardware projects, microcontrollers, embedded C, and software tools.">
   <meta name="author" content="Arjun Sharma">
-  
-  <!-- Open Graph / Social Sharing -->
+
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://3aks.me/">
-  <meta property="og:title" content="Arjun Sharma | Hardware & Software Engineer">
-  <meta property="og:description" content="Embedded systems, custom audio electronics, ESP32 microcontrollers, and software tools by Arjun Sharma (3aks).">
+  <meta property="og:title" content="Arjun Sharma | 3aks.me">
+  <meta property="og:description" content="Hardware projects, microcontrollers, embedded C, and software tools.">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/189921392?v=4">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%230f172a'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='52' font-family='monospace' font-weight='900' fill='%2300f0ff'>3A</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='50' font-family='monospace' font-weight='700' fill='%2338bdf8'>3A</text></svg>">
 
-  <!-- Google Fonts -->
+  <!-- Fonts: IBM Plex Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Ambient background lighting effects -->
-  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
-  <div class="bg-grid-overlay" aria-hidden="true"></div>
-
-  <!-- Header / Navigation Bar -->
+  <!-- Header -->
   <header class="site-header" id="header">
     <div class="container nav-container">
-      <a href="#hero" class="brand-logo" aria-label="3aks.me Home">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">3aks<span class="logo-accent">.me</span></span>
-        <span class="logo-bracket">/&gt;</span>
+      <a href="#hero" class="brand-logo" aria-label="3aks.me home">
+        <span class="logo-mono">3aks<span class="logo-accent">.me</span></span>
       </a>
 
-      <nav class="desktop-nav" id="desktopNav" aria-label="Primary Navigation">
+      <nav class="desktop-nav" aria-label="Main Navigation">
         <a href="#about" class="nav-link">About</a>
         <a href="#projects" class="nav-link">Projects</a>
         <a href="#skills" class="nav-link">Skills</a>
-        <a href="#terminal" class="nav-link">CLI</a>
+        <a href="#terminal" class="nav-link">Terminal</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline nav-github-btn" id="githubNavBtn">
-          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-subtle" id="navGithubLink">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
           <span>GitHub</span>
         </a>
 
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </button>
       </div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
+    <!-- Mobile Drawer -->
     <div class="mobile-nav" id="mobileNav">
       <a href="#about" class="mobile-nav-link">About</a>
       <a href="#projects" class="mobile-nav-link">Projects</a>
       <a href="#skills" class="mobile-nav-link">Skills</a>
-      <a href="#terminal" class="mobile-nav-link">Terminal CLI</a>
+      <a href="#terminal" class="mobile-nav-link">Terminal</a>
       <a href="#contact" class="mobile-nav-link">Contact</a>
-      <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="mobile-nav-link highlight">
-        Visit GitHub Profile &rarr;
-      </a>
+      <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="mobile-nav-link highlight">GitHub Profile &rarr;</a>
     </div>
   </header>
 
   <main>
     <!-- Hero Section -->
     <section class="hero-section" id="hero">
-      <div class="container hero-container">
-        <div class="hero-content">
-          <!-- Availability Badge -->
-          <div class="status-pill" id="statusBadge">
-            <span class="status-indicator"></span>
-            <span class="status-text">Building Hardware & Embedded Systems</span>
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <div class="hero-status">
+            <span class="status-dot"></span>
+            <span class="status-msg">Building hardware &amp; writing C / Python</span>
           </div>
 
-          <h1 class="hero-title">
-            Hi, I'm <span class="gradient-text">Arjun Sharma</span>
+          <h1 class="hero-heading">
+            Arjun Sharma
           </h1>
 
-          <p class="hero-subtitle">
-            Embedded systems developer, hardware tinkerer, and creator of 
-            <span class="text-highlight">3aks</span>. I design custom microcontrollers, audio interfaces, and software tools where bits meet physical reality.
+          <p class="hero-lead">
+            I build microcontrollers, audio interfaces, and custom electronics. Most of my work runs on ESP32s, bare-metal C, or Python automation scripts.
           </p>
 
-          <div class="hero-cta-group">
-            <a href="#projects" class="btn btn-primary" id="exploreProjectsBtn">
-              <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-              <span>Explore Projects</span>
-            </a>
-
-            <a href="#terminal" class="btn btn-secondary" id="openCliBtn">
-              <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="4 17 10 11 4 5"></polyline>
-                <line x1="12" y1="19" x2="20" y2="19"></line>
-              </svg>
-              <span>Launch Terminal</span>
-            </a>
-
-            <button class="btn btn-outline" id="copyEmailHeroBtn" title="Copy email address to clipboard">
-              <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Copy Email</span>
-            </button>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
+            <button class="btn btn-secondary" id="copyEmailHeroBtn">Copy Email</button>
           </div>
 
-          <!-- Quick Metrics Bar -->
-          <div class="hero-stats-strip">
-            <div class="stat-item">
-              <span class="stat-number" id="repoCountStat">6+</span>
-              <span class="stat-label">Open Source Repos</span>
+          <div class="quick-facts">
+            <div class="fact">
+              <span class="fact-val" id="repoCountStat">6</span>
+              <span class="fact-label">Public Repos</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <span class="stat-number">ESP32 &amp; C</span>
-              <span class="stat-label">Core Microcontrollers</span>
+            <div class="fact-separator"></div>
+            <div class="fact">
+              <span class="fact-val">ESP32 &amp; C</span>
+              <span class="fact-label">Primary Stack</span>
             </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-              <span class="stat-number">Hack Club</span>
-              <span class="stat-label">Hardware Maker</span>
+            <div class="fact-separator"></div>
+            <div class="fact">
+              <span class="fact-val">Hack Club</span>
+              <span class="fact-label">Hardware Maker</span>
             </div>
           </div>
         </div>
 
-        <!-- Hero Visual / Profile Card -->
-        <div class="hero-visual">
-          <div class="profile-card-glow"></div>
-          <div class="profile-card">
-            <div class="profile-header">
-              <div class="profile-avatar-wrapper">
-                <img src="https://avatars.githubusercontent.com/u/189921392?v=4" alt="Arjun Sharma (3aks)" class="profile-avatar" id="githubAvatar" loading="lazy">
-                <span class="avatar-chip-badge" title="Hardware Hacker">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                    <path d="M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm0 4h6v6H9V7z"/>
-                  </svg>
-                </span>
+        <!-- Terminal Card / Identity Block -->
+        <div class="hero-card-wrapper">
+          <div class="code-card">
+            <div class="card-topbar">
+              <div class="window-buttons">
+                <span class="win-btn close"></span>
+                <span class="win-btn min"></span>
+                <span class="win-btn max"></span>
               </div>
-              <div class="profile-info">
-                <div class="profile-name">Arjun Sharma</div>
-                <div class="profile-handle">@3aks</div>
-                <div class="profile-domain"><span class="domain-dot"></span> 3aks.me</div>
-              </div>
+              <span class="card-filename">profile.c</span>
             </div>
+            <div class="card-code">
+              <pre><code><span class="token-keyword">#include</span> <span class="token-string">&lt;stdio.h&gt;</span>
+<span class="token-keyword">#include</span> <span class="token-string">"3aks.h"</span>
 
-            <!-- Terminal mini-snippet -->
-            <div class="profile-code-box">
-              <div class="code-box-header">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-                <span class="code-box-title">engineer.h</span>
-              </div>
-              <pre class="code-box-body"><code><span class="c-keyword">typedef struct</span> {
-  <span class="c-type">const char*</span> focus;
-  <span class="c-type">const char*</span> stack;
-  <span class="c-type">bool</span> passion_for_hardware;
-} <span class="c-func">Dev_t</span>;
-
-<span class="c-type">Dev_t</span> arjun = {
-  .<span class="c-prop">focus</span> = <span class="c-str">"Embedded &amp; Audio"</span>,
-  .<span class="c-prop">stack</span> = <span class="c-str">"C, ESP32, Python"</span>,
-  .<span class="c-prop">passion_for_hardware</span> = <span class="c-bool">true</span>
-};</code></pre>
+<span class="token-type">void</span> <span class="token-func">main</span>(<span class="token-type">void</span>) {
+    <span class="token-type">dev_t</span> me = {
+        .<span class="token-prop">name</span> = <span class="token-string">"Arjun Sharma"</span>,
+        .<span class="token-prop">handle</span> = <span class="token-string">"3aks"</span>,
+        .<span class="token-prop">site</span> = <span class="token-string">"3aks.me"</span>,
+        .<span class="token-prop">hardware</span> = {<span class="token-string">"ESP32"</span>, <span class="token-string">"CAN bus"</span>, <span class="token-string">"I2S"</span>},
+        .<span class="token-prop">languages</span> = {<span class="token-string">"C"</span>, <span class="token-string">"Python"</span>, <span class="token-string">"AutoHotkey"</span>}
+    };
+    <span class="token-func">printf</span>(<span class="token-string">"Ready to flash.\n"</span>);
+}</code></pre>
             </div>
-
-            <div class="profile-links">
-              <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="profile-link-btn" title="GitHub">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                github.com/3aks
-              </a>
-              <a href="mailto:arjunsharma290808@gmail.com" class="profile-link-btn" title="Email">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                Get In Touch
-              </a>
+            <div class="card-bottom">
+              <span class="card-status-text">GCC 14.2 &bull; Target: xtensa-esp32</span>
+              <span class="card-chip-tag">MCU Ready</span>
             </div>
           </div>
         </div>
@@ -201,336 +145,187 @@
     </section>
 
     <!-- About Section -->
-    <section class="section about-section" id="about">
+    <section class="section" id="about">
       <div class="container">
-        <div class="section-header">
-          <div class="section-tag">01 // Background</div>
-          <h2 class="section-title">About Me &amp; What I Build</h2>
-          <p class="section-desc">From firmware and microcontrollers to desktop automation and hardware prototypes.</p>
-        </div>
-
-        <div class="about-grid">
-          <div class="about-card primary-card">
-            <div class="card-icon-header">
-              <span class="feature-icon">⚡</span>
-              <span class="badge">Core Focus</span>
-            </div>
-            <h3>Hardware-First Engineering</h3>
-            <p>
-              I love building physical devices that solve real problems. Whether it's designing dual-microcontroller bridges for automotive audio buses, assembling custom hardware macropads for streaming &amp; camera switching, or wiring ESP32 audio mixers, I enjoy tackling low-level challenges where hardware constraints demand precision.
-            </p>
-            <div class="highlights-list">
-              <div class="highlight-item">
-                <span class="check-icon">&#10003;</span>
-                <span>Low-level C/C++ development for microcontrollers</span>
-              </div>
-              <div class="highlight-item">
-                <span class="check-icon">&#10003;</span>
-                <span>Custom PCB and physical computing prototyping</span>
-              </div>
-              <div class="highlight-item">
-                <span class="check-icon">&#10003;</span>
-                <span>Bridging proprietary protocols (automotive CAN / I-Bus)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-card secondary-card">
-            <div class="card-icon-header">
-              <span class="feature-icon">🛠️</span>
-              <span class="badge">Maker Ethos</span>
-            </div>
-            <h3>Hack Club &amp; Open Source</h3>
-            <p>
-              An active participant in maker communities like Hack Club. I document my builds openly so other hardware tinkerers can learn, modify, and build upon them.
-            </p>
-            <div class="badge-row">
-              <span class="tag-pill">Hack Club Blueprint</span>
-              <span class="tag-pill">Open Hardware</span>
-              <span class="tag-pill">MIT License</span>
-            </div>
-          </div>
-
-          <div class="about-card secondary-card">
-            <div class="card-icon-header">
-              <span class="feature-icon">💻</span>
-              <span class="badge">Software Tooling</span>
-            </div>
-            <h3>Automation &amp; Workflow</h3>
-            <p>
-              Beyond embedded boards, I write software in Python, AutoHotkey, and JavaScript to automate repetitive workflows, fix media hardware keys, and integrate devices cleanly with modern operating systems.
-            </p>
-            <div class="badge-row">
-              <span class="tag-pill">Python</span>
-              <span class="tag-pill">AutoHotkey</span>
-              <span class="tag-pill">DevOps</span>
-            </div>
-          </div>
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+          <p>
+            I got into hardware by solving specific annoyances with my own gear: car stereos that lacked modern Bluetooth, video streams that needed dedicated camera switching switches, and desktop apps that wouldn't listen to media keys.
+          </p>
+          <p>
+            Most of what I build involves wiring breadboards, laying out circuits, soldering components, and writing firmware in C or Python. When I am not working on physical devices, I write utilities to automate my desktop environment.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- Featured Projects Section -->
-    <section class="section projects-section" id="projects">
+    <!-- Projects Section -->
+    <section class="section" id="projects">
       <div class="container">
-        <div class="section-header-flex">
+        <div class="section-header-row">
           <div>
-            <div class="section-tag">02 // Showcase</div>
-            <h2 class="section-title">Featured Projects</h2>
-            <p class="section-desc">A selection of my recent hardware builds, embedded systems, and open-source software.</p>
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">Real hardware, prototypes, and open source code.</p>
           </div>
 
-          <!-- Filter Pills -->
-          <div class="filter-group" id="projectFilterGroup" role="tablist" aria-label="Project Categories">
-            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All (<span id="allCount">5</span>)</button>
-            <button class="filter-btn" data-filter="hardware" role="tab" aria-selected="false">Hardware &amp; MCUs</button>
-            <button class="filter-btn" data-filter="software" role="tab" aria-selected="false">Software &amp; Tools</button>
+          <div class="filter-tabs" id="filterTabs" role="tablist">
+            <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter-tab" data-filter="hardware" role="tab" aria-selected="false">Hardware</button>
+            <button class="filter-tab" data-filter="software" role="tab" aria-selected="false">Software</button>
           </div>
         </div>
 
-        <div class="projects-grid" id="projectsGrid">
-          <!-- Project 1: BMW Dual-MCU Audio Bridge -->
-          <article class="project-card" data-category="hardware" data-repo="BMW-Dual-MCU-Bluetooth-Audio-Bridge">
-            <div class="project-card-banner">
-              <span class="category-badge hardware-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm0 4h6v6H9V7z"/></svg>
-                Hardware &amp; Embedded
-              </span>
-              <span class="lang-badge lang-c">C</span>
+        <div class="project-list" id="projectList">
+          <!-- Project: BMW Dual-MCU Audio Bridge -->
+          <article class="project-item" data-category="hardware" data-repo="BMW-Dual-MCU-Bluetooth-Audio-Bridge">
+            <div class="project-header">
+              <div class="project-title-group">
+                <span class="category-tag">Hardware</span>
+                <h3 class="project-heading">
+                  <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer">
+                    BMW Dual-MCU Bluetooth Audio Bridge
+                  </a>
+                </h3>
+              </div>
+              <span class="tech-badge">C</span>
             </div>
-
-            <div class="project-content">
-              <h3 class="project-title">
-                <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer">
-                  BMW Dual-MCU Bluetooth Audio Bridge
-                </a>
-              </h3>
-              <p class="project-description">
-                Engineered an embedded dual-MCU architecture to bridge modern Bluetooth high-fidelity audio directly into vintage BMW factory head-unit communication protocols. Features real-time interrupt handling and hardware synchronization.
-              </p>
-
-              <div class="project-tags">
-                <span class="tag">Dual-MCU</span>
+            <p class="project-desc">
+              Dual-MCU hardware bridge that feeds Bluetooth audio into vintage BMW factory head-unit bus networks without replacing the original dashboard stereo.
+            </p>
+            <div class="project-footer">
+              <div class="tags">
                 <span class="tag">C</span>
-                <span class="tag">Automotive Audio</span>
-                <span class="tag">Embedded Systems</span>
+                <span class="tag">Dual-MCU</span>
+                <span class="tag">Car Audio</span>
                 <span class="tag">Firmware</span>
               </div>
-            </div>
-
-            <div class="project-footer">
-              <div class="repo-meta">
-                <span class="repo-stat" title="Primary Language">
-                  <span class="lang-dot dot-c"></span> C
-                </span>
-                <span class="repo-stat repo-stars" title="GitHub Stars">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  <span class="star-count">0</span>
-                </span>
-              </div>
-
               <div class="project-links">
-                <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer" class="link-btn" title="View Source on GitHub">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span>Code</span>
+                <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer" class="link-label">
+                  Source Code &rarr;
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 2: Camera-Switching Macropad -->
-          <article class="project-card featured" data-category="hardware" data-repo="Camera-Switching-Macropad">
-            <div class="project-card-banner">
-              <span class="category-badge hardware-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm0 4h6v6H9V7z"/></svg>
-                Hack Club Featured
-              </span>
-              <span class="lang-badge lang-python">Python</span>
+          <!-- Project: Camera-Switching Macropad -->
+          <article class="project-item" data-category="hardware" data-repo="Camera-Switching-Macropad">
+            <div class="project-header">
+              <div class="project-title-group">
+                <span class="category-tag">Hack Club</span>
+                <h3 class="project-heading">
+                  <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer">
+                    Camera-Switching Macropad
+                  </a>
+                </h3>
+              </div>
+              <span class="tech-badge">Python</span>
             </div>
-
-            <div class="project-content">
-              <h3 class="project-title">
-                <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer">
-                  Camera-Switching Macropad
-                </a>
-              </h3>
-              <p class="project-description">
-                My first project built for Hack Club! A custom physical macropad hardware device for instantaneous video camera switching during live broadcasts and meetings. Includes hardware bill of materials, circuit schematic, and firmware.
-              </p>
-
-              <div class="project-tags">
-                <span class="tag">Hardware Macropad</span>
-                <span class="tag">Hack Club</span>
+            <p class="project-desc">
+              Physical macropad built for Hack Club. Uses dedicated hardware pushbuttons to cut between cameras and scenes during video calls and streams without taking hands off the desk.
+            </p>
+            <div class="project-footer">
+              <div class="tags">
                 <span class="tag">Python</span>
-                <span class="tag">Physical Computing</span>
-                <span class="tag">HID Device</span>
+                <span class="tag">Hardware</span>
+                <span class="tag">Hack Club</span>
+                <span class="tag">HID</span>
               </div>
-            </div>
-
-            <div class="project-footer">
-              <div class="repo-meta">
-                <span class="repo-stat" title="Primary Language">
-                  <span class="lang-dot dot-python"></span> Python
-                </span>
-                <span class="repo-stat repo-stars" title="GitHub Stars">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  <span class="star-count">0</span>
-                </span>
-              </div>
-
               <div class="project-links">
-                <a href="https://blueprint.hackclub.com/projects/2634" target="_blank" rel="noopener noreferrer" class="link-btn highlight" title="Hack Club Blueprint Showcase">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                  <span>Blueprint</span>
+                <a href="https://blueprint.hackclub.com/projects/2634" target="_blank" rel="noopener noreferrer" class="link-label">
+                  Blueprint &rarr;
                 </a>
-                <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer" class="link-btn" title="View Source on GitHub">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span>Code</span>
+                <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer" class="link-label">
+                  Source Code &rarr;
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 3: Custom-Mixer-ESP32 -->
-          <article class="project-card" data-category="hardware" data-repo="Custom-Mixer-ESP32">
-            <div class="project-card-banner">
-              <span class="category-badge hardware-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm0 4h6v6H9V7z"/></svg>
-                Embedded &amp; Audio
-              </span>
-              <span class="lang-badge lang-python">Python / C</span>
+          <!-- Project: Custom Mixer ESP32 -->
+          <article class="project-item" data-category="hardware" data-repo="Custom-Mixer-ESP32">
+            <div class="project-header">
+              <div class="project-title-group">
+                <span class="category-tag">Hardware</span>
+                <h3 class="project-heading">
+                  <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer">
+                    Custom-Mixer-ESP32
+                  </a>
+                </h3>
+              </div>
+              <span class="tech-badge">C / Python</span>
             </div>
-
-            <div class="project-content">
-              <h3 class="project-title">
-                <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer">
-                  Custom-Mixer-ESP32
-                </a>
-              </h3>
-              <p class="project-description">
-                A custom multi-input audio mixer running on an ESP32 microcontroller. Designed to interface analog potentiometers, rotary encoders, and digital signals to provide smooth audio level balancing and multi-channel routing.
-              </p>
-
-              <div class="project-tags">
+            <p class="project-desc">
+              Multi-channel audio mixing board powered by an ESP32. Interfaces rotary pots and sliders with audio streams for desktop volume control.
+            </p>
+            <div class="project-footer">
+              <div class="tags">
                 <span class="tag">ESP32</span>
-                <span class="tag">Audio Mixing</span>
-                <span class="tag">ADC / DAC</span>
-                <span class="tag">MicroPython</span>
-                <span class="tag">I2S</span>
+                <span class="tag">ADC</span>
+                <span class="tag">Audio</span>
               </div>
-            </div>
-
-            <div class="project-footer">
-              <div class="repo-meta">
-                <span class="repo-stat" title="Primary Language">
-                  <span class="lang-dot dot-python"></span> Python
-                </span>
-                <span class="repo-stat repo-stars" title="GitHub Stars">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  <span class="star-count">0</span>
-                </span>
-              </div>
-
               <div class="project-links">
-                <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer" class="link-btn" title="View Source on GitHub">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span>Code</span>
+                <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer" class="link-label">
+                  Source Code &rarr;
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 4: VoltaMetric -->
-          <article class="project-card" data-category="hardware" data-repo="VoltaMetric">
-            <div class="project-card-banner">
-              <span class="category-badge hardware-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm0 4h6v6H9V7z"/></svg>
-                IoT &amp; Measurement
-              </span>
-              <span class="lang-badge lang-c">Hardware</span>
-            </div>
-
-            <div class="project-content">
-              <h3 class="project-title">
-                <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer">
-                  VoltaMetric
-                </a>
-              </h3>
-              <p class="project-description">
-                A connected smart multimeter instrument capable of continuous voltage, current, and sensor logging. Created to provide real-time diagnostics on breadboards and PCB prototypes without bulky bench instruments.
-              </p>
-
-              <div class="project-tags">
-                <span class="tag">Smart Multimeter</span>
-                <span class="tag">Instrumentation</span>
-                <span class="tag">Voltage Sensing</span>
-                <span class="tag">Electronics</span>
+          <!-- Project: VoltaMetric -->
+          <article class="project-item" data-category="hardware" data-repo="VoltaMetric">
+            <div class="project-header">
+              <div class="project-title-group">
+                <span class="category-tag">Hardware</span>
+                <h3 class="project-heading">
+                  <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer">
+                    VoltaMetric
+                  </a>
+                </h3>
               </div>
+              <span class="tech-badge">Electronics</span>
             </div>
-
+            <p class="project-desc">
+              Connected benchtop multimeter for logging voltage, current, and battery levels over serial while prototyping circuits.
+            </p>
             <div class="project-footer">
-              <div class="repo-meta">
-                <span class="repo-stat" title="Electronics">
-                  <span class="lang-dot dot-hardware"></span> Electronics
-                </span>
-                <span class="repo-stat repo-stars" title="GitHub Stars">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  <span class="star-count">0</span>
-                </span>
+              <div class="tags">
+                <span class="tag">Hardware</span>
+                <span class="tag">Multimeter</span>
+                <span class="tag">Prototyping</span>
               </div>
-
               <div class="project-links">
-                <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer" class="link-btn" title="View Source on GitHub">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span>Code</span>
+                <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer" class="link-label">
+                  Source Code &rarr;
                 </a>
               </div>
             </div>
           </article>
 
-          <!-- Project 5: Media-Keys-Fixer -->
-          <article class="project-card" data-category="software" data-repo="Media-Keys-Fixer">
-            <div class="project-card-banner">
-              <span class="category-badge software-badge">
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                Automation Tool
-              </span>
-              <span class="lang-badge lang-ahk">AutoHotkey</span>
+          <!-- Project: Media-Keys-Fixer -->
+          <article class="project-item" data-category="software" data-repo="Media-Keys-Fixer">
+            <div class="project-header">
+              <div class="project-title-group">
+                <span class="category-tag">Software</span>
+                <h3 class="project-heading">
+                  <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer">
+                    Media-Keys-Fixer
+                  </a>
+                </h3>
+              </div>
+              <span class="tech-badge">AutoHotkey</span>
             </div>
-
-            <div class="project-content">
-              <h3 class="project-title">
-                <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer">
-                  Media-Keys-Fixer
-                </a>
-              </h3>
-              <p class="project-description">
-                A streamlined background utility that intercepts multimedia keyboard keys and routes them directly to Spotify even when focused in full-screen games or browser apps without hijacking global key events.
-              </p>
-
-              <div class="project-tags">
+            <p class="project-desc">
+              Small Windows background script that forces multimedia keyboard play/pause/skip events to route directly to Spotify, even when focused in full-screen games.
+            </p>
+            <div class="project-footer">
+              <div class="tags">
                 <span class="tag">AutoHotkey</span>
                 <span class="tag">Spotify</span>
-                <span class="tag">Windows API</span>
-                <span class="tag">Productivity</span>
+                <span class="tag">Windows</span>
               </div>
-            </div>
-
-            <div class="project-footer">
-              <div class="repo-meta">
-                <span class="repo-stat" title="Primary Language">
-                  <span class="lang-dot dot-ahk"></span> AutoHotkey
-                </span>
-                <span class="repo-stat repo-stars" title="GitHub Stars">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                  <span class="star-count">0</span>
-                </span>
-              </div>
-
               <div class="project-links">
-                <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer" class="link-btn" title="View Source on GitHub">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                  <span>Code</span>
+                <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer" class="link-label">
+                  Source Code &rarr;
                 </a>
               </div>
             </div>
@@ -539,194 +334,105 @@
       </div>
     </section>
 
-    <!-- Skills & Tools Section -->
-    <section class="section skills-section" id="skills">
+    <!-- Skills Section -->
+    <section class="section" id="skills">
       <div class="container">
-        <div class="section-header">
-          <div class="section-tag">03 // Capabilities</div>
-          <h2 class="section-title">Technical Skills &amp; Toolkit</h2>
-          <p class="section-desc">The hardware platforms, programming languages, and engineering tools I build with.</p>
-        </div>
-
-        <div class="skills-grid">
-          <!-- Skill Category 1 -->
-          <div class="skill-category-card">
-            <div class="skill-category-header">
-              <span class="cat-icon">⚡</span>
-              <h3>Embedded &amp; Hardware</h3>
-            </div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <span class="skill-name">ESP32 &amp; Microcontrollers</span>
-                <span class="skill-level">Advanced</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">C / Embedded C</span>
-                <span class="skill-level">Proficient</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Circuit &amp; Schematic Prototyping</span>
-                <span class="skill-level">Experienced</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Serial Protocols (I2C, SPI, UART, CAN)</span>
-                <span class="skill-level">Experienced</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Audio Interfaces (I2S, DAC/ADC)</span>
-                <span class="skill-level">Practicing</span>
-              </li>
+        <h2 class="section-title">Tools &amp; Tech</h2>
+        <div class="skills-columns">
+          <div class="skill-col">
+            <h3 class="col-title">Hardware &amp; Embedded</h3>
+            <ul class="clean-list">
+              <li>ESP32 &amp; microcontrollers</li>
+              <li>Embedded C &amp; C++</li>
+              <li>Breadboard &amp; schematic prototyping</li>
+              <li>Serial protocols: UART, I2C, SPI, CAN</li>
+              <li>Soldering &amp; bench testing</li>
             </ul>
           </div>
 
-          <!-- Skill Category 2 -->
-          <div class="skill-category-card">
-            <div class="skill-category-header">
-              <span class="cat-icon">💻</span>
-              <h3>Software &amp; Scripting</h3>
-            </div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <span class="skill-name">Python</span>
-                <span class="skill-level">Advanced</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">AutoHotkey / Windows Automation</span>
-                <span class="skill-level">Advanced</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">HTML5 / CSS3 / Modern JS</span>
-                <span class="skill-level">Proficient</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Git &amp; GitHub Workflows</span>
-                <span class="skill-level">Proficient</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Linux &amp; Shell Scripting</span>
-                <span class="skill-level">Experienced</span>
-              </li>
+          <div class="skill-col">
+            <h3 class="col-title">Software &amp; Scripting</h3>
+            <ul class="clean-list">
+              <li>Python</li>
+              <li>AutoHotkey (Windows automation)</li>
+              <li>Git &amp; GitHub</li>
+              <li>HTML, CSS, JavaScript</li>
+              <li>Linux / command line</li>
             </ul>
           </div>
 
-          <!-- Skill Category 3 -->
-          <div class="skill-category-card">
-            <div class="skill-category-header">
-              <span class="cat-icon">🛠️</span>
-              <h3>Tools &amp; Environments</h3>
-            </div>
-            <ul class="skill-list">
-              <li class="skill-item">
-                <span class="skill-name">PlatformIO / VS Code</span>
-                <span class="skill-level">Daily Driver</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Hack Club Blueprint</span>
-                <span class="skill-level">Active Maker</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">Logic Analyzers &amp; Multimeters</span>
-                <span class="skill-level">Lab Bench</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">GitHub Pages &amp; Custom Domains</span>
-                <span class="skill-level">3aks.me</span>
-              </li>
-              <li class="skill-item">
-                <span class="skill-name">3D Modeling &amp; Enclosures</span>
-                <span class="skill-level">Prototyping</span>
-              </li>
+          <div class="skill-col">
+            <h3 class="col-title">Workflow</h3>
+            <ul class="clean-list">
+              <li>PlatformIO &amp; VS Code</li>
+              <li>Multimeters &amp; Logic Analyzers</li>
+              <li>Hack Club Blueprint</li>
+              <li>GitHub Pages &amp; DNS management</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Terminal CLI Section -->
-    <section class="section terminal-section" id="terminal">
+    <!-- Interactive Terminal Section -->
+    <section class="section" id="terminal">
       <div class="container">
-        <div class="section-header">
-          <div class="section-tag">04 // Interactive Console</div>
-          <h2 class="section-title">Terminal Shell</h2>
-          <p class="section-desc">Type commands below or click quick shortcuts to inspect details right from the CLI.</p>
+        <div class="section-header-row">
+          <div>
+            <h2 class="section-title">Terminal</h2>
+            <p class="section-subtitle">Type commands or click quick prompts below.</p>
+          </div>
         </div>
 
-        <div class="terminal-window">
-          <div class="terminal-titlebar">
-            <div class="terminal-dots">
-              <span class="terminal-dot close"></span>
-              <span class="terminal-dot minimize"></span>
-              <span class="terminal-dot zoom"></span>
+        <div class="terminal-shell">
+          <div class="terminal-top">
+            <div class="window-buttons">
+              <span class="win-btn close"></span>
+              <span class="win-btn min"></span>
+              <span class="win-btn max"></span>
             </div>
-            <div class="terminal-title">guest@3aks.me: ~ (bash)</div>
-            <div class="terminal-actions">
-              <button class="terminal-action-btn" id="clearTerminalBtn" title="Clear terminal">clear</button>
-            </div>
+            <div class="terminal-shell-title">sh — guest@3aks.me</div>
+            <button class="term-clear-btn" id="clearTerminalBtn">clear</button>
           </div>
 
-          <div class="terminal-quick-pills" id="terminalPills" aria-label="Suggested Commands">
-            <span class="pill-label">Suggested:</span>
-            <button class="term-pill" data-cmd="help">help</button>
-            <button class="term-pill" data-cmd="whoami">whoami</button>
-            <button class="term-pill" data-cmd="projects">projects</button>
-            <button class="term-pill" data-cmd="skills">skills</button>
-            <button class="term-pill" data-cmd="hardware">hardware</button>
-            <button class="term-pill" data-cmd="contact">contact</button>
+          <div class="term-shortcuts">
+            <span class="shortcuts-label">Run:</span>
+            <button class="quick-cmd" data-cmd="help">help</button>
+            <button class="quick-cmd" data-cmd="whoami">whoami</button>
+            <button class="quick-cmd" data-cmd="projects">projects</button>
+            <button class="quick-cmd" data-cmd="hardware">hardware</button>
+            <button class="quick-cmd" data-cmd="contact">contact</button>
           </div>
 
-          <div class="terminal-body" id="terminalBody">
-            <div class="terminal-line banner">
-              <span class="term-dim">Welcome to Arjun's interactive terminal [3aks.me v1.0.0]</span><br>
-              <span class="term-dim">Type <span class="term-highlight">'help'</span> or click any button above to see available commands.</span>
-            </div>
+          <div class="terminal-output" id="terminalBody">
+            <div class="term-row dim">3aks shell [version 1.1]</div>
+            <div class="term-row dim">Type 'help' to see commands.</div>
           </div>
 
-          <form class="terminal-input-row" id="terminalForm">
-            <label for="terminalInput" class="terminal-prompt">
-              <span class="prompt-user">visitor</span><span class="prompt-at">@</span><span class="prompt-host">3aks.me</span>:<span class="prompt-path">~</span>$&nbsp;
-            </label>
-            <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type a command...">
+          <form class="terminal-prompt-line" id="terminalForm">
+            <label for="terminalInput" class="term-prompt-label">3aks.me:$&nbsp;</label>
+            <input type="text" id="terminalInput" class="term-input" autocomplete="off" spellcheck="false" placeholder="help">
           </form>
         </div>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="section contact-section" id="contact">
+    <section class="section" id="contact">
       <div class="container">
-        <div class="contact-card">
-          <div class="contact-glow" aria-hidden="true"></div>
-          
-          <div class="contact-header">
-            <div class="section-tag">05 // Get in Touch</div>
-            <h2 class="contact-title">Let's Build Something Great</h2>
-            <p class="contact-subtitle">
-              Have an idea for a hardware build, embedded project, audio bridge, or open source collaboration? Reach out anytime!
-            </p>
-          </div>
+        <div class="contact-box">
+          <h2 class="contact-heading">Get in touch</h2>
+          <p class="contact-text">
+            For hardware questions, project ideas, or code chat, email me directly or check out my GitHub.
+          </p>
 
-          <div class="contact-actions">
-            <a href="mailto:arjunsharma290808@gmail.com" class="btn btn-primary btn-lg" id="emailDirectBtn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                <polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              <span>arjunsharma290808@gmail.com</span>
+          <div class="contact-buttons">
+            <a href="mailto:arjunsharma290808@gmail.com" class="btn btn-primary" id="emailDirectBtn">
+              arjunsharma290808@gmail.com
             </a>
-
-            <button class="btn btn-secondary btn-lg" id="copyEmailContactBtn">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-              </svg>
-              <span>Copy Email</span>
-            </button>
-
-            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-              </svg>
-              <span>GitHub Profile</span>
+            <button class="btn btn-secondary" id="copyEmailContactBtn">Copy Email</button>
+            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+              github.com/3aks
             </a>
           </div>
         </div>
@@ -734,34 +440,21 @@
     </section>
   </main>
 
-  <!-- Site Footer -->
+  <!-- Footer -->
   <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-left">
-        <div class="footer-brand">
-          <span class="logo-text">3aks<span class="logo-accent">.me</span></span>
-        </div>
-        <p class="footer-text">
-          Crafted with vanilla HTML5, CSS3 &amp; JS. Hosted on GitHub Pages at <strong>3aks.me</strong>.
-        </p>
-      </div>
-
-      <div class="footer-right">
-        <span class="footer-copy">&copy; <span id="currentYear">2026</span> Arjun Sharma. All rights reserved.</span>
-        <a href="#hero" class="back-to-top" id="backToTopBtn" aria-label="Scroll back to top">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="18 15 12 9 6 15"></polyline>
-          </svg>
-          <span>Top</span>
-        </a>
-      </div>
+    <div class="container footer-content">
+      <p class="footer-left-text">
+        &copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <strong>3aks.me</strong>
+      </p>
+      <p class="footer-right-text">
+        Hosted on GitHub Pages
+      </p>
     </div>
   </footer>
 
-  <!-- Toast Notification Container -->
-  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+  <!-- Toast Notification -->
+  <div class="toast-area" id="toastContainer" aria-live="polite"></div>
 
-  <!-- JavaScript -->
   <script src="app.js"></script>
 </body>
 </html>
