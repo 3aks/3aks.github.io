@@ -23,8 +23,16 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-</head>
 <body class="intro-running">
+  <!-- Ambient Interactive Background: Orange & Blue Gradient Circles -->
+  <div class="ambient-bg" id="ambientBg" aria-hidden="true">
+    <div class="gradient-circle orb-blue-1" id="orbBlue1"></div>
+    <div class="gradient-circle orb-orange-1" id="orbOrange1"></div>
+    <div class="gradient-circle orb-blue-2" id="orbBlue2"></div>
+    <div class="gradient-circle orb-orange-2" id="orbOrange2"></div>
+    <div class="ambient-mesh"></div>
+  </div>
+
   <!-- Startup Screen: Clean black screen with scramble into header logo -->
   <div class="startup-overlay" id="startupOverlay" aria-hidden="true"></div>
   <div class="startup-scramble-wrap" id="startupScrambleWrap" aria-hidden="true">
@@ -422,6 +430,8 @@
             <button class="term-pill" data-cmd="skills">skills</button>
             <button class="term-pill" data-cmd="hardware">hardware</button>
             <button class="term-pill" data-cmd="contact">contact</button>
+            <button class="term-pill" data-cmd="error 401">error 401</button>
+            <button class="term-pill" data-cmd="error 404">error 404</button>
           </div>
 
           <div class="terminal-body" id="terminalBody">

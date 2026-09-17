@@ -5,22 +5,27 @@
    ========================================================================== */
 
 :root {
-  /* Color System: Warm Smoky Charcoal Gray rgb(37, 36, 35) */
-  --bg-page: rgb(37, 36, 35);
-  --bg-surface: rgb(46, 45, 43);
-  --bg-surface-elevated: rgb(56, 55, 53);
-  --bg-surface-hover: rgb(66, 65, 62);
+  /* Color System: Deep Pitch Black with Glass Surfaces & Orange/Blue Accents */
+  --bg-page: #08080a;
+  --bg-surface: rgba(18, 18, 22, 0.75);
+  --bg-surface-elevated: rgba(28, 28, 36, 0.85);
+  --bg-surface-hover: rgba(38, 38, 48, 0.9);
 
-  --border-default: rgb(66, 64, 61);
-  --border-subtle: rgb(52, 50, 48);
+  --border-default: rgba(255, 255, 255, 0.09);
+  --border-subtle: rgba(255, 255, 255, 0.05);
   --border-focus: #38bdf8;
 
+  /* Blue & Orange Accents */
   --accent-sky: #38bdf8;
-  --accent-sky-dim: rgba(56, 189, 248, 0.12);
+  --accent-blue: #0284c7;
+  --accent-sky-dim: rgba(56, 189, 248, 0.14);
+  --accent-orange: #f97316;
+  --accent-orange-bright: #ff6a00;
+  --accent-orange-dim: rgba(249, 115, 22, 0.14);
   --accent-emerald: #10b981;
   --accent-emerald-dim: rgba(16, 185, 129, 0.12);
 
-  --text-main: #f3f4f6;
+  --text-main: #f9fafb;
   --text-muted: #9ca3af;
   --text-dim: #6b7280;
 
@@ -88,6 +93,77 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
+   Ambient Interactive Gradient Circles Background (Orange & Blue)
+   ========================================================================== */
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--bg-page);
+}
+
+.gradient-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(95px);
+  will-change: transform;
+  mix-blend-mode: screen;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+/* Primary Cyan/Blue Orb - Top Left / Center */
+.orb-blue-1 {
+  width: 650px;
+  height: 650px;
+  top: -120px;
+  left: 5%;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, rgba(56, 189, 248, 0.16) 45%, transparent 70%);
+}
+
+/* Primary Radiant Orange Orb - Top Right / Hero */
+.orb-orange-1 {
+  width: 700px;
+  height: 700px;
+  top: 8%;
+  right: -80px;
+  background: radial-gradient(circle, rgba(255, 106, 0, 0.38) 0%, rgba(249, 115, 22, 0.16) 50%, transparent 70%);
+}
+
+/* Secondary Deep Blue / Indigo Orb - Midpage / Skills */
+.orb-blue-2 {
+  width: 750px;
+  height: 750px;
+  top: 48%;
+  left: -140px;
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.32) 0%, rgba(59, 130, 246, 0.14) 48%, transparent 72%);
+}
+
+/* Secondary Warm Orange / Amber Orb - Lower / Terminal & Contact */
+.orb-orange-2 {
+  width: 650px;
+  height: 650px;
+  bottom: -100px;
+  right: 8%;
+  background: radial-gradient(circle, rgba(251, 146, 60, 0.3) 0%, rgba(234, 88, 12, 0.14) 50%, transparent 70%);
+}
+
+.ambient-mesh {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+/* ==========================================================================
    Startup Intro Screen: Scramble to Header Bar Animation
    ========================================================================== */
 .startup-overlay {
@@ -139,18 +215,26 @@ h1, h2, h3 {
 }
 
 /* ==========================================================================
-   Header & Nav (Sticky so it never overlaps content)
+   Header & Nav (Permanently Fixed at the Top)
    ========================================================================== */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
-  background: rgba(37, 36, 35, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid transparent;
-  z-index: 100;
-  transition: border-color 0.15s ease;
+  height: 56px;
+  background: rgba(8, 8, 10, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1000;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+main {
+  margin-top: 56px;
+  position: relative;
+  z-index: 1;
 }
 
 .header-line {
@@ -208,8 +292,7 @@ body.intro-running .hero-lead,
 body.intro-running .hero-actions,
 body.intro-running .quick-facts,
 body.intro-running .code-card,
-body.intro-running #about .scroll-item,
-body.intro-running #projects .scroll-item {
+body.intro-running .scroll-item {
   opacity: 0;
 }
 
@@ -531,7 +614,8 @@ body.intro-running #projects .scroll-item {
    ========================================================================== */
 .section {
   position: relative;
-  padding: 38px 0;
+  padding: 42px 0;
+  scroll-margin-top: 72px;
   border-top: none;
 }
 
@@ -541,16 +625,33 @@ body.intro-running #projects .scroll-item {
   left: 0;
   width: 100%;
   height: 1px;
-  background: var(--border-subtle);
+  background: var(--border-default);
   transform-origin: 0% 50%;
   transform: scaleX(0);
   pointer-events: none;
+  will-change: transform;
 }
 
-/* Scroll-reveal items initial state (activated when js-ready is on body) */
+/* Universal scroll-reveal initial state (when js-ready is active) */
+html.js-ready .scroll-item,
 body.js-ready .scroll-item {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(20px);
+  will-change: opacity, transform;
+}
+
+html.js-ready .section-line,
+body.js-ready .section-line {
+  transform: scaleX(0);
+}
+
+section.animated .scroll-item {
+  opacity: 1;
+  transform: none;
+}
+
+section.animated .section-line {
+  transform: scaleX(1);
 }
 
 .section-title {
@@ -892,10 +993,224 @@ body.js-ready .scroll-item {
 
 .term-dim { color: var(--text-dim); }
 .term-highlight { color: var(--accent-sky); font-weight: 600; }
+.term-orange { color: var(--accent-orange); font-weight: 600; }
 .term-success { color: #34d399; }
 .term-warning { color: #fbbf24; }
 .term-error { color: #f87171; }
 .term-cmd { color: #f8fafc; font-weight: 600; }
+
+/* Custom Terminal Error Cards */
+.term-error-box {
+  margin: 8px 0;
+  padding: 10px 14px;
+  background: rgba(239, 68, 68, 0.08);
+  border-left: 3px solid #ef4444;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+.term-error-box.auth {
+  background: rgba(249, 115, 22, 0.08);
+  border-left-color: var(--accent-orange);
+}
+
+.term-error-box.forbidden {
+  background: rgba(239, 68, 68, 0.09);
+  border-left-color: #ef4444;
+}
+
+.term-error-box.server {
+  background: rgba(244, 63, 94, 0.08);
+  border-left-color: #f43f5e;
+}
+
+.term-error-box.notfound {
+  background: rgba(56, 189, 248, 0.08);
+  border-left-color: var(--accent-sky);
+}
+
+.term-error-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.term-badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.term-badge.b-401 {
+  background: rgba(249, 115, 22, 0.22);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.35);
+}
+
+.term-badge.b-403 {
+  background: rgba(239, 68, 68, 0.22);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+.term-badge.b-404 {
+  background: rgba(56, 189, 248, 0.22);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.term-badge.b-500 {
+  background: rgba(244, 63, 94, 0.22);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.35);
+}
+
+.term-error-desc {
+  color: #d1d5db;
+  margin-bottom: 4px;
+}
+
+.term-error-hint {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+}
+
+/* ==========================================================================
+   Dedicated Error Page (404.html / Custom Status Codes)
+   ========================================================================== */
+.error-page-section {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.error-card {
+  max-width: 640px;
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-md);
+  padding: 36px 32px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+.error-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 20px;
+}
+
+.error-status-badge.b-401 {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fb923c;
+  border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.error-status-badge.b-403 {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.error-status-badge.b-404 {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.error-status-badge.b-500 {
+  background: rgba(244, 63, 94, 0.15);
+  color: #fb7185;
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.error-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.error-desc {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.error-code-switcher {
+  display: inline-flex;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.error-code-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.error-code-btn:hover {
+  color: var(--text-main);
+}
+
+.error-code-btn.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-main);
+}
+
+.error-terminal-preview {
+  background: #090a0d;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 28px;
+  color: var(--text-muted);
+}
+
+.error-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
 .terminal-input-row {
   display: flex;

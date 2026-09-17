@@ -4,9 +4,13 @@
  * Author: Arjun Sharma (3aks)
  */
 
+document.documentElement.classList.add('js-ready');
+
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  initInteractiveBackground(prefersReduced);
+  setupScrollReveals(false);
   setupHeader();
   setupFilterTabs(prefersReduced);
   setupTerminal(prefersReduced);
@@ -19,6 +23,56 @@ document.addEventListener('DOMContentLoaded', () => {
     initCardTilt();
   }
 });
+
+/* ==========================================================================
+   Ambient Interactive Background: Orange & Blue Gradient Circles
+   Responsive to Scroll and Mouse/Pointer Position
+   ========================================================================== */
+function initInteractiveBackground(prefersReduced) {
+  const orbBlue1 = document.getElementById('orbBlue1');
+  const orbOrange1 = document.getElementById('orbOrange1');
+  const orbBlue2 = document.getElementById('orbBlue2');
+  const orbOrange2 = document.getElementById('orbOrange2');
+
+  if (!orbBlue1 || !orbOrange1) return;
+  if (prefersReduced) return;
+
+  let currentScroll = window.scrollY;
+  let targetScroll = currentScroll;
+  let mouseX = 0, mouseY = 0;
+  let targetMouseX = 0, targetMouseY = 0;
+
+  window.addEventListener('scroll', () => {
+    targetScroll = window.scrollY;
+  }, { passive: true });
+
+  window.addEventListener('mousemove', (e) => {
+    targetMouseX = (e.clientX / window.innerWidth - 0.5) * 60;
+    targetMouseY = (e.clientY / window.innerHeight - 0.5) * 60;
+  }, { passive: true });
+
+  function updateAmbientOrbs() {
+    currentScroll += (targetScroll - currentScroll) * 0.09;
+    mouseX += (targetMouseX - mouseX) * 0.06;
+    mouseY += (targetMouseY - mouseY) * 0.06;
+
+    const sy = currentScroll;
+
+    // Fluid parallax translations with depth separation
+    orbBlue1.style.transform = `translate3d(${mouseX * -0.7}px, ${sy * 0.22 + mouseY * -0.6}px, 0)`;
+    orbOrange1.style.transform = `translate3d(${mouseX * 0.8}px, ${-sy * 0.18 + mouseY * 0.7}px, 0)`;
+    if (orbBlue2) {
+      orbBlue2.style.transform = `translate3d(${mouseX * -0.9}px, ${sy * 0.15 + mouseY * -0.8}px, 0)`;
+    }
+    if (orbOrange2) {
+      orbOrange2.style.transform = `translate3d(${mouseX * 0.6}px, ${-sy * 0.14 + mouseY * 0.5}px, 0)`;
+    }
+
+    requestAnimationFrame(updateAmbientOrbs);
+  }
+
+  requestAnimationFrame(updateAmbientOrbs);
+}
 
 /* ==========================================================================
    Anime.js: Startup Sequence (Black Screen -> Colour Logo -> Nav Bar -> Lines -> Text & Buttons)
@@ -207,12 +261,12 @@ function initStartupAnimation(prefersReduced) {
       easing: 'easeOutQuart'
     });
 
-    // 1. Horizontal lines slice across fast! (Header, Hero, About, Projects)
+    // 1. Header & Hero lines slice across fast!
     masterTimeline.add({
-      targets: ['.header-line', '#heroLine', '#about .section-line', '#projects .section-line'],
+      targets: ['.header-line', '#heroLine'],
       scaleX: [0, 1],
       duration: 280,
-      delay: anime.stagger(45),
+      delay: anime.stagger(40),
       easing: 'easeOutQuart'
     })
     // 2. Header nav links & GitHub button
@@ -273,41 +327,22 @@ function initStartupAnimation(prefersReduced) {
       scale: [0.97, 1],
       translateY: [10, 0],
       duration: 250,
-      easing: 'easeOutQuad'
-    }, '-=190')
-    // 9. About Section: Title & text animate!
-    .add({
-      targets: '#about .scroll-item',
-      opacity: [0, 1],
-      translateY: [12, 0],
-      delay: anime.stagger(35),
-      duration: 220,
-      easing: 'easeOutCubic'
-    }, '-=180')
-    // 10. Projects Section: Header & cards animate!
-    .add({
-      targets: '#projects .scroll-item',
-      opacity: [0, 1],
-      translateY: [12, 0],
-      delay: anime.stagger(30),
-      duration: 220,
-      easing: 'easeOutCubic',
+      easing: 'easeOutQuad',
       complete: () => {
-        document.querySelector('#about')?.classList.add('animated');
-        document.querySelector('#projects')?.classList.add('animated');
-        // Initialize scroll observer for remaining sections (Skills, Terminal, Contact)
-        setupScrollReveals(false);
+        // Trigger any section already on screen or near viewport
+        triggerVisibleSections();
       }
-    }, '-=160');
+    }, '-=190');
   }
 }
 
 /* ==========================================================================
    Anime.js: Scroll-Triggered Appearing Animations (Lines -> Text & Cards)
+   Guaranteed across all sections: About, Projects, Tools & Tech, Terminal, Contact
    ========================================================================== */
 function setupScrollReveals(immediate) {
+  document.documentElement.classList.add('js-ready');
   document.body.classList.add('js-ready');
-  const sections = document.querySelectorAll('main section.section:not(.animated)');
 
   if (immediate || !window.IntersectionObserver) {
     document.querySelectorAll('.section-line').forEach(l => l.style.transform = 'scaleX(1)');
@@ -315,47 +350,73 @@ function setupScrollReveals(immediate) {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
+    document.querySelectorAll('main section.section').forEach(s => s.classList.add('animated'));
     return;
   }
+
+  const sections = document.querySelectorAll('main section.section:not(.animated)');
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const section = entry.target;
         obs.unobserve(section);
-        section.classList.add('animated');
-
-        const line = section.querySelector('.section-line');
-        const items = section.querySelectorAll('.scroll-item');
-
-        const secTl = anime.timeline({ easing: 'easeOutQuart' });
-        if (line) {
-          secTl.add({
-            targets: line,
-            scaleX: [0, 1],
-            duration: 280,
-            easing: 'easeOutQuart'
-          });
-        }
-
-        if (items.length > 0) {
-          secTl.add({
-            targets: items,
-            opacity: [0, 1],
-            translateY: [12, 0],
-            delay: anime.stagger(30),
-            duration: 220,
-            easing: 'easeOutCubic'
-          }, line ? '-=180' : 0);
-        }
+        triggerSectionAnimation(section);
       }
     });
   }, {
-    rootMargin: '0px 0px -20px 0px',
-    threshold: 0.05
+    rootMargin: '100px 0px -20px 0px',
+    threshold: 0.02
   });
 
   sections.forEach(s => observer.observe(s));
+}
+
+function triggerSectionAnimation(section) {
+  if (!section || section.classList.contains('animated')) return;
+  section.classList.add('animated');
+
+  const line = section.querySelector('.section-line');
+  const items = section.querySelectorAll('.scroll-item');
+
+  if (!window.anime) {
+    if (line) line.style.transform = 'scaleX(1)';
+    items.forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+    return;
+  }
+
+  const secTl = anime.timeline({ easing: 'easeOutQuart' });
+  if (line) {
+    secTl.add({
+      targets: line,
+      scaleX: [0, 1],
+      duration: 320,
+      easing: 'easeOutQuart'
+    });
+  }
+
+  if (items.length > 0) {
+    secTl.add({
+      targets: items,
+      opacity: [0, 1],
+      translateY: [18, 0],
+      delay: anime.stagger(35),
+      duration: 260,
+      easing: 'easeOutCubic'
+    }, line ? '-=220' : 0);
+  }
+}
+
+function triggerVisibleSections() {
+  document.querySelectorAll('main section.section:not(.animated)').forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 40 && rect.bottom > 0) {
+      triggerSectionAnimation(s);
+    }
+  });
 }
 
 /* Anime.js: Subtle 3D Card Hover */
@@ -515,17 +576,31 @@ function setupTerminal(prefersReduced) {
   const history = [];
   let historyIndex = -1;
 
+  function formatErrorBox(code, status, desc, hint, type = 'notfound') {
+    const badgeClass = `b-${code}`;
+    return `
+<div class="term-error-box ${type}">
+  <div class="term-error-header">
+    <span class="term-badge ${badgeClass}">HTTP ${code}</span>
+    <span class="term-cmd">${escapeHtml(status)}</span>
+  </div>
+  <div class="term-error-desc">${desc}</div>
+  <div class="term-error-hint">&gt; Hint: ${hint}</div>
+</div>`;
+  }
+
   const commands = {
     help: () => `
 <span class="term-highlight">Available Commands:</span>
-  <span class="term-cmd">whoami</span>    - Brief intro and identity
-  <span class="term-cmd">projects</span>  - List key hardware & software builds
-  <span class="term-cmd">skills</span>    - View engineering & microcontroller toolkit
-  <span class="term-cmd">hardware</span>  - Specific details on embedded hardware builds
-  <span class="term-cmd">contact</span>   - Show contact channels & links
-  <span class="term-cmd">github</span>    - Open Arjun's GitHub profile
-  <span class="term-cmd">clear</span>     - Wipe terminal screen
-  <span class="term-cmd">echo [text]</span>- Print text back
+  <span class="term-cmd">whoami</span>       - Brief intro and identity
+  <span class="term-cmd">projects</span>     - List key hardware & software builds
+  <span class="term-cmd">skills</span>       - View engineering & microcontroller toolkit
+  <span class="term-cmd">hardware</span>     - Specific details on embedded hardware builds
+  <span class="term-cmd">contact</span>      - Show contact channels & links
+  <span class="term-cmd">github</span>       - Open Arjun's GitHub profile
+  <span class="term-cmd">error [code]</span> - Custom error inspector (e.g. error 401, error 404)
+  <span class="term-cmd">clear</span>        - Wipe terminal screen
+  <span class="term-cmd">echo [text]</span>   - Print text back
     `,
     whoami: () => `
 <span class="term-success">Arjun Sharma (@3aks)</span>
@@ -562,7 +637,43 @@ Domain: <span class="term-highlight">https://3aks.me</span>
     github: () => {
       window.open('https://github.com/3aks', '_blank');
       return `Opening <span class="term-highlight">https://github.com/3aks</span> in a new tab...`;
-    }
+    },
+    error: (arg) => {
+      const code = (arg || '').trim();
+      if (code === '401') {
+        return formatErrorBox('401', 'Unauthorized Access', 'Access token or cryptographic signature missing. GUEST_SESSION is restricted from accessing privileged hardware debug registers.', "Type <span class='term-highlight'>'whoami'</span> to inspect rights or explore projects with <span class='term-highlight'>'projects'</span>.", 'auth');
+      } else if (code === '403') {
+        return formatErrorBox('403', 'Forbidden Endpoint', 'Execution policy violation. Even with authentication, writing to firmware partition /dev/mcu0 is forbidden.', "Elevated permissions cannot be granted remotely.", 'forbidden');
+      } else if (code === '404') {
+        return formatErrorBox('404', 'Resource Not Found', 'The requested route, file, or memory map was not found on 3aks.me.', "Try <span class='term-highlight'>'projects'</span> or <span class='term-highlight'>'skills'</span> to explore available topics.", 'notfound');
+      } else if (code === '500') {
+        return formatErrorBox('500', 'Internal Server Fault', 'Watchdog timer overflow: ESP32 I2S DMA buffer underflow. Hardware exception triggered.', "Diagnostic crash dump logged to memory register 0x3FF00000.", 'server');
+      } else {
+        return `
+<span class="term-highlight">Custom Error Diagnostics:</span>
+  Usage: <span class="term-cmd">error &lt;code&gt;</span>
+  Available codes:
+    &bull; <span class="term-orange">error 401</span> - HTTP 401 Unauthorized Access
+    &bull; <span class="term-error">error 403</span> - HTTP 403 Forbidden Endpoint
+    &bull; <span class="term-highlight">error 404</span> - HTTP 404 Route Not Found
+    &bull; <span class="term-warning">error 500</span> - HTTP 500 Internal Fault
+        `;
+      }
+    },
+    '401': () => commands.error('401'),
+    '403': () => commands.error('403'),
+    '404': () => commands.error('404'),
+    '500': () => commands.error('500'),
+    sudo: () => commands.error('401'),
+    admin: () => commands.error('403'),
+    login: () => commands.error('401'),
+    auth: () => commands.error('401'),
+    token: () => commands.error('401'),
+    root: () => commands.error('403'),
+    chmod: () => commands.error('403'),
+    rm: () => commands.error('403'),
+    crash: () => commands.error('500'),
+    panic: () => commands.error('500')
   };
 
   function executeCommand(rawInput) {
@@ -592,10 +703,12 @@ Domain: <span class="term-highlight">https://3aks.me</span>
       return;
     } else if (cmd === 'echo') {
       outputLine.innerHTML = `<span>${escapeHtml(args)}</span>`;
+    } else if (cmd === 'error') {
+      outputLine.innerHTML = commands.error(args);
     } else if (commands[cmd]) {
-      outputLine.innerHTML = commands[cmd]();
+      outputLine.innerHTML = commands[cmd](args);
     } else {
-      outputLine.innerHTML = `<span class="term-error">command not found: '${escapeHtml(cmd)}'. Type <span class="term-highlight">'help'</span> for list of commands.</span>`;
+      outputLine.innerHTML = formatErrorBox('404', `Command Not Found: '${cmd}'`, `The command '${escapeHtml(cmd)}' is not recognized by the 3aks.me shell.`, "Type <span class='term-highlight'>'help'</span> for command list, or try <span class='term-highlight'>'error 401'</span>.", 'notfound');
     }
 
     body.appendChild(outputLine);
