@@ -631,11 +631,6 @@ function setupTerminal(prefersReduced) {
   </div>
   <div class="term-error-desc">${desc}</div>
   <div class="term-error-hint">&gt; Hint: ${hint}</div>
-  <div style="margin-top: 8px; font-size: 0.8rem;">
-    <a href="${code}.html" class="term-highlight" style="text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">
-      <span>&rarr; Open Dedicated HTTP ${code} Page</span>
-    </a>
-  </div>
 </div>`;
   }
 

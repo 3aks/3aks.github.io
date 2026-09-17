@@ -69,14 +69,6 @@
           The requested endpoint or file does not exist on 3aks.me. Check the URL or return to the main engineering portfolio.
         </p>
 
-        <!-- Interactive Switcher for testing/viewing error codes -->
-        <div class="error-code-switcher" aria-label="Simulate Error States">
-          <button class="error-code-btn" data-code="401">401 Unauthorized</button>
-          <button class="error-code-btn" data-code="403">403 Forbidden</button>
-          <button class="error-code-btn active" data-code="404">404 Not Found</button>
-          <button class="error-code-btn" data-code="500">500 Server Error</button>
-        </div>
-
         <div class="error-terminal-preview" id="errLog">
           <span style="color: var(--accent-sky); font-weight: 600;">[SYS-DIAGNOSTIC]</span> route_resolution_fault<br>
           &gt; target: <span id="errTargetUrl">/unknown-route</span><br>
@@ -102,16 +94,8 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <p class="footer-left-text">
-        &copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <a href="index.html" class="brand-link">3aks.me</a>
+        &copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <strong>3aks.me</strong>
       </p>
-
-      <div class="footer-error-demos" aria-label="HTTP Status Demos">
-        <span class="footer-demo-label">Status Demos:</span>
-        <a href="401.html" class="footer-demo-link d-401" title="Test HTTP 401 Unauthorized">401</a>
-        <a href="403.html" class="footer-demo-link d-403" title="Test HTTP 403 Forbidden">403</a>
-        <a href="404.html" class="footer-demo-link d-404" title="Test HTTP 404 Not Found">404</a>
-        <a href="500.html" class="footer-demo-link d-500" title="Test HTTP 500 Server Fault">500</a>
-      </div>
 
       <p class="footer-right-text">
         Hosted on GitHub Pages
@@ -170,52 +154,25 @@
       title.textContent = data.title;
       desc.textContent = data.desc;
       log.innerHTML = data.log;
-
-      document.querySelectorAll('.error-code-btn').forEach(btn => {
-        if (btn.getAttribute('data-code') === code) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
     }
 
     function getErrorCodeFromUrl() {
+      const pathname = window.location.pathname.toLowerCase();
+      if (pathname.includes('401')) return '401';
+      if (pathname.includes('403')) return '403';
+      if (pathname.includes('500')) return '500';
+
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('code')) {
         const c = urlParams.get('code');
         if (ERROR_DATA[c]) return c;
       }
 
-      const pathname = window.location.pathname.toLowerCase();
-      if (pathname.includes('401')) return '401';
-      if (pathname.includes('403')) return '403';
-      if (pathname.includes('500')) return '500';
-      if (pathname.includes('404')) return '404';
-
-      const hash = window.location.hash.toLowerCase();
-      if (hash.includes('401')) return '401';
-      if (hash.includes('403')) return '403';
-      if (hash.includes('500')) return '500';
-      if (hash.includes('404')) return '404';
-
       return '404';
     }
 
     const initialCode = getErrorCodeFromUrl();
     renderErrorCode(initialCode);
-
-    document.querySelectorAll('.error-code-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const code = btn.getAttribute('data-code');
-        renderErrorCode(code);
-        try {
-          const newUrl = new URL(window.location);
-          newUrl.searchParams.set('code', code);
-          window.history.replaceState({}, '', newUrl);
-        } catch (e) {}
-      });
-    });
 
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 

@@ -59,25 +59,17 @@
   <main>
     <section class="error-page-section">
       <div class="error-card">
-        <div class="error-status-badge b-500" id="errBadge">
+        <div class="error-status-badge b-500">
           <span class="status-indicator"></span>
-          <span id="errBadgeText">HTTP 500 INTERNAL ERROR</span>
+          <span>HTTP 500 INTERNAL ERROR</span>
         </div>
 
-        <h1 class="error-title" id="errTitle">Internal Server Fault</h1>
-        <p class="error-desc" id="errDesc">
+        <h1 class="error-title">Internal Server Fault</h1>
+        <p class="error-desc">
           A hardware watchdog timeout or firmware interrupt occurred during execution. Diagnostic telemetry has been recorded.
         </p>
 
-        <!-- Interactive Switcher for testing/viewing error codes -->
-        <div class="error-code-switcher" aria-label="Simulate Error States">
-          <button class="error-code-btn" data-code="401">401 Unauthorized</button>
-          <button class="error-code-btn" data-code="403">403 Forbidden</button>
-          <button class="error-code-btn" data-code="404">404 Not Found</button>
-          <button class="error-code-btn active" data-code="500">500 Server Error</button>
-        </div>
-
-        <div class="error-terminal-preview" id="errLog">
+        <div class="error-terminal-preview">
           <span style="color: #fb7185; font-weight: 600;">[CORE-DUMP]</span> HTTP_500_INTERNAL_FAULT<br>
           &gt; exception: DMA_BUFFER_OVERFLOW (I2S_CHANNEL_0)<br>
           &gt; register_dump: 0x3FF00000: DEAD_BEEF<br>
@@ -102,17 +94,8 @@
   <footer class="site-footer">
     <div class="container footer-content">
       <p class="footer-left-text">
-        &copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <a href="../index.html" class="brand-link">3aks.me</a>
+        &copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <strong>3aks.me</strong>
       </p>
-
-      <div class="footer-error-demos" aria-label="HTTP Status Demos">
-        <span class="footer-demo-label">Status Demos:</span>
-        <a href="../401.html" class="footer-demo-link d-401" title="Test HTTP 401 Unauthorized">401</a>
-        <a href="../403.html" class="footer-demo-link d-403" title="Test HTTP 403 Forbidden">403</a>
-        <a href="../404.html" class="footer-demo-link d-404" title="Test HTTP 404 Not Found">404</a>
-        <a href="../500.html" class="footer-demo-link d-500" title="Test HTTP 500 Server Fault">500</a>
-      </div>
-
       <p class="footer-right-text">
         Hosted on GitHub Pages
       </p>
@@ -120,69 +103,6 @@
   </footer>
 
   <script>
-    const ERROR_DATA = {
-      '401': {
-        code: '401',
-        badge: 'HTTP 401 UNAUTHORIZED',
-        badgeClass: 'b-401',
-        title: 'Authentication Required',
-        desc: 'Access denied: You lack valid authentication tokens or hardware security credentials to inspect this endpoint.',
-        log: `<span style="color: var(--accent-orange); font-weight: 600;">[AUTH-FAULT]</span> HTTP_401_UNAUTHORIZED<br>&gt; token: NULL or EXPIRED<br>&gt; scope: privileged_hardware_registers<br>&gt; advice: authenticate via authorized developer session`
-      },
-      '403': {
-        code: '403',
-        badge: 'HTTP 403 FORBIDDEN',
-        badgeClass: 'b-403',
-        title: 'Access Strictly Forbidden',
-        desc: 'Permission denied: Even with authentication, access to this hardware interface or firmware partition is prohibited.',
-        log: `<span style="color: #f87171; font-weight: 600;">[ACL-BLOCKED]</span> HTTP_403_FORBIDDEN<br>&gt; target_partition: /dev/mcu0/flash<br>&gt; security_policy: WRITE_RESTRICTED (SECURE_BOOT_ACTIVE)<br>&gt; advice: remote escalation denied by hardware supervisor`
-      },
-      '404': {
-        code: '404',
-        badge: 'HTTP 404 NOT FOUND',
-        badgeClass: 'b-404',
-        title: 'Endpoint Not Found',
-        desc: 'The requested route, circuit schematic, or repository link does not exist on 3aks.me.',
-        log: `<span style="color: var(--accent-sky); font-weight: 600;">[SYS-DIAGNOSTIC]</span> HTTP_404_NOT_FOUND<br>&gt; target: ${window.location.pathname}<br>&gt; status: route_unresolved<br>&gt; advice: navigate to homepage or inspect terminal`
-      },
-      '500': {
-        code: '500',
-        badge: 'HTTP 500 INTERNAL ERROR',
-        badgeClass: 'b-500',
-        title: 'Internal Server Fault',
-        desc: 'A hardware watchdog timeout or firmware interrupt occurred during execution. Diagnostic telemetry has been recorded.',
-        log: `<span style="color: #fb7185; font-weight: 600;">[CORE-DUMP]</span> HTTP_500_INTERNAL_FAULT<br>&gt; exception: DMA_BUFFER_OVERFLOW (I2S_CHANNEL_0)<br>&gt; register_dump: 0x3FF00000: DEAD_BEEF<br>&gt; advice: hardware watchdog will reset bus interface automatically`
-      }
-    };
-
-    function renderErrorCode(code) {
-      const data = ERROR_DATA[code] || ERROR_DATA['500'];
-      document.title = `${data.badge} — 3aks.me`;
-      document.getElementById('errBadge').className = `error-status-badge ${data.badgeClass}`;
-      document.getElementById('errBadgeText').textContent = data.badge;
-      document.getElementById('errTitle').textContent = data.title;
-      document.getElementById('errDesc').textContent = data.desc;
-      document.getElementById('errLog').innerHTML = data.log;
-
-      document.querySelectorAll('.error-code-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-code') === code);
-      });
-    }
-
-    renderErrorCode('500');
-
-    document.querySelectorAll('.error-code-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const code = btn.getAttribute('data-code');
-        renderErrorCode(code);
-        try {
-          const newUrl = new URL(window.location);
-          newUrl.searchParams.set('code', code);
-          window.history.replaceState({}, '', newUrl);
-        } catch (e) {}
-      });
-    });
-
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
     // Ambient background interactivity
