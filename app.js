@@ -1,17 +1,146 @@
 /**
  * 3aks.me — Main Client Script
+ * Powered by Anime.js & motion.dev
  * Author: Arjun Sharma (3aks)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   setupHeader();
-  setupFilterTabs();
-  setupTerminal();
-  setupRepoSync();
+  setupFilterTabs(prefersReduced);
+  setupTerminal(prefersReduced);
+  setupRepoSync(prefersReduced);
   setupFooterYear();
+
+  if (!prefersReduced) {
+    initMotionScroll();
+    initHeroTimeline();
+    initInViewReveals();
+    initCardTilt();
+  }
 });
 
-/* Header & Mobile Drawer */
+/* ==========================================================================
+   Motion.dev: Scroll Progress & In-View Reveals
+   ========================================================================== */
+function initMotionScroll() {
+  const bar = document.getElementById('scrollProgressBar');
+  if (!bar || !window.Motion || !Motion.scroll || !Motion.animate) return;
+
+  Motion.scroll(
+    Motion.animate(bar, { scaleX: [0, 1] }, { ease: 'linear' })
+  );
+}
+
+function initInViewReveals() {
+  if (!window.Motion || !Motion.inView || !Motion.animate) return;
+
+  // Reveal sections cleanly as they enter the viewport
+  const targets = document.querySelectorAll('.section-title, .about-content p, .skill-col, .contact-box');
+  targets.forEach(el => {
+    // Initial hidden state for inView
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+
+    Motion.inView(el, ({ target }) => {
+      Motion.animate(
+        target,
+        { opacity: [0, 1], transform: ['translateY(14px)', 'translateY(0px)'] },
+        { duration: 0.45, easing: [0.16, 1, 0.3, 1] }
+      );
+    }, { amount: 0.2 });
+  });
+}
+
+/* ==========================================================================
+   Anime.js: Hero Entrance & Micro-interactions
+   ========================================================================== */
+function initHeroTimeline() {
+  if (!window.anime) return;
+
+  const tl = anime.timeline({
+    easing: 'easeOutCubic'
+  });
+
+  tl.add({
+    targets: '.hero-status',
+    opacity: [0, 1],
+    translateY: [10, 0],
+    duration: 350
+  })
+  .add({
+    targets: '.hero-heading',
+    opacity: [0, 1],
+    translateY: [16, 0],
+    duration: 450
+  }, '-=150')
+  .add({
+    targets: '.hero-lead',
+    opacity: [0, 1],
+    translateY: [12, 0],
+    duration: 400
+  }, '-=200')
+  .add({
+    targets: '.hero-actions .btn',
+    opacity: [0, 1],
+    translateY: [10, 0],
+    delay: anime.stagger(70),
+    duration: 350
+  }, '-=200')
+  .add({
+    targets: '.quick-facts .fact',
+    opacity: [0, 1],
+    translateY: [10, 0],
+    delay: anime.stagger(60),
+    duration: 350
+  }, '-=150')
+  .add({
+    targets: '.code-card',
+    opacity: [0, 1],
+    scale: [0.97, 1],
+    translateY: [14, 0],
+    duration: 500,
+    easing: 'easeOutQuad'
+  }, '-=300');
+}
+
+/* Anime.js: Subtle 3D Card Hover */
+function initCardTilt() {
+  const card = document.querySelector('.code-card');
+  if (!card || !window.anime) return;
+
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+
+    const rotX = -(y / (rect.height / 2)) * 3.5;
+    const rotY = (x / (rect.width / 2)) * 3.5;
+
+    anime({
+      targets: card,
+      rotateX: rotX,
+      rotateY: rotY,
+      duration: 150,
+      easing: 'easeOutQuad'
+    });
+  });
+
+  card.addEventListener('mouseleave', () => {
+    anime({
+      targets: card,
+      rotateX: 0,
+      rotateY: 0,
+      duration: 400,
+      easing: 'easeOutCubic'
+    });
+  });
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
 function setupHeader() {
   const header = document.getElementById('header');
   const toggle = document.getElementById('mobileMenuBtn');
@@ -66,8 +195,10 @@ function setupHeader() {
   sections.forEach(s => observer.observe(s));
 }
 
-/* Category Filter Tabs */
-function setupFilterTabs() {
+/* ==========================================================================
+   Category Filter Tabs (Staggered with Anime.js)
+   ========================================================================== */
+function setupFilterTabs(prefersReduced) {
   const tabs = document.querySelectorAll('.filter-tab');
   const items = document.querySelectorAll('.project-item');
 
@@ -82,20 +213,36 @@ function setupFilterTabs() {
       tab.classList.add('active');
       tab.setAttribute('aria-selected', 'true');
 
+      const visibleItems = [];
+
       items.forEach(item => {
         const cat = item.getAttribute('data-category');
         if (filter === 'all' || cat === filter) {
           item.style.display = 'block';
+          visibleItems.push(item);
         } else {
           item.style.display = 'none';
         }
       });
+
+      if (!prefersReduced && window.anime && visibleItems.length > 0) {
+        anime({
+          targets: visibleItems,
+          opacity: [0, 1],
+          translateY: [10, 0],
+          delay: anime.stagger(40),
+          duration: 280,
+          easing: 'easeOutQuad'
+        });
+      }
     });
   });
 }
 
-/* Terminal CLI */
-function setupTerminal() {
+/* ==========================================================================
+   Terminal CLI
+   ========================================================================== */
+function setupTerminal(prefersReduced) {
   const form = document.getElementById('terminalForm');
   const input = document.getElementById('terminalInput');
   const output = document.getElementById('terminalBody');
@@ -140,7 +287,7 @@ Site  : https://3aks.me`
     history.push(trimmed);
     historyIdx = history.length;
 
-    // Echo input
+    // Command echo row
     const row = document.createElement('div');
     row.className = 'term-row';
     row.innerHTML = `<span class="term-prompt-label">3aks.me:$</span> <span>${escapeHtml(trimmed)}</span>`;
@@ -162,6 +309,17 @@ Site  : https://3aks.me`
 
     output.appendChild(resultRow);
     output.scrollTop = output.scrollHeight;
+
+    // Anime.js entrance for new terminal line
+    if (!prefersReduced && window.anime) {
+      anime({
+        targets: [row, resultRow],
+        opacity: [0, 1],
+        translateY: [4, 0],
+        duration: 150,
+        easing: 'easeOutQuad'
+      });
+    }
   }
 
   form.addEventListener('submit', (e) => {
@@ -203,25 +361,10 @@ Site  : https://3aks.me`
   }
 }
 
-
-
-function toast(msg) {
-  const container = document.getElementById('toastContainer');
-  if (!container) return;
-
-  const t = document.createElement('div');
-  t.className = 'toast';
-  t.textContent = msg;
-  container.appendChild(t);
-
-  setTimeout(() => {
-    t.style.opacity = '0';
-    setTimeout(() => t.remove(), 200);
-  }, 2500);
-}
-
-/* GitHub Live Stats */
-async function setupRepoSync() {
+/* ==========================================================================
+   GitHub Live Stats & Counter Animation (Anime.js)
+   ========================================================================== */
+async function setupRepoSync(prefersReduced) {
   try {
     const res = await fetch('https://api.github.com/users/3aks/repos?sort=updated');
     if (!res.ok) return;
@@ -229,9 +372,26 @@ async function setupRepoSync() {
     if (!Array.isArray(repos)) return;
 
     const countEl = document.getElementById('repoCountStat');
-    if (countEl) countEl.textContent = repos.length;
+    if (countEl) {
+      const count = repos.length;
+      if (!prefersReduced && window.anime) {
+        const counter = { val: 0 };
+        anime({
+          targets: counter,
+          val: count,
+          round: 1,
+          duration: 1100,
+          easing: 'easeOutExpo',
+          update: () => {
+            countEl.textContent = counter.val;
+          }
+        });
+      } else {
+        countEl.textContent = count;
+      }
+    }
   } catch {
-    // Keep cached count in markup
+    // Graceful fallback to static number in HTML
   }
 }
 
