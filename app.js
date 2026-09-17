@@ -22,147 +22,164 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   Anime.js: Startup Sequence (Circuit / Telemetry Animation)
+   Anime.js: Startup Sequence (Scramble Text -> Glide into Header Bar)
    ========================================================================== */
 function initStartupAnimation(prefersReduced) {
-  const loader = document.getElementById('startupLoader');
-  if (!loader) {
-    if (!prefersReduced) initHeroTimeline();
+  const overlay = document.getElementById('startupOverlay');
+  const scrambleWrap = document.getElementById('startupScrambleWrap');
+  const scrambleBrand = document.getElementById('scrambleBrand');
+  const targetLogo = document.getElementById('siteLogo') || document.querySelector('.brand-logo');
+
+  if (!overlay || !scrambleWrap || !scrambleBrand) {
     return;
   }
 
-  // If user prefers reduced motion or anime.js isn't available, skip immediately
+  // If reduced motion is requested or anime.js is unavailable, immediately reveal
   if (prefersReduced || !window.anime) {
-    loader.style.display = 'none';
+    overlay.style.display = 'none';
+    scrambleWrap.style.display = 'none';
+    if (targetLogo) targetLogo.style.opacity = '1';
     return;
   }
-
-  const fill = document.getElementById('startupProgressFill');
-  const counter = document.getElementById('startupCounter');
-  const status = document.getElementById('startupStatus');
-  const skipBtn = document.getElementById('startupSkipBtn');
 
   let isDismissed = false;
+  let scrambleTimer = null;
 
-  function dismissLoader() {
+  // Temporarily hide the navbar logo while animated logo is in flight
+  if (targetLogo) {
+    targetLogo.style.opacity = '0';
+  }
+
+  // Measure initial natural bounds
+  const wrapRect = scrambleWrap.getBoundingClientRect();
+  const startX = (window.innerWidth - wrapRect.width) / 2;
+  const startY = (window.innerHeight - wrapRect.height) / 2;
+
+  // Center the scramble wrap in the viewport
+  anime.set(scrambleWrap, {
+    translateX: startX,
+    translateY: startY,
+    scale: 1,
+    transformOrigin: '0% 0%'
+  });
+
+  const TARGET_TEXT = '<3aks.me/>';
+  const CHAR_POOL = '0123456789ABCDEF!<>-_\\/[]{}—=+*^?#';
+
+  function buildScrambleHtml(lockedCount) {
+    let html = '';
+    for (let i = 0; i < TARGET_TEXT.length; i++) {
+      const isLocked = i < lockedCount;
+      const char = isLocked ? TARGET_TEXT[i] : CHAR_POOL[Math.floor(Math.random() * CHAR_POOL.length)];
+      const escaped = char === '<' ? '&lt;' : char === '>' ? '&gt;' : char;
+
+      let cls = 'scramble-text';
+      if (i === 0 || i >= 8) {
+        cls = 'scramble-bracket';
+      } else if (i >= 5 && i <= 7) {
+        cls = 'scramble-accent';
+      }
+
+      html += `<span class="${cls}">${escaped}</span>`;
+    }
+    return html;
+  }
+
+  function dismissImmediately() {
     if (isDismissed) return;
     isDismissed = true;
+    if (scrambleTimer) clearInterval(scrambleTimer);
+    window.removeEventListener('click', onUserInteraction);
+    window.removeEventListener('keydown', onUserInteraction);
+
+    if (window.anime) {
+      anime.remove([overlay, scrambleWrap]);
+    }
+    overlay.style.display = 'none';
+    scrambleWrap.style.display = 'none';
+    if (targetLogo) targetLogo.style.opacity = '1';
+  }
+
+  const onUserInteraction = (e) => {
+    if (e.key === 'Escape' || e.type === 'click') {
+      dismissImmediately();
+    }
+  };
+
+  overlay.addEventListener('click', onUserInteraction);
+  window.addEventListener('keydown', onUserInteraction);
+
+  // Step 1: Rapid Scramble Loop
+  const totalFrames = 20;
+  const frameInterval = 28; // ~560ms total
+  let currentFrame = 0;
+
+  scrambleTimer = setInterval(() => {
+    if (isDismissed) {
+      clearInterval(scrambleTimer);
+      return;
+    }
+
+    currentFrame++;
+    const progress = currentFrame / totalFrames;
+    const lockedCount = Math.floor(progress * (TARGET_TEXT.length + 1));
+    scrambleBrand.innerHTML = buildScrambleHtml(lockedCount);
+
+    if (currentFrame >= totalFrames) {
+      clearInterval(scrambleTimer);
+      scrambleBrand.innerHTML = buildScrambleHtml(TARGET_TEXT.length);
+
+      // Step 2: Brief pause (130ms), then fly into header bar
+      setTimeout(() => {
+        if (isDismissed) return;
+        flyToHeader();
+      }, 130);
+    }
+  }, frameInterval);
+
+  // Step 3: Glide trajectory directly into navbar logo position
+  function flyToHeader() {
+    if (!targetLogo) {
+      dismissImmediately();
+      return;
+    }
+
+    const targetRect = targetLogo.getBoundingClientRect();
+    const targetScale = targetRect.height / wrapRect.height;
+    const deltaW = targetRect.width - (wrapRect.width * targetScale);
+    const deltaH = targetRect.height - (wrapRect.height * targetScale);
+    const endX = targetRect.left + (deltaW / 2);
+    const endY = targetRect.top + (deltaH / 2);
+
+    // Concurrently: 1) Glide scramble wrap to navbar logo, 2) Fade black overlay
+    anime({
+      targets: scrambleWrap,
+      translateX: [startX, endX],
+      translateY: [startY, endY],
+      scale: [1, targetScale],
+      duration: 560,
+      easing: 'cubicBezier(0.16, 1, 0.3, 1)',
+      complete: () => {
+        if (!isDismissed) {
+          isDismissed = true;
+          window.removeEventListener('keydown', onUserInteraction);
+          targetLogo.style.opacity = '1';
+          scrambleWrap.style.display = 'none';
+        }
+      }
+    });
 
     anime({
-      targets: loader,
+      targets: overlay,
       opacity: [1, 0],
-      scale: [1, 1.04],
-      duration: 380,
+      duration: 440,
+      delay: 50,
       easing: 'easeInOutQuad',
       complete: () => {
-        loader.style.display = 'none';
-        initHeroTimeline();
+        overlay.style.display = 'none';
       }
     });
   }
-
-  // Allow skip via button, click anywhere on loader, or ESC key
-  if (skipBtn) skipBtn.addEventListener('click', dismissLoader);
-  loader.addEventListener('click', (e) => {
-    if (e.target !== skipBtn) dismissLoader();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') dismissLoader();
-  });
-
-  // Prepare initial SVG stroke dashoffset
-  const hexAccent = loader.querySelector('.hex-accent');
-  if (hexAccent && anime.setDashoffset) {
-    hexAccent.style.strokeDashoffset = anime.setDashoffset(hexAccent);
-  }
-
-  const diamondInner = loader.querySelector('.diamond-inner');
-  if (diamondInner && anime.setDashoffset) {
-    diamondInner.style.strokeDashoffset = anime.setDashoffset(diamondInner);
-  }
-
-  // Anime.js Timeline: Sequential Path Drawing & Micro-interactions
-  const tl = anime.timeline({
-    easing: 'easeOutExpo',
-    complete: () => {
-      setTimeout(dismissLoader, 160);
-    }
-  });
-
-  // 1. Draw outer SVG circuit hexagon
-  tl.add({
-    targets: '.hex-accent',
-    strokeDashoffset: [anime.setDashoffset, 0],
-    duration: 650,
-    easing: 'easeInOutQuart'
-  })
-  // 2. Light up the 6 circuit nodes with a stagger
-  .add({
-    targets: '.svg-node',
-    scale: [0, 1],
-    opacity: [0, 1],
-    delay: anime.stagger(45),
-    duration: 320,
-    easing: 'easeOutBack'
-  }, '-=380')
-  // 3. Center diamond draw and rotate
-  .add({
-    targets: '.diamond-inner',
-    strokeDashoffset: [anime.setDashoffset, 0],
-    scale: [0.75, 1],
-    rotate: [45, 0],
-    duration: 450,
-    easing: 'easeOutCubic'
-  }, '-=280')
-  // 4. Reveal brackets with smooth outward slide
-  .add({
-    targets: '.startup-bracket-l',
-    translateX: [-18, 0],
-    opacity: [0, 1],
-    duration: 340,
-    easing: 'easeOutExpo'
-  }, '-=320')
-  .add({
-    targets: '.startup-bracket-r',
-    translateX: [18, 0],
-    opacity: [0, 1],
-    duration: 340,
-    easing: 'easeOutExpo'
-  }, '-=340')
-  // 5. Reveal brand text
-  .add({
-    targets: '.startup-core-text',
-    opacity: [0, 1],
-    scale: [0.85, 1],
-    letterSpacing: ['0.08em', '-0.02em'],
-    duration: 340,
-    easing: 'easeOutQuad'
-  }, '-=300');
-
-  // Concurrently animate progress bar and counter from 0 to 100
-  const counterObj = { val: 0 };
-  anime({
-    targets: counterObj,
-    val: 100,
-    round: 1,
-    duration: 1050,
-    easing: 'easeInOutCubic',
-    update: () => {
-      if (counter) counter.textContent = `${counterObj.val}%`;
-      if (fill) fill.style.width = `${counterObj.val}%`;
-      if (status) {
-        if (counterObj.val < 32) {
-          status.textContent = 'INITIALIZING CORE...';
-        } else if (counterObj.val < 72) {
-          status.textContent = 'CHECKING MCU BUSES...';
-        } else if (counterObj.val < 100) {
-          status.textContent = 'HARDWARE SYSTEM READY';
-        } else {
-          status.textContent = 'WELCOME // 3AKS.ME';
-        }
-      }
-    }
-  });
 }
 
 /* ==========================================================================
@@ -181,67 +198,6 @@ function initInViewReveals() {
     });
   } catch (err) {
     console.debug('InView skipped:', err);
-  }
-}
-
-/* ==========================================================================
-   Anime.js: Hero Entrance & Micro-interactions
-   ========================================================================== */
-function initHeroTimeline() {
-  if (!window.anime) return;
-
-  try {
-    const tl = anime.timeline({
-      easing: 'easeOutCubic'
-    });
-
-    tl.add({
-      targets: '.site-header',
-      opacity: [0, 1],
-      translateY: [-16, 0],
-      duration: 320
-    })
-    .add({
-      targets: '.hero-status',
-      opacity: [0, 1],
-      translateY: [8, 0],
-      duration: 300
-    }, '-=180')
-    .add({
-      targets: '.hero-heading',
-      opacity: [0, 1],
-      translateY: [12, 0],
-      duration: 350
-    }, '-=180')
-    .add({
-      targets: '.hero-lead',
-      opacity: [0, 1],
-      translateY: [10, 0],
-      duration: 300
-    }, '-=200')
-    .add({
-      targets: '.hero-actions .btn',
-      opacity: [0, 1],
-      translateY: [8, 0],
-      delay: anime.stagger(50),
-      duration: 260
-    }, '-=180')
-    .add({
-      targets: '.quick-facts .fact',
-      opacity: [0, 1],
-      translateY: [8, 0],
-      delay: anime.stagger(40),
-      duration: 260
-    }, '-=160')
-    .add({
-      targets: '.code-card',
-      opacity: [0, 1],
-      scale: [0.97, 1],
-      duration: 400,
-      easing: 'easeOutQuad'
-    }, '-=260');
-  } catch (err) {
-    console.debug('Hero timeline skipped:', err);
   }
 }
 
