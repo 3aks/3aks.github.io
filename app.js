@@ -22,35 +22,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   Motion.dev: Scroll Progress & In-View Reveals
+   Motion.dev: Scroll Progress & In-View
    ========================================================================== */
 function initMotionScroll() {
   const bar = document.getElementById('scrollProgressBar');
   if (!bar || !window.Motion || !Motion.scroll || !Motion.animate) return;
 
-  Motion.scroll(
-    Motion.animate(bar, { scaleX: [0, 1] }, { ease: 'linear' })
-  );
+  try {
+    Motion.scroll(
+      Motion.animate(bar, { scaleX: [0, 1] }, { ease: 'linear' })
+    );
+  } catch (err) {
+    console.debug('Motion scroll skipped:', err);
+  }
 }
 
 function initInViewReveals() {
   if (!window.Motion || !Motion.inView || !Motion.animate) return;
 
-  // Reveal sections cleanly as they enter the viewport
-  const targets = document.querySelectorAll('.section-title, .about-content p, .skill-col, .contact-box');
-  targets.forEach(el => {
-    // Initial hidden state for inView
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(14px)';
-
-    Motion.inView(el, ({ target }) => {
-      Motion.animate(
-        target,
-        { opacity: [0, 1], transform: ['translateY(14px)', 'translateY(0px)'] },
-        { duration: 0.45, easing: [0.16, 1, 0.3, 1] }
-      );
-    }, { amount: 0.2 });
-  });
+  try {
+    const targets = document.querySelectorAll('.project-item');
+    targets.forEach(el => {
+      Motion.inView(el, ({ target }) => {
+        Motion.animate(target, { y: [10, 0] }, { duration: 0.35, easing: [0.16, 1, 0.3, 1] });
+      }, { amount: 0.1 });
+    });
+  } catch (err) {
+    console.debug('InView skipped:', err);
+  }
 }
 
 /* ==========================================================================
@@ -59,50 +58,53 @@ function initInViewReveals() {
 function initHeroTimeline() {
   if (!window.anime) return;
 
-  const tl = anime.timeline({
-    easing: 'easeOutCubic'
-  });
+  try {
+    const tl = anime.timeline({
+      easing: 'easeOutCubic'
+    });
 
-  tl.add({
-    targets: '.hero-status',
-    opacity: [0, 1],
-    translateY: [10, 0],
-    duration: 350
-  })
-  .add({
-    targets: '.hero-heading',
-    opacity: [0, 1],
-    translateY: [16, 0],
-    duration: 450
-  }, '-=150')
-  .add({
-    targets: '.hero-lead',
-    opacity: [0, 1],
-    translateY: [12, 0],
-    duration: 400
-  }, '-=200')
-  .add({
-    targets: '.hero-actions .btn',
-    opacity: [0, 1],
-    translateY: [10, 0],
-    delay: anime.stagger(70),
-    duration: 350
-  }, '-=200')
-  .add({
-    targets: '.quick-facts .fact',
-    opacity: [0, 1],
-    translateY: [10, 0],
-    delay: anime.stagger(60),
-    duration: 350
-  }, '-=150')
-  .add({
-    targets: '.code-card',
-    opacity: [0, 1],
-    scale: [0.97, 1],
-    translateY: [14, 0],
-    duration: 500,
-    easing: 'easeOutQuad'
-  }, '-=300');
+    tl.add({
+      targets: '.hero-status',
+      opacity: [0, 1],
+      translateY: [8, 0],
+      duration: 320
+    })
+    .add({
+      targets: '.hero-heading',
+      opacity: [0, 1],
+      translateY: [12, 0],
+      duration: 380
+    }, '-=140')
+    .add({
+      targets: '.hero-lead',
+      opacity: [0, 1],
+      translateY: [10, 0],
+      duration: 320
+    }, '-=180')
+    .add({
+      targets: '.hero-actions .btn',
+      opacity: [0, 1],
+      translateY: [8, 0],
+      delay: anime.stagger(50),
+      duration: 280
+    }, '-=160')
+    .add({
+      targets: '.quick-facts .fact',
+      opacity: [0, 1],
+      translateY: [8, 0],
+      delay: anime.stagger(40),
+      duration: 280
+    }, '-=140')
+    .add({
+      targets: '.code-card',
+      opacity: [0, 1],
+      scale: [0.98, 1],
+      duration: 400,
+      easing: 'easeOutQuad'
+    }, '-=260');
+  } catch (err) {
+    console.debug('Hero timeline skipped:', err);
+  }
 }
 
 /* Anime.js: Subtle 3D Card Hover */
@@ -115,14 +117,14 @@ function initCardTilt() {
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    const rotX = -(y / (rect.height / 2)) * 3.5;
-    const rotY = (x / (rect.width / 2)) * 3.5;
+    const rotX = -(y / (rect.height / 2)) * 3;
+    const rotY = (x / (rect.width / 2)) * 3;
 
     anime({
       targets: card,
       rotateX: rotX,
       rotateY: rotY,
-      duration: 150,
+      duration: 120,
       easing: 'easeOutQuad'
     });
   });
@@ -132,14 +134,14 @@ function initCardTilt() {
       targets: card,
       rotateX: 0,
       rotateY: 0,
-      duration: 400,
+      duration: 350,
       easing: 'easeOutCubic'
     });
   });
 }
 
 /* ==========================================================================
-   Header & Navigation
+   Header & Mobile Navigation
    ========================================================================== */
 function setupHeader() {
   const header = document.getElementById('header');
@@ -173,7 +175,7 @@ function setupHeader() {
     });
   }
 
-  // Active section spy
+  // Active section observer
   const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
   const sections = document.querySelectorAll('main section[id]');
 
@@ -218,7 +220,7 @@ function setupFilterTabs(prefersReduced) {
       items.forEach(item => {
         const cat = item.getAttribute('data-category');
         if (filter === 'all' || cat === filter) {
-          item.style.display = 'block';
+          item.style.display = 'flex';
           visibleItems.push(item);
         } else {
           item.style.display = 'none';
@@ -229,9 +231,9 @@ function setupFilterTabs(prefersReduced) {
         anime({
           targets: visibleItems,
           opacity: [0, 1],
-          translateY: [10, 0],
-          delay: anime.stagger(40),
-          duration: 280,
+          translateY: [6, 0],
+          delay: anime.stagger(30),
+          duration: 220,
           easing: 'easeOutQuad'
         });
       }
@@ -287,7 +289,6 @@ Site  : https://3aks.me`
     history.push(trimmed);
     historyIdx = history.length;
 
-    // Command echo row
     const row = document.createElement('div');
     row.className = 'term-row';
     row.innerHTML = `<span class="term-prompt-label">3aks.me:$</span> <span>${escapeHtml(trimmed)}</span>`;
@@ -310,13 +311,12 @@ Site  : https://3aks.me`
     output.appendChild(resultRow);
     output.scrollTop = output.scrollHeight;
 
-    // Anime.js entrance for new terminal line
     if (!prefersReduced && window.anime) {
       anime({
         targets: [row, resultRow],
         opacity: [0, 1],
         translateY: [4, 0],
-        duration: 150,
+        duration: 140,
         easing: 'easeOutQuad'
       });
     }
@@ -380,7 +380,7 @@ async function setupRepoSync(prefersReduced) {
           targets: counter,
           val: count,
           round: 1,
-          duration: 1100,
+          duration: 900,
           easing: 'easeOutExpo',
           update: () => {
             countEl.textContent = counter.val;
@@ -391,7 +391,7 @@ async function setupRepoSync(prefersReduced) {
       }
     }
   } catch {
-    // Graceful fallback to static number in HTML
+    // Fallback stays in place
   }
 }
 
