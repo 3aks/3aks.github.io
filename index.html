@@ -24,7 +24,7 @@
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="intro-running">
   <!-- Startup Screen: Clean black screen with scramble into header logo -->
   <div class="startup-overlay" id="startupOverlay" aria-hidden="true"></div>
   <div class="startup-scramble-wrap" id="startupScrambleWrap" aria-hidden="true">
@@ -75,6 +75,8 @@
       <a href="#contact" class="mobile-nav-link">Contact</a>
       <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="mobile-nav-link highlight">GitHub Profile &rarr;</a>
     </div>
+
+    <div class="header-line" id="headerLine"></div>
   </header>
 
   <main>
@@ -99,6 +101,8 @@
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub Profile</a>
           </div>
+
+          <div class="hero-line" id="heroLine"></div>
 
           <div class="quick-facts">
             <div class="fact">
@@ -155,9 +159,10 @@
 
     <!-- About Section -->
     <section class="section" id="about">
+      <div class="section-line"></div>
       <div class="container">
-        <h2 class="section-title">About</h2>
-        <div class="about-content">
+        <h2 class="section-title scroll-item">About</h2>
+        <div class="about-content scroll-item">
           <p>
             I got into hardware by solving specific annoyances with my own gear: car stereos that lacked modern Bluetooth, video streams that needed dedicated camera switching switches, and desktop apps that wouldn't listen to media keys.
           </p>
@@ -170,8 +175,9 @@
 
     <!-- Projects Section -->
     <section class="section" id="projects">
+      <div class="section-line"></div>
       <div class="container">
-        <div class="section-header-row">
+        <div class="section-header-row scroll-item">
           <div>
             <h2 class="section-title">Projects</h2>
             <p class="section-subtitle">Real hardware, prototypes, and open source code.</p>
@@ -186,7 +192,7 @@
 
         <div class="project-list" id="projectList">
           <!-- Project: BMW Dual-MCU Audio Bridge -->
-          <article class="project-item" data-category="hardware" data-repo="BMW-Dual-MCU-Bluetooth-Audio-Bridge">
+          <article class="project-item scroll-item" data-category="hardware" data-repo="BMW-Dual-MCU-Bluetooth-Audio-Bridge">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hardware</span>
@@ -217,7 +223,7 @@
           </article>
 
           <!-- Project: Camera-Switching Macropad -->
-          <article class="project-item" data-category="hardware" data-repo="Camera-Switching-Macropad">
+          <article class="project-item scroll-item" data-category="hardware" data-repo="Camera-Switching-Macropad">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hack Club</span>
@@ -251,7 +257,7 @@
           </article>
 
           <!-- Project: Custom Mixer ESP32 -->
-          <article class="project-item" data-category="hardware" data-repo="Custom-Mixer-ESP32">
+          <article class="project-item scroll-item" data-category="hardware" data-repo="Custom-Mixer-ESP32">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hardware</span>
@@ -281,7 +287,7 @@
           </article>
 
           <!-- Project: VoltaMetric -->
-          <article class="project-item" data-category="hardware" data-repo="VoltaMetric">
+          <article class="project-item scroll-item" data-category="hardware" data-repo="VoltaMetric">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hardware</span>
@@ -311,7 +317,7 @@
           </article>
 
           <!-- Project: Media-Keys-Fixer -->
-          <article class="project-item" data-category="software" data-repo="Media-Keys-Fixer">
+          <article class="project-item scroll-item" data-category="software" data-repo="Media-Keys-Fixer">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Software</span>
@@ -345,10 +351,11 @@
 
     <!-- Skills Section -->
     <section class="section" id="skills">
+      <div class="section-line"></div>
       <div class="container">
-        <h2 class="section-title">Tools &amp; Tech</h2>
+        <h2 class="section-title scroll-item">Tools &amp; Tech</h2>
         <div class="skills-columns">
-          <div class="skill-col">
+          <div class="skill-col scroll-item">
             <h3 class="col-title">Hardware &amp; Embedded</h3>
             <ul class="clean-list">
               <li>ESP32 &amp; microcontrollers</li>
@@ -359,7 +366,7 @@
             </ul>
           </div>
 
-          <div class="skill-col">
+          <div class="skill-col scroll-item">
             <h3 class="col-title">Software &amp; Scripting</h3>
             <ul class="clean-list">
               <li>Python</li>
@@ -370,7 +377,7 @@
             </ul>
           </div>
 
-          <div class="skill-col">
+          <div class="skill-col scroll-item">
             <h3 class="col-title">Workflow</h3>
             <ul class="clean-list">
               <li>PlatformIO &amp; VS Code</li>
@@ -385,15 +392,16 @@
 
     <!-- Interactive Terminal CLI Section -->
     <section class="section terminal-section" id="terminal">
+      <div class="section-line"></div>
       <div class="container">
-        <div class="section-header-row">
+        <div class="section-header-row scroll-item">
           <div>
             <h2 class="section-title">Terminal Shell</h2>
             <p class="section-subtitle">Type commands below or click quick shortcuts to inspect details right from the CLI.</p>
           </div>
         </div>
 
-        <div class="terminal-window">
+        <div class="terminal-window scroll-item">
           <div class="terminal-titlebar">
             <div class="terminal-dots">
               <span class="terminal-dot close"></span>
@@ -435,8 +443,9 @@
 
     <!-- Contact Section -->
     <section class="section" id="contact">
+      <div class="section-line"></div>
       <div class="container">
-        <div class="contact-box">
+        <div class="contact-box scroll-item">
           <h2 class="contact-heading">Connect</h2>
           <p class="contact-text">
             The best place to follow my projects, discuss hardware, or collaborate is on GitHub.

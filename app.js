@@ -16,13 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
   initStartupAnimation(prefersReduced);
 
   if (!prefersReduced) {
-    initInViewReveals();
     initCardTilt();
   }
 });
 
 /* ==========================================================================
-   Anime.js: Startup Sequence (Scramble Text -> Glide into Header Bar)
+   Anime.js: Startup Sequence (Black Screen -> Colour Logo -> Nav Bar -> Lines -> Text & Buttons)
    ========================================================================== */
 function initStartupAnimation(prefersReduced) {
   const overlay = document.getElementById('startupOverlay');
@@ -36,26 +35,28 @@ function initStartupAnimation(prefersReduced) {
 
   // If reduced motion is requested or anime.js is unavailable, immediately reveal
   if (prefersReduced || !window.anime) {
+    document.body.classList.remove('intro-running');
     overlay.style.display = 'none';
-    scrambleWrap.style.display = 'none';
-    if (targetLogo) targetLogo.style.opacity = '1';
+    scrambleWrap.remove();
+    if (targetLogo) {
+      targetLogo.style.opacity = '1';
+      targetLogo.style.visibility = 'visible';
+    }
+    const lines = document.querySelectorAll('.header-line, .hero-line, .section-line');
+    lines.forEach(l => l.style.transform = 'scaleX(1)');
+    setupScrollReveals(true);
     return;
   }
 
   let isDismissed = false;
   let scrambleTimer = null;
 
-  // Temporarily hide the navbar logo while animated logo is in flight
-  if (targetLogo) {
-    targetLogo.style.opacity = '0';
-  }
-
   // Measure initial natural bounds
   const wrapRect = scrambleWrap.getBoundingClientRect();
   const startX = (window.innerWidth - wrapRect.width) / 2;
   const startY = (window.innerHeight - wrapRect.height) / 2;
 
-  // Center the scramble wrap in the viewport
+  // Center the scramble wrap in the viewport using Anime.js
   anime.set(scrambleWrap, {
     translateX: startX,
     translateY: startY,
@@ -92,12 +93,27 @@ function initStartupAnimation(prefersReduced) {
     window.removeEventListener('click', onUserInteraction);
     window.removeEventListener('keydown', onUserInteraction);
 
-    if (window.anime) {
-      anime.remove([overlay, scrambleWrap]);
-    }
+    anime.remove([overlay, scrambleWrap, '.header-line', '#heroLine', '.section-line', '.desktop-nav .nav-link', '#navGithubLink', '#mobileMenuBtn', '.hero-status', '.hero-heading', '.hero-lead', '.hero-actions .btn', '.quick-facts .fact', '.code-card']);
+
     overlay.style.display = 'none';
-    scrambleWrap.style.display = 'none';
-    if (targetLogo) targetLogo.style.opacity = '1';
+    scrambleWrap.remove();
+    document.body.classList.remove('intro-running');
+
+    if (targetLogo) {
+      targetLogo.style.opacity = '1';
+      targetLogo.style.visibility = 'visible';
+    }
+
+    const lines = document.querySelectorAll('.header-line, .hero-line, .section-line');
+    lines.forEach(l => l.style.transform = 'scaleX(1)');
+
+    const heroEls = document.querySelectorAll('.desktop-nav .nav-link, #navGithubLink, #mobileMenuBtn, .hero-status, .hero-heading, .hero-lead, .hero-actions .btn, .quick-facts .fact, .code-card');
+    heroEls.forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    });
+
+    setupScrollReveals(true);
   }
 
   const onUserInteraction = (e) => {
@@ -109,9 +125,9 @@ function initStartupAnimation(prefersReduced) {
   overlay.addEventListener('click', onUserInteraction);
   window.addEventListener('keydown', onUserInteraction);
 
-  // Step 1: Rapid Scramble Loop
-  const totalFrames = 20;
-  const frameInterval = 28; // ~560ms total
+  // Step 1: Black screen to colour logo scramble
+  const totalFrames = 19;
+  const frameInterval = 28; // ~530ms total
   let currentFrame = 0;
 
   scrambleTimer = setInterval(() => {
@@ -129,15 +145,15 @@ function initStartupAnimation(prefersReduced) {
       clearInterval(scrambleTimer);
       scrambleBrand.innerHTML = buildScrambleHtml(TARGET_TEXT.length);
 
-      // Step 2: Brief pause (130ms), then fly into header bar
+      // Step 2: Brief pause (120ms), then glide colour logo to nav bar
       setTimeout(() => {
         if (isDismissed) return;
         flyToHeader();
-      }, 130);
+      }, 120);
     }
   }, frameInterval);
 
-  // Step 3: Glide trajectory directly into navbar logo position
+  // Step 3: Glide colour logo into nav bar
   function flyToHeader() {
     if (!targetLogo) {
       dismissImmediately();
@@ -157,14 +173,18 @@ function initStartupAnimation(prefersReduced) {
       translateX: [startX, endX],
       translateY: [startY, endY],
       scale: [1, targetScale],
-      duration: 560,
+      duration: 520,
       easing: 'cubicBezier(0.16, 1, 0.3, 1)',
       complete: () => {
         if (!isDismissed) {
-          isDismissed = true;
-          window.removeEventListener('keydown', onUserInteraction);
+          // Hand off seamlessly to navbar logo — no black blink
           targetLogo.style.opacity = '1';
-          scrambleWrap.style.display = 'none';
+          targetLogo.style.visibility = 'visible';
+          document.body.classList.remove('intro-running');
+          scrambleWrap.remove();
+
+          // Step 4: Load horizontal lines, THEN all text and buttons
+          animateLinesAndContent();
         }
       }
     });
@@ -172,33 +192,149 @@ function initStartupAnimation(prefersReduced) {
     anime({
       targets: overlay,
       opacity: [1, 0],
-      duration: 440,
-      delay: 50,
+      duration: 400,
+      delay: 40,
       easing: 'easeInOutQuad',
       complete: () => {
         overlay.style.display = 'none';
       }
     });
   }
+
+  // Step 4: Load horizontal lines, THEN all the text and buttons (Anime.js)
+  function animateLinesAndContent() {
+    const masterTimeline = anime.timeline({
+      easing: 'easeOutQuart'
+    });
+
+    // 1. Horizontal lines draw across
+    masterTimeline.add({
+      targets: ['.header-line', '#heroLine'],
+      scaleX: [0, 1],
+      duration: 480,
+      delay: anime.stagger(90),
+      easing: 'easeOutQuart'
+    })
+    // 2. Header nav links & GitHub button
+    .add({
+      targets: ['.desktop-nav .nav-link', '#navGithubLink', '#mobileMenuBtn'],
+      opacity: [0, 1],
+      translateY: [-6, 0],
+      delay: anime.stagger(35),
+      duration: 320,
+      easing: 'easeOutCubic'
+    }, '-=240')
+    // 3. Hero status badge
+    .add({
+      targets: '.hero-status',
+      opacity: [0, 1],
+      translateY: [8, 0],
+      duration: 280,
+      easing: 'easeOutCubic'
+    }, '-=240')
+    // 4. Hero heading
+    .add({
+      targets: '.hero-heading',
+      opacity: [0, 1],
+      translateY: [12, 0],
+      duration: 340,
+      easing: 'easeOutCubic'
+    }, '-=220')
+    // 5. Hero lead text
+    .add({
+      targets: '.hero-lead',
+      opacity: [0, 1],
+      translateY: [10, 0],
+      duration: 300,
+      easing: 'easeOutCubic'
+    }, '-=200')
+    // 6. Hero action buttons
+    .add({
+      targets: '.hero-actions .btn',
+      opacity: [0, 1],
+      translateY: [8, 0],
+      delay: anime.stagger(50),
+      duration: 280,
+      easing: 'easeOutCubic'
+    }, '-=180')
+    // 7. Quick facts
+    .add({
+      targets: '.quick-facts .fact',
+      opacity: [0, 1],
+      translateY: [8, 0],
+      delay: anime.stagger(40),
+      duration: 260,
+      easing: 'easeOutCubic'
+    }, '-=160')
+    // 8. Profile code card
+    .add({
+      targets: '.code-card',
+      opacity: [0, 1],
+      scale: [0.97, 1],
+      translateY: [12, 0],
+      duration: 400,
+      easing: 'easeOutQuad',
+      complete: () => {
+        // Initialize scroll observer for sections below
+        setupScrollReveals(false);
+      }
+    }, '-=260');
+  }
 }
 
 /* ==========================================================================
-   Motion.dev: In-View Reveals
+   Anime.js: Scroll-Triggered Appearing Animations (Lines -> Text & Cards)
    ========================================================================== */
+function setupScrollReveals(immediate) {
+  document.body.classList.add('js-ready');
+  const sections = document.querySelectorAll('main section.section');
 
-function initInViewReveals() {
-  if (!window.Motion || !Motion.inView || !Motion.animate) return;
-
-  try {
-    const targets = document.querySelectorAll('.project-item');
-    targets.forEach(el => {
-      Motion.inView(el, ({ target }) => {
-        Motion.animate(target, { y: [10, 0] }, { duration: 0.35, easing: [0.16, 1, 0.3, 1] });
-      }, { amount: 0.1 });
+  if (immediate || !window.IntersectionObserver) {
+    document.querySelectorAll('.section-line').forEach(l => l.style.transform = 'scaleX(1)');
+    document.querySelectorAll('.scroll-item').forEach(el => {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
     });
-  } catch (err) {
-    console.debug('InView skipped:', err);
+    return;
   }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const section = entry.target;
+        obs.unobserve(section);
+
+        const line = section.querySelector('.section-line');
+        const items = section.querySelectorAll('.scroll-item');
+
+        const secTl = anime.timeline({ easing: 'easeOutQuart' });
+        if (line) {
+          secTl.add({
+            targets: line,
+            scaleX: [0, 1],
+            duration: 480,
+            easing: 'easeOutQuart'
+          });
+        }
+
+        if (items.length > 0) {
+          secTl.add({
+            targets: items,
+            opacity: [0, 1],
+            translateY: [18, 0],
+            delay: anime.stagger(50),
+            duration: 380,
+            easing: 'easeOutCubic'
+          }, line ? '-=240' : 0);
+        }
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.1
+  });
+
+  sections.forEach(s => observer.observe(s));
 }
 
 /* Anime.js: Subtle 3D Card Hover */

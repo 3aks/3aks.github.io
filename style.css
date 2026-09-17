@@ -5,14 +5,14 @@
    ========================================================================== */
 
 :root {
-  /* Color System: Dark Smoky Gray / Neutral Carbon */
-  --bg-page: #0e0f12;
-  --bg-surface: #16171b;
-  --bg-surface-elevated: #1e2025;
-  --bg-surface-hover: #25272e;
+  /* Color System: Warm Smoky Charcoal Gray rgb(37, 36, 35) */
+  --bg-page: rgb(37, 36, 35);
+  --bg-surface: rgb(46, 45, 43);
+  --bg-surface-elevated: rgb(56, 55, 53);
+  --bg-surface-hover: rgb(66, 65, 62);
 
-  --border-default: #2a2c33;
-  --border-subtle: #1d1f24;
+  --border-default: rgb(66, 64, 61);
+  --border-subtle: rgb(52, 50, 48);
   --border-focus: #38bdf8;
 
   --accent-sky: #38bdf8;
@@ -145,12 +145,24 @@ h1, h2, h3 {
   position: sticky;
   top: 0;
   width: 100%;
-  background: rgba(14, 15, 18, 0.95);
+  background: rgba(37, 36, 35, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid transparent;
   z-index: 100;
   transition: border-color 0.15s ease;
+}
+
+.header-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border-subtle);
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  pointer-events: none;
 }
 
 .site-header.scrolled {
@@ -174,7 +186,29 @@ h1, h2, h3 {
   display: inline-flex;
   align-items: center;
   line-height: 1;
-  transition: opacity 0.15s ease;
+}
+
+/* Nav & Hero entrance visibility during intro */
+body.intro-running #siteLogo {
+  opacity: 0;
+  visibility: hidden;
+}
+
+body:not(.intro-running) #siteLogo {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.intro-running .desktop-nav .nav-link,
+body.intro-running #navGithubLink,
+body.intro-running #mobileMenuBtn,
+body.intro-running .hero-status,
+body.intro-running .hero-heading,
+body.intro-running .hero-lead,
+body.intro-running .hero-actions,
+body.intro-running .quick-facts,
+body.intro-running .code-card {
+  opacity: 0;
 }
 
 .logo-bracket {
@@ -379,12 +413,22 @@ h1, h2, h3 {
   margin-bottom: 26px;
 }
 
+.hero-line {
+  width: 100%;
+  height: 1px;
+  background: var(--border-subtle);
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  margin-top: 18px;
+  margin-bottom: 18px;
+}
+
 .quick-facts {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border-subtle);
+  padding-top: 0;
+  border-top: none;
 }
 
 .fact {
@@ -484,8 +528,27 @@ h1, h2, h3 {
    Sections (Tightened Spacing)
    ========================================================================== */
 .section {
+  position: relative;
   padding: 38px 0;
-  border-top: 1px solid var(--border-subtle);
+  border-top: none;
+}
+
+.section-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--border-subtle);
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* Scroll-reveal items initial state (activated when js-ready is on body) */
+body.js-ready .scroll-item {
+  opacity: 0;
+  transform: translateY(18px);
 }
 
 .section-title {
@@ -1144,5 +1207,31 @@ h1, h2, h3 {
   .quick-facts {
     grid-template-columns: 1fr;
     gap: 8px;
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .header-line,
+  .hero-line,
+  .section-line {
+    transform: scaleX(1) !important;
+  }
+
+  body.intro-running #siteLogo,
+  body.intro-running .desktop-nav .nav-link,
+  body.intro-running #navGithubLink,
+  body.intro-running #mobileMenuBtn,
+  body.intro-running .hero-status,
+  body.intro-running .hero-heading,
+  body.intro-running .hero-lead,
+  body.intro-running .hero-actions,
+  body.intro-running .quick-facts,
+  body.intro-running .code-card,
+  body.js-ready .scroll-item {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    transition: none !important;
   }
 }
