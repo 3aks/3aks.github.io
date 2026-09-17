@@ -299,6 +299,12 @@ body.intro-running .scroll-item {
   opacity: 0;
 }
 
+body.intro-running .section-line,
+body.intro-running .header-line,
+body.intro-running #heroLine {
+  transform: scaleX(0);
+}
+
 .logo-bracket {
   color: var(--accent-sky);
   transition: transform 0.15s ease;
@@ -636,24 +642,23 @@ body.intro-running .scroll-item {
 }
 
 /* Universal scroll-reveal initial state (when js-ready is active) */
-html.js-ready .scroll-item,
-body.js-ready .scroll-item {
+html.js-ready main section.section:not(.animated) .scroll-item {
   opacity: 0;
   transform: translateY(20px);
   will-change: opacity, transform;
 }
 
-html.js-ready .section-line,
-body.js-ready .section-line {
+html.js-ready main section.section:not(.animated) .section-line {
   transform: scaleX(0);
+  will-change: transform;
 }
 
-section.animated .scroll-item {
+main section.section.animated .scroll-item {
   opacity: 1;
   transform: none;
 }
 
-section.animated .section-line {
+main section.section.animated .section-line {
   transform: scaleX(1);
 }
 

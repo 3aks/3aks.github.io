@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   initInteractiveBackground(prefersReduced);
-  setupScrollReveals(false);
   setupHeader();
   setupFilterTabs(prefersReduced);
   setupTerminal(prefersReduced);
@@ -147,7 +146,7 @@ function initStartupAnimation(prefersReduced) {
     window.removeEventListener('click', onUserInteraction);
     window.removeEventListener('keydown', onUserInteraction);
 
-    anime.remove([overlay, scrambleWrap, '.header-line', '#heroLine', '.section-line', '.desktop-nav .nav-link', '#navGithubLink', '#mobileMenuBtn', '.hero-status', '.hero-heading', '.hero-lead', '.hero-actions .btn', '.quick-facts .fact', '.code-card']);
+    anime.remove([overlay, scrambleWrap, '.header-line', '#heroLine', '.desktop-nav .nav-link', '#navGithubLink', '#mobileMenuBtn', '.hero-status', '.hero-heading', '.hero-lead', '.hero-actions .btn', '.quick-facts .fact', '.code-card']);
 
     overlay.style.display = 'none';
     scrambleWrap.remove();
@@ -158,8 +157,8 @@ function initStartupAnimation(prefersReduced) {
       targetLogo.style.visibility = 'visible';
     }
 
-    const lines = document.querySelectorAll('.header-line, .hero-line, .section-line');
-    lines.forEach(l => l.style.transform = 'scaleX(1)');
+    const heroLines = document.querySelectorAll('.header-line, #heroLine');
+    heroLines.forEach(l => l.style.transform = 'scaleX(1)');
 
     const heroEls = document.querySelectorAll('.desktop-nav .nav-link, #navGithubLink, #mobileMenuBtn, .hero-status, .hero-heading, .hero-lead, .hero-actions .btn, .quick-facts .fact, .code-card');
     heroEls.forEach(el => {
@@ -167,7 +166,7 @@ function initStartupAnimation(prefersReduced) {
       el.style.transform = 'none';
     });
 
-    setupScrollReveals(true);
+    setupScrollReveals(false);
   }
 
   const onUserInteraction = (e) => {
@@ -327,54 +326,100 @@ function initStartupAnimation(prefersReduced) {
       scale: [0.97, 1],
       translateY: [10, 0],
       duration: 250,
-      easing: 'easeOutQuad',
+      easing: 'easeOutQuad'
+    }, '-=190')
+    // 9. About Section: Line & Content
+    .add({
+      targets: '#about .section-line',
+      scaleX: [0, 1],
+      duration: 280,
+      easing: 'easeOutQuart'
+    }, '-=170')
+    .add({
+      targets: '#about .scroll-item',
+      opacity: [0, 1],
+      translateY: [16, 0],
+      delay: anime.stagger(35),
+      duration: 220,
+      easing: 'easeOutCubic'
+    }, '-=180')
+    // 10. Projects Section: Line & Content
+    .add({
+      targets: '#projects .section-line',
+      scaleX: [0, 1],
+      duration: 280,
+      easing: 'easeOutQuart'
+    }, '-=170')
+    .add({
+      targets: '#projects .scroll-item',
+      opacity: [0, 1],
+      translateY: [16, 0],
+      delay: anime.stagger(25),
+      duration: 220,
+      easing: 'easeOutCubic',
       complete: () => {
-        // Trigger any section already on screen or near viewport
-        triggerVisibleSections();
+        document.querySelector('#about')?.classList.add('animated');
+        document.querySelector('#projects')?.classList.add('animated');
+        // Activate scroll observer for remaining sections (Tools & Tech, Terminal Shell, Contact)
+        setupScrollReveals(false);
       }
-    }, '-=190');
+    }, '-=160');
   }
 }
 
 /* ==========================================================================
    Anime.js: Scroll-Triggered Appearing Animations (Lines -> Text & Cards)
-   Guaranteed across all sections: About, Projects, Tools & Tech, Terminal, Contact
+   Guaranteed across all sections: Tools & Tech, Terminal Shell, Contact
    ========================================================================== */
 function setupScrollReveals(immediate) {
   document.documentElement.classList.add('js-ready');
   document.body.classList.add('js-ready');
 
+  const remainingSections = document.querySelectorAll('main section.section:not(.animated)');
+
   if (immediate || !window.IntersectionObserver) {
-    document.querySelectorAll('.section-line').forEach(l => l.style.transform = 'scaleX(1)');
-    document.querySelectorAll('.scroll-item').forEach(el => {
-      el.style.opacity = '1';
-      el.style.transform = 'none';
+    remainingSections.forEach(s => {
+      s.classList.add('animated');
+      const line = s.querySelector('.section-line');
+      if (line) line.style.transform = 'scaleX(1)';
+      s.querySelectorAll('.scroll-item').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
     });
-    document.querySelectorAll('main section.section').forEach(s => s.classList.add('animated'));
     return;
   }
-
-  const sections = document.querySelectorAll('main section.section:not(.animated)');
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const section = entry.target;
-        obs.unobserve(section);
-        triggerSectionAnimation(section);
+        obs.unobserve(entry.target);
+        triggerSectionAnimation(entry.target);
       }
     });
   }, {
-    rootMargin: '100px 0px -20px 0px',
-    threshold: 0.02
+    rootMargin: '80px 0px -20px 0px',
+    threshold: 0.04
   });
 
-  sections.forEach(s => observer.observe(s));
+  remainingSections.forEach(s => {
+    observer.observe(s);
+    // If already in viewport (e.g. on tall monitor), trigger right away
+    const rect = s.getBoundingClientRect();
+    if (rect.top < window.innerHeight - 30 && rect.bottom > 0) {
+      obsTrigger(observer, s);
+    }
+  });
+
+  function obsTrigger(obs, s) {
+    obs.unobserve(s);
+    triggerSectionAnimation(s);
+  }
 }
 
 function triggerSectionAnimation(section) {
-  if (!section || section.classList.contains('animated')) return;
-  section.classList.add('animated');
+  if (!section || section.classList.contains('animated') || section.dataset.animating) return;
+  section.dataset.animating = 'true';
 
   const line = section.querySelector('.section-line');
   const items = section.querySelectorAll('.scroll-item');
@@ -385,15 +430,24 @@ function triggerSectionAnimation(section) {
       el.style.opacity = '1';
       el.style.transform = 'none';
     });
+    section.classList.add('animated');
+    delete section.dataset.animating;
     return;
   }
 
-  const secTl = anime.timeline({ easing: 'easeOutQuart' });
+  const secTl = anime.timeline({
+    easing: 'easeOutQuart',
+    complete: () => {
+      section.classList.add('animated');
+      delete section.dataset.animating;
+    }
+  });
+
   if (line) {
     secTl.add({
       targets: line,
       scaleX: [0, 1],
-      duration: 320,
+      duration: 300,
       easing: 'easeOutQuart'
     });
   }
@@ -404,19 +458,10 @@ function triggerSectionAnimation(section) {
       opacity: [0, 1],
       translateY: [18, 0],
       delay: anime.stagger(35),
-      duration: 260,
+      duration: 250,
       easing: 'easeOutCubic'
-    }, line ? '-=220' : 0);
+    }, line ? '-=210' : 0);
   }
-}
-
-function triggerVisibleSections() {
-  document.querySelectorAll('main section.section:not(.animated)').forEach(s => {
-    const rect = s.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 40 && rect.bottom > 0) {
-      triggerSectionAnimation(s);
-    }
-  });
 }
 
 /* Anime.js: Subtle 3D Card Hover */
