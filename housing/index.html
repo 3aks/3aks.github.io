@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardiff 5-Bed Student House Hunter | Cardiff University 2027/28</title>
+  <meta name="description" content="Real-time web scraper and finder for 5-bedroom Cardiff student houses. Filter by walking distance to Cardiff University, unlet status, bills included, and recent drops.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header / Hero Section -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand-badge">
+        <span class="pulsing-dot"></span>
+        <span>LIVE CARDIFF SCRAPER • 2027/28 ACADEMIC YEAR</span>
+      </div>
+      <h1 class="main-title">
+        Cardiff Uni 5-Bed House Hunter
+      </h1>
+      <p class="subtitle">
+        Aggregating verified available 5-bedroom houses from <strong>Cardiff Student Letting</strong>, <strong>UniHomes</strong>, <strong>Housr</strong>, <strong>Horizon</strong> & <strong>CPS Homes</strong>. Prioritizing &le;10 min walk to Cardiff University campus.
+      </p>
+
+      <!-- Stats Bar -->
+      <div class="stats-row" id="statsRow">
+        <div class="stat-card" id="statTotal">
+          <div class="stat-icon">🏡</div>
+          <div class="stat-info">
+            <span class="stat-value" id="valTotal">108</span>
+            <span class="stat-label">Available Houses</span>
+          </div>
+        </div>
+        <div class="stat-card stat-priority" id="statPriority">
+          <div class="stat-icon">⭐</div>
+          <div class="stat-info">
+            <span class="stat-value" id="valPriority">68</span>
+            <span class="stat-label">&le; 10m Walk to Uni</span>
+          </div>
+        </div>
+        <div class="stat-card" id="statBills">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-info">
+            <span class="stat-value" id="valBills">49</span>
+            <span class="stat-label">Bills Included</span>
+          </div>
+        </div>
+        <div class="stat-card" id="statAvgPrice">
+          <div class="stat-icon">💷</div>
+          <div class="stat-info">
+            <span class="stat-value" id="valAvgPrice">£142</span>
+            <span class="stat-label">Avg Price /pppw</span>
+          </div>
+        </div>
+        <div class="stat-card stat-action" id="actionCard">
+          <button class="btn-refresh" id="btnRefresh" title="Run real-time scraper across all portals">
+            <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+            </svg>
+            <span id="refreshBtnText">Re-Scrape Portals</span>
+          </button>
+          <a href="/api/export-csv" class="btn-export" download="cardiff_5bed_student_houses.csv" id="btnExportCsv">
+            <span>📥 Export CSV</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Filter & Controls Toolbar -->
+  <main class="main-container">
+    <div class="toolbar-card">
+      <div class="search-and-toggles">
+        <!-- Search bar -->
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search by street (e.g. Miskin, Woodville, Coburn, Flora, Rhymney)...">
+          <button class="btn-clear" id="btnClearSearch" style="display: none;">&times;</button>
+        </div>
+
+        <!-- Walk Proximity Filter Buttons -->
+        <div class="filter-group">
+          <span class="group-title">Walking Distance to Cardiff Uni:</span>
+          <div class="chip-toggle-group" id="walkFilterChips">
+            <button class="chip active" data-walk="priority">⭐ &le; 10m Walk Only</button>
+            <button class="chip" data-walk="5m">&le; 5m (Campus Edge)</button>
+            <button class="chip" data-walk="all">All Cardiff Areas</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Filters -->
+      <div class="filter-subrow">
+        <!-- Portals -->
+        <div class="filter-item">
+          <label for="agencyFilter">Agency / Portal:</label>
+          <select id="agencyFilter">
+            <option value="all">All Agencies (CSL, UniHomes, Housr, Horizon, CPS)</option>
+            <option value="Cardiff Student Letting">Cardiff Student Letting (Uni SU)</option>
+            <option value="UniHomes">UniHomes (Bills Included)</option>
+            <option value="Housr">Housr Student Living</option>
+            <option value="Horizon Properties">Horizon Properties</option>
+            <option value="CPS Homes">CPS Homes</option>
+          </select>
+        </div>
+
+        <!-- Bills Included Toggle -->
+        <div class="filter-item toggle-item">
+          <label class="switch-container">
+            <input type="checkbox" id="billsOnlyToggle">
+            <span class="switch-slider"></span>
+            <span class="switch-label">⚡ Bills Included Only</span>
+          </label>
+        </div>
+
+        <!-- Max Price Slider -->
+        <div class="filter-item price-slider-item">
+          <div class="slider-header">
+            <span>Max Price /pppw:</span>
+            <strong id="priceDisplay">Any Price</strong>
+          </div>
+          <input type="range" id="priceRange" min="100" max="220" step="5" value="220">
+        </div>
+
+        <!-- Sort By -->
+        <div class="filter-item">
+          <label for="sortBySelect">Sort By:</label>
+          <select id="sortBySelect">
+            <option value="closest">🚶 Closest Walk to Uni (Default)</option>
+            <option value="cheapest">💷 Cheapest Price (£ pppw)</option>
+            <option value="newest">🆕 Most Recently Listed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Active Filter Chips / Notice Banner -->
+    <div class="results-header">
+      <div class="results-count-wrap">
+        <h2 id="resultsCount">Showing 68 Properties (&le; 10m Walk)</h2>
+        <span class="results-sub" id="resultsSub">Next Academic Year (July 2027 - June 2028) • Unlet Verified</span>
+      </div>
+      <div class="legend-pills">
+        <span class="pill pill-green">🟢 &le; 5m Walk</span>
+        <span class="pill pill-gold">🟡 6-10m Walk</span>
+        <span class="pill pill-purple">🟣 11-15m Walk</span>
+      </div>
+    </div>
+
+    <!-- Property Card Grid -->
+    <div class="properties-grid" id="propertiesGrid">
+      <!-- Populated via JavaScript -->
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-icon">🏚️</div>
+      <h3>No matching properties found</h3>
+      <p>Try adjusting your search criteria, price range, or toggling "All Cardiff Areas".</p>
+      <button class="btn-reset" id="btnResetFilters">Reset All Filters</button>
+    </div>
+  </main>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">Copied property info for your group chat!</div>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>Cardiff Student 5-Bed House Scraper • Built for Cardiff University House Hunters</p>
+      <p class="footer-sub">Monitors Cardiff Student Letting (Park Place), UniHomes, Housr, Horizon Properties, and CPS Homes. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
