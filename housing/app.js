@@ -4,6 +4,8 @@
 
 let allListings = [];
 let activeWalkFilter = "priority"; // default: <= 10m walk priority
+let visibleCount = 12;
+let isLoadingMore = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   initEventListeners();
@@ -123,7 +125,7 @@ async function triggerScrape() {
   btn.disabled = true;
   icon.classList.add("refresh-spinning");
   text.textContent = "Scraping Portals...";
-  showToast("🔍 Running live scrapers across all 5 student housing portals...");
+  showToast("Running live scrapers across all portals...");
 
   try {
     const res = await fetch(`${apiBase}/scrape`, { method: "POST" });
@@ -132,11 +134,11 @@ async function triggerScrape() {
       allListings = data.listings || [];
       updateTopStats(data.metadata, allListings);
       filterAndRender();
-      showToast(`✅ Refresh complete! Found ${allListings.length} verified 5-bed houses.`);
+      showToast(`Done — found ${allListings.length} verified 5-bed houses.`);
     }
   } catch (err) {
     console.error("Scrape error:", err);
-    showToast("⚠️ Scrape failed. Please check server logs.");
+    showToast("Scrape failed. Check server logs.");
   } finally {
     btn.disabled = false;
     icon.classList.remove("refresh-spinning");
@@ -160,6 +162,8 @@ function updateTopStats(metadata, listings) {
 }
 
 function filterAndRender() {
+  if (!isLoadingMore) visibleCount = 12;
+  isLoadingMore = false;
   const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
   const selectedAgency = document.getElementById("agencyFilter").value;
   const billsOnly = document.getElementById("billsOnlyToggle").checked;
@@ -215,16 +219,44 @@ function renderGrid(listings) {
   const empty = document.getElementById("emptyState");
   const countHeader = document.getElementById("resultsCount");
 
-  countHeader.textContent = `Showing ${listings.length} Available 5-Bed Houses`;
+  countHeader.textContent = `Showing ${listings.length} available 5-bed houses`;
 
   if (listings.length === 0) {
     grid.innerHTML = "";
     empty.style.display = "block";
+    removeLoadMoreBtn();
     return;
   }
 
   empty.style.display = "none";
-  grid.innerHTML = listings.map(p => createCardHTML(p)).join("");
+  const toShow = listings.slice(0, visibleCount);
+  grid.innerHTML = toShow.map(p => createCardHTML(p)).join("");
+
+  if (listings.length > visibleCount) {
+    const remaining = listings.length - visibleCount;
+    showLoadMoreBtn(remaining);
+  } else {
+    removeLoadMoreBtn();
+  }
+}
+
+function showLoadMoreBtn(remaining) {
+  removeLoadMoreBtn();
+  const btn = document.createElement("button");
+  btn.className = "btn-load-more";
+  btn.id = "btnLoadMore";
+  btn.textContent = `Show ${Math.min(remaining, 12)} more of ${remaining} remaining`;
+  btn.addEventListener("click", () => {
+    visibleCount += 12;
+    isLoadingMore = true;
+    filterAndRender();
+  });
+  document.getElementById("propertiesGrid").after(btn);
+}
+
+function removeLoadMoreBtn() {
+  const existing = document.getElementById("btnLoadMore");
+  if (existing) existing.remove();
 }
 
 function createCardHTML(p) {
@@ -240,21 +272,15 @@ function createCardHTML(p) {
   const isPriority = p.is_priority_10min;
   const priorityClass = isPriority ? "priority-card" : "";
 
-  // Image or stylized placeholder
   const mediaHTML = p.image_url ? `
-    <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.address)}" class="card-img" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>🏠<span>Cardiff Student House</span></div>';">
+    <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.address)}" class="card-img" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>No image available</div>';">
   ` : `
     <div class="card-img-placeholder">
-      🏠
-      <span>${escapeHtml(p.address.split(',')[0])}</span>
+      ${escapeHtml(p.address.split(',')[0])}
     </div>
   `;
 
-  // Encoded address for Google Maps directions to Cardiff University Students' Union
-  const mapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(p.address + ', Cardiff')}&destination=Cardiff+University+Students+Union+CF10+3QN&travelmode=walking`;
-
-  // WhatsApp share message payload
-  const shareText = `🏡 Check out this 5-bed house for next year!\n📍 ${p.address}\n🚶‍♂️ Walk to Uni: ${p.walk_display}\n💷 Rent: ${p.price_formatted} ${p.bills_included ? '(Bills Included)' : ''}\n📅 Available: ${p.available_date}\n🔗 Link: ${p.url}`;
+  const shareText = `${p.address} — ${p.walk_display} walk to uni — ${p.price_formatted} ${p.bills_included ? '(bills incl.)' : ''} — Available: ${p.available_date} — ${p.url}`;
 
   return `
     <div class="property-card ${priorityClass}">
@@ -263,7 +289,7 @@ function createCardHTML(p) {
         
         <div class="badge-top-left">
           <span class="badge-walk ${walkClass}">
-            🚶‍♂️ ${escapeHtml(p.walk_display)} ${isPriority ? '★' : ''}
+            ${escapeHtml(p.walk_display)} ${isPriority ? '★' : ''}
           </span>
         </div>
 
@@ -278,50 +304,52 @@ function createCardHTML(p) {
       <div class="card-content">
         <div class="card-price-row">
           <div class="price-main">
-            ${p.price_pppw ? `£${p.price_pppw} <span class="price-sub">pppw</span>` : 'Inquire for Price'}
+            ${p.price_pppw ? `£${p.price_pppw} <span class="price-sub">pppw</span>` : 'Price on enquiry'}
           </div>
           ${p.price_total_month ? `<div class="price-sub">£${p.price_total_month.toLocaleString()}/mo total</div>` : ''}
         </div>
 
         ${p.bills_included ? `
-          <div class="bills-tag">⚡ All Bills Included</div>
+          <div class="bills-tag">Bills included</div>
         ` : `
-          <div class="price-sub" style="margin-bottom: 8px;">Exclusive of bills</div>
+          <div class="price-sub" style="margin-bottom: 8px;">Bills not included</div>
         `}
 
         <h3 class="card-title">${escapeHtml(p.title)}</h3>
-        <p class="card-address">📍 ${escapeHtml(p.address)}</p>
+        <p class="card-address">${escapeHtml(p.address)}</p>
 
         <div class="spec-row">
-          <div class="spec-item">🛏️ 5 Bedrooms</div>
-          <div class="spec-item">🚿 ${p.bathrooms || 2} Bathrooms</div>
-          <div class="spec-item">📍 ${isPriority ? 'Cathays (Near Campus)' : 'Cardiff'}</div>
+          <div class="spec-item">5 bed</div>
+          <div class="spec-item">${p.bathrooms || 2} bath</div>
+          <div class="spec-item">${isPriority ? 'Cathays' : 'Cardiff'}</div>
         </div>
 
         <div class="avail-notice">
-          <span>📅 Available From: <strong>${escapeHtml(p.available_date)}</strong></span>
+          <span>Available from <strong>${escapeHtml(p.available_date)}</strong></span>
         </div>
 
         <div class="card-actions">
           <a href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer" class="btn-view">
-            <span>View & Book</span>
+            <span>View listing</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
           </a>
-          <button class="btn-share" onclick="copyShareText(${JSON.stringify(shareText)})" title="Copy summary to WhatsApp / Group chat">
-            <span>💬 Share</span>
+          <button class="btn-share" onclick="copyShareText(${JSON.stringify(shareText)})" title="Copy property details">
+            <span>Copy info</span>
           </button>
-          <a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="btn-maps" title="View walking route to Cardiff Uni on Google Maps">
-            🗺️
-          </a>
         </div>
       </div>
     </div>
   `;
 }
 
+
+
+
+
+
 function copyShareText(text) {
   navigator.clipboard.writeText(text).then(() => {
-    showToast("📋 Copied house details! Ready to paste into WhatsApp group chat.");
+    showToast("Copied house details to clipboard.");
   }).catch(() => {
     showToast("Copied to clipboard!");
   });

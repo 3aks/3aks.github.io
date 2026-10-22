@@ -22,34 +22,34 @@
         Cardiff Uni 5-Bed House Hunter
       </h1>
       <p class="subtitle">
-        Aggregating verified available 5-bedroom houses from <strong>Cardiff Student Letting</strong>, <strong>UniHomes</strong>, <strong>Housr</strong>, <strong>Horizon</strong> & <strong>CPS Homes</strong>. Prioritizing &le;10 min walk to Cardiff University campus.
+        Verified 5-bedroom houses from <strong>CSL</strong>, <strong>UniHomes</strong>, <strong>Housr</strong>, <strong>Horizon</strong> &amp; <strong>CPS Homes</strong> — prioritised by walking distance to Cardiff University.
       </p>
 
       <!-- Stats Bar -->
       <div class="stats-row" id="statsRow">
         <div class="stat-card" id="statTotal">
-          <div class="stat-icon">🏡</div>
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
           <div class="stat-info">
             <span class="stat-value" id="valTotal">108</span>
             <span class="stat-label">Available Houses</span>
           </div>
         </div>
         <div class="stat-card stat-priority" id="statPriority">
-          <div class="stat-icon">⭐</div>
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <div class="stat-info">
             <span class="stat-value" id="valPriority">68</span>
             <span class="stat-label">&le; 10m Walk to Uni</span>
           </div>
         </div>
         <div class="stat-card" id="statBills">
-          <div class="stat-icon">⚡</div>
+          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
           <div class="stat-info">
             <span class="stat-value" id="valBills">49</span>
             <span class="stat-label">Bills Included</span>
           </div>
         </div>
         <div class="stat-card" id="statAvgPrice">
-          <div class="stat-icon">💷</div>
+          <div class="stat-icon">£</div>
           <div class="stat-info">
             <span class="stat-value" id="valAvgPrice">£142</span>
             <span class="stat-label">Avg Price /pppw</span>
@@ -63,7 +63,7 @@
             <span id="refreshBtnText">Re-Scrape Portals</span>
           </button>
           <a href="/api/export-csv" class="btn-export" download="cardiff_5bed_student_houses.csv" id="btnExportCsv">
-            <span>📥 Export CSV</span>
+            <span>Export CSV</span>
           </a>
         </div>
       </div>
@@ -76,7 +76,7 @@
       <div class="search-and-toggles">
         <!-- Search bar -->
         <div class="search-box">
-          <span class="search-icon">🔍</span>
+          <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
           <input type="text" id="searchInput" placeholder="Search by street (e.g. Miskin, Woodville, Coburn, Flora, Rhymney)...">
           <button class="btn-clear" id="btnClearSearch" style="display: none;">&times;</button>
         </div>
@@ -85,9 +85,9 @@
         <div class="filter-group">
           <span class="group-title">Walking Distance to Cardiff Uni:</span>
           <div class="chip-toggle-group" id="walkFilterChips">
-            <button class="chip active" data-walk="priority">⭐ &le; 10m Walk Only</button>
-            <button class="chip" data-walk="5m">&le; 5m (Campus Edge)</button>
-            <button class="chip" data-walk="all">All Cardiff Areas</button>
+            <button class="chip active" data-walk="priority">&le; 10 min walk</button>
+            <button class="chip" data-walk="5m">&le; 5 min</button>
+            <button class="chip" data-walk="all">All areas</button>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@
           <label class="switch-container">
             <input type="checkbox" id="billsOnlyToggle">
             <span class="switch-slider"></span>
-            <span class="switch-label">⚡ Bills Included Only</span>
+            <span class="switch-label">Bills included only</span>
           </label>
         </div>
 
@@ -129,9 +129,9 @@
         <div class="filter-item">
           <label for="sortBySelect">Sort By:</label>
           <select id="sortBySelect">
-            <option value="closest">🚶 Closest Walk to Uni (Default)</option>
-            <option value="cheapest">💷 Cheapest Price (£ pppw)</option>
-            <option value="newest">🆕 Most Recently Listed</option>
+            <option value="closest">Closest to Uni</option>
+            <option value="cheapest">Cheapest (£ pppw)</option>
+            <option value="newest">Recently Listed</option>
           </select>
         </div>
       </div>
@@ -144,9 +144,9 @@
         <span class="results-sub" id="resultsSub">Next Academic Year (July 2027 - June 2028) • Unlet Verified</span>
       </div>
       <div class="legend-pills">
-        <span class="pill pill-green">🟢 &le; 5m Walk</span>
-        <span class="pill pill-gold">🟡 6-10m Walk</span>
-        <span class="pill pill-purple">🟣 11-15m Walk</span>
+        <span class="pill pill-green"><span class="dot"></span> &le; 5m Walk</span>
+        <span class="pill pill-gold"><span class="dot"></span> 6-10m Walk</span>
+        <span class="pill pill-purple"><span class="dot"></span> 11-15m Walk</span>
       </div>
     </div>
 
@@ -157,7 +157,7 @@
 
     <!-- Empty State -->
     <div class="empty-state" id="emptyState" style="display: none;">
-      <div class="empty-icon">🏚️</div>
+      <div class="empty-icon">—</div>
       <h3>No matching properties found</h3>
       <p>Try adjusting your search criteria, price range, or toggling "All Cardiff Areas".</p>
       <button class="btn-reset" id="btnResetFilters">Reset All Filters</button>
