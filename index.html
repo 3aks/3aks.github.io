@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
   <title>Arjun Sharma | 3aks.me</title>
   <meta name="description" content="Personal site of Arjun Sharma (3aks). Hardware projects, microcontrollers, embedded C, and software tools.">
   <meta name="author" content="Arjun Sharma">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -15,58 +17,43 @@
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/189921392?v=4">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f172a'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='50' font-family='monospace' font-weight='700' fill='%2338bdf8'>3A</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-size='46' font-family='monospace' font-weight='700' fill='%23ff7a1a'>3A</text></svg>">
 
-  <!-- Fonts: IBM Plex Sans & JetBrains Mono -->
+  <!-- Fonts: system font on Apple devices, Inter + JetBrains Mono elsewhere -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
-<body class="intro-running">
-  <!-- Ambient Interactive Background: Orange & Blue Gradient Circles -->
-  <div class="ambient-bg" id="ambientBg" aria-hidden="true">
-    <div class="gradient-circle orb-blue-1" id="orbBlue1"></div>
-    <div class="gradient-circle orb-orange-1" id="orbOrange1"></div>
-    <div class="gradient-circle orb-blue-2" id="orbBlue2"></div>
-    <div class="gradient-circle orb-orange-2" id="orbOrange2"></div>
-    <div class="ambient-mesh"></div>
-  </div>
-
-  <!-- Startup Screen: Clean black screen with scramble into header logo -->
-  <div class="startup-overlay" id="startupOverlay" aria-hidden="true"></div>
-  <div class="startup-scramble-wrap" id="startupScrambleWrap" aria-hidden="true">
-    <div class="scramble-brand" id="scrambleBrand">
-      <span class="scramble-bracket">&lt;</span><span class="scramble-text">3aks</span><span class="scramble-accent">.me</span><span class="scramble-bracket">/&gt;</span>
-    </div>
-  </div>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Header -->
   <header class="site-header" id="header">
     <div class="container nav-container">
-      <a href="#hero" class="brand-logo" id="siteLogo" aria-label="3aks.me Home">
-        <span class="logo-bracket">&lt;</span>
-        <span class="logo-text">3aks<span class="logo-accent">.me</span></span>
-        <span class="logo-bracket">/&gt;</span>
+      <a href="#hero" class="brand-logo" id="siteLogo" aria-label="3aks.me home">
+        <span class="logo-bracket">&lt;</span><span class="logo-text">3aks<span class="logo-accent">.me</span></span><span class="logo-bracket">/&gt;</span>
       </a>
 
-      <nav class="desktop-nav" aria-label="Main Navigation">
+      <nav class="desktop-nav" aria-label="Main">
         <a href="#about" class="nav-link">About</a>
         <a href="#projects" class="nav-link">Projects</a>
-        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#skills" class="nav-link">Toolkit</a>
         <a href="#terminal" class="nav-link">Terminal</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
       <div class="nav-actions">
         <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-subtle" id="navGithubLink">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
             <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
           </svg>
           <span>GitHub</span>
         </a>
 
-        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
           <span class="bar"></span>
           <span class="bar"></span>
           <span class="bar"></span>
@@ -74,67 +61,64 @@
       </div>
     </div>
 
-    <!-- Mobile Drawer -->
-    <div class="mobile-nav" id="mobileNav">
+    <!-- Mobile menu -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
       <a href="#about" class="mobile-nav-link">About</a>
       <a href="#projects" class="mobile-nav-link">Projects</a>
-      <a href="#skills" class="mobile-nav-link">Skills</a>
+      <a href="#skills" class="mobile-nav-link">Toolkit</a>
       <a href="#terminal" class="mobile-nav-link">Terminal</a>
       <a href="#contact" class="mobile-nav-link">Contact</a>
-      <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="mobile-nav-link highlight">GitHub Profile &rarr;</a>
-    </div>
-
-    <div class="header-line" id="headerLine"></div>
+      <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="mobile-nav-link highlight">GitHub profile &rarr;</a>
+    </nav>
   </header>
 
-  <main>
-    <!-- Hero Section -->
+  <main id="main">
+    <!-- Hero -->
     <section class="hero-section" id="hero">
+      <div class="hero-shader" data-shader="mesh"
+           data-colors="#000000,#0b1a4a,#1d4ed8,#ff7a1a,#05060a"
+           data-speed="0.22" data-distortion="0.85" data-swirl="0.4" data-grain="0.1"
+           aria-hidden="true"></div>
+
       <div class="container hero-grid">
         <div class="hero-text">
-          <div class="hero-status">
+          <div class="hero-status reveal" style="--i:0">
             <span class="status-dot"></span>
-            <span class="status-msg">Building hardware &amp; writing C / Python</span>
+            <span>Building hardware &amp; writing C / Python</span>
           </div>
 
-          <h1 class="hero-heading">
-            Arjun Sharma
-          </h1>
+          <h1 class="hero-heading reveal" style="--i:1">Arjun Sharma<span class="dot">.</span></h1>
 
-          <p class="hero-lead">
-            I build microcontrollers, audio interfaces, and custom electronics. Most of my work runs on ESP32s, bare-metal C, or Python automation scripts.
+          <p class="hero-lead reveal" style="--i:2">
+            I build microcontrollers, audio interfaces and custom electronics. Most of my work runs on ESP32s, bare-metal C or Python.
           </p>
 
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub Profile</a>
+          <div class="hero-actions reveal" style="--i:3">
+            <a href="#projects" class="btn btn-primary">View projects</a>
+            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">GitHub</a>
           </div>
 
-          <div class="hero-line" id="heroLine"></div>
-
-          <div class="quick-facts">
+          <div class="quick-facts reveal" style="--i:4">
             <div class="fact">
               <span class="fact-val" id="repoCountStat">6</span>
-              <span class="fact-label">Public Repos</span>
+              <span class="fact-label">Public repos</span>
             </div>
-            <div class="fact-separator"></div>
             <div class="fact">
               <span class="fact-val">ESP32 &amp; C</span>
-              <span class="fact-label">Primary Stack</span>
+              <span class="fact-label">Primary stack</span>
             </div>
-            <div class="fact-separator"></div>
             <div class="fact">
               <span class="fact-val">Hack Club</span>
-              <span class="fact-label">Hardware Maker</span>
+              <span class="fact-label">Hardware maker</span>
             </div>
           </div>
         </div>
 
-        <!-- Terminal Card / Identity Block -->
-        <div class="hero-card-wrapper">
+        <!-- Identity card -->
+        <div class="hero-card-wrapper reveal" style="--i:3">
           <div class="code-card">
             <div class="card-topbar">
-              <div class="window-buttons">
+              <div class="window-buttons" aria-hidden="true">
                 <span class="win-btn close"></span>
                 <span class="win-btn min"></span>
                 <span class="win-btn max"></span>
@@ -149,49 +133,48 @@
     <span class="token-type">dev_t</span> me = {
         .<span class="token-prop">name</span> = <span class="token-string">"Arjun Sharma"</span>,
         .<span class="token-prop">handle</span> = <span class="token-string">"3aks"</span>,
-        .<span class="token-prop">site</span> = <span class="token-string">"3aks.me"</span>,
-        .<span class="token-prop">hardware</span> = {<span class="token-string">"ESP32"</span>, <span class="token-string">"CAN bus"</span>, <span class="token-string">"I2S"</span>},
-        .<span class="token-prop">languages</span> = {<span class="token-string">"C"</span>, <span class="token-string">"Python"</span>, <span class="token-string">"AutoHotkey"</span>}
+        .<span class="token-prop">hardware</span> = {<span class="token-string">"ESP32"</span>, <span class="token-string">"CAN"</span>, <span class="token-string">"I2S"</span>},
+        .<span class="token-prop">languages</span> = {<span class="token-string">"C"</span>, <span class="token-string">"Python"</span>}
     };
     <span class="token-func">printf</span>(<span class="token-string">"Ready to flash.\n"</span>);
 }</code></pre>
             </div>
             <div class="card-bottom">
-              <span class="card-status-text">GCC 14.2 &bull; Target: xtensa-esp32</span>
-              <span class="card-chip-tag">MCU Ready</span>
+              <span>GCC 14.2 &bull; xtensa-esp32</span>
+              <span class="card-chip-tag">MCU ready</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About -->
     <section class="section" id="about">
-      <div class="section-line"></div>
       <div class="container">
-        <h2 class="section-title scroll-item">About</h2>
-        <div class="about-content scroll-item">
-          <p>
-            I got into hardware by solving specific annoyances with my own gear: car stereos that lacked modern Bluetooth, video streams that needed dedicated camera switching switches, and desktop apps that wouldn't listen to media keys.
+        <span class="eyebrow reveal">About</span>
+        <div class="about-content">
+          <p class="reveal" style="--i:1">
+            I got into hardware by fixing my own gear. <strong>Car stereos without modern Bluetooth, streams that needed a real camera switcher, apps that ignored media keys.</strong>
           </p>
-          <p>
-            Most of what I build involves wiring breadboards, laying out circuits, soldering components, and writing firmware in C or Python. When I am not working on physical devices, I write utilities to automate my desktop environment.
+          <p class="reveal" style="--i:2">
+            Most of what I build means <strong>wiring breadboards, laying out circuits, soldering and writing firmware</strong> in C or Python. Between devices, I write tools that automate my desktop.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects -->
     <section class="section" id="projects">
-      <div class="section-line"></div>
       <div class="container">
-        <div class="section-header-row scroll-item">
-          <div>
-            <h2 class="section-title">Projects</h2>
-            <p class="section-subtitle">Real hardware, prototypes, and open source code.</p>
+        <div class="section-header-row">
+          <div class="reveal">
+            <span class="eyebrow">Projects</span>
+            <h2 class="section-title">Things I've built.</h2>
+            <p class="section-subtitle">Real hardware, prototypes and open source code.</p>
           </div>
 
-          <div class="filter-tabs" id="filterTabs" role="tablist">
+          <div class="filter-tabs reveal" style="--i:1" id="filterTabs" role="tablist" aria-label="Filter projects">
+            <span class="filter-indicator" aria-hidden="true"></span>
             <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
             <button class="filter-tab" data-filter="hardware" role="tab" aria-selected="false">Hardware</button>
             <button class="filter-tab" data-filter="software" role="tab" aria-selected="false">Software</button>
@@ -199,86 +182,70 @@
         </div>
 
         <div class="project-list" id="projectList">
-          <!-- Project: BMW Dual-MCU Audio Bridge -->
-          <article class="project-item scroll-item" data-category="hardware" data-repo="BMW-Dual-MCU-Bluetooth-Audio-Bridge">
+          <article class="project-item is-featured reveal" data-category="hardware">
             <div class="project-header">
               <div class="project-title-group">
-                <span class="category-tag">Hardware</span>
+                <span class="category-tag">Hardware &middot; Featured</span>
                 <h3 class="project-heading">
-                  <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer">
-                    BMW Dual-MCU Bluetooth Audio Bridge
-                  </a>
+                  <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer">BMW Dual-MCU Bluetooth Audio Bridge</a>
                 </h3>
               </div>
               <span class="tech-badge">C</span>
             </div>
             <p class="project-desc">
-              Dual-MCU hardware bridge that feeds Bluetooth audio into vintage BMW factory head-unit bus networks without replacing the original dashboard stereo.
+              A dual-MCU bridge that feeds Bluetooth audio into vintage BMW head-unit bus networks, without replacing the original dashboard stereo.
             </p>
             <div class="project-footer">
               <div class="tags">
                 <span class="tag">C</span>
                 <span class="tag">Dual-MCU</span>
-                <span class="tag">Car Audio</span>
+                <span class="tag">Car audio</span>
                 <span class="tag">Firmware</span>
               </div>
               <div class="project-links">
-                <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer" class="link-label">
-                  Source Code &rarr;
-                </a>
+                <a href="https://github.com/3aks/BMW-Dual-MCU-Bluetooth-Audio-Bridge" target="_blank" rel="noopener noreferrer" class="link-label">Source code &rsaquo;</a>
               </div>
             </div>
           </article>
 
-          <!-- Project: Camera-Switching Macropad -->
-          <article class="project-item scroll-item" data-category="hardware" data-repo="Camera-Switching-Macropad">
+          <article class="project-item reveal" style="--i:1" data-category="hardware">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hack Club</span>
                 <h3 class="project-heading">
-                  <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer">
-                    Camera-Switching Macropad
-                  </a>
+                  <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer">Camera-Switching Macropad</a>
                 </h3>
               </div>
               <span class="tech-badge">Python</span>
             </div>
             <p class="project-desc">
-              Physical macropad built for Hack Club. Uses dedicated hardware pushbuttons to cut between cameras and scenes during video calls and streams without taking hands off the desk.
+              A physical macropad with dedicated buttons to cut between cameras and scenes during calls and streams.
             </p>
             <div class="project-footer">
               <div class="tags">
                 <span class="tag">Python</span>
-                <span class="tag">Hardware</span>
-                <span class="tag">Hack Club</span>
                 <span class="tag">HID</span>
+                <span class="tag">Hack Club</span>
               </div>
               <div class="project-links">
-                <a href="https://blueprint.hackclub.com/projects/2634" target="_blank" rel="noopener noreferrer" class="link-label">
-                  Blueprint &rarr;
-                </a>
-                <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer" class="link-label">
-                  Source Code &rarr;
-                </a>
+                <a href="https://blueprint.hackclub.com/projects/2634" target="_blank" rel="noopener noreferrer" class="link-label">Blueprint &rsaquo;</a>
+                <a href="https://github.com/3aks/Camera-Switching-Macropad" target="_blank" rel="noopener noreferrer" class="link-label">Source code &rsaquo;</a>
               </div>
             </div>
           </article>
 
-          <!-- Project: Custom Mixer ESP32 -->
-          <article class="project-item scroll-item" data-category="hardware" data-repo="Custom-Mixer-ESP32">
+          <article class="project-item reveal" data-category="hardware">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hardware</span>
                 <h3 class="project-heading">
-                  <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer">
-                    Custom-Mixer-ESP32
-                  </a>
+                  <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer">Custom Mixer ESP32</a>
                 </h3>
               </div>
               <span class="tech-badge">C / Python</span>
             </div>
             <p class="project-desc">
-              Multi-channel audio mixing board powered by an ESP32. Interfaces rotary pots and sliders with audio streams for desktop volume control.
+              A multi-channel mixing board on an ESP32. Rotary pots and sliders control desktop audio volumes.
             </p>
             <div class="project-footer">
               <div class="tags">
@@ -287,58 +254,47 @@
                 <span class="tag">Audio</span>
               </div>
               <div class="project-links">
-                <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer" class="link-label">
-                  Source Code &rarr;
-                </a>
+                <a href="https://github.com/3aks/Custom-Mixer-ESP32" target="_blank" rel="noopener noreferrer" class="link-label">Source code &rsaquo;</a>
               </div>
             </div>
           </article>
 
-          <!-- Project: VoltaMetric -->
-          <article class="project-item scroll-item" data-category="hardware" data-repo="VoltaMetric">
+          <article class="project-item reveal" style="--i:1" data-category="hardware">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Hardware</span>
                 <h3 class="project-heading">
-                  <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer">
-                    VoltaMetric
-                  </a>
+                  <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer">VoltaMetric</a>
                 </h3>
               </div>
               <span class="tech-badge">Electronics</span>
             </div>
             <p class="project-desc">
-              Connected benchtop multimeter for logging voltage, current, and battery levels over serial while prototyping circuits.
+              A connected benchtop multimeter that logs voltage, current and battery levels over serial while prototyping.
             </p>
             <div class="project-footer">
               <div class="tags">
-                <span class="tag">Hardware</span>
                 <span class="tag">Multimeter</span>
                 <span class="tag">Prototyping</span>
               </div>
               <div class="project-links">
-                <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer" class="link-label">
-                  Source Code &rarr;
-                </a>
+                <a href="https://github.com/3aks/VoltaMetric" target="_blank" rel="noopener noreferrer" class="link-label">Source code &rsaquo;</a>
               </div>
             </div>
           </article>
 
-          <!-- Project: Media-Keys-Fixer -->
-          <article class="project-item scroll-item" data-category="software" data-repo="Media-Keys-Fixer">
+          <article class="project-item reveal" style="--i:2" data-category="software">
             <div class="project-header">
               <div class="project-title-group">
                 <span class="category-tag">Software</span>
                 <h3 class="project-heading">
-                  <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer">
-                    Media-Keys-Fixer
-                  </a>
+                  <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer">Media Keys Fixer</a>
                 </h3>
               </div>
               <span class="tech-badge">AutoHotkey</span>
             </div>
             <p class="project-desc">
-              Small Windows background script that forces multimedia keyboard play/pause/skip events to route directly to Spotify, even when focused in full-screen games.
+              A small Windows script that routes play, pause and skip keys straight to Spotify, even inside full-screen games.
             </p>
             <div class="project-footer">
               <div class="tags">
@@ -347,9 +303,7 @@
                 <span class="tag">Windows</span>
               </div>
               <div class="project-links">
-                <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer" class="link-label">
-                  Source Code &rarr;
-                </a>
+                <a href="https://github.com/3aks/Media-Keys-Fixer" target="_blank" rel="noopener noreferrer" class="link-label">Source code &rsaquo;</a>
               </div>
             </div>
           </article>
@@ -357,137 +311,125 @@
       </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- Toolkit -->
     <section class="section" id="skills">
-      <div class="section-line"></div>
       <div class="container">
-        <h2 class="section-title scroll-item">Tools &amp; Tech</h2>
+        <div class="reveal">
+          <span class="eyebrow">Toolkit</span>
+          <h2 class="section-title">Tools &amp; tech.</h2>
+        </div>
         <div class="skills-columns">
-          <div class="skill-col scroll-item">
-            <h3 class="col-title">Hardware &amp; Embedded</h3>
+          <div class="skill-col reveal">
+            <div class="col-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/></svg>
+            </div>
+            <h3 class="col-title">Hardware &amp; embedded</h3>
             <ul class="clean-list">
               <li>ESP32 &amp; microcontrollers</li>
               <li>Embedded C &amp; C++</li>
               <li>Breadboard &amp; schematic prototyping</li>
-              <li>Serial protocols: UART, I2C, SPI, CAN</li>
+              <li>UART, I2C, SPI, CAN</li>
               <li>Soldering &amp; bench testing</li>
             </ul>
           </div>
 
-          <div class="skill-col scroll-item">
-            <h3 class="col-title">Software &amp; Scripting</h3>
+          <div class="skill-col reveal" style="--i:1">
+            <div class="col-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+            </div>
+            <h3 class="col-title">Software &amp; scripting</h3>
             <ul class="clean-list">
               <li>Python</li>
-              <li>AutoHotkey (Windows automation)</li>
+              <li>AutoHotkey</li>
               <li>Git &amp; GitHub</li>
               <li>HTML, CSS, JavaScript</li>
-              <li>Linux / command line</li>
+              <li>Linux &amp; the command line</li>
             </ul>
           </div>
 
-          <div class="skill-col scroll-item">
+          <div class="skill-col reveal" style="--i:2">
+            <div class="col-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
             <h3 class="col-title">Workflow</h3>
             <ul class="clean-list">
               <li>PlatformIO &amp; VS Code</li>
-              <li>Multimeters &amp; Logic Analyzers</li>
+              <li>Multimeters &amp; logic analyzers</li>
               <li>Hack Club Blueprint</li>
-              <li>GitHub Pages &amp; DNS management</li>
+              <li>GitHub Pages &amp; DNS</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive Terminal CLI Section -->
+    <!-- Terminal -->
     <section class="section terminal-section" id="terminal">
-      <div class="section-line"></div>
       <div class="container">
-        <div class="section-header-row scroll-item">
+        <div class="section-header-row reveal">
           <div>
-            <h2 class="section-title">Terminal Shell</h2>
-            <p class="section-subtitle">Type commands below or click quick shortcuts to inspect details right from the CLI.</p>
+            <span class="eyebrow">Terminal</span>
+            <h2 class="section-title">Ask the shell.</h2>
+            <p class="section-subtitle">Type a command, or tap a suggestion.</p>
           </div>
         </div>
 
-        <div class="terminal-window scroll-item">
+        <div class="terminal-window reveal" style="--i:1">
           <div class="terminal-titlebar">
-            <div class="terminal-dots">
+            <div class="terminal-dots" aria-hidden="true">
               <span class="terminal-dot close"></span>
               <span class="terminal-dot minimize"></span>
               <span class="terminal-dot zoom"></span>
             </div>
-            <div class="terminal-title">guest@3aks.me: ~ (bash)</div>
-            <div class="terminal-actions">
-              <button class="terminal-action-btn" id="clearTerminalBtn" title="Clear terminal">clear</button>
-            </div>
+            <div class="terminal-title">guest@3aks.me: ~</div>
+            <button class="terminal-action-btn" id="clearTerminalBtn" type="button">clear</button>
           </div>
 
-          <div class="terminal-quick-pills" id="terminalPills" aria-label="Suggested Commands">
-            <span class="pill-label">Suggested:</span>
-            <button class="term-pill" data-cmd="help">help</button>
-            <button class="term-pill" data-cmd="whoami">whoami</button>
-            <button class="term-pill" data-cmd="projects">projects</button>
-            <button class="term-pill" data-cmd="skills">skills</button>
-            <button class="term-pill" data-cmd="hardware">hardware</button>
-            <button class="term-pill" data-cmd="contact">contact</button>
+          <div class="terminal-quick-pills" id="terminalPills" aria-label="Suggested commands">
+            <span class="pill-label">Try</span>
+            <button class="term-pill" type="button" data-cmd="help">help</button>
+            <button class="term-pill" type="button" data-cmd="whoami">whoami</button>
+            <button class="term-pill" type="button" data-cmd="projects">projects</button>
+            <button class="term-pill" type="button" data-cmd="skills">skills</button>
+            <button class="term-pill" type="button" data-cmd="hardware">hardware</button>
+            <button class="term-pill" type="button" data-cmd="contact">contact</button>
           </div>
 
-          <div class="terminal-body" id="terminalBody">
-            <div class="terminal-line banner">
-              <span class="term-dim">Welcome to Arjun's interactive terminal [3aks.me v1.0.0]</span><br>
-              <span class="term-dim">Type <span class="term-highlight">'help'</span> or click any button above to see available commands.</span>
-            </div>
+          <div class="terminal-body" id="terminalBody" aria-live="polite">
+            <div class="terminal-line banner"><span class="term-dim">Welcome to Arjun's terminal [3aks.me v2.0]
+Type <span class="term-highlight">help</span> to see available commands.</span></div>
           </div>
 
           <form class="terminal-input-row" id="terminalForm">
-            <label for="terminalInput" class="terminal-prompt">
-              <span class="prompt-user">visitor</span><span class="prompt-at">@</span><span class="prompt-host">3aks.me</span>:<span class="prompt-path">~</span>$&nbsp;
-            </label>
-            <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="type a command...">
+            <label for="terminalInput" class="terminal-prompt"><span class="prompt-user">visitor</span><span class="prompt-at">@</span><span class="prompt-host">3aks.me</span>:<span class="prompt-path">~</span>$&nbsp;</label>
+            <input type="text" id="terminalInput" class="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" enterkeyhint="send" placeholder="type a command">
           </form>
         </div>
       </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section class="section" id="contact">
-      <div class="section-line"></div>
       <div class="container">
-        <div class="contact-box scroll-item">
-          <h2 class="contact-heading">Connect</h2>
-          <p class="contact-text">
-            The best place to follow my projects, discuss hardware, or collaborate is on GitHub.
-          </p>
-
+        <div class="contact-box reveal">
+          <h2 class="contact-heading">Let's build something.</h2>
+          <p class="contact-text">GitHub is the best place to follow my projects, talk hardware or collaborate.</p>
           <div class="contact-buttons">
-            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              github.com/3aks
-            </a>
+            <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="btn btn-primary">github.com/3aks</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-content">
-      <p class="footer-left-text">
-        &copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <strong>3aks.me</strong>
-      </p>
-
-      <p class="footer-right-text">
-        Hosted on GitHub Pages
-      </p>
+      <p>&copy; <span id="currentYear">2026</span> Arjun Sharma &bull; <strong>3aks.me</strong></p>
+      <p>Hosted on GitHub Pages</p>
     </div>
   </footer>
 
-  <!-- Toast Notification -->
-  <div class="toast-area" id="toastContainer" aria-live="polite"></div>
-
-  <!-- Animation Engines: Anime.js & Motion (motion.dev) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.js"></script>
   <script src="app.js"></script>
+  <script type="module" src="shaders.js"></script>
 </body>
 </html>

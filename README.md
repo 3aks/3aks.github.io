@@ -8,7 +8,8 @@ Modern, responsive developer portfolio for **Arjun Sharma** (`3aks`), featuring 
 
 - `index.html` — Main portfolio with dark theme, interactive background, and terminal CLI.
 - `style.css` — High contrast design system with glassmorphism and animations.
-- `app.js` — Anime.js orchestrator, terminal shell logic, and parallax interactive background.
+- `app.js` — Reveal-on-scroll, navigation, project filter, and terminal shell logic.
+- `shaders.js` — WebGL mesh-gradient backgrounds via [Paper Shaders](https://github.com/paper-design/shaders) (pinned to 0.0.81 on jsDelivr), shared with `/housing`.
 - `401.html`, `401/index.html` — Standalone HTTP 401 Unauthorized page.
 - `403.html`, `403/index.html` — Standalone HTTP 403 Forbidden page.
 - `404.html` — GitHub Pages default 404 handler.

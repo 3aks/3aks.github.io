@@ -2,178 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cardiff 5-Bed Student House Hunter | Cardiff University 2027/28</title>
-  <meta name="description" content="Real-time web scraper and finder for 5-bedroom Cardiff student houses. Filter by walking distance to Cardiff University, unlet status, bills included, and recent drops.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Cardiff 5-Bed House Hunter</title>
+  <meta name="description" content="5-bedroom Cardiff student houses for 2027/28, sorted by walking distance to Cardiff University.">
+  <!-- Unlisted page: keep it out of search results -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000'/><path d='M22 52 50 28l28 24v24a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4z' fill='none' stroke='%23ff7a1a' stroke-width='8' stroke-linejoin='round'/></svg>">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <!-- Header / Hero Section -->
+<body class="housing">
+  <!-- Header -->
   <header class="app-header">
+    <div class="header-shader" data-shader="mesh"
+         data-colors="#000000,#0a1f3d,#0e7490,#ff7a1a,#03050a"
+         data-speed="0.18" data-distortion="0.7" data-swirl="0.3" data-grain="0.1"
+         aria-hidden="true"></div>
+
     <div class="header-container">
       <div class="brand-badge">
         <span class="pulsing-dot"></span>
-        <span>LIVE CARDIFF SCRAPER • 2027/28 ACADEMIC YEAR</span>
+        <span>2027/28 &middot; Updated <span id="lastUpdated">recently</span></span>
       </div>
-      <h1 class="main-title">
-        Cardiff Uni 5-Bed House Hunter
-      </h1>
+      <h1 class="main-title">Cardiff 5-bed<br>house hunter.</h1>
       <p class="subtitle">
-        Verified 5-bedroom houses from <strong>CSL</strong>, <strong>UniHomes</strong>, <strong>Housr</strong>, <strong>Horizon</strong> &amp; <strong>CPS Homes</strong> — prioritised by walking distance to Cardiff University.
+        Unlet 5-bedroom houses from CSL, UniHomes, Housr, Horizon and CPS Homes, sorted by the walk to Cardiff University.
       </p>
 
-      <!-- Stats Bar -->
+      <!-- Stats -->
       <div class="stats-row" id="statsRow">
-        <div class="stat-card" id="statTotal">
-          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
-          <div class="stat-info">
-            <span class="stat-value" id="valTotal">108</span>
-            <span class="stat-label">Available Houses</span>
-          </div>
+        <div class="stat-card">
+          <span class="stat-value" id="valTotal">&ndash;</span>
+          <span class="stat-label">Available</span>
         </div>
-        <div class="stat-card stat-priority" id="statPriority">
-          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <div class="stat-info">
-            <span class="stat-value" id="valPriority">68</span>
-            <span class="stat-label">&le; 10m Walk to Uni</span>
-          </div>
+        <div class="stat-card stat-priority">
+          <span class="stat-value" id="valPriority">&ndash;</span>
+          <span class="stat-label">&le; 10 min walk</span>
         </div>
-        <div class="stat-card" id="statBills">
-          <div class="stat-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div class="stat-info">
-            <span class="stat-value" id="valBills">49</span>
-            <span class="stat-label">Bills Included</span>
-          </div>
+        <div class="stat-card">
+          <span class="stat-value" id="valBills">&ndash;</span>
+          <span class="stat-label">Bills included</span>
         </div>
-        <div class="stat-card" id="statAvgPrice">
-          <div class="stat-icon">£</div>
-          <div class="stat-info">
-            <span class="stat-value" id="valAvgPrice">£142</span>
-            <span class="stat-label">Avg Price /pppw</span>
-          </div>
+        <div class="stat-card">
+          <span class="stat-value" id="valAvgPrice">&ndash;</span>
+          <span class="stat-label">Avg pppw</span>
         </div>
-        <div class="stat-card stat-action" id="actionCard">
-          <button class="btn-refresh" id="btnRefresh" title="Run real-time scraper across all portals">
-            <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
-            </svg>
-            <span id="refreshBtnText">Re-Scrape Portals</span>
-          </button>
-          <a href="/api/export-csv" class="btn-export" download="cardiff_5bed_student_houses.csv" id="btnExportCsv">
-            <span>Export CSV</span>
-          </a>
-        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="./cardiff_5bed_student_houses.csv" class="btn btn-secondary" download id="btnExportCsv">Export CSV</a>
+        <button class="btn btn-secondary" id="btnRefresh" type="button" hidden>
+          <svg class="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>
+          <span id="refreshBtnText">Re-scrape portals</span>
+        </button>
       </div>
     </div>
   </header>
 
-  <!-- Filter & Controls Toolbar -->
   <main class="main-container">
-    <div class="toolbar-card">
-      <div class="search-and-toggles">
-        <!-- Search bar -->
+    <!-- Toolbar: sticky on scroll -->
+    <div class="toolbar" id="toolbar">
+      <div class="toolbar-row">
         <div class="search-box">
-          <span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
-          <input type="text" id="searchInput" placeholder="Search by street (e.g. Miskin, Woodville, Coburn, Flora, Rhymney)...">
-          <button class="btn-clear" id="btnClearSearch" style="display: none;">&times;</button>
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="searchInput" placeholder="Search streets: Miskin, Woodville, Coburn&hellip;" aria-label="Search by street" enterkeyhint="search" autocomplete="off">
+          <button class="btn-clear" id="btnClearSearch" type="button" aria-label="Clear search" hidden>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
         </div>
-
-        <!-- Walk Proximity Filter Buttons -->
-        <div class="filter-group">
-          <span class="group-title">Walking Distance to Cardiff Uni:</span>
-          <div class="chip-toggle-group" id="walkFilterChips">
-            <button class="chip active" data-walk="priority">&le; 10 min walk</button>
-            <button class="chip" data-walk="5m">&le; 5 min</button>
-            <button class="chip" data-walk="all">All areas</button>
-          </div>
-        </div>
+        <button class="btn-filters" id="btnFilters" type="button" aria-expanded="false" aria-controls="filterPanel">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          <span>Filters</span>
+          <span class="filter-count" id="filterCount" hidden></span>
+        </button>
       </div>
 
-      <!-- Secondary Filters -->
-      <div class="filter-subrow">
-        <!-- Portals -->
-        <div class="filter-item">
-          <label for="agencyFilter">Agency / Portal:</label>
-          <select id="agencyFilter">
-            <option value="all">All Agencies (CSL, UniHomes, Housr, Horizon, CPS)</option>
-            <option value="Cardiff Student Letting">Cardiff Student Letting (Uni SU)</option>
-            <option value="UniHomes">UniHomes (Bills Included)</option>
-            <option value="Housr">Housr Student Living</option>
-            <option value="Horizon Properties">Horizon Properties</option>
-            <option value="CPS Homes">CPS Homes</option>
-          </select>
-        </div>
+      <div class="chip-toggle-group" id="walkFilterChips" role="group" aria-label="Walking distance">
+        <button class="chip active" type="button" data-walk="priority" aria-pressed="true">&le; 10 min walk</button>
+        <button class="chip" type="button" data-walk="5m" aria-pressed="false">&le; 5 min</button>
+        <button class="chip" type="button" data-walk="all" aria-pressed="false">All areas</button>
+      </div>
 
-        <!-- Bills Included Toggle -->
-        <div class="filter-item toggle-item">
-          <label class="switch-container">
-            <input type="checkbox" id="billsOnlyToggle">
-            <span class="switch-slider"></span>
-            <span class="switch-label">Bills included only</span>
-          </label>
-        </div>
-
-        <!-- Max Price Slider -->
-        <div class="filter-item price-slider-item">
-          <div class="slider-header">
-            <span>Max Price /pppw:</span>
-            <strong id="priceDisplay">Any Price</strong>
+      <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-inner">
+          <div class="filter-item">
+            <label for="agencyFilter">Agency</label>
+            <select id="agencyFilter">
+              <option value="all">All agencies</option>
+              <option value="Cardiff Student Letting">Cardiff Student Letting</option>
+              <option value="UniHomes">UniHomes</option>
+              <option value="Housr">Housr</option>
+              <option value="Horizon Properties">Horizon Properties</option>
+              <option value="CPS Homes">CPS Homes</option>
+            </select>
           </div>
-          <input type="range" id="priceRange" min="100" max="220" step="5" value="220">
-        </div>
 
-        <!-- Sort By -->
-        <div class="filter-item">
-          <label for="sortBySelect">Sort By:</label>
-          <select id="sortBySelect">
-            <option value="closest">Closest to Uni</option>
-            <option value="cheapest">Cheapest (£ pppw)</option>
-            <option value="newest">Recently Listed</option>
-          </select>
+          <div class="filter-item">
+            <label for="sortBySelect">Sort by</label>
+            <select id="sortBySelect">
+              <option value="closest">Closest to uni</option>
+              <option value="cheapest">Cheapest</option>
+              <option value="newest">Recently listed</option>
+            </select>
+          </div>
+
+          <div class="filter-item price-slider-item">
+            <div class="slider-header">
+              <label for="priceRange">Max price</label>
+              <strong id="priceDisplay">Any</strong>
+            </div>
+            <input type="range" id="priceRange" min="100" max="220" step="5" value="220">
+          </div>
+
+          <div class="filter-item toggle-item">
+            <label class="switch-container">
+              <span class="switch-label">Bills included only</span>
+              <input type="checkbox" id="billsOnlyToggle" role="switch">
+              <span class="switch-slider" aria-hidden="true"></span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Active Filter Chips / Notice Banner -->
+    <!-- Results -->
     <div class="results-header">
-      <div class="results-count-wrap">
-        <h2 id="resultsCount">Showing 68 Properties (&le; 10m Walk)</h2>
-        <span class="results-sub" id="resultsSub">Next Academic Year (July 2027 - June 2028) • Unlet Verified</span>
-      </div>
-      <div class="legend-pills">
-        <span class="pill pill-green"><span class="dot"></span> &le; 5m Walk</span>
-        <span class="pill pill-gold"><span class="dot"></span> 6-10m Walk</span>
-        <span class="pill pill-purple"><span class="dot"></span> 11-15m Walk</span>
+      <h2 id="resultsCount" aria-live="polite">Loading houses&hellip;</h2>
+      <div class="legend-pills" aria-label="Walk time legend">
+        <span class="pill pill-green"><span class="dot"></span>&le; 5 min</span>
+        <span class="pill pill-gold"><span class="dot"></span>6&ndash;10 min</span>
+        <span class="pill pill-purple"><span class="dot"></span>11&ndash;15 min</span>
       </div>
     </div>
 
-    <!-- Property Card Grid -->
-    <div class="properties-grid" id="propertiesGrid">
-      <!-- Populated via JavaScript -->
-    </div>
+    <div class="properties-grid" id="propertiesGrid"></div>
 
-    <!-- Empty State -->
-    <div class="empty-state" id="emptyState" style="display: none;">
-      <div class="empty-icon">—</div>
-      <h3>No matching properties found</h3>
-      <p>Try adjusting your search criteria, price range, or toggling "All Cardiff Areas".</p>
-      <button class="btn-reset" id="btnResetFilters">Reset All Filters</button>
+    <div class="empty-state" id="emptyState" hidden>
+      <h3>No houses match</h3>
+      <p>Try a wider walking distance, a higher price or a different street.</p>
+      <button class="btn btn-primary" id="btnResetFilters" type="button">Reset filters</button>
     </div>
   </main>
 
-  <!-- Notification Toast -->
-  <div class="toast" id="toast">Copied property info for your group chat!</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <footer class="app-footer">
-    <div class="footer-container">
-      <p>Cardiff Student 5-Bed House Scraper • Built for Cardiff University House Hunters</p>
-      <p class="footer-sub">Monitors Cardiff Student Letting (Park Place), UniHomes, Housr, Horizon Properties, and CPS Homes. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>Sources: Cardiff Student Letting, UniHomes, Housr, Horizon Properties, CPS Homes.</p>
+      <p>Check each listing with the agent before applying.</p>
     </div>
   </footer>
 
   <script src="app.js"></script>
+  <script type="module" src="../shaders.js"></script>
 </body>
 </html>
