@@ -1,0 +1,24 @@
+/* Watch tracker: reuses the housing page's cards, toolbar and controls; only the differences live here. */
+
+.watch-filters {
+  grid-template-columns: 1fr 1fr auto;
+}
+
+.watch-card .card-media {
+  aspect-ratio: 1 / 1;
+  background: #f2f2f4; /* product shots are on white/transparent backgrounds */
+}
+.watch-card .card-img {
+  object-fit: contain;
+  padding: 16px;
+}
+
+.badge-condition.new { color: var(--walk-green); }
+.badge-condition.used { color: var(--accent-orange); }
+.stock-out { color: var(--accent-red); font-weight: 600; }
+
+@media (max-width: 720px) {
+  .watch-filters { grid-template-columns: 1fr; }
+  /* Short list and no collapsible panel: a sticky toolbar would cover a third of the screen */
+  .toolbar { position: static; }
+}

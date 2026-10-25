@@ -246,7 +246,7 @@
 /* Filter panel — always open on desktop, collapsible on phones */
 .filter-panel-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.4fr auto;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr auto;
   align-items: end;
   gap: 16px;
 }
@@ -483,6 +483,11 @@ input[type="range"]::-moz-range-thumb {
 .spec-item + .spec-item::before { content: "\00b7"; margin-right: 14px; color: var(--text-3); }
 
 .avail-notice { font-size: 14px; color: var(--text-2); }
+.also-on { font-size: 13px; color: var(--text-3); }
+.also-on a { color: var(--accent-sky); }
+@media (hover: hover) and (pointer: fine) {
+  .also-on a:hover { text-decoration: underline; text-underline-offset: 2px; }
+}
 .avail-notice strong { color: var(--text); font-weight: 600; }
 
 .card-actions {

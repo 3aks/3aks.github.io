@@ -1,10 +1,11 @@
 /**
- * Cardiff Student House Hunter (3–8 bed) - Interactive Dashboard Logic
+ * Cardiff Student House Hunter (3–9 bed) - Interactive Dashboard Logic
  * Data comes from listings.json, written by scraper.py.
  */
 
 const PAGE_SIZE = 12;
 const PRICE_MAX = 220;
+const DISTANCE_MAX = 3000; // metres; the slider's top stop means "any distance"
 
 let allListings = [];
 let activeWalkFilter = "priority"; // default: <= 10m walk priority
@@ -47,6 +48,11 @@ function initEventListeners() {
   const priceRange = document.getElementById("priceRange");
   priceRange.addEventListener("input", () => {
     updatePriceDisplay();
+    filterAndRender();
+  });
+
+  document.getElementById("distanceRange").addEventListener("input", () => {
+    updateDistanceDisplay();
     filterAndRender();
   });
 
@@ -94,6 +100,15 @@ function updatePriceDisplay() {
   document.getElementById("priceDisplay").textContent = val >= PRICE_MAX ? "Any" : `£${val} pppw`;
 }
 
+function updateDistanceDisplay() {
+  const val = parseInt(document.getElementById("distanceRange").value, 10);
+  document.getElementById("distanceDisplay").textContent = val >= DISTANCE_MAX ? "Any" : formatDistance(val);
+}
+
+function formatDistance(m) {
+  return m < 1000 ? `${m} m` : `${(m / 1000).toFixed(1)} km`;
+}
+
 function resetFilters() {
   document.getElementById("searchInput").value = "";
   document.getElementById("btnClearSearch").hidden = true;
@@ -101,8 +116,10 @@ function resetFilters() {
   document.getElementById("agencyFilter").value = "all";
   document.getElementById("billsOnlyToggle").checked = false;
   document.getElementById("priceRange").value = PRICE_MAX;
+  document.getElementById("distanceRange").value = DISTANCE_MAX;
   document.getElementById("sortBySelect").value = "closest";
   updatePriceDisplay();
+  updateDistanceDisplay();
   setWalkFilter("all");
 }
 
@@ -150,6 +167,7 @@ function filterAndRender(loadingMore = false) {
   const selectedAgency = document.getElementById("agencyFilter").value;
   const billsOnly = document.getElementById("billsOnlyToggle").checked;
   const maxPrice = parseInt(document.getElementById("priceRange").value, 10);
+  const maxDistance = parseInt(document.getElementById("distanceRange").value, 10);
   const sortBy = document.getElementById("sortBySelect").value;
 
   const filtered = allListings.filter(p => {
@@ -164,29 +182,32 @@ function filterAndRender(loadingMore = false) {
       if ((p.walk_minutes ?? Infinity) > 5) return false;
     }
 
+    // The same house can be offered by several sites: a filter passes if any offer matches
+    const offers = [p, ...(p.also_on || [])];
     if (beds !== "all" && p.bedrooms !== Number(beds)) return false;
-    if (selectedAgency !== "all" && p.source !== selectedAgency) return false;
-    if (billsOnly && !p.bills_included) return false;
-    if (maxPrice < PRICE_MAX && p.price_pppw > 0 && p.price_pppw > maxPrice) return false;
+    if (selectedAgency !== "all" && !offers.some(o => o.source === selectedAgency)) return false;
+    if (billsOnly && !offers.some(o => o.bills_included)) return false;
+    if (maxPrice < PRICE_MAX && !offers.some(o => !o.price_pppw || o.price_pppw <= maxPrice)) return false;
+    if (maxDistance < DISTANCE_MAX && (p.distance_m ?? Infinity) > maxDistance) return false;
 
     return true;
   });
 
   if (sortBy === "closest") {
-    filtered.sort((a, b) => (a.walk_minutes ?? 999) - (b.walk_minutes ?? 999));
+    filtered.sort((a, b) => (a.distance_m ?? Infinity) - (b.distance_m ?? Infinity));
   } else if (sortBy === "cheapest") {
     filtered.sort((a, b) => (a.price_pppw || 9999) - (b.price_pppw || 9999));
   } else if (sortBy === "newest") {
     filtered.sort((a, b) => a.recency_days - b.recency_days);
   }
 
-  updateFilterCount(beds, selectedAgency, billsOnly, maxPrice);
+  updateFilterCount(beds, selectedAgency, billsOnly, maxPrice, maxDistance);
   renderGrid(filtered);
 }
 
 // Badge on the mobile "Filters" button: how many panel filters are not default
-function updateFilterCount(beds, agency, billsOnly, maxPrice) {
-  const n = (beds !== "all") + (agency !== "all") + billsOnly + (maxPrice < PRICE_MAX);
+function updateFilterCount(beds, agency, billsOnly, maxPrice, maxDistance) {
+  const n = (beds !== "all") + (agency !== "all") + billsOnly + (maxPrice < PRICE_MAX) + (maxDistance < DISTANCE_MAX);
   const badge = document.getElementById("filterCount");
   badge.hidden = n === 0;
   badge.textContent = n;
@@ -239,7 +260,8 @@ function removeLoadMoreBtn() {
 }
 
 function buildShareText(p) {
-  return `${p.address} — ${p.walk_display} walk to uni — ${p.price_formatted} ${p.bills_included ? '(bills incl.)' : ''} — Available: ${p.available_date} — ${p.url}`;
+  const distance = p.distance_m != null ? `${formatDistance(p.distance_m)} (${p.walk_display}) to uni` : "distance unknown";
+  return `${p.address} — ${distance} —${p.price_formatted} ${p.bills_included ? '(bills incl.)' : ''} — Available: ${p.available_date} — ${p.url}`;
 }
 
 function createCardHTML(p, index) {
@@ -267,7 +289,7 @@ function createCardHTML(p, index) {
       <div class="card-media">
         ${mediaHTML}
         <div class="badge-top-left">
-          <span class="badge-walk ${walkClass}">${escapeHtml(p.walk_display)}</span>
+          <span class="badge-walk ${walkClass}">${p.distance_m != null ? `${formatDistance(p.distance_m)} &middot; ` : ''}${escapeHtml(p.walk_display)}</span>
         </div>
         <div class="badge-top-right">
           ${fresh ? `<span class="badge-recency ${fresh.includes('NEW') ? 'badge-new' : ''}">${escapeHtml(fresh)}</span>` : ''}
@@ -294,6 +316,11 @@ function createCardHTML(p, index) {
         </div>
 
         <div class="avail-notice">Available from <strong>${escapeHtml(p.available_date)}</strong></div>
+
+        ${p.also_on?.length ? `
+          <div class="also-on">Also on ${p.also_on.map(o => `
+            <a href="${escapeHtml(o.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(o.source)}${o.price_pppw ? ` £${o.price_pppw}` : ''}${o.bills_included ? ' bills incl.' : ''}</a>`).join(', ')}
+          </div>` : ''}
 
         <div class="card-actions">
           <a href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer" class="btn-view">

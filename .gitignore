@@ -2,6 +2,3 @@
 .DS_Store
 Thumbs.db
 __pycache__/
-.claude/
-CLAUDE.md
-CLAUDE.local.md

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
   <title>Cardiff Student House Hunter</title>
-  <meta name="description" content="3 to 8 bedroom Cardiff student houses for 2027/28, sorted by walking distance to Cardiff University.">
+  <meta name="description" content="3 to 9 bedroom Cardiff student houses for 2027/28, sorted by walking distance to Cardiff University.">
   <!-- Unlisted page: keep it out of search results -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#000000">
@@ -33,7 +33,7 @@
       </div>
       <h1 class="main-title">Cardiff student<br>house hunter.</h1>
       <p class="subtitle">
-        3 to 8 bedroom houses from CSL, UniHomes, Housr and CPS Homes, sorted by the walk to Cardiff University.
+        3 to 9 bedroom houses from CSL, UniHomes, Housr and CPS Homes, sorted by the walk to Cardiff University.
       </p>
 
       <!-- Stats -->
@@ -90,13 +90,14 @@
           <div class="filter-item">
             <label for="bedsFilter">Bedrooms</label>
             <select id="bedsFilter">
-              <option value="all">Any (3&ndash;8)</option>
+              <option value="all">Any (3&ndash;9)</option>
               <option value="3">3 bed</option>
               <option value="4">4 bed</option>
               <option value="5">5 bed</option>
               <option value="6">6 bed</option>
               <option value="7">7 bed</option>
               <option value="8">8 bed</option>
+              <option value="9">9 bed</option>
             </select>
           </div>
 
@@ -126,6 +127,14 @@
               <strong id="priceDisplay">Any</strong>
             </div>
             <input type="range" id="priceRange" min="100" max="220" step="5" value="220">
+          </div>
+
+          <div class="filter-item price-slider-item">
+            <div class="slider-header">
+              <label for="distanceRange">Max walking distance</label>
+              <strong id="distanceDisplay">Any</strong>
+            </div>
+            <input type="range" id="distanceRange" min="250" max="3000" step="250" value="3000">
           </div>
 
           <div class="filter-item toggle-item">

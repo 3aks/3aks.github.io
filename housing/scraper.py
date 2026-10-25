@@ -1,5 +1,5 @@
 """
-Cardiff student house scraper — 3 to 8 bedroom houses for the next academic year.
+Cardiff student house scraper — 3 to 9 bedroom houses for the next academic year.
 
 Sources: Cardiff Student Letting (CSL), UniHomes, Housr, CPS Homes.
 Writes listings.json (read by index.html) and cardiff_student_houses.csv.
@@ -18,16 +18,22 @@ import time
 from datetime import date, datetime
 from pathlib import Path
 
+import io
+
 import requests
 from bs4 import BeautifulSoup
+from PIL import Image
 
 HERE = Path(__file__).parent
 OUT_JSON = HERE / "listings.json"
 OUT_CSV = HERE / "cardiff_student_houses.csv"
 
-BEDROOMS = range(3, 9)  # 3–8 bed
-YEAR_START = date(2027, 6, 1)  # listings available before this aren't for 2027/28
+BEDROOMS = range(3, 10)  # 3–9 bed
+# Only houses with a confirmed Jul–Sep 2027 start; "available now" and undated listings are dropped
+MOVE_IN = (date(2027, 7, 1), date(2027, 9, 30))
 UNI = (51.488357, -3.177434)  # Cardiff University Students' Union, Park Place
+OSRM = "https://routing.openstreetmap.de/routed-foot"  # free walking-route server, no key
+CSL_PLACEHOLDER = (51.48868, -3.17751)  # pin CSL shows when a house has no location of its own
 DELAY = 0.4  # seconds between requests, to stay polite
 
 session = requests.Session()
@@ -46,17 +52,178 @@ def get(url, **params):
 
 # ---------------------------------------------------------------- helpers
 
-def walk_minutes(lat, lng):
-    """Straight-line distance to the SU, x1.3 for real streets, at 80 m/min."""
+def metres_between(a, b):
+    """Great-circle distance between two (lat, lng) points."""
+    dlat = math.radians(b[0] - a[0])
+    dlng = math.radians(b[1] - a[1])
+    h = math.sin(dlat / 2) ** 2 + math.cos(math.radians(a[0])) * math.cos(math.radians(b[0])) * math.sin(dlng / 2) ** 2
+    return 6371000 * 2 * math.asin(math.sqrt(h))
+
+
+def estimate_metres(lat, lng):
+    """Straight-line distance to the SU x1.3 for streets; fallback when routing is unavailable."""
     if lat is None or lng is None:
         return None
-    dlat = math.radians(lat - UNI[0])
-    dlng = math.radians(lng - UNI[1])
-    a = math.sin(dlat / 2) ** 2 + math.cos(math.radians(UNI[0])) * math.cos(math.radians(lat)) * math.sin(dlng / 2) ** 2
-    metres = 6371000 * 2 * math.asin(math.sqrt(a))
+    metres = metres_between(UNI, (lat, lng))
     if metres > 15000:  # placeholder coords some listings ship with (UK centroid, 90,90)
         return None
-    return max(1, round(metres * 1.3 / 80))
+    return round(metres * 1.3)
+
+
+def walk_minutes(metres):
+    return max(1, round(metres / 80)) if metres is not None else None  # 80 m/min walking pace
+
+
+POSTCODE = re.compile(r"CF\d{1,2}\s*\d[A-Z]{2}")
+SOURCE_RANK = ["Cardiff Student Letting", "CPS Homes", "Housr", "UniHomes"]  # letting agents before portals
+
+
+def street_key(address):
+    """'Flat 3, 15 Northcote Street, CF24' -> 'northcote street'."""
+    a = re.sub(r"^(?:top\s+)?flat[^,]*,\s*", "", address.strip().lower())
+    return re.sub(r"^\d+[a-z]?\s+", "", a).split(",")[0].strip()
+
+
+def dhash(img):
+    """64-bit difference hash: survives resizing and recompression, so it matches the same photo across sites."""
+    px = img.convert("L").resize((9, 8)).tobytes()  # 72 greyscale bytes, row by row
+    return sum(1 << i for i in range(64) if px[(i // 8) * 9 + i % 8] > px[(i // 8) * 9 + i % 8 + 1])
+
+
+_photo_hashes = {}
+
+
+def photo_hash(url):
+    if not url:
+        return None
+    if url not in _photo_hashes:
+        try:
+            r = session.get(url, timeout=20)
+            r.raise_for_status()
+            _photo_hashes[url] = dhash(Image.open(io.BytesIO(r.content)))
+        except Exception:  # broken or non-image photo: just can't use it as evidence
+            _photo_hashes[url] = None
+    return _photo_hashes[url]
+
+
+def same_photo(a, b, max_bits=6):
+    ha, hb = photo_hash(a["image_url"]), photo_hash(b["image_url"])
+    return ha is not None and hb is not None and bin(ha ^ hb).count("1") <= max_bits
+
+
+RENT_ONLY = {"Cardiff Student Letting", "CPS Homes", "Housr"}  # UniHomes prices include a bills premium
+
+
+def rents_agree(a, b, tolerance=0.03):
+    """Neighbouring houses on one street can share a pin; the same house has the same rent everywhere."""
+    if a["source"] not in RENT_ONLY or b["source"] not in RENT_ONLY or not a["price_pppw"] or not b["price_pppw"]:
+        return True
+    return abs(a["price_pppw"] - b["price_pppw"]) <= tolerance * max(a["price_pppw"], b["price_pppw"])
+
+
+def pin(p):
+    return (p["source"], round(p["lat"], 5), round(p["lng"], 5)) if p["lat"] is not None else None
+
+
+def merge_duplicates(listings, within=15):
+    """One card per house: merge listings from DIFFERENT sites with the same street and bedrooms when their
+    main photos match, or else their pins are within 15 m and neither pin is shared by another house on the
+    same site (shared street pins can't tell neighbours apart). The rest become also_on links, so nothing is lost."""
+    pin_count = {}
+    for p in listings:
+        pin_count[pin(p)] = pin_count.get(pin(p), 0) + 1
+
+    def unambiguous_pin_match(a, b):
+        return (a["lat"] is not None and b["lat"] is not None
+                and pin_count[pin(a)] == 1 and pin_count[pin(b)] == 1
+                and metres_between((a["lat"], a["lng"]), (b["lat"], b["lng"])) <= within
+                and rents_agree(a, b))
+
+    groups = {}
+    for p in sorted(listings, key=lambda p: SOURCE_RANK.index(p["source"])):
+        groups.setdefault((street_key(p["address"]), p["bedrooms"]), []).append(p)
+    out = []
+    for members in groups.values():
+        clusters = []
+        for p in members:
+            open_ = [c for c in clusters if p["source"] not in {q["source"] for q in c}]
+            home = (next((c for c in open_ if same_photo(c[0], p)), None)  # photo first: strongest evidence
+                    or next((c for c in open_ if unambiguous_pin_match(c[0], p)), None))
+            if home:
+                home.append(p)
+            else:
+                clusters.append([p])
+        for primary, *others in clusters:
+            primary["also_on"] = [{k: q[k] for k in ("source", "url", "price_pppw", "bills_included")} for q in others]
+            out.append(primary)
+    return out
+
+
+def refine_coords(listings):
+    """Move houses onto their postcode's centre (postcodes.io, free, no key) when the site gave
+    CSL's placeholder pin, or one street-level pin shared by houses with different postcodes."""
+    for p in listings:
+        p["postcode"] = (POSTCODE.search(p["address"]) or [None])[0]
+    pins = {}
+    for p in listings:
+        if p["lat"] is not None:
+            pins.setdefault((p["source"], round(p["lat"], 5), round(p["lng"], 5)), set()).add(p["postcode"])
+
+    def is_placeholder(p):
+        return p["lat"] is not None and metres_between(CSL_PLACEHOLDER, (p["lat"], p["lng"])) < 20
+
+    def street_pin(p):
+        return p["lat"] is not None and len(pins[(p["source"], round(p["lat"], 5), round(p["lng"], 5))]) > 1
+
+    bad = [p for p in listings if is_placeholder(p) or (p["postcode"] and street_pin(p))]
+    lookup = [p for p in bad if p["postcode"]]
+    for i in range(0, len(lookup), 100):  # postcodes.io bulk limit
+        chunk = lookup[i:i + 100]
+        try:
+            r = session.post("https://api.postcodes.io/postcodes", json={"postcodes": [p["postcode"] for p in chunk]}, timeout=30)
+            r.raise_for_status()
+            results = r.json()["result"]
+        except (requests.RequestException, KeyError, ValueError) as e:
+            print(f"  postcode lookup failed: {e!r}", file=sys.stderr)
+            results = [{}] * len(chunk)
+        for p, res in zip(chunk, results):
+            if res.get("result"):
+                p["lat"], p["lng"] = res["result"]["latitude"], res["result"]["longitude"]
+    for p in bad:
+        if is_placeholder(p):
+            p["lat"] = p["lng"] = None  # still unknown: better no walk time than a fake 1 min
+        p["distance_m"] = estimate_metres(p["lat"], p["lng"])
+    for p in listings:
+        del p["postcode"]
+    print(f"  moved {len(bad)} houses from a placeholder or street-level pin to their postcode")
+
+
+def route_distances(listings, batch=90):
+    """Real walking distances to the SU from OSRM (OpenStreetMap foot routing), many houses per request."""
+    todo = [p for p in listings if p["distance_m"] is not None]
+    for i in range(0, len(todo), batch):
+        chunk = todo[i:i + batch]
+        coords = ";".join(f"{lng},{lat}" for lat, lng in [UNI] + [(p["lat"], p["lng"]) for p in chunk])
+        try:
+            r = session.get(f"{OSRM}/table/v1/driving/{coords}", params={"sources": 0, "annotations": "distance"}, timeout=60)
+            r.raise_for_status()
+            distances = r.json()["distances"][0][1:]
+        except (requests.RequestException, KeyError, ValueError) as e:  # keep the estimates for this batch
+            print(f"  routing failed for {len(chunk)} houses, using estimates: {e!r}", file=sys.stderr)
+            continue
+        for p, d in zip(chunk, distances):
+            if d is not None:
+                p["distance_m"], p["distance_routed"] = round(d), True
+        time.sleep(1)  # shared community server: keep it gentle
+    for p in listings:
+        p["walk_minutes"] = walk_minutes(p["distance_m"])
+
+
+def says_bills_included(text):
+    """CSL states it in the badge or description; anything else (silence included) means not included."""
+    if re.search(r"(?i)bills?\s+(?:are\s+)?not\s+inclu|\bno\s+bills\b|excl\w*\s+(?:of\s+)?bills", text):
+        return False
+    return bool(re.search(r"(?i)\bbills?\s+(?:are\s+)?inclu", text))
 
 
 def pppw_from_pcm(pcm, beds):
@@ -91,7 +258,7 @@ def listing(*, id, source, title, address, bedrooms, bathrooms, price_pppw, pric
         "bills_included": bool(bills),
         "available": available.isoformat() if available else None,
         "url": url, "image_url": image or None,
-        "lat": lat, "lng": lng, "walk_minutes": walk_minutes(lat, lng),
+        "lat": lat, "lng": lng, "distance_m": estimate_metres(lat, lng), "distance_routed": False,
         "notes": notes,
     }
 
@@ -130,7 +297,7 @@ def scrape_csl():
                 area=lines[1] if len(lines) > 2 else "", bedrooms=beds,
                 bathrooms=int(baths.get_text(strip=True)) if baths and baths.get_text(strip=True).isdigit() else None,
                 price_pppw=pppw_from_pcm(pcm, beds), price_pcm=pcm,
-                bills="Bills Included" in detail, available=parse_date(avail[1] if avail else None),
+                bills=says_bills_included(detail), available=parse_date(avail[1] if avail else None),
                 url=url, image=img["src"] if img else None, lat=lat, lng=lng,
                 notes="Students' Union agency. No agency fees.",
             ))
@@ -253,32 +420,41 @@ def scrape_cps():
 
 # ---------------------------------------------------------------- output
 
+def starts_in_window(available):
+    return bool(available) and MOVE_IN[0] <= date.fromisoformat(available) <= MOVE_IN[1]
+
+
 def finalise(listings, previous):
-    """Drop last-year lets, add walk labels and keep first-seen dates across runs."""
+    """Keep Jul–Sep 2027 starts only, route walking distances, add labels and keep first-seen dates."""
     today = date.today()
     first_seen = {p["id"]: p.get("first_detected") for p in previous}
-    kept = []
-    for p in listings:
-        avail = date.fromisoformat(p["available"]) if p.get("available") else None
-        if avail and avail < YEAR_START:
-            continue
-        m = p.get("walk_minutes")
+    kept = [p for p in listings if starts_in_window(p.get("available"))]
+    before = len(kept)
+    kept = merge_duplicates(kept)  # before refining: cross-site copies share the site's original pin
+    print(f"  merged {before - len(kept)} cross-site duplicates into {len(kept)} houses")
+    for p in kept:
+        p.setdefault("distance_m", estimate_metres(p.get("lat"), p.get("lng")))  # older saved data
+    refine_coords(kept)
+    print(f"Routing walking distances for {len(kept)} houses…", flush=True)
+    route_distances(kept)
+    for p in kept:
+        m = p["walk_minutes"]
         p["walk_display"] = f"{m} min walk" if m is not None else "Walk time unknown"
         p["is_priority_10min"] = m is not None and m <= 10
-        p["available_date"] = avail.strftime("%d/%m/%Y") if avail else "TBC"
+        p["available_date"] = date.fromisoformat(p["available"]).strftime("%d/%m/%Y")
         p["first_detected"] = first_seen.get(p["id"]) or today.isoformat()
         days = (today - date.fromisoformat(p["first_detected"])).days
         p["recency_days"] = days
         p["freshness_tag"] = "NEW TODAY" if days == 0 else "NEW THIS WEEK" if days <= 7 else ""
         p["price_formatted"] = f"£{p['price_pppw']:g} pppw" if p["price_pppw"] else "Price on enquiry"
-        kept.append(p)
-    kept.sort(key=lambda p: (p["walk_minutes"] is None, p["walk_minutes"] or 0))
+    kept.sort(key=lambda p: (p["distance_m"] is None, p["distance_m"] or 0))
     return kept
 
 
 def write_csv(listings):
     cols = [("Address", "address"), ("Bedrooms", "bedrooms"), ("Bathrooms", "bathrooms"),
-            ("Walk to Cardiff Uni (min)", "walk_minutes"), ("Price PPPW (£)", "price_pppw"),
+            ("Walking distance to SU (m)", "distance_m"), ("Walk to SU (min)", "walk_minutes"),
+            ("Price PPPW (£)", "price_pppw"),
             ("Total Monthly (£)", "price_total_month"), ("Bills Included", "bills_included"),
             ("Available", "available_date"), ("Agent", "source"), ("URL", "url")]
     with OUT_CSV.open("w", newline="", encoding="utf-8-sig") as f:
@@ -290,9 +466,41 @@ def write_csv(listings):
 
 def selfcheck():
     assert pppw_from_pcm(3100, 5) == 143.08
-    assert walk_minutes(*UNI) == 1
-    assert 18 <= walk_minutes(51.4757, -3.1791) <= 28  # Cardiff Central station, ~1.4 km
-    assert walk_minutes(90.0, 90.0) is None and walk_minutes(55.378051, -3.435973) is None
+    assert estimate_metres(*UNI) == 0 and walk_minutes(0) == 1
+    assert 1500 <= estimate_metres(51.4757, -3.1791) <= 2200  # Cardiff Central station, ~1.4 km straight
+    assert estimate_metres(90.0, 90.0) is None and estimate_metres(55.378051, -3.435973) is None
+    assert walk_minutes(800) == 10 and walk_minutes(None) is None
+    assert starts_in_window("2027-07-01") and starts_in_window("2027-09-30")
+    assert not starts_in_window(None) and not starts_in_window("2027-06-30") and not starts_in_window("2027-10-01")
+    assert not starts_in_window(date.today().isoformat())  # "available now"
+    assert street_key("Flat 3, 15 Northcote Street, CF24") == "northcote street"
+    assert street_key("49 Woodville Road, Cathays, CF24") == street_key("Woodville Road, Cathays, CF24 4DW")
+    assert says_bills_included("Book an Appointment Bills Included Description")
+    assert says_bills_included("Utility Bills Included (excl TV licence)")
+    assert not says_bills_included("Bills not included") and not says_bills_included("A lovely house near uni")
+    # Same photo resized and recompressed still matches; a different photo doesn't
+    photo = Image.linear_gradient("L").rotate(90).resize((400, 300)).convert("RGB")  # left-right gradient
+    buf = io.BytesIO()
+    photo.resize((200, 150)).save(buf, "JPEG", quality=60)
+    assert bin(dhash(photo) ^ dhash(Image.open(buf))).count("1") <= 6
+    assert bin(dhash(photo) ^ dhash(photo.transpose(Image.Transpose.FLIP_LEFT_RIGHT))).count("1") > 6
+    base = dict(address="Llandough Street, Cathays", bedrooms=6, lat=51.4900, lng=-3.1780, url="u",
+                price_pppw=137, bills_included=False, image_url=None)
+    merged = merge_duplicates([dict(base, source="UniHomes", price_pppw=160, bills_included=True),
+                               dict(base, source="CPS Homes"), dict(base, source="CPS Homes", lat=51.4902),  # 2nd CPS house: own card
+                               dict(base, source="Housr", lng=-3.1781)])
+    assert len(merged) == 2 and merged[0]["source"] == "CPS Homes"
+    assert {a["source"] for a in merged[0]["also_on"]} == {"Housr", "UniHomes"}
+    # Two houses sharing one street pin on both sites: no photo match, so no guessing — they stay apart
+    twins = [dict(base, source="CPS Homes", url="c1"), dict(base, source="CPS Homes", url="c2"),
+             dict(base, source="Housr", url="h1")]
+    assert len(merge_duplicates(twins)) == 3
+    # Two houses near each other: each Housr copy pairs with the CPS house whose rent matches
+    pair = merge_duplicates([dict(base, source="CPS Homes", url="c115", price_pppw=115.38),
+                             dict(base, source="CPS Homes", url="c123", price_pppw=123.46, lat=51.49005),
+                             dict(base, source="Housr", url="h123", price_pppw=123, lat=51.49003),
+                             dict(base, source="Housr", url="h115", price_pppw=115, lat=51.49002)])
+    assert {(p["url"], p["also_on"][0]["url"]) for p in pair} == {("c115", "h115"), ("c123", "h123")}
     assert parse_date("Available from 3rd July 2027") == date(2027, 7, 3)
     assert parse_date("01/07/2027 12:00:00 AM") == date(2027, 7, 1)
     assert parse_date("2027-07-01") == date(2027, 7, 1)
