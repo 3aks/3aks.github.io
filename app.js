@@ -195,8 +195,7 @@ Domain: <span class="term-highlight">https://3aks.me</span>
   1. <span class="term-cmd">BMW-Dual-MCU-Bluetooth-Audio-Bridge</span> (C) - Embedded audio interface for BMW headunits
   2. <span class="term-cmd">Camera-Switching-Macropad</span> (Python) - Custom Hack Club physical macropad
   3. <span class="term-cmd">Custom-Mixer-ESP32</span> (Python/C) - Multi-channel audio mixer
-  4. <span class="term-cmd">VoltaMetric</span> (Hardware) - Connected smart multimeter prototype
-  5. <span class="term-cmd">Media-Keys-Fixer</span> (AutoHotkey) - Windows background utility for Spotify
+  4. <span class="term-cmd">Media-Keys-Fixer</span> (AutoHotkey) - Windows background utility for Spotify
     `,
     skills: () => `
 <span class="term-highlight">Technical Toolkit:</span>

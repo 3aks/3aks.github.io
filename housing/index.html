@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-  <title>Cardiff 5-Bed House Hunter</title>
-  <meta name="description" content="5-bedroom Cardiff student houses for 2027/28, sorted by walking distance to Cardiff University.">
+  <title>Cardiff Student House Hunter</title>
+  <meta name="description" content="3 to 8 bedroom Cardiff student houses for 2027/28, sorted by walking distance to Cardiff University.">
   <!-- Unlisted page: keep it out of search results -->
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#000000">
@@ -31,9 +31,9 @@
         <span class="pulsing-dot"></span>
         <span>2027/28 &middot; Updated <span id="lastUpdated">recently</span></span>
       </div>
-      <h1 class="main-title">Cardiff 5-bed<br>house hunter.</h1>
+      <h1 class="main-title">Cardiff student<br>house hunter.</h1>
       <p class="subtitle">
-        Unlet 5-bedroom houses from CSL, UniHomes, Housr, Horizon and CPS Homes, sorted by the walk to Cardiff University.
+        3 to 8 bedroom houses from CSL, UniHomes, Housr and CPS Homes, sorted by the walk to Cardiff University.
       </p>
 
       <!-- Stats -->
@@ -57,12 +57,7 @@
       </div>
 
       <div class="header-actions">
-        <a href="./cardiff_5bed_student_houses.csv" class="btn btn-secondary" download id="btnExportCsv">Export CSV</a>
-        <button class="btn btn-secondary" id="btnRefresh" type="button" hidden>
-          <svg class="refresh-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6"/></svg>
-          <span id="refreshBtnText">Re-scrape portals</span>
-        </button>
-      </div>
+        <a href="./cardiff_student_houses.csv" class="btn btn-secondary" download id="btnExportCsv">Export CSV</a>      </div>
     </div>
   </header>
 
@@ -93,13 +88,25 @@
       <div class="filter-panel" id="filterPanel">
         <div class="filter-panel-inner">
           <div class="filter-item">
+            <label for="bedsFilter">Bedrooms</label>
+            <select id="bedsFilter">
+              <option value="all">Any (3&ndash;8)</option>
+              <option value="3">3 bed</option>
+              <option value="4">4 bed</option>
+              <option value="5">5 bed</option>
+              <option value="6">6 bed</option>
+              <option value="7">7 bed</option>
+              <option value="8">8 bed</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
             <label for="agencyFilter">Agency</label>
             <select id="agencyFilter">
               <option value="all">All agencies</option>
               <option value="Cardiff Student Letting">Cardiff Student Letting</option>
               <option value="UniHomes">UniHomes</option>
               <option value="Housr">Housr</option>
-              <option value="Horizon Properties">Horizon Properties</option>
               <option value="CPS Homes">CPS Homes</option>
             </select>
           </div>
@@ -155,7 +162,7 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p>Sources: Cardiff Student Letting, UniHomes, Housr, Horizon Properties, CPS Homes.</p>
+      <p>Sources: Cardiff Student Letting, UniHomes, Housr, CPS Homes.</p>
       <p>Check each listing with the agent before applying.</p>
     </div>
   </footer>

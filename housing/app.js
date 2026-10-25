@@ -1,5 +1,6 @@
 /**
- * Cardiff Student 5-Bed House Hunter - Interactive Dashboard Logic
+ * Cardiff Student House Hunter (3–8 bed) - Interactive Dashboard Logic
+ * Data comes from listings.json, written by scraper.py.
  */
 
 const PAGE_SIZE = 12;
@@ -39,7 +40,7 @@ function initEventListeners() {
     chip.addEventListener("click", () => setWalkFilter(chip.dataset.walk));
   });
 
-  ["agencyFilter", "billsOnlyToggle", "sortBySelect"].forEach(id => {
+  ["bedsFilter", "agencyFilter", "billsOnlyToggle", "sortBySelect"].forEach(id => {
     document.getElementById(id).addEventListener("change", () => filterAndRender());
   });
 
@@ -59,13 +60,6 @@ function initEventListeners() {
   });
 
   document.getElementById("btnResetFilters").addEventListener("click", resetFilters);
-
-  // Scraping needs the local Python server; it doesn't exist on GitHub Pages
-  const btnRefresh = document.getElementById("btnRefresh");
-  if (["localhost", "127.0.0.1"].includes(location.hostname)) {
-    btnRefresh.hidden = false;
-    btnRefresh.addEventListener("click", triggerScrape);
-  }
 
   // Copy buttons are rendered per card; one delegated listener handles them all
   document.getElementById("propertiesGrid").addEventListener("click", (e) => {
@@ -103,6 +97,7 @@ function updatePriceDisplay() {
 function resetFilters() {
   document.getElementById("searchInput").value = "";
   document.getElementById("btnClearSearch").hidden = true;
+  document.getElementById("bedsFilter").value = "all";
   document.getElementById("agencyFilter").value = "all";
   document.getElementById("billsOnlyToggle").checked = false;
   document.getElementById("priceRange").value = PRICE_MAX;
@@ -111,21 +106,9 @@ function resetFilters() {
   setWalkFilter("all");
 }
 
-function getApiBase() {
-  const path = window.location.pathname;
-  if (path.startsWith('/housing')) {
-    return '/housing/api';
-  }
-  return '/api';
-}
-
 async function loadListings() {
   try {
-    // Try loading static JSON data (compatible with GitHub Pages & custom domains)
-    let res = await fetch("./listings.json");
-    if (!res.ok) {
-      res = await fetch(`${getApiBase()}/listings`);
-    }
+    const res = await fetch("./listings.json");
     if (!res.ok) throw new Error("Failed to load listings");
     const data = await res.json();
     allListings = data.listings || [];
@@ -134,35 +117,6 @@ async function loadListings() {
   } catch (err) {
     console.error("Error fetching listings:", err);
     document.getElementById("resultsCount").textContent = "Couldn't load listings. Refresh to try again.";
-  }
-}
-
-async function triggerScrape() {
-  const btn = document.getElementById("btnRefresh");
-  const icon = btn.querySelector(".refresh-icon");
-  const text = document.getElementById("refreshBtnText");
-
-  btn.disabled = true;
-  icon.classList.add("refresh-spinning");
-  text.textContent = "Scraping…";
-  showToast("Running scrapers across all portals…");
-
-  try {
-    const res = await fetch(`${getApiBase()}/scrape`, { method: "POST" });
-    const data = await res.json();
-    if (data.status === "success") {
-      allListings = data.listings || [];
-      updateTopStats(data.metadata, allListings);
-      filterAndRender();
-      showToast(`Found ${allListings.length} 5-bed houses.`);
-    }
-  } catch (err) {
-    console.error("Scrape error:", err);
-    showToast("Scrape failed. Check the server logs.");
-  } finally {
-    btn.disabled = false;
-    icon.classList.remove("refresh-spinning");
-    text.textContent = "Re-scrape portals";
   }
 }
 
@@ -192,6 +146,7 @@ function filterAndRender(loadingMore = false) {
     animateFrom = 0;
   }
   const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
+  const beds = document.getElementById("bedsFilter").value;
   const selectedAgency = document.getElementById("agencyFilter").value;
   const billsOnly = document.getElementById("billsOnlyToggle").checked;
   const maxPrice = parseInt(document.getElementById("priceRange").value, 10);
@@ -206,9 +161,10 @@ function filterAndRender(loadingMore = false) {
     if (activeWalkFilter === "priority") {
       if (!p.is_priority_10min) return false;
     } else if (activeWalkFilter === "5m") {
-      if (p.walk_minutes > 5) return false;
+      if ((p.walk_minutes ?? Infinity) > 5) return false;
     }
 
+    if (beds !== "all" && p.bedrooms !== Number(beds)) return false;
     if (selectedAgency !== "all" && p.source !== selectedAgency) return false;
     if (billsOnly && !p.bills_included) return false;
     if (maxPrice < PRICE_MAX && p.price_pppw > 0 && p.price_pppw > maxPrice) return false;
@@ -217,20 +173,20 @@ function filterAndRender(loadingMore = false) {
   });
 
   if (sortBy === "closest") {
-    filtered.sort((a, b) => a.walk_minutes - b.walk_minutes);
+    filtered.sort((a, b) => (a.walk_minutes ?? 999) - (b.walk_minutes ?? 999));
   } else if (sortBy === "cheapest") {
     filtered.sort((a, b) => (a.price_pppw || 9999) - (b.price_pppw || 9999));
   } else if (sortBy === "newest") {
     filtered.sort((a, b) => a.recency_days - b.recency_days);
   }
 
-  updateFilterCount(selectedAgency, billsOnly, maxPrice);
+  updateFilterCount(beds, selectedAgency, billsOnly, maxPrice);
   renderGrid(filtered);
 }
 
 // Badge on the mobile "Filters" button: how many panel filters are not default
-function updateFilterCount(agency, billsOnly, maxPrice) {
-  const n = (agency !== "all") + billsOnly + (maxPrice < PRICE_MAX);
+function updateFilterCount(beds, agency, billsOnly, maxPrice) {
+  const n = (beds !== "all") + (agency !== "all") + billsOnly + (maxPrice < PRICE_MAX);
   const badge = document.getElementById("filterCount");
   badge.hidden = n === 0;
   badge.textContent = n;
@@ -287,12 +243,12 @@ function buildShareText(p) {
 }
 
 function createCardHTML(p, index) {
+  const walk = p.walk_minutes ?? Infinity; // null <= 5 is true in JS
   let walkClass = "walk-far";
-  if (p.walk_minutes <= 5) walkClass = "walk-5m";
-  else if (p.walk_minutes <= 10) walkClass = "walk-10m";
-  else if (p.walk_minutes <= 15) walkClass = "walk-15m";
+  if (walk <= 5) walkClass = "walk-5m";
+  else if (walk <= 10) walkClass = "walk-10m";
+  else if (walk <= 15) walkClass = "walk-15m";
 
-  const isPriority = p.is_priority_10min;
   const fresh = p.freshness_tag || "";
 
   // Only newly shown cards animate in, staggered, capped so long pages don't drag
@@ -332,9 +288,9 @@ function createCardHTML(p, index) {
         <h3 class="card-title">${escapeHtml(p.title)}</h3>
 
         <div class="spec-row">
-          <span class="spec-item">5 bed</span>
-          <span class="spec-item">${p.bathrooms || 2} bath</span>
-          <span class="spec-item">${isPriority ? 'Cathays' : 'Cardiff'}</span>
+          <span class="spec-item">${p.bedrooms} bed</span>
+          ${p.bathrooms ? `<span class="spec-item">${p.bathrooms} bath</span>` : ''}
+          <span class="spec-item">${escapeHtml(p.area || 'Cardiff')}</span>
         </div>
 
         <div class="avail-notice">Available from <strong>${escapeHtml(p.available_date)}</strong></div>
