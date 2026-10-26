@@ -1015,7 +1015,7 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
 }
 
 @media (max-width: 760px) {
-  .desktop-nav, #navGithubLink { display: none; }
+  .desktop-nav, #navGithubLink, #navLinkedinLink { display: none; }
   .mobile-toggle { display: block; }
   .mobile-nav { display: flex; }
 
