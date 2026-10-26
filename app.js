@@ -180,6 +180,7 @@ function setupTerminal() {
   <span class="term-cmd">hardware</span>     - Specific details on embedded hardware builds
   <span class="term-cmd">contact</span>      - Show contact channels & links
   <span class="term-cmd">github</span>       - Open Arjun's GitHub profile
+  <span class="term-cmd">linkedin</span>     - Open Arjun's LinkedIn profile
   <span class="term-cmd">error [code]</span> - Custom error inspector (e.g. error 401, error 404)
   <span class="term-cmd">clear</span>        - Wipe terminal screen
   <span class="term-cmd">echo [text]</span>   - Print text back
@@ -212,12 +213,17 @@ Domain: <span class="term-highlight">https://3aks.me</span>
     contact: () => `
 <span class="term-highlight">Get in Touch:</span>
   GitHub : <a href="https://github.com/3aks" target="_blank" rel="noopener noreferrer" class="term-highlight" style="text-decoration:underline;">https://github.com/3aks</a>
+  LinkedIn: <a href="https://www.linkedin.com/in/1aks" target="_blank" rel="noopener noreferrer" class="term-highlight" style="text-decoration:underline;">https://www.linkedin.com/in/1aks</a>
   Website: <a href="https://3aks.me" class="term-highlight" style="text-decoration:underline;">https://3aks.me</a>
   Status : Available for embedded systems collaborations & open-source projects.
     `,
     github: () => {
       window.open('https://github.com/3aks', '_blank', 'noopener');
       return `Opening <span class="term-highlight">https://github.com/3aks</span> in a new tab...`;
+    },
+    linkedin: () => {
+      window.open('https://www.linkedin.com/in/1aks', '_blank', 'noopener');
+      return `Opening <span class="term-highlight">https://www.linkedin.com/in/1aks</span> in a new tab...`;
     },
     error: (arg) => {
       const code = (arg || '').trim();

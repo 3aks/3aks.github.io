@@ -1030,6 +1030,7 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
   .hero-lead { margin-bottom: 28px; }
   .hero-actions { margin-bottom: 32px; }
   .hero-actions .btn { flex: 1 1 0; min-height: 50px; font-size: 16px; }
+  .hero-actions .btn-primary { flex-basis: 100%; }
   .quick-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
   .fact-val { font-size: 17px; }
   .fact-label { font-size: 12px; }
