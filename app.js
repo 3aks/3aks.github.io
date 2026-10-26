@@ -181,6 +181,7 @@ function setupTerminal() {
   <span class="term-cmd">contact</span>      - Show contact channels & links
   <span class="term-cmd">github</span>       - Open Arjun's GitHub profile
   <span class="term-cmd">linkedin</span>     - Open Arjun's LinkedIn profile
+  <span class="term-cmd">housing</span>      - Open the Cardiff student housing finder
   <span class="term-cmd">error [code]</span> - Custom error inspector (e.g. error 401, error 404)
   <span class="term-cmd">clear</span>        - Wipe terminal screen
   <span class="term-cmd">echo [text]</span>   - Print text back
@@ -220,6 +221,10 @@ Domain: <span class="term-highlight">https://3aks.me</span>
     github: () => {
       window.open('https://github.com/3aks', '_blank', 'noopener');
       return `Opening <span class="term-highlight">https://github.com/3aks</span> in a new tab...`;
+    },
+    housing: () => {
+      setTimeout(() => { location.href = '/housing/'; }, 400);
+      return `Opening the <span class="term-highlight">Cardiff housing finder</span>...`;
     },
     linkedin: () => {
       window.open('https://www.linkedin.com/in/1aks', '_blank', 'noopener');
