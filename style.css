@@ -210,17 +210,72 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
 .logo-bracket { color: var(--text-3); }
 .logo-accent { color: var(--accent-orange); }
 
-.desktop-nav { display: flex; gap: 4px; }
+/* Liquid glass nav: a frosted pill, with a brighter glass lens that slides to the hovered or current link */
+.desktop-nav {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),   /* light catching the top edge */
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 0 0 1px rgba(255, 255, 255, 0.07),
+    0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+.nav-lens {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 0;
+  width: var(--lens-w, 0px);
+  border-radius: var(--radius-pill);
+  background:
+    radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+  -webkit-backdrop-filter: blur(6px) saturate(220%) brightness(1.15);
+  backdrop-filter: blur(6px) saturate(220%) brightness(1.15);
+  box-shadow:
+    inset 0 1px 0.5px rgba(255, 255, 255, 0.55),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.18),
+    0 4px 14px -4px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateX(var(--lens-x, 0px)) scale(0.85);
+  pointer-events: none;
+  /* Slight overshoot reads as liquid; transitions retarget from the current position when interrupted */
+  transition:
+    transform 520ms cubic-bezier(0.34, 1.4, 0.64, 1),
+    width 420ms cubic-bezier(0.34, 1.25, 0.64, 1),
+    opacity 200ms ease;
+}
+.nav-lens.on { opacity: 1; transform: translateX(var(--lens-x, 0px)) scale(1); }
+/* While travelling, the lens stretches along its path and thins, like a drop being dragged */
+.nav-lens.on.moving { transform: translateX(var(--lens-x, 0px)) scale(1.06, 0.88); }
 .nav-link {
-  padding: 6px 12px;
+  position: relative;
+  z-index: 1;
+  padding: 6px 13px;
   border-radius: var(--radius-pill);
   font-size: 14px;
   color: var(--text-2);
-  transition: color 200ms ease, background-color 200ms ease;
+  transition: color 200ms ease;
 }
-.nav-link.active { color: var(--text); background: var(--surface-2); }
+.nav-link.active, .nav-link.lensed { color: var(--text); }
 @media (hover: hover) and (pointer: fine) {
   .nav-link:hover { color: var(--text); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-lens { transition: opacity 200ms ease; }
+  .nav-lens.on.moving { transform: translateX(var(--lens-x, 0px)); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .desktop-nav, .nav-lens { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .desktop-nav { background: #1c1c1e; }
+  .nav-lens { background: #3a3a3c; }
 }
 
 .nav-actions { display: flex; align-items: center; gap: 8px; }

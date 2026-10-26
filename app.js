@@ -80,17 +80,57 @@ function setupHeader() {
     window.matchMedia('(min-width: 761px)').addEventListener('change', (e) => e.matches && setOpen(false));
   }
 
-  // Active section highlight
-  const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
+  // Active section highlight, shown by a glass lens that slides between links
+  const nav = document.querySelector('.desktop-nav');
+  const navLinks = nav ? [...nav.querySelectorAll('.nav-link')] : [];
   const sections = document.querySelectorAll('main section[id]');
+  const lens = document.createElement('span');
+  lens.className = 'nav-lens';
+  lens.setAttribute('aria-hidden', 'true');
+  nav?.prepend(lens);
+
+  let moveTimer;
+  const moveLens = (link) => {
+    navLinks.forEach((l) => l.classList.toggle('lensed', l === link));
+    if (!link) { lens.classList.remove('on'); return; }
+    const wasOn = lens.classList.contains('on');
+    lens.style.setProperty('--lens-x', `${link.offsetLeft}px`);
+    lens.style.setProperty('--lens-w', `${link.offsetWidth}px`);
+    if (!wasOn) {
+      // Appear in place (scale up) rather than sliding in from the left edge
+      lens.style.transition = 'none';
+      lens.getBoundingClientRect();
+      lens.style.transition = '';
+    }
+    lens.classList.add('on');
+    if (wasOn) {
+      lens.classList.add('moving');
+      clearTimeout(moveTimer);
+      moveTimer = setTimeout(() => lens.classList.remove('moving'), 180);
+    }
+  };
+  const activeLink = () => navLinks.find((l) => l.classList.contains('active'));
+
+  navLinks.forEach((link) => link.addEventListener('pointerenter', () => moveLens(link)));
+  nav?.addEventListener('pointerleave', () => moveLens(activeLink()));
+  window.addEventListener('resize', () => moveLens(activeLink()));
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
       const id = entry.target.id;
       navLinks.forEach((link) => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+      if (!nav.matches(':hover')) moveLens(activeLink());
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   sections.forEach((s) => observer.observe(s));
+  // Above the first section nothing is active: let the lens fade out
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 80 && !nav?.matches(':hover')) {
+      navLinks.forEach((l) => l.classList.remove('active'));
+      moveLens(null);
+    }
+  }, { passive: true });
 }
 
 /* ==========================================================================
