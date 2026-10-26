@@ -210,21 +210,63 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
 .logo-bracket { color: var(--text-3); }
 .logo-accent { color: var(--accent-orange); }
 
-/* Liquid glass nav: a frosted pill, with a brighter glass lens that slides to the hovered or current link */
-.desktop-nav {
+/* On desktop the header has no bar of its own: the logo, nav and buttons float as glass over the page */
+@media (min-width: 761px) {
+  .site-header.scrolled { background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+  .brand-logo {
+    padding: 7px 14px;
+    border-radius: var(--radius-pill);
+  }
+}
+
+/* Liquid glass: a thick, bright-rimmed material that bends light from whatever scrolls beneath it */
+.glass {
   position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(140% 100% at 50% -20%, rgba(255, 255, 255, 0.16), transparent 55%),
+    rgba(28, 28, 32, 0.38);
+  -webkit-backdrop-filter: blur(18px) saturate(190%) brightness(1.08);
+  backdrop-filter: blur(18px) saturate(190%) brightness(1.08);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.28),    /* specular highlight along the top */
+    inset 0 -1px 1px rgba(255, 255, 255, 0.06),
+    inset 0 0 12px rgba(255, 255, 255, 0.04),     /* inner glow: thickness */
+    0 8px 28px -8px rgba(0, 0, 0, 0.65),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+}
+/* The rim: bright where light hits (top-left, bottom-right), almost clear in between */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.08) 30%,
+    rgba(255, 255, 255, 0.03) 60%, rgba(255, 255, 255, 0.32));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  a.glass, .btn.glass { transition: transform 200ms var(--ease-out), background-color 200ms ease, box-shadow 200ms ease; }
+  a.glass:hover, .btn.glass:hover {
+    background:
+      radial-gradient(140% 100% at 50% -20%, rgba(255, 255, 255, 0.24), transparent 55%),
+      rgba(44, 44, 50, 0.45);
+  }
+}
+.btn.glass:active, a.glass:active { transform: scale(0.97); }
+
+/* Nav pill with a brighter glass lens that slides to the hovered or current link */
+.desktop-nav {
   display: flex;
   gap: 2px;
   padding: 4px;
   border-radius: var(--radius-pill);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),   /* light catching the top edge */
-    inset 0 -1px 0 rgba(255, 255, 255, 0.04),
-    0 0 0 1px rgba(255, 255, 255, 0.07),
-    0 10px 30px -10px rgba(0, 0, 0, 0.6);
 }
 .nav-lens {
   position: absolute;
@@ -273,8 +315,8 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
   .nav-lens.on.moving { transform: translateX(var(--lens-x, 0px)); }
 }
 @media (prefers-reduced-transparency: reduce) {
-  .desktop-nav, .nav-lens { -webkit-backdrop-filter: none; backdrop-filter: none; }
-  .desktop-nav { background: #1c1c1e; }
+  .glass, .nav-lens { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .glass { background: #1c1c1e; }
   .nav-lens { background: #3a3a3c; }
 }
 
@@ -394,6 +436,31 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
   align-items: center;
   gap: clamp(32px, 6vw, 72px);
 }
+
+.hero-announce {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 5px 14px 5px 5px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.announce-tag {
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-orange);
+  color: #000;
+  font-size: 12px;
+  font-weight: 700;
+}
+.hero-announce svg { color: var(--text-2); transition: transform 200ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .hero-announce:hover svg { transform: translateX(3px); color: var(--text); }
+}
+.hero-announce + .hero-status { display: flex; width: fit-content; }
 
 .hero-status {
   display: inline-flex;
@@ -1070,6 +1137,9 @@ button, .btn, [role="button"], .filter-tab, .term-pill, .nav-link, .mobile-nav-l
 }
 
 @media (max-width: 760px) {
+  .brand-logo.glass { background: none; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; }
+  .brand-logo.glass::after { display: none; }
+  .hero-announce { font-size: 13px; }
   .desktop-nav, #navGithubLink, #navLinkedinLink { display: none; }
   .mobile-toggle { display: block; }
   .mobile-nav { display: flex; }
