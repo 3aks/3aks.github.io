@@ -15,7 +15,7 @@ import math
 import re
 import sys
 import time
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import io
@@ -114,11 +114,16 @@ def same_photo(a, b, max_bits=6):
 RENT_ONLY = {"Cardiff Student Letting", "CPS Homes", "Housr"}  # UniHomes prices include a bills premium
 
 
+def rent(p):
+    """Rent before bills: Housr shows a bills-included price but also publishes the bare rent."""
+    return p.get("rent_pppw") or p["price_pppw"]
+
+
 def rents_agree(a, b, tolerance=0.03):
     """Neighbouring houses on one street can share a pin; the same house has the same rent everywhere."""
-    if a["source"] not in RENT_ONLY or b["source"] not in RENT_ONLY or not a["price_pppw"] or not b["price_pppw"]:
+    if a["source"] not in RENT_ONLY or b["source"] not in RENT_ONLY or not rent(a) or not rent(b):
         return True
-    return abs(a["price_pppw"] - b["price_pppw"]) <= tolerance * max(a["price_pppw"], b["price_pppw"])
+    return abs(rent(a) - rent(b)) <= tolerance * max(rent(a), rent(b))
 
 
 def pin(p):
@@ -250,12 +255,12 @@ def parse_date(text):
 
 
 def listing(*, id, source, title, address, bedrooms, bathrooms, price_pppw, price_pcm,
-            bills, available, url, image, lat, lng, area="", notes=""):
+            bills, available, url, image, lat, lng, area="", notes="", rent_pppw=None):
     return {
         "id": id, "source": source, "title": title, "address": address, "area": area,
         "bedrooms": bedrooms, "bathrooms": bathrooms or None,
         "price_pppw": price_pppw or 0, "price_total_month": round(price_pcm) if price_pcm else None,
-        "bills_included": bool(bills),
+        "bills_included": bool(bills), "rent_pppw": rent_pppw or price_pppw or 0,
         "available": available.isoformat() if available else None,
         "url": url, "image_url": image or None,
         "lat": lat, "lng": lng, "distance_m": estimate_metres(lat, lng), "distance_routed": False,
@@ -378,16 +383,19 @@ def scrape_housr():
                     continue
                 images = p.get("images_full") or p.get("images") or []
                 addr = p.get("address") or p["title"]
+                all_in = p.get("total_price") if (p.get("total_price") or 0) > p["price_pw"] else None  # Housr's headline price
                 out.append(listing(
                     id=f"housr_{p['id']}", source="Housr", title=f"{p['bedrooms']} bed house, {p['title']}",
                     address=addr, area=addr.split(",")[1].strip() if addr.count(",") >= 2 else "",
                     bedrooms=p["bedrooms"], bathrooms=p.get("bathrooms"),
-                    price_pppw=p["price_pw"], price_pcm=p["price_pm"] * p["bedrooms"] if p.get("price_pm") else None,
-                    bills=False, available=parse_date(p.get("available_from")),
+                    # Housr advertises the bills-included total; the bare rent is kept for matching other agents
+                    price_pppw=all_in or p["price_pw"], rent_pppw=p["price_pw"],
+                    price_pcm=all_in * p["bedrooms"] * 52 / 12 if all_in else None,
+                    bills=bool(all_in), available=parse_date(p.get("available_from")),
                     url=f"https://www.housr.com/en-gb/student-accommodation/cardiff/property/{p['id']}",
                     image=images[0] if images else None,
                     lat=float(p["lat"]), lng=float(p["lng"]),
-                    notes=f"Optional Housr bills package: £{p['total_price']} pppw all-in." if p.get("total_price") else "",
+                    notes=f"Rent £{p['price_pw']} pppw + bills package = £{all_in} pppw." if all_in else "",
                 ))
             page += 1
     return out
@@ -509,9 +517,13 @@ def selfcheck():
 
 def main():
     selfcheck()
-    previous = []
+    previous, previous_age = [], None
     if OUT_JSON.exists():
-        previous = json.loads(OUT_JSON.read_text(encoding="utf-8")).get("listings", [])
+        saved = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+        previous = saved.get("listings", [])
+        stamp = saved.get("metadata", {}).get("timestamp")
+        previous_age = (datetime.now(timezone.utc)
+                        - datetime.strptime(stamp, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)) if stamp else None
 
     results, counts, failed = [], {}, []
     for name, fn in [("Cardiff Student Letting", scrape_csl), ("UniHomes", scrape_unihomes),
@@ -522,14 +534,16 @@ def main():
         except Exception as e:  # one broken site shouldn't lose the others
             print(f"  FAILED: {e!r}", file=sys.stderr)
             failed.append(name)
-            found = [p for p in previous if p["source"] == name]  # keep last good data
+            # Keep last good data through a short outage, but not for days: those houses may have been let since
+            fresh = previous_age is not None and previous_age < timedelta(days=2)
+            found = [p for p in previous if p["source"] == name] if fresh else []
         counts[name] = len(found)
         print(f"  {len(found)} houses")
         results += found
 
     listings = finalise(results, previous)
     meta = {
-        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),  # UTC
         "total_properties": len(listings),
         "bedrooms": f"{BEDROOMS.start}-{BEDROOMS.stop - 1}",
         "source_breakdown": {s: sum(p["source"] == s for p in listings) for s in counts},

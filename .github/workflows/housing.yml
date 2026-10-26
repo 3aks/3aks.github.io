@@ -1,0 +1,43 @@
+name: Refresh housing listings
+
+# Re-scrapes every 3 hours so let houses (which drop out of the agencies' searches) leave the page
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: housing-refresh
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: housing/requirements.txt
+
+      - run: pip install -r housing/requirements.txt
+
+      - name: Scrape
+        working-directory: housing
+        run: python scraper.py
+
+      - name: Publish if anything changed
+        run: |
+          git config user.name "3aks"
+          git config user.email "3aks@users.noreply.github.com"
+          git add housing/listings.json housing/cardiff_student_houses.csv
+          git diff --cached --quiet && exit 0
+          git commit -m "Refresh housing listings"
+          git pull --rebase
+          git push

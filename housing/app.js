@@ -83,6 +83,25 @@ function initStickyToolbar() {
   new IntersectionObserver(([entry]) => {
     toolbar.classList.toggle("stuck", !entry.isIntersecting);
   }).observe(sentinel);
+
+  // Scrolling down through results tucks the toolbar and closes filters; scrolling up brings it back
+  const panel = document.getElementById("filterPanel");
+  const btnFilters = document.getElementById("btnFilters");
+  let lastY = window.scrollY;
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    const delta = y - lastY;
+    if (Math.abs(delta) < 8) return;
+    lastY = y;
+    const typing = toolbar.contains(document.activeElement) && document.activeElement.matches("input, select");
+    if (delta > 0 && toolbar.classList.contains("stuck") && !typing) {
+      toolbar.classList.add("tucked");
+      panel.classList.remove("open");
+      btnFilters.setAttribute("aria-expanded", "false");
+    } else if (delta < 0) {
+      toolbar.classList.remove("tucked");
+    }
+  }, { passive: true });
 }
 
 function setWalkFilter(value) {
@@ -125,7 +144,7 @@ function resetFilters() {
 
 async function loadListings() {
   try {
-    const res = await fetch("./listings.json");
+    const res = await fetch("./listings.json", { cache: "no-cache" }); // always the latest scrape
     if (!res.ok) throw new Error("Failed to load listings");
     const data = await res.json();
     allListings = data.listings || [];
@@ -150,11 +169,17 @@ function updateTopStats(metadata, listings) {
   document.getElementById("valBills").textContent = billsCount;
   document.getElementById("valAvgPrice").textContent = `£${avg}`;
 
-  const updated = metadata && metadata.timestamp ? new Date(metadata.timestamp.replace(" ", "T")) : null;
+  const updated = metadata && metadata.timestamp ? new Date(metadata.timestamp.replace(" ", "T") + "Z") : null;
   if (updated && !isNaN(updated)) {
-    document.getElementById("lastUpdated").textContent =
-      updated.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+    document.getElementById("lastUpdated").textContent = timeAgo(updated);
   }
+}
+
+function timeAgo(when) {
+  const mins = Math.round((Date.now() - when) / 60000);
+  if (mins < 60) return `${Math.max(mins, 1)} min ago`;
+  if (mins < 48 * 60) return `${Math.round(mins / 60)} h ago`;
+  return when.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 }
 
 function filterAndRender(loadingMore = false) {
@@ -324,7 +349,7 @@ function createCardHTML(p, index) {
 
         <div class="card-actions">
           <a href="${escapeHtml(p.url)}" target="_blank" rel="noopener noreferrer" class="btn-view">
-            <span>View listing</span>
+            <span>View</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
           </a>
           <button class="btn-share" type="button" data-id="${escapeHtml(p.id)}" aria-label="Copy details for ${escapeHtml(p.address)}">Copy</button>
