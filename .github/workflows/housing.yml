@@ -28,9 +28,11 @@ jobs:
 
       - run: pip install -r housing/requirements.txt
 
+      # Cardiff Student Letting blocks GitHub's servers, so a failed agency is a warning, not a stop:
+      # the scraper keeps that agency's last data for up to 2 days and publishes the rest
       - name: Scrape
         working-directory: housing
-        run: python scraper.py
+        run: python scraper.py || echo "::warning::Some agencies could not be scraped; see the log above"
 
       - name: Publish if anything changed
         run: |

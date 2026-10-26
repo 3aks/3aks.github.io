@@ -111,6 +111,8 @@ def same_photo(a, b, max_bits=6):
     return ha is not None and hb is not None and bin(ha ^ hb).count("1") <= max_bits
 
 
+STAMP = "%Y-%m-%d %H:%M:%S"  # metadata timestamps, always UTC
+
 RENT_ONLY = {"Cardiff Student Letting", "CPS Homes", "Housr"}  # UniHomes prices include a bills premium
 
 
@@ -517,13 +519,14 @@ def selfcheck():
 
 def main():
     selfcheck()
-    previous, previous_age = [], None
+    now = datetime.now(timezone.utc)
+    previous, source_updated = [], {}
     if OUT_JSON.exists():
         saved = json.loads(OUT_JSON.read_text(encoding="utf-8"))
         previous = saved.get("listings", [])
-        stamp = saved.get("metadata", {}).get("timestamp")
-        previous_age = (datetime.now(timezone.utc)
-                        - datetime.strptime(stamp, "%Y-%m-%d %H:%M:%S").replace(tzinfo=timezone.utc)) if stamp else None
+        meta = saved.get("metadata", {})
+        # When each agency last scraped successfully (older files only have one overall timestamp)
+        source_updated = meta.get("source_updated") or {s: meta["timestamp"] for s in SOURCE_RANK if "timestamp" in meta}
 
     results, counts, failed = [], {}, []
     for name, fn in [("Cardiff Student Letting", scrape_csl), ("UniHomes", scrape_unihomes),
@@ -534,20 +537,24 @@ def main():
         except Exception as e:  # one broken site shouldn't lose the others
             print(f"  FAILED: {e!r}", file=sys.stderr)
             failed.append(name)
-            # Keep last good data through a short outage, but not for days: those houses may have been let since
-            fresh = previous_age is not None and previous_age < timedelta(days=2)
+            # Keep this agency's last good data through a short outage, but not for days: those houses may be let
+            last = source_updated.get(name)
+            fresh = last and now - datetime.strptime(last, STAMP).replace(tzinfo=timezone.utc) < timedelta(days=2)
             found = [p for p in previous if p["source"] == name] if fresh else []
+        else:
+            source_updated[name] = now.strftime(STAMP)
         counts[name] = len(found)
         print(f"  {len(found)} houses")
         results += found
 
     listings = finalise(results, previous)
     meta = {
-        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),  # UTC
+        "timestamp": now.strftime(STAMP),  # UTC
         "total_properties": len(listings),
         "bedrooms": f"{BEDROOMS.start}-{BEDROOMS.stop - 1}",
         "source_breakdown": {s: sum(p["source"] == s for p in listings) for s in counts},
         "failed_sources": failed,
+        "source_updated": source_updated,
     }
     OUT_JSON.write_text(json.dumps({"metadata": meta, "listings": listings}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     write_csv(listings)
