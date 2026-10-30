@@ -1,5 +1,6 @@
 ﻿Address,Bedrooms,Bathrooms,Walking distance to SU (m),Walk to SU (min),Price PPPW (£),Total Monthly (£),Bills Included,Available,Agent,URL
-"Ruthin Gardens, Cathays",6,2,160,2,123.46,3210,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199041
+"Coburn Street Cathays, Cathays, CF24 4BR",4,1,58,1,160.0,2773,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/193561666/cardiff/cathays/4-bedroom-student-house/coburn-street-cathays
+"Ruthin Gardens, Cathays, CF24",6,2,160,2,145,3770,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29195
 "Llandough Street, Cathays, CF24 4AW",5,2,171,2,158.85,3442,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1009365847/cardiff/cathays/5-bedroom-student-house/llandough-street
 "Glynrhondda Street, Cathays",7,2,186,2,123.46,3745,No,02/08/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198921
 "Ruthin Gardens, Cathays, CF24 4AU",6,3,208,3,154.0,4004,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1845422740/cardiff/cathays/6-bedroom-student-house/ruthin-gardens
@@ -33,7 +34,6 @@
 "Miskin Street, Cathays, CF24 4AQ",6,2,309,4,150.0,3900,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/603786289/cardiff/cathays/6-bedroom-student-house/miskin-street
 "Llanbleddian Gardens, Cathays",3,1,309,4,124.62,1620,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199434
 "Miskin Street, Cathays, CF24 4AQ",6,2,317,4,161.46,4198,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/766458819/cardiff/cathays/6-bedroom-student-house/miskin-street
-"Miskin Street, Cathays, CF24 4AQ",5,1,317,4,141.0,3055,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/206077549/cardiff/cathays/5-bedroom-student-house/miskin-street
 "Miskin Street, Cathays, CF24 4AQ",7,3,321,4,149.0,4520,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1553423772/cardiff/cathays/7-bedroom-student-house/miskin-street
 "Salisbury Road, Cathays, CF24 4AA",3,1,326,4,167.15,2173,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1570417079/cardiff/cathays/3-bedroom-student-house/salisbury-road
 "Salisbury Road, Cathays, CF24 4AA",9,3,326,4,146.92,5730,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/886677034/cardiff/cathays/9-bedroom-student-house/salisbury-road
@@ -42,7 +42,7 @@
 "Miskin Street, Cathays, CF24 4AQ",7,2,342,4,159.0,4823,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/1457527429/cardiff/cathays/7-bedroom-student-house/miskin-street
 "Miskin Street, Cathays, CF24 4AQ",7,3,343,4,161.0,4884,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1920026502/cardiff/cathays/7-bedroom-student-house/miskin-street
 "Salisbury Road, Cathays",4,1,343,4,120.0,2080,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198585
-"Salisbury Road, Cathays, CF24 4AD",8,3,345,4,143.31,4968,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1158205250/cardiff/cathays/8-bedroom-student-house/salisbury-road
+"Salisbury Road, Cathays, CF24 4AD",8,3,345,4,143.31,4968,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1332154016/cardiff/cathays/8-bedroom-student-house/salisbury-road
 "Salisbury Road, Cathays, CF24 4AD",5,3,345,4,185.0,4008,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2058716063/cardiff/cathays/5-bedroom-student-house/salisbury-road
 "Miskin Street, Cathays, CF24 4AQ",9,3,345,4,133.0,5187,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/990764881/cardiff/cathays/9-bedroom-student-house/miskin-street
 "Salisbury Road, Cathays, CF24 4AA",8,3,364,5,142.0,4923,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1248319137/cardiff/cathays/8-bedroom-student-house/salisbury-road
@@ -59,9 +59,9 @@
 "Wyverne Road, Cathays",5,2,403,5,135.0,2925,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200924
 "Salisbury Road, Cathays, CF24 4AD",5,2,404,5,164.0,3553,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1407605650/cardiff/cathays/5-bedroom-student-house/salisbury-road
 "Cranbrook Street, Cathays, CF24 4AL",5,2,404,5,147.0,3185,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2096028642/cardiff/cathays/5-bedroom-student-house/cranbrook-street
-"Cranbrook Street, Cathays",4,2,410,5,130.38,2260,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10861553
 "Cranbrook Street, Cathays",4,1,415,5,130.38,2260,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10861564
-"Cranbrook Street, Cathays",7,3,421,5,123.46,3745,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199308
+"Cranbrook Street, Cathays, CF24",4,1,415,5,156,2704,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32216
+"Cranbrook Street, Cathays, CF24",7,3,421,5,144,4368,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/28999
 "Woodville Road, Cathays, CF24 4DW",8,3,422,5,156.0,5408,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/728698780/cardiff/cathays/8-bedroom-student-house/woodville-road
 "Woodville Road, Cathays, CF24 4DW",8,3,422,5,143.31,4968,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/97776310/cardiff/cathays/8-bedroom-student-house/woodville-road
 "Woodville Road, Cathays, CF24 4DW",8,3,422,5,143.31,4968,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/696341362/cardiff/cathays/8-bedroom-student-house/woodville-road
@@ -81,6 +81,7 @@
 "Rhymney Street Cathays, Cathays, CF24 4DF",4,1,428,5,143.0,2479,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/132265343/cardiff/cathays/4-bedroom-student-house/rhymney-street-cathays
 "Rhymney Street Cathays, Cathays, CF24 4DF",4,1,428,5,160.0,2773,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/284626810/cardiff/cathays/4-bedroom-student-house/rhymney-street-cathays
 "Woodville Court, Cathays, CF24 4DR",3,1,430,5,165.0,2145,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/600826293/cardiff/cathays/3-bedroom-student-house/woodville-court
+"Rhymney Street, Cathays",5,2,431,5,144.23,3125,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10856522
 "Woodville Road, Cathays, CF24 4EA",8,3,433,5,158.0,5477,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/79804354/cardiff/cathays/8-bedroom-student-house/woodville-road
 "Cranbrook Street, Cathays, CF24 4AL",4,1,434,5,143.0,2479,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2024512489/cardiff/cathays/4-bedroom-student-house/cranbrook-street
 "Wyeverne road, Cathays",5,1,436,5,132.69,2875,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199557
@@ -95,7 +96,10 @@
 "Wyeverne Road, Cathays, CF24 4BJ",5,2,448,6,169.23,3667,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/379430505/cardiff/cathays/5-bedroom-student-house/wyeverne-road
 "Wyeverne Road Cathays, Cathays, CF24 4BJ",5,2,448,6,169.0,3662,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1239623625/cardiff/cathays/5-bedroom-student-house/wyeverne-road-cathays
 "Wyeverne Road Cathays, Cathays, CF24 4BJ",5,2,448,6,169.0,3662,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/489827210/cardiff/cathays/5-bedroom-student-house/wyeverne-road-cathays
+"Wyverne Road, Cathays",5,2,453,6,131.54,2850,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199821
+"Wyverne Road, Cathays, CF24 4BG",5,2,453,6,157.0,3402,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/723831326/cardiff/cathays/5-bedroom-student-house/wyverne-road
 "Wyverne Road, Cathays",4,1,453,6,129.23,2240,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199846
+"Wyverne Road, Cathays, CF24",4,1,453,6,155,2687,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29276
 "Coburn Street, Cathays",4,1,457,6,124.62,2160,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198544
 "Coburn Street, Cathays, CF24 4BS",4,1,457,6,152.0,2635,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2104426749/cardiff/cathays/4-bedroom-student-house/coburn-street
 Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Maindy Road. Cathays/10201574
@@ -109,7 +113,6 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Rhymney Street, Cathays, CF24 4DG",6,2,477,6,141.0,3666,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/711666813/cardiff/cathays/6-bedroom-student-house/rhymney-street
 "Cranbrook Street, Cathays",6,2,480,6,123.46,3210,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200092
 "Wyeverne Road, Cathays, CF24 4BJ",4,2,483,6,143.0,2479,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/502715132/cardiff/cathays/4-bedroom-student-house/wyeverne-road
-"Maindy Road, Cathays, CF24 4HP",5,2,486,6,155.0,3358,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1122556250/cardiff/cathays/5-bedroom-student-house/maindy-road
 "Rhymney Street, Cathays, CF24 4DF",6,2,489,6,169.0,4394,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1359018110/cardiff/cathays/6-bedroom-student-house/rhymney-street
 "Thesiger Street, Cathays",6,2,492,6,138.46,3600,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10600326
 "Richmond Road Roath, Roath, CF24 3BT",4,1,498,6,163.0,2825,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/172969534/cardiff/roath/4-bedroom-student-house/richmond-road-roath
@@ -120,10 +123,9 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Colum Road, Cathays",6,2,510,6,122.31,3180,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200950
 "Coburn Street, Cathays, CF24 4BQ",6,3,513,6,175.0,4550,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1410754072/cardiff/cathays/6-bedroom-student-house/coburn-street
 "Rhymney Street, Cathays, CF24 4DH",6,2,515,6,173.0,4498,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/387259016/cardiff/cathays/6-bedroom-student-house/rhymney-street
-"Cathays Terrace, Cathays",6,2,518,6,131.54,3420,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198946
+"Cathays Terrace, Cathays, CF24",6,2,518,6,154,4004,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32252
 "Coburn Street, Cathays, CF24 4BS",9,3,520,6,130.0,5070,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/1805524310/cardiff/cathays/9-bedroom-student-house/coburn-street
 "Mundy Place, Cathays, CF24 4BZ",9,3,528,7,141.0,5499,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1738359780/cardiff/cathays/9-bedroom-student-house/mundy-place
-"Mundy Place, Cathays, CF24 4BZ",5,2,531,7,152.0,3293,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/1969613180/cardiff/cathays/5-bedroom-student-house/mundy-place
 "Colum Road, Cathays ",6,2,532,7,125.77,3270,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201314
 "18 Colum Road, Wales, CF10",3,2,532,7,183,2379,Yes,01/08/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/28893
 "Wyeverne Road, Cathays, CF24 4BG",4,1,534,7,166.0,2877,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/163516959/cardiff/cathays/4-bedroom-student-house/wyeverne-road
@@ -157,6 +159,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Thesiger Street, Cathays, CF24 4BN",6,4,570,7,173.0,4498,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1483749990/cardiff/cathays/6-bedroom-student-house/thesiger-street
 "Thesiger Street, Cathays, CF24 4BN",4,2,570,7,143.0,2479,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1719888463/cardiff/cathays/4-bedroom-student-house/thesiger-street
 "Thesiger Street, Cathays, CF24 4BN",7,2,573,7,157.0,4762,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/801844997/cardiff/cathays/7-bedroom-student-house/thesiger-street
+"Rhymney Street, Cathays, CF24 4DG",4,2,575,7,147.0,2548,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2016439685/cardiff/cathays/4-bedroom-student-house/rhymney-street
 "Rhymney Street, Cathays, CF24 4DG",4,1,575,7,166.62,2888,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/38276723/cardiff/cathays/4-bedroom-student-house/rhymney-street
 "Rhymney Street, Cathays, CF24 4DG",3,1,575,7,169.46,2203,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1623983261/cardiff/cathays/3-bedroom-student-house/rhymney-street
 "Rhymney Street Cathays, Cathays, CF24 4DG",3,1,575,7,160.0,2080,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/478499251/cardiff/cathays/3-bedroom-student-house/rhymney-street-cathays
@@ -167,7 +170,6 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Coburn Street Cathays, Cathays, CF24 4BQ",6,2,580,7,167.0,4342,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/475299672/cardiff/cathays/6-bedroom-student-house/coburn-street-cathays
 "Thesiger Street Cathays, Cathays, CF24 4BN",5,2,585,7,152.0,3293,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1220250337/cardiff/cathays/5-bedroom-student-house/thesiger-street-cathays
 "Colum Road, Cathays, CF10 3EE",6,2,586,7,150.0,3900,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1653022191/cardiff/cathays/6-bedroom-student-house/colum-road
-"Northcote Street, Cathays, CF24 3BH",7,3,586,7,138.0,4186,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/746990468/cardiff/cathays/7-bedroom-student-house/northcote-street
 "84 Bedford Street, CF24",7,2,588,7,175,5308,Yes,12/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31439
 "Colum Road, Cathays",7,2,592,7,123.46,3745,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201545
 "Colum Road, Cathays",6,2,592,7,118.85,3090,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200380
@@ -179,6 +181,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Wyeverne Road, Cathays, CF24 4BG",4,1,597,7,164.0,2843,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/296910185/cardiff/cathays/4-bedroom-student-house/wyeverne-road
 "15 Northcote Street, Wales, CF24",3,1,597,7,162,2106,Yes,16/09/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/28913
 "Wyeverne Road, Cathays, CF24 4BG",8,3,598,7,181.0,6275,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1403270933/cardiff/cathays/8-bedroom-student-house/wyeverne-road
+"Coburn Street, Cathays",6,2,599,7,137.31,3570,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198376
 "Thesiger Street, Cathays, CF24 4BN",4,1,601,8,160.0,2773,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2128653990/cardiff/cathays/4-bedroom-student-house/thesiger-street
 "Rhymney Street, Cathays",6,2,602,8,126.92,3300,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198379
 "Woodville Road, Cathays, CF24 4DX",3,1,602,8,175.0,2275,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1346439802/cardiff/cathays/3-bedroom-student-house/woodville-road
@@ -203,7 +206,6 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Harriet Street, Cathays, CF24 4BY",5,1,620,8,152.0,3293,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1312377952/cardiff/cathays/5-bedroom-student-house/harriet-street
 "Cathays Terrace, Cathays, CF24 4HT",7,3,621,8,149.0,4520,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1059541165/cardiff/cathays/7-bedroom-student-house/cathays-terrace
 "72 Bedford Street, Wales, CF24",8,2,621,8,126,4368,Yes,03/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32227
-"Letty Street, Cathays, CF24 4EJ",4,3,622,8,170.0,2947,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1071398265/cardiff/cathays/4-bedroom-student-house/letty-street
 "Minister Street, Cathays",6,2,624,8,129.23,3360,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200935
 "Harriet Street, Cathays, CF24 4BU",7,3,625,8,167.39,5077,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/364054052/cardiff/cathays/7-bedroom-student-house/harriet-street
 "Rhymney Street, Cathays",4,1,625,8,130.38,2260,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200279
@@ -229,6 +231,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Senghennydd Road Cathays, Cathays, CF24 4AG",6,3,646,8,155.0,4030,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1849141199/cardiff/cathays/6-bedroom-student-house/senghennydd-road-cathays
 "Senghennydd Road Cathays, Cathays, CF24 4AG",6,3,646,8,155.0,4030,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/624627324/cardiff/cathays/6-bedroom-student-house/senghennydd-road-cathays
 "Senghennydd Road Cathays, Cathays, CF24 4AG",7,3,646,8,132.0,4004,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/370470317/cardiff/cathays/7-bedroom-student-house/senghennydd-road-cathays
+"Colum Road, Cathays",5,5,647,8,147.69,3200,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201185
 "Richards Street, Cathays, CF24 4DA",4,1,647,8,153.93,2668,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1312743665/cardiff/cathays/4-bedroom-student-house/richards-street
 "Minister Street Cathays, Cathays, CF24 4HR",5,1,647,8,164.0,3553,Yes,15/09/2027,UniHomes,https://www.unihomes.co.uk/property/727888352/cardiff/cathays/5-bedroom-student-house/minister-street-cathays
 "Colum Road Cathays, Cathays, CF10 3EE",6,2,647,8,173.0,4498,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/297018032/cardiff/cathays/6-bedroom-student-house/colum-road-cathays
@@ -254,19 +257,17 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Colum Road, Cathays",7,2,670,8,126.92,3850,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10310834
 "Thesiger Street, Cathays",4,1,671,8,129.23,2240,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201440
 "Thesiger Street, Cathays, CF24 4BP",7,3,675,8,160.46,4867,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/145403252/cardiff/cathays/7-bedroom-student-house/thesiger-street
+"Thesiger Street, Cathays, CF24 4BP",4,1,675,8,147.0,2548,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/127674955/cardiff/cathays/4-bedroom-student-house/thesiger-street
 "Gordon Road, Cathays, CF24 3AL",3,1,675,8,164.0,2132,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/543964176/cardiff/cathays/3-bedroom-student-house/gordon-road
 "Thesiger Street, Cathays, CF24 4BP",4,2,682,9,154.0,2669,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1414357210/cardiff/cathays/4-bedroom-student-house/thesiger-street
 "49a Colum Road, CF10",4,1,682,9,200,3467,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31465
-"Gordon Road, Cathays, CF24 3AL",3,2,682,9,164.0,2132,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/846556594/cardiff/cathays/3-bedroom-student-house/gordon-road
 "Colum Road, Cathays, CF10 3EH",7,3,685,9,153.0,4641,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/232230202/cardiff/cathays/7-bedroom-student-house/colum-road
 "Richards Street Cathays, Cathays, CF24 4DB",7,3,685,9,158.0,4793,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1957438346/cardiff/cathays/7-bedroom-student-house/richards-street-cathays
 "Cathays Terrace Cathays, Cathays, CF24 4HT",6,3,687,9,150.0,3900,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/1837551092/cardiff/cathays/6-bedroom-student-house/cathays-terrace-cathays
 "Letty Street, Cathays, CF24 4EL",4,1,688,9,159.0,2756,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/467711209/cardiff/cathays/4-bedroom-student-house/letty-street
-"Gordon Road, Cathays, CF24 3AL",3,3,689,9,167.0,2171,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2063664509/cardiff/cathays/3-bedroom-student-house/gordon-road
 "City Road, Roath",3,1,694,9,126.92,1650,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10200118
 "Gordon Road, Roath, CF24 3AL",3,1,694,9,164.0,2132,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1633806976/cardiff/roath/3-bedroom-student-house/gordon-road
 "Richmod Road, Cathays, CF24 3BS",3,1,694,9,151.0,1963,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/316888896/cardiff/cathays/3-bedroom-student-house/richmod-road
-"Coburn Street Cathays, Cathays, CF24 4BR",4,1,695,9,160.0,2773,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/193561666/cardiff/cathays/4-bedroom-student-house/coburn-street-cathays
 "Russell Street, Cathays, CF24 3BG",4,2,696,9,168.93,2928,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1028059455/cardiff/cathays/4-bedroom-student-house/russell-street
 "Russell Street, Cathays, CF24 3BG",5,2,696,9,150.77,3267,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/235235085/cardiff/cathays/5-bedroom-student-house/russell-street
 "Letty Street, Cathays, CF24 4EL",6,3,696,9,161.0,4186,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1840096219/cardiff/cathays/6-bedroom-student-house/letty-street
@@ -289,7 +290,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Richards Street, Cathays, CF24 4DB",8,2,722,9,148.0,5131,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1699797768/cardiff/cathays/8-bedroom-student-house/richards-street
 "Flora Street, Cathays, CF24 4EQ",5,2,723,9,157.0,3402,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1108216907/cardiff/cathays/5-bedroom-student-house/flora-street
 "Harriet Street, Cathays, CF24 4BW",6,2,723,9,144.0,3744,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1013996959/cardiff/cathays/6-bedroom-student-house/harriet-street
-"Flora Street, Cathays",8,2,729,9,126.92,4400,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200468
+"Flora Street, Cathays, CF24",8,2,729,9,147,5096,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29104
 "Cathays Terrace, Cathays, CF24 4HY",5,1,729,9,146.0,3163,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1820960128/cardiff/cathays/5-bedroom-student-house/cathays-terrace
 "Harriet Street, Cathays, CF24 4BW",7,2,730,9,143.0,4338,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/113627496/cardiff/cathays/7-bedroom-student-house/harriet-street
 "Letty Street, Cathays, CF24 4EL",4,1,730,9,156.0,2704,Yes,03/08/2027,UniHomes,https://www.unihomes.co.uk/property/1329593929/cardiff/cathays/4-bedroom-student-house/letty-street
@@ -317,6 +318,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Cathays Terrace, Cathays",6,2,756,9,133.85,3480,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198485
 "Rhymney Street Cathays, Cathays, CF24 4DL",4,1,756,9,145.0,2513,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1724826453/cardiff/cathays/4-bedroom-student-house/rhymney-street-cathays
 "Cathays Terrace, Cathays",8,3,759,9,138.46,4800,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200321
+"Rhymney Street, Cathays, CF24 4DL",5,2,759,9,149.62,3242,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/488547480/cardiff/cathays/5-bedroom-student-house/rhymney-street
 "Rhymney Street, Cathays, CF24 4DL",5,2,759,9,149.62,3242,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2112065742/cardiff/cathays/5-bedroom-student-house/rhymney-street
 "Rhymney Street, Cathays, CF24 4DL",4,1,759,9,177.0,3068,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1486953657/cardiff/cathays/4-bedroom-student-house/rhymney-street
 "Harriet Street, Cathays, CF24 4BW",6,3,761,10,144.0,3744,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/682439546/cardiff/cathays/6-bedroom-student-house/harriet-street
@@ -368,7 +370,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Woodville Road, Cathays, CF24 4EE",5,2,790,10,155.0,3358,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/309732451/cardiff/cathays/5-bedroom-student-house/woodville-road
 "Flora Street, Cathays, CF24 4EQ",6,3,792,10,164.0,4264,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/435780023/cardiff/cathays/6-bedroom-student-house/flora-street
 "Flora Street, Cathays, CF24 4EQ",6,3,792,10,190.0,4940,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/769732022/cardiff/cathays/6-bedroom-student-house/flora-street
-"Flora Street, Cathays, CF24 4EQ",6,2,793,10,179.93,4678,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1493150478/cardiff/cathays/6-bedroom-student-house/flora-street
+"Flora Street, Cathays, CF24 4EQ",6,2,793,10,179.93,4678,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1962089358/cardiff/cathays/6-bedroom-student-house/flora-street
 "Rhymney Street, Cathays, CF24 4DL",4,1,794,10,147.0,2548,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2144317301/cardiff/cathays/4-bedroom-student-house/rhymney-street
 "Richmond Road, Roath, CF24 3BX",6,3,798,10,162.0,4212,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1659318465/cardiff/roath/6-bedroom-student-house/richmond-road
 "Rhymney Street, Cathays, CF24 4DJ",6,3,799,10,162.0,4212,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1982511330/cardiff/cathays/6-bedroom-student-house/rhymney-street
@@ -433,16 +435,16 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Richards Street, Cathays, CF24 4DD",8,3,866,11,171.0,5928,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1811387695/cardiff/cathays/8-bedroom-student-house/richards-street
 "Richards Street, Cathays, CF24 4DD",7,3,866,11,167.39,5077,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1873010385/cardiff/cathays/7-bedroom-student-house/richards-street
 "Corner House, Cathays",6,2,867,11,129.23,3360,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200580
-"Corner House, Cathays",6,2,867,11,121.15,3150,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200578
 "Corner House, Cathays",6,2,867,11,121.15,3150,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201793
+"Corner House, Cathays",6,2,867,11,115.38,3000,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200578
 "Corner House, Cathays, CF24",6,2,867,11,143,3718,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29285
 "Corner House, Cathays, CF24",6,2,867,11,155,4030,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29250
 "Corner House, Cathays, CF24",6,2,867,11,147,3822,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29347
 "Corner House, Cathays",5,2,867,11,132.69,2875,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201610
 "Corner House, Cathays, CF24",5,2,867,11,157,3402,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29235
-"Corner House, Cathays",4,4,867,11,150.0,2600,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10202208
-"Corner House, Cathays",4,4,867,11,146.54,2540,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200938
 "Corner House, Cathays",4,4,867,11,146.54,2540,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200611
+"Corner House, Cathays",4,4,867,11,146.54,2540,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200938
+"Corner House, Cathays",4,4,867,11,146.54,2540,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10202208
 "Corner House, Cathays, CF24",4,4,867,11,173,2999,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/30679
 "Corner House, Cathays, CF24",4,4,867,11,173,2999,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/30678
 "Keppoch Street, Roath",4,1,867,11,118.85,2060,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10604026
@@ -486,8 +488,8 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Cyfarthfa Street, Roath, CF24 3HE",4,1,901,11,138.0,2392,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/1870774732/cardiff/roath/4-bedroom-student-house/cyfarthfa-street
 "Arran Street, Roath",4,1,903,11,130.38,2260,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10596587
 "Glenroy Street, Cathays, CF24 3JX",6,2,903,11,139.0,3614,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1177048452/cardiff/cathays/6-bedroom-student-house/glenroy-street
+"May Street, Cathays, CF24 4EX",6,2,906,11,179.93,4678,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1950499255/cardiff/cathays/6-bedroom-student-house/may-street
 "May Street, Cathays, CF24 4EX",6,2,906,11,156.85,4078,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1366466341/cardiff/cathays/6-bedroom-student-house/may-street
-"May Street, Cathays, CF24 4EX",6,2,906,11,179.93,4678,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1787091112/cardiff/cathays/6-bedroom-student-house/may-street
 "Rhymney Terrace, Cathays",7,2,909,11,123.46,3745,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199925
 "Bedford Street, Roath",4,1,910,11,121.15,2100,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10568555
 "Keppoch Street, Roath, CF24 3JS",6,2,912,11,147.0,3822,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/151927236/cardiff/roath/6-bedroom-student-house/keppoch-street
@@ -496,7 +498,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "May Street, Cathays",7,2,917,11,129.23,3920,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201145
 "Crwys Road, Cathays, CF24 4NL",7,1,920,12,148.93,4518,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1988263386/cardiff/cathays/7-bedroom-student-house/crwys-road
 "Talworth Street, Roath, CF24 3EJ",4,2,921,12,196.0,3397,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/183354307/cardiff/roath/4-bedroom-student-house/talworth-street
-"May Street, Cathays",7,3,923,12,150.0,4550,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10712551
+"May Street, Cathays, CF24",7,3,923,12,171,5187,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/30516
 "City Road, Roath",6,2,924,12,124.62,3240,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10200057
 "22 Glenroy Street, CF24",7,2,925,12,160,4853,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31474
 "Hirwain Street, Cathays, CF24 4JH",6,2,930,12,173.0,4498,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1004747503/cardiff/cathays/6-bedroom-student-house/hirwain-street
@@ -536,9 +538,9 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "141 Woodville Road, Wales, CF24",3,1,977,12,180,2340,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/30715
 "May Street, Cathays",4,1,979,12,129.23,2240,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10311720
 "Llantrisant Street, Cathays, CF24 4JE",8,3,979,12,139.0,4819,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1962477416/cardiff/cathays/8-bedroom-student-house/llantrisant-street
-"Norman Street, Cathays ",6,2,980,12,140.77,3660,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10600327
 "Woodville Road, Cathays, CF24 4NW",5,2,980,12,158.85,3442,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/530655663/cardiff/cathays/5-bedroom-student-house/woodville-road
 "Woodville Road, Cathays, CF24 4NW",3,1,980,12,181.0,2353,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/554488369/cardiff/cathays/3-bedroom-student-house/woodville-road
+"Norman Street, Cathays, CF24",6,2,980,12,163,4238,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31036
 "Woodville Road, Cathays, CF24 4NW",8,3,980,12,133.0,4611,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/1526433500/cardiff/cathays/8-bedroom-student-house/woodville-road
 "Woodville Road, Cathays, CF24 4NW",4,1,980,12,182.0,3155,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1780050816/cardiff/cathays/4-bedroom-student-house/woodville-road
 "Llantrisant Street, Cathays, CF24 4JD",4,1,981,12,166.0,2877,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/186818297/cardiff/cathays/4-bedroom-student-house/llantrisant-street
@@ -550,7 +552,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "41 Glenroy Street, CF24",7,2,986,12,158,4793,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31478
 "Strathnairn Street, Roath",6,2,988,12,130.38,3390,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10198272
 "Keppoch Street, Roath, CF24 3JS",5,2,988,12,141.0,3055,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1711702203/cardiff/roath/5-bedroom-student-house/keppoch-street
-"Arran Street, Roath, CF24 3HT",4,1,989,12,149.31,2588,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1953485702/cardiff/roath/4-bedroom-student-house/arran-street
+"Arran Street, Roath, CF24 3HT",4,1,989,12,149.31,2588,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/413235274/cardiff/roath/4-bedroom-student-house/arran-street
 "Llantrisant street, Cathays",4,1,989,12,129.23,2240,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10310904
 "Llantrisant Street, Cathays",5,2,990,12,115.38,2500,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199693
 "Llantrisant Street, Cathays, CF24 4JE",6,2,992,12,150.0,3900,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1451045015/cardiff/cathays/6-bedroom-student-house/llantrisant-street
@@ -603,7 +605,6 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Crwys Road, Cathays",5,2,1054,13,130.38,2825,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200752
 "Crwys Place, Cathays, CF24 4NS",6,2,1057,13,161.0,4186,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/474290442/cardiff/cathays/6-bedroom-student-house/crwys-place
 "Lisvane Street, Cathays",5,2,1060,13,132.69,2875,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201239
-"Lisvane Street, Cathays, CF24 4LL",5,2,1060,13,158.0,3423,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1762992105/cardiff/cathays/5-bedroom-student-house/lisvane-street
 "Mackintosh Place, Roath",7,2,1072,13,123.46,3745,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10200309
 "Pentyrch Street, Cathays",5,2,1074,13,125.77,2725,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199393
 "Lisvane Street, Cathays",5,3,1074,13,133.85,2900,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10407320
@@ -680,6 +681,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Blackweir Terrace, Cathays, CF10 3EQ",6,2,1235,15,139.0,3614,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1935603100/cardiff/cathays/6-bedroom-student-house/blackweir-terrace
 "Dogfield Street, Cathays",6,2,1236,15,138.46,3600,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198969
 "Daniel Street, Cathays",6,2,1238,15,129.23,3360,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199941
+"Braeval Street, Roath, CF24 4SJ",4,1,1242,16,151.62,2628,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1655829428/cardiff/roath/4-bedroom-student-house/braeval-street
 "Mackintosh Place Roath, Roath, CF24 4RR",5,2,1242,16,169.0,3662,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/184295441/cardiff/roath/5-bedroom-student-house/mackintosh-place-roath
 "Lisvane Street, Cathays",7,2,1244,16,123.46,3745,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10531032
 "Tewkesbury Street, Cathays",6,4,1244,16,122.31,3180,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199177
@@ -715,7 +717,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Lisvane Street, Cathays",5,1,1298,16,132.69,2875,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10712632
 "Mackintosh Place, Roath",5,2,1304,16,124.62,2700,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10260715
 "Dogfield Street, Cathays, CF24 4QZ",5,2,1305,16,164.0,3553,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/945725703/cardiff/cathays/5-bedroom-student-house/dogfield-street
-"Tewkesbury Street, Cathays, CF24 4QR",5,2,1306,16,153.08,3317,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1908371290/cardiff/cathays/5-bedroom-student-house/tewkesbury-street
+"Tewkesbury Street, Cathays, CF24 4QR",5,2,1306,16,153.08,3317,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/706271117/cardiff/cathays/5-bedroom-student-house/tewkesbury-street
 "Mackintosh Place, Roath, CF24 4RL",6,3,1306,16,145.0,3770,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1377489303/cardiff/roath/6-bedroom-student-house/mackintosh-place
 "61 Malefant Street, CF24",6,6,1307,16,181,4706,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31481
 "Malefant Street, Cathays, CF24 4QH",5,2,1310,16,158.85,3442,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/994772773/cardiff/cathays/5-bedroom-student-house/malefant-street
@@ -729,7 +731,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Gelligaer Street, Cathays",4,1,1333,17,124.62,2160,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201166
 "13 Angus Street, CF24",5,1,1338,17,172,3727,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31469
 "Gelligaer Street, Cathays",4,1,1338,17,121.15,2100,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200261
-"Gelligaer Street, Cathays, CF24 4LA",4,2,1338,17,160.85,2788,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1692504238/cardiff/cathays/4-bedroom-student-house/gelligaer-street
+"Gelligaer Street, Cathays, CF24 4LA",4,2,1338,17,160.85,2788,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1355135698/cardiff/cathays/4-bedroom-student-house/gelligaer-street
 "Alfred Street, Roath",4,1,1338,17,118.85,2060,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10201103
 "Gelligaer Street, Cathays, CF24 4LA",5,2,1338,17,164.62,3567,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/49609189/cardiff/cathays/5-bedroom-student-house/gelligaer-street
 "Gelligaer Street, Cathays",4,1,1343,17,120.0,2080,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10200507
@@ -744,6 +746,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Tewkesbury Street, Cathays",5,2,1354,17,118.85,2575,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10199347
 "Gelligaer Street Cathays, Cathays, CF24 4LA",5,2,1355,17,164.0,3553,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/320003810/cardiff/cathays/5-bedroom-student-house/gelligaer-street-cathays
 "140 Mackintosh Place, CF24",7,2,1356,17,160,4853,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31470
+"Arabella Street, Roath",3,1,1356,17,126.92,1650,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10201425
 "Donald Street, Roath, CF24 4TL",5,2,1358,17,159.0,3445,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/801700566/cardiff/roath/5-bedroom-student-house/donald-street
 "Tewkesbury Street, Cathays",4,1,1358,17,124.62,2160,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198814
 "Angus Street Roath, Roath, CF24 3LW",6,3,1359,17,162.0,4212,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/766449852/cardiff/roath/6-bedroom-student-house/angus-street-roath
@@ -751,7 +754,10 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Angus Street, Roath",5,2,1366,17,121.15,2625,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10201060
 "Gwennyth House, Cathays",4,4,1366,17,137.31,2380,No,01/08/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201203
 "46 Moy Road, CF24",7,2,1378,17,169,5126,Yes,12/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31441
+"Mackintosh Place, Roath, CF24 4RN",7,5,1379,17,151.23,4587,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/195512657/cardiff/roath/7-bedroom-student-house/mackintosh-place
 "Dogfield Street, Cathays, CF24 4QZ",4,2,1392,17,148.0,2565,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/609919627/cardiff/cathays/4-bedroom-student-house/dogfield-street
+"Monthermer Road, Cathays, CF24 4QY",5,2,1394,17,157.0,3402,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/764193234/cardiff/cathays/5-bedroom-student-house/monthermer-road
+"Donald Street, Roath, CF24 4TR",5,2,1396,17,145.0,3142,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/159049461/cardiff/roath/5-bedroom-student-house/donald-street
 "Tewkesbury Street, Cathays, CF24 4QS",5,2,1399,17,146.0,3163,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/857380164/cardiff/cathays/5-bedroom-student-house/tewkesbury-street
 "Tewkesbury Street, Cathays, CF24 4QS",4,2,1399,17,166.0,2877,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1106155333/cardiff/cathays/4-bedroom-student-house/tewkesbury-street
 "83 Donald Street, CF24",7,3,1399,17,175,5308,Yes,12/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31440
@@ -770,6 +776,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Monthermer Road, Cathays, CF24 4QY",5,5,1432,18,175.0,3792,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/781918463/cardiff/cathays/5-bedroom-student-house/monthermer-road
 "Moy Road, Cathays, CF24 4TH",4,1,1433,18,143.0,2479,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2142064079/cardiff/cathays/4-bedroom-student-house/moy-road
 "Gelligaer Street, Cathays, CF24 4LB",4,1,1437,18,156.0,2704,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2091659897/cardiff/cathays/4-bedroom-student-house/gelligaer-street
+"Diana Street, Roath, CF24 4TW",5,2,1442,18,154.23,3342,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1084171133/cardiff/roath/5-bedroom-student-house/diana-street
 "Diana Street, Roath, CF24 4TT",5,2,1447,18,145.0,3142,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1228444533/cardiff/roath/5-bedroom-student-house/diana-street
 "Allensbank Road, Heath",3,1,1452,18,130.38,1695,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10310908
 "Dogfield Street, Cathays, CF24 4QN",5,2,1454,18,154.24,3342,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/212210800/cardiff/cathays/5-bedroom-student-house/dogfield-street
@@ -787,7 +794,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Alfred Street, Roath, CF24 4TZ",5,2,1494,19,159.0,3445,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1715236103/cardiff/roath/5-bedroom-student-house/alfred-street
 "Alfred Street, Roath, CF24 4TZ",5,1,1494,19,146.0,3163,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2125215351/cardiff/roath/5-bedroom-student-house/alfred-street
 "Malefant Street, Cathays, CF24 4QF",5,1,1496,19,152.0,3293,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1104174247/cardiff/cathays/5-bedroom-student-house/malefant-street
-"Hazeldene Avenue, Cathays",5,2,1504,19,123.46,2675,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201338
+"Hazeldene Avenue, Cathays, CF24",5,2,1504,19,147,3185,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29012
 "Malefant Street, Cathays, CF24 4QF",7,3,1504,19,149.0,4520,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2064997452/cardiff/cathays/7-bedroom-student-house/malefant-street
 "Angus Street, Roath, CF24 3LX",5,2,1509,19,158.0,3423,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1141911477/cardiff/roath/5-bedroom-student-house/angus-street
 "Alfred Street, Roath, CF24 4TZ",4,1,1513,19,124.0,2149,Yes,22/07/2027,UniHomes,https://www.unihomes.co.uk/property/1010786304/cardiff/roath/4-bedroom-student-house/alfred-street
@@ -796,11 +803,13 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Mackintosh Place, Roath, CF24 4RP",5,2,1518,19,154.0,3337,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1735214942/cardiff/roath/5-bedroom-student-house/mackintosh-place
 "Arabella Street, Roath",4,1,1520,19,126.92,2200,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10199445
 "Inverness Place, Roath",5,1,1533,19,118.85,2575,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10200489
+"Mackintosh Place, Roath, CF24 4RT",7,3,1534,19,151.23,4587,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/845167766/cardiff/roath/7-bedroom-student-house/mackintosh-place
 "Allensbank Crescent, Heath",6,2,1535,19,121.15,3150,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10201490
 "Allensbank Crescent Heath, Heath, CF14 3PR",4,2,1535,19,148.0,2565,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/135466838/cardiff/heath/4-bedroom-student-house/allensbank-crescent-heath
 "Clun Terrace Cathays, Cathays, CF24 4RB",5,2,1536,19,152.0,3293,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/316998795/cardiff/cathays/5-bedroom-student-house/clun-terrace-cathays
 "Mackintosh Place, Roath, CF24 4RP",3,1,1538,19,158.0,2054,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/239537398/cardiff/roath/3-bedroom-student-house/mackintosh-place
 "Mackintosh Place, Roath, CF24 4RP",3,1,1538,19,158.0,2054,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1162573607/cardiff/roath/3-bedroom-student-house/mackintosh-place
+"Mackintosh Place, Roath, CF24 4RP",6,3,1538,19,143.0,3718,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1747370732/cardiff/roath/6-bedroom-student-house/mackintosh-place
 "Arabella Street, Roath, CF24 4SY",6,2,1540,19,139.0,3614,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1547135760/cardiff/roath/6-bedroom-student-house/arabella-street
 "Lochaber Street, Cathays, CF24 3LS",7,3,1542,19,138.0,4186,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/373208798/cardiff/cathays/7-bedroom-student-house/lochaber-street
 "Connaught Road, Roath",8,3,1544,19,115.38,4000,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10198559
@@ -878,6 +887,7 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Australia Road, Heath, CF14 3DA",5,2,1932,24,141.0,3055,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1941737610/cardiff/heath/5-bedroom-student-house/australia-road
 "Clodien Avenue, Heath, CF14 3NN",5,2,1936,24,177.0,3835,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/809133212/cardiff/heath/5-bedroom-student-house/clodien-avenue
 "Australia Road, Heath",4,1,1954,24,123.46,2140,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10200116
+"Australia Road, Heath",3,1,1983,25,126.92,1650,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10199861
 "Newfoundland Road, Heath, CF14 3LD",5,2,2029,25,162.0,3510,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1498890883/cardiff/heath/5-bedroom-student-house/newfoundland-road
 "Newfoundland Road, Heath",4,1,2051,26,129.23,2240,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10201515
 "Clodien Avenue, Heath",4,1,2081,26,124.62,2160,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10602948
@@ -889,7 +899,6 @@ Maindy Road. Cathays,4,1,464,6,138.46,2400,No,01/07/2027,CPS Homes,https://www.c
 "Heathfield Road, Heath",5,2,2276,28,126.92,2750,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10201090
 "Pearl Street, Roath, CF24 1PJ",5,2,2282,29,141.0,3055,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/23805654/cardiff/roath/5-bedroom-student-house/pearl-street
 "Flaxland Avenue, Heath",3,1,2292,29,123.46,1605,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10200346
-"Allensbank Road, Heath, CF14 3PN",3,1,2325,29,154.0,2002,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/849495941/cardiff/heath/3-bedroom-student-house/allensbank-road
 "Flaxland Avenue, Heath",4,1,2394,30,126.35,2190,No,05/08/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10199939
 "Splott Road, Cathays, CF24 2DB",6,6,2609,33,150.0,3900,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1149730104/cardiff/cathays/6-bedroom-student-house/splott-road
 "Swinton Street, Adamsdown, CF24 2NT",4,1,2706,34,165.46,2868,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/158734323/cardiff/adamsdown/4-bedroom-student-house/swinton-street
