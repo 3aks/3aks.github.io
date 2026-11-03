@@ -648,7 +648,7 @@ def main():
     selfcheck()
     return run([("Cardiff Student Letting", scrape_csl), ("UniHomes", scrape_unihomes),
                 ("Housr", scrape_housr), ("CPS Homes", scrape_cps),
-                ("Rightmove", lambda: scrape_rightmove(5814, 1.5)),  # 1.5 miles around Cathays
+                ("Rightmove", lambda: scrape_rightmove(5814, 1.0)),  # 1 mile around Cathays (Rightmove only takes its menu radii)
                 ("OnTheMarket", lambda: scrape_onthemarket("cathays", 1))],
                OUT_JSON, OUT_CSV)
 
