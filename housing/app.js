@@ -424,8 +424,6 @@ function createCardHTML(p, index) {
   else if (walk <= WALK_BANDS[1]) walkClass = "walk-10m";
   else if (walk <= WALK_BANDS[2]) walkClass = "walk-15m";
 
-  const fresh = p.freshness_tag || "";
-
   // Only newly shown cards animate in, staggered, capped so long pages don't drag
   const animStyle = index < animateFrom
     ? 'style="animation:none"'
@@ -445,7 +443,6 @@ function createCardHTML(p, index) {
           <span class="badge-walk ${walkClass}">${walkLabel}</span>
         </div>
         <div class="badge-top-right">
-          ${fresh ? `<span class="badge-recency ${fresh.includes('NEW') ? 'badge-new' : ''}">${escapeHtml(fresh)}</span>` : ''}
           <span class="badge-source">${escapeHtml(p.source)}</span>
         </div>
       </div>

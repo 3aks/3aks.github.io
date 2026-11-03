@@ -566,7 +566,7 @@ input[type="range"]::-moz-range-thumb {
 .badge-top-left { left: 10px; }
 .badge-top-right { right: 10px; flex-direction: column; align-items: flex-end; }
 
-.badge-walk, .badge-recency, .badge-source {
+.badge-walk, .badge-source {
   padding: 3px 9px;
   border-radius: var(--radius-pill);
   background: rgba(0, 0, 0, 0.6);
@@ -581,8 +581,6 @@ input[type="range"]::-moz-range-thumb {
 .walk-5m::before { background: var(--walk-green); }
 .walk-10m::before { background: var(--walk-gold); }
 .walk-15m::before { background: var(--walk-purple); }
-.badge-recency { color: var(--text-2); }
-.badge-new { color: var(--walk-green); }
 .badge-source { font-weight: 500; color: var(--text-2); }
 
 .card-content {
@@ -744,12 +742,10 @@ input[type="range"]::-moz-range-thumb {
   .properties-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .property-card { border-radius: 14px; }
   .card-media { aspect-ratio: 4 / 3; }
-  /* Walk badge on top, recency on the bottom edge so the two never collide at this width */
   .badge-top-left { top: 6px; left: 6px; }
-  .badge-top-right { top: auto; right: 6px; bottom: 6px; }
-  .badge-walk, .badge-recency, .badge-source { padding: 2px 7px; font-size: 10px; }
+  .badge-walk, .badge-source { padding: 2px 7px; font-size: 10px; }
   .badge-source, .price-sub, .also-on { display: none; }
-  .gallery-dots { bottom: 30px; gap: 4px; padding: 3px 5px; }
+  .gallery-dots { bottom: 8px; gap: 4px; padding: 3px 5px; }
   .gallery-dot { width: 5px; height: 5px; }
   .segmented button { min-width: 46px; padding: 0 6px; font-size: 12px; }
   /* Room for the search box: the filter button keeps its icon and count, and drops the word */
@@ -778,6 +774,6 @@ input[type="range"]::-moz-range-thumb {
 
 @media (prefers-reduced-transparency: reduce) {
   .toolbar { background: #000; backdrop-filter: none; -webkit-backdrop-filter: none; }
-  .stat-card, .badge-walk, .badge-recency, .badge-source, .toast { backdrop-filter: none; -webkit-backdrop-filter: none; background: #1c1c1e; }
+  .stat-card, .badge-walk, .badge-source, .toast { backdrop-filter: none; -webkit-backdrop-filter: none; background: #1c1c1e; }
   .gallery-dots { background: #1c1c1e; }
 }
