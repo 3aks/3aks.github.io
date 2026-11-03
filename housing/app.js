@@ -1,14 +1,22 @@
 /**
- * Cardiff Student House Hunter (3–9 bed) - Interactive Dashboard Logic
- * Data comes from listings.json, written by scraper.py.
+ * Student House Hunter (3–9 bed) - Interactive Dashboard Logic
+ * Shared by the Cardiff page and /housing/warwick/. Data comes from ./listings.json,
+ * written by scraper.py; per-city settings live on <body> data attributes.
  */
 
 const PAGE_SIZE = 12;
 const PRICE_MAX = 220;
-const DISTANCE_MAX = 3000; // metres; the slider's top stop means "any distance"
+const DISTANCE_MAX = Number(document.getElementById("distanceRange").max); // metres; the top stop means "any distance"
+const WEEKS_PER_MONTH = 52 / 12;
+const UNIT_KEY = "housing.priceUnit";
+
+// Walk-time colour bands in minutes (green, gold, purple) and the "near" threshold the stats count
+const WALK_BANDS = (document.body.dataset.walkBands || "5,10,15").split(",").map(Number);
+const PRIORITY_WALK = Number(document.body.dataset.priorityWalk || WALK_BANDS[1]);
 
 let allListings = [];
-let activeWalkFilter = "priority"; // default: <= 10m walk priority
+let activeWalkFilter = document.querySelector("#walkFilterChips .chip.active")?.dataset.walk || "all";
+let priceUnit = readUnit(); // "pppw" or "pppm"; prices are stored per week and converted for display
 let visibleCount = PAGE_SIZE;
 let animateFrom = 0; // cards below this index are already on screen and shouldn't re-animate
 let currentResults = [];
@@ -16,8 +24,18 @@ let currentResults = [];
 document.addEventListener("DOMContentLoaded", () => {
   initEventListeners();
   initStickyToolbar();
+  initGalleries();
+  setPriceUnit(priceUnit, false);
   loadListings();
 });
+
+function readUnit() {
+  try {
+    return localStorage.getItem(UNIT_KEY) === "pppm" ? "pppm" : "pppw";
+  } catch {
+    return "pppw";
+  }
+}
 
 function initEventListeners() {
   const searchInput = document.getElementById("searchInput");
@@ -36,12 +54,24 @@ function initEventListeners() {
   });
 
   // Walk filter chips
-  const walkChips = document.querySelectorAll("#walkFilterChips .chip");
-  walkChips.forEach(chip => {
+  document.querySelectorAll("#walkFilterChips .chip").forEach(chip => {
     chip.addEventListener("click", () => setWalkFilter(chip.dataset.walk));
   });
 
-  ["bedsFilter", "agencyFilter", "billsOnlyToggle", "sortBySelect"].forEach(id => {
+  // Bedroom chips: any combination can be on; none on means any size
+  document.querySelectorAll("#bedsFilter .chip").forEach(chip => {
+    chip.addEventListener("click", () => {
+      chip.setAttribute("aria-pressed", chip.getAttribute("aria-pressed") === "true" ? "false" : "true");
+      updateBedsDisplay();
+      filterAndRender();
+    });
+  });
+
+  document.querySelectorAll("#priceUnit button").forEach(btn => {
+    btn.addEventListener("click", () => setPriceUnit(btn.dataset.unit));
+  });
+
+  ["agencyFilter", "billsOnlyToggle", "sortBySelect"].forEach(id => {
     document.getElementById(id).addEventListener("change", () => filterAndRender());
   });
 
@@ -104,6 +134,61 @@ function initStickyToolbar() {
   }, { passive: true });
 }
 
+/* ---------------------------------------------------------------- photo galleries */
+
+// Each card's photos sit in a horizontal scroll-snap strip: swipe on touch, arrows on hover.
+// Scroll events don't bubble, so one capturing listener on the grid keeps every card's dots in step.
+function initGalleries() {
+  const grid = document.getElementById("propertiesGrid");
+  const pending = new Set();
+  grid.addEventListener("scroll", (e) => {
+    if (!e.target.classList?.contains("gallery-track")) return;
+    if (!pending.size) requestAnimationFrame(() => { pending.forEach(syncGallery); pending.clear(); });
+    pending.add(e.target);
+  }, { capture: true, passive: true });
+
+  grid.addEventListener("click", (e) => {
+    const arrow = e.target.closest(".gallery-arrow");
+    if (!arrow) return;
+    const track = arrow.parentElement.querySelector(".gallery-track");
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    track.scrollBy({ left: track.clientWidth * Number(arrow.dataset.step), behavior: smooth ? "smooth" : "auto" });
+  });
+}
+
+function syncGallery(track) {
+  const slides = track.children.length;
+  const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+  const media = track.parentElement;
+  media.querySelectorAll(".gallery-dot").forEach((dot, i) => dot.classList.toggle("on", i === index));
+  media.querySelector(".gallery-arrow.prev")?.toggleAttribute("hidden", index <= 0);
+  media.querySelector(".gallery-arrow.next")?.toggleAttribute("hidden", index >= slides - 1);
+}
+
+function galleryHTML(p) {
+  const photos = (p.images && p.images.length ? p.images : [p.image_url]).filter(Boolean);
+  if (!photos.length) {
+    return `<div class="card-img-placeholder">${escapeHtml(p.address.split(',')[0])}</div>`;
+  }
+  const alt = escapeHtml(p.address);
+  const slides = photos.map((src, i) => `
+    <div class="gallery-slide">
+      <img src="${escapeHtml(src)}" alt="${i === 0 ? alt : `${alt}, photo ${i + 1}`}" class="card-img" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('broken')">
+    </div>`).join("");
+  if (photos.length === 1) return `<div class="gallery-track">${slides}</div>`;
+  return `
+    <div class="gallery-track" tabindex="0" aria-label="${photos.length} photos of ${alt}">${slides}</div>
+    <button class="gallery-arrow prev" type="button" data-step="-1" aria-label="Previous photo" hidden>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg>
+    </button>
+    <button class="gallery-arrow next" type="button" data-step="1" aria-label="Next photo">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+    <div class="gallery-dots" aria-hidden="true">${photos.map((_, i) => `<span class="gallery-dot${i === 0 ? ' on' : ''}"></span>`).join("")}</div>`;
+}
+
+/* ---------------------------------------------------------------- filters */
+
 function setWalkFilter(value) {
   activeWalkFilter = value;
   document.querySelectorAll("#walkFilterChips .chip").forEach(c => {
@@ -114,9 +199,39 @@ function setWalkFilter(value) {
   filterAndRender();
 }
 
+function setPriceUnit(unit, rerender = true) {
+  priceUnit = unit;
+  try { localStorage.setItem(UNIT_KEY, unit); } catch { /* private mode: the choice just isn't remembered */ }
+  document.querySelectorAll("#priceUnit button").forEach(btn => {
+    btn.setAttribute("aria-pressed", btn.dataset.unit === unit ? "true" : "false");
+  });
+  document.getElementById("priceUnit").dataset.unit = unit;
+  updatePriceDisplay();
+  if (rerender) {
+    updateTopStats();
+    animateFrom = visibleCount; // same cards, new numbers: no entrance animation
+    filterAndRender(true);
+  }
+}
+
+// Weekly price shown in the chosen unit, rounded to whole pounds per month
+function money(pppw) {
+  if (!pppw) return null;
+  return priceUnit === "pppm" ? Math.round(pppw * WEEKS_PER_MONTH) : Math.round(pppw * 100) / 100;
+}
+
+function selectedBeds() {
+  return [...document.querySelectorAll('#bedsFilter .chip[aria-pressed="true"]')].map(c => Number(c.dataset.beds));
+}
+
+function updateBedsDisplay() {
+  const beds = selectedBeds();
+  document.getElementById("bedsDisplay").textContent = beds.length ? `${beds.join(", ")} bed` : "Any";
+}
+
 function updatePriceDisplay() {
   const val = parseInt(document.getElementById("priceRange").value, 10);
-  document.getElementById("priceDisplay").textContent = val >= PRICE_MAX ? "Any" : `£${val} pppw`;
+  document.getElementById("priceDisplay").textContent = val >= PRICE_MAX ? "Any" : `£${money(val)} ${priceUnit}`;
 }
 
 function updateDistanceDisplay() {
@@ -131,12 +246,13 @@ function formatDistance(m) {
 function resetFilters() {
   document.getElementById("searchInput").value = "";
   document.getElementById("btnClearSearch").hidden = true;
-  document.getElementById("bedsFilter").value = "all";
+  document.querySelectorAll("#bedsFilter .chip").forEach(c => c.setAttribute("aria-pressed", "false"));
   document.getElementById("agencyFilter").value = "all";
   document.getElementById("billsOnlyToggle").checked = false;
   document.getElementById("priceRange").value = PRICE_MAX;
   document.getElementById("distanceRange").value = DISTANCE_MAX;
   document.getElementById("sortBySelect").value = "closest";
+  updateBedsDisplay();
   updatePriceDisplay();
   updateDistanceDisplay();
   setWalkFilter("all");
@@ -148,7 +264,9 @@ async function loadListings() {
     if (!res.ok) throw new Error("Failed to load listings");
     const data = await res.json();
     allListings = data.listings || [];
-    updateTopStats(data.metadata, allListings);
+    fillAgencyFilter(allListings);
+    updateTopStats();
+    updateLastUpdated(data.metadata);
     filterAndRender();
   } catch (err) {
     console.error("Error fetching listings:", err);
@@ -156,19 +274,29 @@ async function loadListings() {
   }
 }
 
-function updateTopStats(metadata, listings) {
-  const total = listings.length;
-  const priority10m = listings.filter(p => p.is_priority_10min).length;
-  const billsCount = listings.filter(p => p.bills_included).length;
+// Agencies come from the data, busiest first, so each city's page lists its own agents
+function fillAgencyFilter(listings) {
+  const counts = new Map();
+  listings.forEach(p => [p, ...(p.also_on || [])].forEach(o => counts.set(o.source, (counts.get(o.source) || 0) + 1)));
+  const select = document.getElementById("agencyFilter");
+  [...counts].sort((a, b) => b[1] - a[1]).forEach(([name, n]) => {
+    select.add(new Option(`${name} (${n})`, name));
+  });
+}
 
+function updateTopStats() {
+  const listings = allListings;
   const priced = listings.filter(p => p.price_pppw > 0);
-  const avg = priced.length ? Math.round(priced.reduce((acc, p) => acc + p.price_pppw, 0) / priced.length) : 0;
+  const avg = priced.length ? priced.reduce((acc, p) => acc + p.price_pppw, 0) / priced.length : 0;
 
-  document.getElementById("valTotal").textContent = total;
-  document.getElementById("valPriority").textContent = priority10m;
-  document.getElementById("valBills").textContent = billsCount;
-  document.getElementById("valAvgPrice").textContent = `£${avg}`;
+  document.getElementById("valTotal").textContent = listings.length;
+  document.getElementById("valPriority").textContent = listings.filter(p => (p.walk_minutes ?? Infinity) <= PRIORITY_WALK).length;
+  document.getElementById("valBills").textContent = listings.filter(p => p.bills_included).length;
+  document.getElementById("valAvgPrice").textContent = `£${Math.round(money(avg) || 0)}`;
+  document.getElementById("labelAvgPrice").textContent = `Avg ${priceUnit}`;
+}
 
+function updateLastUpdated(metadata) {
   const updated = metadata && metadata.timestamp ? new Date(metadata.timestamp.replace(" ", "T") + "Z") : null;
   if (updated && !isNaN(updated)) {
     document.getElementById("lastUpdated").textContent = timeAgo(updated);
@@ -188,7 +316,7 @@ function filterAndRender(loadingMore = false) {
     animateFrom = 0;
   }
   const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
-  const beds = document.getElementById("bedsFilter").value;
+  const beds = selectedBeds();
   const selectedAgency = document.getElementById("agencyFilter").value;
   const billsOnly = document.getElementById("billsOnlyToggle").checked;
   const maxPrice = parseInt(document.getElementById("priceRange").value, 10);
@@ -197,19 +325,15 @@ function filterAndRender(loadingMore = false) {
 
   const filtered = allListings.filter(p => {
     if (searchTerm) {
-      const hay = `${p.address} ${p.title} ${p.source} ${p.notes || ''}`.toLowerCase();
+      const hay = `${p.address} ${p.title} ${p.area || ''} ${p.source} ${p.notes || ''}`.toLowerCase();
       if (!hay.includes(searchTerm)) return false;
     }
 
-    if (activeWalkFilter === "priority") {
-      if (!p.is_priority_10min) return false;
-    } else if (activeWalkFilter === "5m") {
-      if ((p.walk_minutes ?? Infinity) > 5) return false;
-    }
+    if (activeWalkFilter !== "all" && (p.walk_minutes ?? Infinity) > Number(activeWalkFilter)) return false;
 
     // The same house can be offered by several sites: a filter passes if any offer matches
     const offers = [p, ...(p.also_on || [])];
-    if (beds !== "all" && p.bedrooms !== Number(beds)) return false;
+    if (beds.length && !beds.includes(p.bedrooms)) return false;
     if (selectedAgency !== "all" && !offers.some(o => o.source === selectedAgency)) return false;
     if (billsOnly && !offers.some(o => o.bills_included)) return false;
     if (maxPrice < PRICE_MAX && !offers.some(o => !o.price_pppw || o.price_pppw <= maxPrice)) return false;
@@ -232,7 +356,7 @@ function filterAndRender(loadingMore = false) {
 
 // Badge on the mobile "Filters" button: how many panel filters are not default
 function updateFilterCount(beds, agency, billsOnly, maxPrice, maxDistance) {
-  const n = (beds !== "all") + (agency !== "all") + billsOnly + (maxPrice < PRICE_MAX) + (maxDistance < DISTANCE_MAX);
+  const n = (beds.length > 0) + (agency !== "all") + billsOnly + (maxPrice < PRICE_MAX) + (maxDistance < DISTANCE_MAX);
   const badge = document.getElementById("filterCount");
   badge.hidden = n === 0;
   badge.textContent = n;
@@ -284,17 +408,21 @@ function removeLoadMoreBtn() {
   if (existing) existing.remove();
 }
 
+function priceText(p) {
+  return p.price_pppw ? `£${money(p.price_pppw)} ${priceUnit}` : "Price on enquiry";
+}
+
 function buildShareText(p) {
   const distance = p.distance_m != null ? `${formatDistance(p.distance_m)} (${p.walk_display}) to uni` : "distance unknown";
-  return `${p.address} — ${distance} —${p.price_formatted} ${p.bills_included ? '(bills incl.)' : ''} — Available: ${p.available_date} — ${p.url}`;
+  return `${p.address} — ${distance} — ${priceText(p)}${p.bills_included ? ' (bills incl.)' : ''} — Available: ${p.available_date} — ${p.url}`;
 }
 
 function createCardHTML(p, index) {
   const walk = p.walk_minutes ?? Infinity; // null <= 5 is true in JS
   let walkClass = "walk-far";
-  if (walk <= 5) walkClass = "walk-5m";
-  else if (walk <= 10) walkClass = "walk-10m";
-  else if (walk <= 15) walkClass = "walk-15m";
+  if (walk <= WALK_BANDS[0]) walkClass = "walk-5m";
+  else if (walk <= WALK_BANDS[1]) walkClass = "walk-10m";
+  else if (walk <= WALK_BANDS[2]) walkClass = "walk-15m";
 
   const fresh = p.freshness_tag || "";
 
@@ -303,18 +431,18 @@ function createCardHTML(p, index) {
     ? 'style="animation:none"'
     : `style="--i:${Math.min(index - animateFrom, 8)}"`;
 
-  const mediaHTML = p.image_url ? `
-    <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.address)}" class="card-img" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'card-img-placeholder',textContent:'No photo'}))">
-  ` : `
-    <div class="card-img-placeholder">${escapeHtml(p.address.split(',')[0])}</div>
-  `;
+  const walkLabel = p.distance_m != null && walk <= 60 ? `${formatDistance(p.distance_m)} &middot; ${escapeHtml(p.walk_display)}` : escapeHtml(p.walk_display);
+  // The other unit goes underneath, so both are always one glance away
+  const subPrice = !p.price_pppw ? ""
+    : priceUnit === "pppm" ? `£${Math.round(p.price_pppw * 100) / 100} pppw`
+    : p.price_total_month ? `£${p.price_total_month.toLocaleString()}/mo total` : "";
 
   return `
     <article class="property-card" ${animStyle}>
       <div class="card-media">
-        ${mediaHTML}
+        ${galleryHTML(p)}
         <div class="badge-top-left">
-          <span class="badge-walk ${walkClass}">${p.distance_m != null ? `${formatDistance(p.distance_m)} &middot; ` : ''}${escapeHtml(p.walk_display)}</span>
+          <span class="badge-walk ${walkClass}">${walkLabel}</span>
         </div>
         <div class="badge-top-right">
           ${fresh ? `<span class="badge-recency ${fresh.includes('NEW') ? 'badge-new' : ''}">${escapeHtml(fresh)}</span>` : ''}
@@ -325,9 +453,9 @@ function createCardHTML(p, index) {
       <div class="card-content">
         <div class="card-price-row">
           <div class="price-main">
-            ${p.price_pppw ? `£${p.price_pppw} <span class="price-unit">pppw</span>` : '<span class="price-unit">Price on enquiry</span>'}
+            ${p.price_pppw ? `£${money(p.price_pppw).toLocaleString()} <span class="price-unit">${priceUnit}</span>` : '<span class="price-unit">Price on enquiry</span>'}
           </div>
-          ${p.price_total_month ? `<div class="price-sub">£${p.price_total_month.toLocaleString()}/mo total</div>` : ''}
+          ${subPrice ? `<div class="price-sub">${subPrice}</div>` : ''}
         </div>
 
         <span class="bills-tag ${p.bills_included ? '' : 'no'}">${p.bills_included ? 'Bills included' : 'Bills not included'}</span>
@@ -337,14 +465,14 @@ function createCardHTML(p, index) {
         <div class="spec-row">
           <span class="spec-item">${p.bedrooms} bed</span>
           ${p.bathrooms ? `<span class="spec-item">${p.bathrooms} bath</span>` : ''}
-          <span class="spec-item">${escapeHtml(p.area || 'Cardiff')}</span>
+          <span class="spec-item">${escapeHtml(p.area || document.body.dataset.city || '')}</span>
         </div>
 
         <div class="avail-notice">Available from <strong>${escapeHtml(p.available_date)}</strong></div>
 
         ${p.also_on?.length ? `
           <div class="also-on">Also on ${p.also_on.map(o => `
-            <a href="${escapeHtml(o.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(o.source)}${o.price_pppw ? ` £${o.price_pppw}` : ''}${o.bills_included ? ' bills incl.' : ''}</a>`).join(', ')}
+            <a href="${escapeHtml(o.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(o.source)}${o.price_pppw ? ` £${money(o.price_pppw)}` : ''}${o.bills_included ? ' bills incl.' : ''}</a>`).join(', ')}
           </div>` : ''}
 
         <div class="card-actions">

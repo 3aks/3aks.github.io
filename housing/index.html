@@ -15,10 +15,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../style.css?v=202610262300">
-  <link rel="stylesheet" href="styles.css?v=202610262300">
+  <link rel="stylesheet" href="../style.css?v=202611031620">
+  <link rel="stylesheet" href="styles.css?v=202611031620">
 </head>
-<body class="housing">
+<body class="housing" data-city="Cardiff" data-walk-bands="5,10,15" data-priority-walk="10">
   <!-- Header -->
   <header class="app-header">
     <div class="header-shader" data-shader="mesh"
@@ -33,7 +33,7 @@
       </div>
       <h1 class="main-title">Cardiff student<br>house hunter.</h1>
       <p class="subtitle">
-        3 to 9 bedroom houses from CSL, UniHomes, Housr and CPS Homes, sorted by the walk to Cardiff University.
+        3 to 9 bedroom student houses from CSL, CPS Homes, Housr, UniHomes, Rightmove and OnTheMarket, sorted by the walk to Cardiff University.
       </p>
 
       <!-- Stats -->
@@ -52,12 +52,14 @@
         </div>
         <div class="stat-card">
           <span class="stat-value" id="valAvgPrice">&ndash;</span>
-          <span class="stat-label">Avg pppw</span>
+          <span class="stat-label" id="labelAvgPrice">Avg pppw</span>
         </div>
       </div>
 
       <div class="header-actions">
-        <a href="./cardiff_student_houses.csv" class="btn btn-secondary" download id="btnExportCsv">Export CSV</a>      </div>
+        <a href="./cardiff_student_houses.csv" class="btn btn-secondary" download id="btnExportCsv">Export CSV</a>
+        <a href="./warwick/" class="btn btn-secondary">Warwick houses &rarr;</a>
+      </div>
     </div>
   </header>
 
@@ -72,50 +74,52 @@
             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
           </button>
         </div>
-        <button class="btn-filters" id="btnFilters" type="button" aria-expanded="false" aria-controls="filterPanel">
+        <div class="segmented" id="priceUnit" role="group" aria-label="Show prices per week or per month">
+          <button type="button" data-unit="pppw" aria-pressed="true">pppw</button>
+          <button type="button" data-unit="pppm" aria-pressed="false">pppm</button>
+        </div>
+        <button class="btn-filters" id="btnFilters" type="button" aria-expanded="false" aria-controls="filterPanel" aria-label="Filters">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
-          <span>Filters</span>
+          <span class="btn-filters-label">Filters</span>
           <span class="filter-count" id="filterCount" hidden></span>
         </button>
       </div>
 
       <div class="chip-toggle-group" id="walkFilterChips" role="group" aria-label="Walking distance">
-        <button class="chip active" type="button" data-walk="priority" aria-pressed="true">&le; 10 min walk</button>
-        <button class="chip" type="button" data-walk="5m" aria-pressed="false">&le; 5 min</button>
+        <button class="chip active" type="button" data-walk="10" aria-pressed="true">&le; 10 min walk</button>
+        <button class="chip" type="button" data-walk="5" aria-pressed="false">&le; 5 min</button>
         <button class="chip" type="button" data-walk="all" aria-pressed="false">All areas</button>
       </div>
 
       <div class="filter-panel" id="filterPanel">
         <div class="filter-panel-inner">
-          <div class="filter-item">
-            <label for="bedsFilter">Bedrooms</label>
-            <select id="bedsFilter">
-              <option value="all">Any (3&ndash;9)</option>
-              <option value="3">3 bed</option>
-              <option value="4">4 bed</option>
-              <option value="5">5 bed</option>
-              <option value="6">6 bed</option>
-              <option value="7">7 bed</option>
-              <option value="8">8 bed</option>
-              <option value="9">9 bed</option>
-            </select>
+          <div class="filter-item beds-item">
+            <div class="slider-header">
+              <span id="bedsLabel">Bedrooms</span>
+              <strong id="bedsDisplay">Any</strong>
+            </div>
+            <div class="bed-chips" id="bedsFilter" role="group" aria-labelledby="bedsLabel">
+              <button class="chip" type="button" data-beds="3" aria-pressed="false">3</button>
+              <button class="chip" type="button" data-beds="4" aria-pressed="false">4</button>
+              <button class="chip" type="button" data-beds="5" aria-pressed="false">5</button>
+              <button class="chip" type="button" data-beds="6" aria-pressed="false">6</button>
+              <button class="chip" type="button" data-beds="7" aria-pressed="false">7</button>
+              <button class="chip" type="button" data-beds="8" aria-pressed="false">8</button>
+              <button class="chip" type="button" data-beds="9" aria-pressed="false">9</button>
+            </div>
           </div>
 
           <div class="filter-item">
             <label for="agencyFilter">Agency</label>
             <select id="agencyFilter">
               <option value="all">All agencies</option>
-              <option value="Cardiff Student Letting">Cardiff Student Letting</option>
-              <option value="UniHomes">UniHomes</option>
-              <option value="Housr">Housr</option>
-              <option value="CPS Homes">CPS Homes</option>
             </select>
           </div>
 
           <div class="filter-item">
             <label for="sortBySelect">Sort by</label>
             <select id="sortBySelect">
-              <option value="closest">Closest to uni</option>
+              <option value="closest">Closest first</option>
               <option value="cheapest">Cheapest</option>
               <option value="newest">Recently listed</option>
             </select>
@@ -171,12 +175,12 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p>Sources: Cardiff Student Letting, UniHomes, Housr, CPS Homes.</p>
+      <p>Sources: Cardiff Student Letting, CPS Homes, Housr, UniHomes, Rightmove, OnTheMarket.</p>
       <p>Check each listing with the agent before applying.</p>
     </div>
   </footer>
 
-  <script src="app.js?v=202610262300"></script>
-  <script type="module" src="../shaders.js?v=202610262300"></script>
+  <script src="app.js?v=202611031620"></script>
+  <script type="module" src="../shaders.js?v=202611031620"></script>
 </body>
 </html>

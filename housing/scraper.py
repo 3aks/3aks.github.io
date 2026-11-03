@@ -1,8 +1,10 @@
 """
 Cardiff student house scraper — 3 to 9 bedroom houses for the next academic year.
 
-Sources: Cardiff Student Letting (CSL), UniHomes, Housr, CPS Homes.
+Sources: Cardiff Student Letting (CSL), UniHomes, Housr, CPS Homes, Rightmove and OnTheMarket (student lets).
 Writes listings.json (read by index.html) and cardiff_student_houses.csv.
+Pages are fetched with Scrapling, which sends real-browser TLS and headers.
+The Warwick page (warwick/scraper.py) reuses everything here with its own sources.
 
     pip install -r requirements.txt
     python scraper.py
@@ -19,10 +21,14 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import io
+import logging
 
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
+from scrapling.fetchers import Fetcher
+
+logging.getLogger("scrapling").setLevel(logging.WARNING)  # one line per page is too chatty for the Action log
 
 HERE = Path(__file__).parent
 OUT_JSON = HERE / "listings.json"
@@ -35,6 +41,7 @@ UNI = (51.488357, -3.177434)  # Cardiff University Students' Union, Park Place
 OSRM = "https://routing.openstreetmap.de/routed-foot"  # free walking-route server, no key
 CSL_PLACEHOLDER = (51.48868, -3.17751)  # pin CSL shows when a house has no location of its own
 DELAY = 0.4  # seconds between requests, to stay polite
+MAX_PHOTOS = 8  # per house: enough to swipe through, without bloating listings.json
 
 session = requests.Session()
 session.headers["User-Agent"] = (
@@ -45,9 +52,11 @@ session.headers["User-Agent"] = (
 
 def get(url, **params):
     time.sleep(DELAY)
-    r = session.get(url, params=params, timeout=30)
-    r.raise_for_status()
-    return r.text
+    r = Fetcher.get(url, params=params or None, timeout=30, retries=2)
+    if r.status >= 400:
+        raise requests.HTTPError(f"{r.status} for url: {url}")
+    # The raw body, not r.html_content: that is re-serialised by the parser and loses comments some regexes need
+    return r.body.decode(r.encoding or "utf-8", "replace")
 
 
 # ---------------------------------------------------------------- helpers
@@ -75,7 +84,16 @@ def walk_minutes(metres):
 
 
 POSTCODE = re.compile(r"CF\d{1,2}\s*\d[A-Z]{2}")
-SOURCE_RANK = ["Cardiff Student Letting", "CPS Homes", "Housr", "UniHomes"]  # letting agents before portals
+SOURCE_RANK = ["Cardiff Student Letting", "CPS Homes", "Housr", "UniHomes", "Rightmove", "OnTheMarket"]  # letting agents before portals
+
+
+def site(p):
+    """Where a listing was scraped. Portal listings carry the agent as source and the portal as via."""
+    return p.get("via", p["source"])
+
+
+def source_rank(p):
+    return SOURCE_RANK.index(site(p)) if site(p) in SOURCE_RANK else len(SOURCE_RANK)
 
 
 def street_key(address):
@@ -129,7 +147,7 @@ def rents_agree(a, b, tolerance=0.03):
 
 
 def pin(p):
-    return (p["source"], round(p["lat"], 5), round(p["lng"], 5)) if p["lat"] is not None else None
+    return (site(p), round(p["lat"], 5), round(p["lng"], 5)) if p["lat"] is not None else None
 
 
 def merge_duplicates(listings, within=15):
@@ -147,13 +165,13 @@ def merge_duplicates(listings, within=15):
                 and rents_agree(a, b))
 
     groups = {}
-    for p in sorted(listings, key=lambda p: SOURCE_RANK.index(p["source"])):
+    for p in sorted(listings, key=source_rank):
         groups.setdefault((street_key(p["address"]), p["bedrooms"]), []).append(p)
     out = []
     for members in groups.values():
         clusters = []
         for p in members:
-            open_ = [c for c in clusters if p["source"] not in {q["source"] for q in c}]
+            open_ = [c for c in clusters if site(p) not in {site(q) for q in c}]
             home = (next((c for c in open_ if same_photo(c[0], p)), None)  # photo first: strongest evidence
                     or next((c for c in open_ if unambiguous_pin_match(c[0], p)), None))
             if home:
@@ -161,6 +179,8 @@ def merge_duplicates(listings, within=15):
             else:
                 clusters.append([p])
         for primary, *others in clusters:
+            # Keep the primary's link and price, but show the fullest photo set any copy has
+            primary["images"] = max([q.get("images") or [] for q in [primary, *others]], key=len)
             primary["also_on"] = [{k: q[k] for k in ("source", "url", "price_pppw", "bills_included")} for q in others]
             out.append(primary)
     return out
@@ -257,14 +277,15 @@ def parse_date(text):
 
 
 def listing(*, id, source, title, address, bedrooms, bathrooms, price_pppw, price_pcm,
-            bills, available, url, image, lat, lng, area="", notes="", rent_pppw=None):
+            bills, available, url, image, lat, lng, area="", notes="", rent_pppw=None, images=()):
+    images = list(dict.fromkeys(u for u in [image, *images] if u))[:MAX_PHOTOS]
     return {
         "id": id, "source": source, "title": title, "address": address, "area": area,
         "bedrooms": bedrooms, "bathrooms": bathrooms or None,
         "price_pppw": price_pppw or 0, "price_total_month": round(price_pcm) if price_pcm else None,
         "bills_included": bool(bills), "rent_pppw": rent_pppw or price_pppw or 0,
         "available": available.isoformat() if available else None,
-        "url": url, "image_url": image or None,
+        "url": url, "image_url": images[0] if images else None, "images": images,
         "lat": lat, "lng": lng, "distance_m": estimate_metres(lat, lng), "distance_routed": False,
         "notes": notes,
     }
@@ -290,7 +311,7 @@ def scrape_csl():
 
             try:
                 detail = get(url)  # coordinates and bills live on the detail page
-            except requests.RequestException as e:  # one broken page shouldn't drop the whole agency
+            except Exception as e:  # one broken page shouldn't drop the whole agency
                 print(f"  skipped details for {url}: {e}", file=sys.stderr)
                 detail = ""
             coords = re.search(r"L\.marker\(\[([-\d.]+),\s*([-\d.]+)\],\s*\{icon:\s*resIcon", detail)
@@ -306,6 +327,7 @@ def scrape_csl():
                 price_pppw=pppw_from_pcm(pcm, beds), price_pcm=pcm,
                 bills=says_bills_included(detail), available=parse_date(avail[1] if avail else None),
                 url=url, image=img["src"] if img else None, lat=lat, lng=lng,
+                images=re.findall(r"https://www\.cardiffstudentletting\.com/storage/properties/[\w-]+\.(?:jpe?g|png|webp)", detail),
                 notes="Students' Union agency. No agency fees.",
             ))
     return out
@@ -321,12 +343,12 @@ def unihomes_page(h):
     return props, int(total[1]) if total else 0
 
 
-def scrape_unihomes():
+def scrape_unihomes(city="cardiff"):
     out = []
     for beds in BEDROOMS:
         seen, page, total = set(), 1, 1
         while len(seen) < total and page <= 40:
-            props, total = unihomes_page(get("https://www.unihomes.co.uk/student-accommodation/cardiff", bedrooms=beds, page=page))
+            props, total = unihomes_page(get(f"https://www.unihomes.co.uk/student-accommodation/{city}", bedrooms=beds, page=page))
             new = [p for p in props if p["id"] not in seen]
             if not new:
                 break
@@ -345,6 +367,7 @@ def scrape_unihomes():
                     bills=True,  # every UniHomes listing is bills-inclusive
                     available=parse_date(p.get("availableFrom")),
                     url=p["path"], image=p.get("mainImage"), lat=lat, lng=lng,
+                    images=[i["fileURLTablet"] for i in p.get("images") or [] if i.get("fileURLTablet")],
                     notes="Bills included: gas, electricity, water, internet, TV licence.",
                 ))
             page += 1
@@ -395,7 +418,7 @@ def scrape_housr():
                     price_pcm=all_in * p["bedrooms"] * 52 / 12 if all_in else None,
                     bills=bool(all_in), available=parse_date(p.get("available_from")),
                     url=f"https://www.housr.com/en-gb/student-accommodation/cardiff/property/{p['id']}",
-                    image=images[0] if images else None,
+                    image=images[0] if images else None, images=images,
                     lat=float(p["lat"]), lng=float(p["lng"]),
                     notes=f"Rent £{p['price_pw']} pppw + bills package = £{all_in} pppw." if all_in else "",
                 ))
@@ -411,7 +434,10 @@ def scrape_cps():
     out = []
     for p in data["MapList"]:  # MapList holds every letting; List is only page 1
         beds = p.get("Bedrooms") or 0
-        if beds not in BEDROOMS or p.get("Status") != "Available" or p.get("Style") == "Flat":
+        # CPS lets to everyone and has no student flag; houses starting Jul–Sep 2027 (kept by finalise) are its
+        # student-year lets. Floor-level types are flats.
+        if (beds not in BEDROOMS or p.get("Status") != "Available" or p.get("Style") == "Flat"
+                or "Floor" in (p.get("Type") or "")):
             continue
         ref, photo = p["Reference"], p.get("Photo") or ""
         parts = photo.split("/")
@@ -428,6 +454,98 @@ def scrape_cps():
     return out
 
 
+RIGHTMOVE = "https://www.rightmove.co.uk"
+# Whole shared houses only: a single room in someone else's house shows up as a cheap "4 bed house"
+ROOM_ONLY = re.compile(r"(?i)\b(?:one|1|single|a)\s+(?:double\s+|single\s+|en-?suite\s+)?room\s+(?:av\w*|to\s+(?:let|rent))|\broom\s+only\b|\bper\s+room\b")
+MIN_PPPW = 60  # below this a "house" price is really one room
+
+
+def scrape_rightmove(region, radius_miles):
+    """Student lets around a Rightmove region, from its search API (robots.txt allows /api/property-search/)."""
+    out, index, total = [], 0, 1
+    while index < min(total, 1000):  # Rightmove stops paging at 1,000 results
+        d = json.loads(get(f"{RIGHTMOVE}/api/property-search/listing/search", useLocationIdentifier="true",
+                           locationIdentifier=f"REGION^{region}", radius=radius_miles,
+                           minBedrooms=BEDROOMS.start, maxBedrooms=BEDROOMS.stop - 1, channel="RENT",
+                           transactionType="LETTING", letType="student", sortType=6, index=index,
+                           propertyTypes="detached,semi-detached,terraced,bungalow"))
+        total = int(str(d.get("resultCount") or 0).replace(",", ""))
+        props = d.get("properties") or []
+        if not props:
+            break
+        for p in props:
+            beds = p.get("bedrooms") or 0
+            if beds not in BEDROOMS or not p.get("students") or ROOM_ONLY.search(p.get("summary") or ""):
+                continue  # letType=student is checked per house too
+            price = p.get("price") or {}
+            amount = price.get("amount") or 0
+            pcm = amount if price.get("frequency") == "monthly" else amount * 52 / 12
+            parts = [x.strip() for x in p["displayAddress"].split(",")]
+            loc = p.get("location") or {}
+            out.append(listing(
+                id=f"rm_{p['id']}", source=(p.get("customer") or {}).get("brandTradingName") or "Rightmove",
+                title=f"{beds} bed house, {parts[0]}", address=p["displayAddress"],
+                area=parts[1] if len(parts) >= 3 else "", bedrooms=beds, bathrooms=p.get("bathrooms"),
+                price_pppw=pppw_from_pcm(pcm, beds), price_pcm=pcm, bills=says_bills_included(p.get("summary") or ""),
+                available=parse_date((p.get("letAvailableDate") or "")[:10]),
+                url=RIGHTMOVE + p["propertyUrl"].split("#")[0], image=None,
+                images=[i["srcUrl"].replace("476x317", "656x437") for i in p.get("images") or [] if i.get("srcUrl")],
+                lat=loc.get("latitude"), lng=loc.get("longitude"),
+            ))
+            out[-1]["via"] = "Rightmove"
+        index += len(props)
+    return out
+
+
+OTM = "https://www.onthemarket.com"
+
+
+def otm_price_pppw(text, beds):
+    """'£127 pppw', '£550 pw' or '£2,950 pcm' -> rent per person per week."""
+    m = re.search(r"£([\d,.]+)\s*(pppw|pw|pcm)", text or "")
+    if not m:
+        return 0
+    amount = float(m[1].replace(",", ""))
+    return amount if m[2] == "pppw" else round(amount / beds, 2) if m[2] == "pw" else pppw_from_pcm(amount, beds)
+
+
+def scrape_onthemarket(area, radius_miles):
+    """Student houses from OnTheMarket's student search; the move-in date is only on each house's page."""
+    out, page, pages = [], 1, 1
+    while page <= min(pages, 40):
+        h = get(f"{OTM}/student/property/{area}/", **{"min-bedrooms": BEDROOMS.start, "max-bedrooms": BEDROOMS.stop - 1,
+                                                       "radius": radius_miles, "page": page})
+        state = json.loads(re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', h, re.S)[1])
+        results = state["props"]["pageProps"]["initialReduxState"]["results"]
+        pages = max([1] + [int(x["page"]) for x in results.get("page-links") or [] if str(x.get("page", "")).isdigit()])
+        for p in results.get("list") or []:
+            beds = p.get("bedrooms") or 0
+            if beds not in BEDROOMS or "house" not in (p.get("humanised-property-type") or "").lower():
+                continue
+            try:
+                detail = get(OTM + f"/details/{p['id']}/")
+            except Exception as e:  # one broken page shouldn't drop the whole site
+                print(f"  skipped details for OTM {p['id']}: {e}", file=sys.stderr)
+                continue
+            avail = re.search(r"Availability date:\s*([^<\"]+)", detail)
+            parts = [x.strip() for x in p["address"].split(",")]
+            loc = p.get("location") or {}
+            pppw = otm_price_pppw(p.get("price"), beds)
+            out.append(listing(
+                id=f"otm_{p['id']}", source=(p.get("agent") or {}).get("name", "").split(" - ")[0] or "OnTheMarket",
+                title=f"{beds} bed house, {parts[0]}", address=p["address"],
+                area=parts[1] if len(parts) >= 3 else "", bedrooms=beds, bathrooms=p.get("bathrooms"),
+                price_pppw=pppw, price_pcm=pppw * beds * 52 / 12,
+                bills=says_bills_included(" ".join(p.get("features") or [])),
+                available=parse_date(avail[1] if avail else None), url=f"{OTM}/details/{p['id']}/",
+                image=None, images=[i["default"] for i in p.get("images") or [] if i.get("default")],
+                lat=loc.get("lat"), lng=loc.get("lon"),
+            ))
+            out[-1]["via"] = "OnTheMarket"
+        page += 1
+    return out
+
+
 # ---------------------------------------------------------------- output
 
 def starts_in_window(available):
@@ -438,7 +556,8 @@ def finalise(listings, previous):
     """Keep Jul–Sep 2027 starts only, route walking distances, add labels and keep first-seen dates."""
     today = date.today()
     first_seen = {p["id"]: p.get("first_detected") for p in previous}
-    kept = [p for p in listings if starts_in_window(p.get("available"))]
+    kept = [p for p in listings if starts_in_window(p.get("available"))
+            and not 0 < p["price_pppw"] < MIN_PPPW]
     before = len(kept)
     kept = merge_duplicates(kept)  # before refining: cross-site copies share the site's original pin
     print(f"  merged {before - len(kept)} cross-site duplicates into {len(kept)} houses")
@@ -449,7 +568,8 @@ def finalise(listings, previous):
     route_distances(kept)
     for p in kept:
         m = p["walk_minutes"]
-        p["walk_display"] = f"{m} min walk" if m is not None else "Walk time unknown"
+        p["walk_display"] = ("Walk time unknown" if m is None else f"{m} min walk" if m <= 60
+                             else f"{p['distance_m'] / 1000:.0f} km, bus or bike")
         p["is_priority_10min"] = m is not None and m <= 10
         p["available_date"] = date.fromisoformat(p["available"]).strftime("%d/%m/%Y")
         p["first_detected"] = first_seen.get(p["id"]) or today.isoformat()
@@ -461,13 +581,13 @@ def finalise(listings, previous):
     return kept
 
 
-def write_csv(listings):
+def write_csv(listings, out_csv=OUT_CSV):
     cols = [("Address", "address"), ("Bedrooms", "bedrooms"), ("Bathrooms", "bathrooms"),
             ("Walking distance to SU (m)", "distance_m"), ("Walk to SU (min)", "walk_minutes"),
             ("Price PPPW (£)", "price_pppw"),
             ("Total Monthly (£)", "price_total_month"), ("Bills Included", "bills_included"),
             ("Available", "available_date"), ("Agent", "source"), ("URL", "url")]
-    with OUT_CSV.open("w", newline="", encoding="utf-8-sig") as f:
+    with out_csv.open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         w.writerow([c for c, _ in cols])
         for p in listings:
@@ -515,22 +635,37 @@ def selfcheck():
     assert parse_date("01/07/2027 12:00:00 AM") == date(2027, 7, 1)
     assert parse_date("2027-07-01") == date(2027, 7, 1)
     assert parse_date(None) is None
+    assert parse_date("1 Sep 2027") == date(2027, 9, 1)
+    assert ROOM_ONLY.search("Earlsdon Avenue North - One room avialable in a 4 Bed House")  # their spelling
+    assert ROOM_ONLY.search("Earlsdon Avenue North - One room available in a 4 Bed House")
+    assert ROOM_ONLY.search("Single ensuite room to let") and ROOM_ONLY.search("£95 per room")
+    assert not ROOM_ONLY.search("5 bedroom house: 3 double bedroom ensuites, 2 single rooms, 10 mins walk")
+    assert otm_price_pppw("£127 pppw", 4) == 127 and otm_price_pppw("£500 pw", 4) == 125
+    assert otm_price_pppw("£2,600 pcm", 5) == pppw_from_pcm(2600, 5) and otm_price_pppw("POA", 4) == 0
 
 
 def main():
     selfcheck()
+    return run([("Cardiff Student Letting", scrape_csl), ("UniHomes", scrape_unihomes),
+                ("Housr", scrape_housr), ("CPS Homes", scrape_cps),
+                ("Rightmove", lambda: scrape_rightmove(5814, 1.5)),  # 1.5 miles around Cathays
+                ("OnTheMarket", lambda: scrape_onthemarket("cathays", 1))],
+               OUT_JSON, OUT_CSV)
+
+
+def run(sources, out_json, out_csv):
+    """Scrape each (name, fn) source, keep a failed one's recent data, and write the JSON and CSV."""
     now = datetime.now(timezone.utc)
     previous, source_updated = [], {}
-    if OUT_JSON.exists():
-        saved = json.loads(OUT_JSON.read_text(encoding="utf-8"))
+    if out_json.exists():
+        saved = json.loads(out_json.read_text(encoding="utf-8"))
         previous = saved.get("listings", [])
         meta = saved.get("metadata", {})
         # When each agency last scraped successfully (older files only have one overall timestamp)
-        source_updated = meta.get("source_updated") or {s: meta["timestamp"] for s in SOURCE_RANK if "timestamp" in meta}
+        source_updated = meta.get("source_updated") or {s: meta["timestamp"] for s, _ in sources if "timestamp" in meta}
 
     results, counts, failed = [], {}, []
-    for name, fn in [("Cardiff Student Letting", scrape_csl), ("UniHomes", scrape_unihomes),
-                     ("Housr", scrape_housr), ("CPS Homes", scrape_cps)]:
+    for name, fn in sources:
         print(f"Scraping {name}…", flush=True)
         try:
             found = fn()
@@ -540,7 +675,7 @@ def main():
             # Keep this agency's last good data through a short outage, but not for days: those houses may be let
             last = source_updated.get(name)
             fresh = last and now - datetime.strptime(last, STAMP).replace(tzinfo=timezone.utc) < timedelta(days=2)
-            found = [p for p in previous if p["source"] == name] if fresh else []
+            found = [p for p in previous if site(p) == name] if fresh else []
         else:
             source_updated[name] = now.strftime(STAMP)
         counts[name] = len(found)
@@ -552,13 +687,13 @@ def main():
         "timestamp": now.strftime(STAMP),  # UTC
         "total_properties": len(listings),
         "bedrooms": f"{BEDROOMS.start}-{BEDROOMS.stop - 1}",
-        "source_breakdown": {s: sum(p["source"] == s for p in listings) for s in counts},
+        "source_breakdown": {s: sum(site(p) == s for p in listings) for s in counts},
         "failed_sources": failed,
         "source_updated": source_updated,
     }
-    OUT_JSON.write_text(json.dumps({"metadata": meta, "listings": listings}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    write_csv(listings)
-    print(f"Saved {len(listings)} houses to {OUT_JSON.name} and {OUT_CSV.name}")
+    out_json.write_text(json.dumps({"metadata": meta, "listings": listings}, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    write_csv(listings, out_csv)
+    print(f"Saved {len(listings)} houses to {out_json.name} and {out_csv.name}")
     return 1 if failed else 0
 
 

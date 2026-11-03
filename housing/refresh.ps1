@@ -8,8 +8,11 @@ git pull --rebase --quiet
 Push-Location housing
 python scraper.py
 Pop-Location
+Push-Location housing/warwick
+python scraper.py
+Pop-Location
 
-git add housing/listings.json housing/cardiff_student_houses.csv
+git add housing/listings.json housing/cardiff_student_houses.csv housing/warwick/listings.json housing/warwick/warwick_student_houses.csv
 git diff --cached --quiet
 if ($LASTEXITCODE -eq 0) { Write-Host 'No changes to publish.'; exit 0 }
 git -c user.name=3aks -c user.email=3aks@users.noreply.github.com commit --quiet -m 'Refresh housing listings'

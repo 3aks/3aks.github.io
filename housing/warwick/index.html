@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Warwick Student House Hunter</title>
+  <meta name="description" content="3 to 9 bedroom student houses near the University of Warwick for 2027/28, closest to campus first.">
+  <!-- Unlisted page: keep it out of search results -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23000'/><path d='M22 52 50 28l28 24v24a4 4 0 0 1-4 4H26a4 4 0 0 1-4-4z' fill='none' stroke='%23ff7a1a' stroke-width='8' stroke-linejoin='round'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../style.css?v=202611031620">
+  <link rel="stylesheet" href="../styles.css?v=202611031620">
+</head>
+<body class="housing" data-city="Coventry" data-walk-bands="20,30,60" data-priority-walk="30">
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-shader" data-shader="mesh"
+         data-colors="#000000,#170a2e,#4c1d95,#0e7490,#03050a"
+         data-speed="0.18" data-distortion="0.7" data-swirl="0.3" data-grain="0.1"
+         aria-hidden="true"></div>
+
+    <div class="header-container">
+      <div class="brand-badge">
+        <span class="pulsing-dot"></span>
+        <span>2027/28 &middot; Updated <span id="lastUpdated">recently</span></span>
+      </div>
+      <h1 class="main-title">Warwick student<br>house hunter.</h1>
+      <p class="subtitle">
+        Whole student houses to share, 3 to 9 bedrooms, from Rightmove, OnTheMarket, UniHomes and local agents. Closest to campus first: Cannon Park and Canley, then Earlsdon, then Leamington.
+      </p>
+
+      <!-- Stats -->
+      <div class="stats-row" id="statsRow">
+        <div class="stat-card">
+          <span class="stat-value" id="valTotal">&ndash;</span>
+          <span class="stat-label">Available</span>
+        </div>
+        <div class="stat-card stat-priority">
+          <span class="stat-value" id="valPriority">&ndash;</span>
+          <span class="stat-label">&le; 30 min walk</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="valBills">&ndash;</span>
+          <span class="stat-label">Bills included</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="valAvgPrice">&ndash;</span>
+          <span class="stat-label" id="labelAvgPrice">Avg pppw</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="./warwick_student_houses.csv" class="btn btn-secondary" download id="btnExportCsv">Export CSV</a>
+        <a href="../" class="btn btn-secondary">Cardiff houses &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- Toolbar: sticky on scroll -->
+    <div class="toolbar" id="toolbar">
+      <div class="toolbar-row">
+        <div class="search-box">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="searchInput" placeholder="Search areas: Canley, Earlsdon, Leamington&hellip;" aria-label="Search by street or area" enterkeyhint="search" autocomplete="off">
+          <button class="btn-clear" id="btnClearSearch" type="button" aria-label="Clear search" hidden>
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+        <div class="segmented" id="priceUnit" role="group" aria-label="Show prices per week or per month">
+          <button type="button" data-unit="pppw" aria-pressed="true">pppw</button>
+          <button type="button" data-unit="pppm" aria-pressed="false">pppm</button>
+        </div>
+        <button class="btn-filters" id="btnFilters" type="button" aria-expanded="false" aria-controls="filterPanel" aria-label="Filters">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+          <span class="btn-filters-label">Filters</span>
+          <span class="filter-count" id="filterCount" hidden></span>
+        </button>
+      </div>
+
+      <div class="chip-toggle-group" id="walkFilterChips" role="group" aria-label="Walking distance">
+        <button class="chip active" type="button" data-walk="all" aria-pressed="true">All areas</button>
+        <button class="chip" type="button" data-walk="30" aria-pressed="false">&le; 30 min walk</button>
+        <button class="chip" type="button" data-walk="60" aria-pressed="false">&le; 1 hour (Earlsdon)</button>
+      </div>
+
+      <div class="filter-panel" id="filterPanel">
+        <div class="filter-panel-inner">
+          <div class="filter-item beds-item">
+            <div class="slider-header">
+              <span id="bedsLabel">Bedrooms</span>
+              <strong id="bedsDisplay">Any</strong>
+            </div>
+            <div class="bed-chips" id="bedsFilter" role="group" aria-labelledby="bedsLabel">
+              <button class="chip" type="button" data-beds="3" aria-pressed="false">3</button>
+              <button class="chip" type="button" data-beds="4" aria-pressed="false">4</button>
+              <button class="chip" type="button" data-beds="5" aria-pressed="false">5</button>
+              <button class="chip" type="button" data-beds="6" aria-pressed="false">6</button>
+              <button class="chip" type="button" data-beds="7" aria-pressed="false">7</button>
+              <button class="chip" type="button" data-beds="8" aria-pressed="false">8</button>
+              <button class="chip" type="button" data-beds="9" aria-pressed="false">9</button>
+            </div>
+          </div>
+
+          <div class="filter-item">
+            <label for="agencyFilter">Agency</label>
+            <select id="agencyFilter">
+              <option value="all">All agencies</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label for="sortBySelect">Sort by</label>
+            <select id="sortBySelect">
+              <option value="closest">Closest first</option>
+              <option value="cheapest">Cheapest</option>
+              <option value="newest">Recently listed</option>
+            </select>
+          </div>
+
+          <div class="filter-item price-slider-item">
+            <div class="slider-header">
+              <label for="priceRange">Max price</label>
+              <strong id="priceDisplay">Any</strong>
+            </div>
+            <input type="range" id="priceRange" min="100" max="220" step="5" value="220">
+          </div>
+
+          <div class="filter-item price-slider-item">
+            <div class="slider-header">
+              <label for="distanceRange">Max walking distance</label>
+              <strong id="distanceDisplay">Any</strong>
+            </div>
+            <input type="range" id="distanceRange" min="500" max="6000" step="500" value="6000">
+          </div>
+
+          <div class="filter-item toggle-item">
+            <label class="switch-container">
+              <span class="switch-label">Bills included only</span>
+              <input type="checkbox" id="billsOnlyToggle" role="switch">
+              <span class="switch-slider" aria-hidden="true"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div class="results-header">
+      <h2 id="resultsCount" aria-live="polite">Loading houses&hellip;</h2>
+      <div class="legend-pills" aria-label="Walk time legend">
+        <span class="pill pill-green"><span class="dot"></span>&le; 20 min</span>
+        <span class="pill pill-gold"><span class="dot"></span>21&ndash;30 min</span>
+        <span class="pill pill-purple"><span class="dot"></span>31&ndash;60 min</span>
+      </div>
+    </div>
+
+    <div class="properties-grid" id="propertiesGrid"></div>
+
+    <div class="empty-state" id="emptyState" hidden>
+      <h3>No houses match</h3>
+      <p>Try a wider walking distance, a higher price or a different street.</p>
+      <button class="btn btn-primary" id="btnResetFilters" type="button">Reset filters</button>
+    </div>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>Sources: Rightmove, OnTheMarket, UniHomes, Accommodation for Students. Student shared houses only; walk times are to the Piazza.</p>
+      <p>Check each listing with the agent before applying.</p>
+    </div>
+  </footer>
+
+  <script src="../app.js?v=202611031620"></script>
+  <script type="module" src="../../shaders.js?v=202611031620"></script>
+</body>
+</html>
