@@ -42,6 +42,7 @@ Llandough Street Cardiff,5,2,166,2,133.85,2900,No,01/07/2027,Interlet Group,http
 "Senghenydd Road, Cathays, Cardiff, CF24 4AG",6,3,271,3,129.23,3360,No,01/07/2027,Kingstons,https://www.rightmove.co.uk/properties/94036581
 "Senghenydd Road, Cathays, Cardiff, CF24 4AG",6,3,271,3,129.23,3360,No,01/07/2027,Kingstons,https://www.rightmove.co.uk/properties/94036578
 "Senghenydd Road, Cathays, Cardiff, CF24 4AG",6,2,271,3,138.46,3600,No,01/07/2027,Kingstons,https://www.rightmove.co.uk/properties/94035579
+"Miskin Street, Cardiff(City), CF24",6,2,282,4,126.92,3300,No,01/07/2027,Amos PM,https://www.rightmove.co.uk/properties/86711304
 "Miskin Street, Cathays, Cardiff, CF24 4AS",5,2,283,4,133.85,2900,No,01/07/2027,Lettings Angels,https://www.rightmove.co.uk/properties/94577148
 "Senghennydd Road, Cathays",6,3,284,4,126.92,3300,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10198460
 "Miskin Street, Cathays, Cardiff",4,2,287,4,179.0,3103,No,13/09/2027,Loc8me,https://www.rightmove.co.uk/properties/94068936
@@ -59,7 +60,7 @@ Llandough Street Cardiff,5,2,166,2,133.85,2900,No,01/07/2027,Interlet Group,http
 "Miskin Street, Cathays, CF24",6,2,306,4,156,4056,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31306
 "15 Miskin Street, Wales, CF24",7,2,309,4,166,5035,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/30696
 "Llanbleddian Gardens, Cathays, CF24",3,1,309,4,155,2015,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29291
-"Miskin Street, Cathays, CF24 4AQ",6,2,309,4,150.0,3900,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/603786289/cardiff/cathays/6-bedroom-student-house/miskin-street
+"Miskin Street, Cathays, CF24",6,2,309,4,126.92,3300,No,01/07/2027,2 Let 2,https://www.rightmove.co.uk/properties/94534311
 "Miskin Street, Cathays",8,3,311,4,130.38,4520,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10675839
 "Miskin Street, Cathays, Cardiff, CF24 4AQ",3,1,317,4,126.92,1650,No,01/07/2027,Cardiff Student Letting,https://www.cardiffstudentletting.com/properties/2502
 "Miskin Street  Flat B, Cathays, Cardiff, CF24 4AQ",3,1,317,4,155.77,2025,No,01/07/2027,Cardiff Student Letting,https://www.cardiffstudentletting.com/properties/2535
@@ -74,7 +75,6 @@ Llandough Street Cardiff,5,2,166,2,133.85,2900,No,01/07/2027,Interlet Group,http
 "Salisbury Road, Cathays, CF24 4AA",9,3,326,4,146.92,5730,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/752854832/cardiff/cathays/9-bedroom-student-house/salisbury-road
 "Salisbury Road, Cathays, CF24 4AA",9,4,326,4,146.92,5730,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/10780613/cardiff/cathays/9-bedroom-student-house/salisbury-road
 "Miskin Street, Cathays, CF24 4AQ",7,2,342,4,153.0,4641,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/1457527429/cardiff/cathays/7-bedroom-student-house/miskin-street
-"Miskin Street, Cardiff",7,2,342,4,130.38,3955,No,03/07/2027,JNR properties,https://www.rightmove.co.uk/properties/94081020
 "Miskin Street, Cardiff",7,2,342,4,130.38,3955,No,03/07/2027,JNR properties,https://www.rightmove.co.uk/properties/94081020
 "Miskin Street, Cardiff",7,2,342,4,130.38,3955,No,03/07/2027,JNR properties,https://www.rightmove.co.uk/properties/94081020
 "Miskin Street, Cathays, CF24 4AQ",7,3,343,4,155.0,4702,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1920026502/cardiff/cathays/7-bedroom-student-house/miskin-street
@@ -130,8 +130,6 @@ Wyeverne Road Cardiff,4,2,446,6,145.38,2520,No,01/07/2027,Interlet Group,https:/
 "Wyeverne Road, Cathays, CF24 4BJ",4,2,448,6,142.38,2468,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/425599962/cardiff/cathays/4-bedroom-student-house/wyeverne-road
 "Wyeverne Road, Cathays, Cardiff, CF24 4BJ",6,2,448,6,138.46,3600,No,01/07/2027,Cardiff Student Letting,https://www.cardiffstudentletting.com/properties/2574
 "Wyeverne Road, Cathays, CF24 4BJ",5,2,448,6,169.23,3667,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/191540944/cardiff/cathays/5-bedroom-student-house/wyeverne-road
-"Wyeverne Road Cathays, Cathays, CF24 4BJ",5,2,448,6,169.0,3662,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1239623625/cardiff/cathays/5-bedroom-student-house/wyeverne-road-cathays
-"Wyeverne Road Cathays, Cathays, CF24 4BJ",5,2,448,6,169.0,3662,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/489827210/cardiff/cathays/5-bedroom-student-house/wyeverne-road-cathays
 "Lowther Road, Cardiff, CF24",4,2,448,6,132.69,2300,No,01/07/2027,2 Let 2,https://www.rightmove.co.uk/properties/94603443
 "Cranbrook Street, Cardiff(City), CF24",7,3,449,6,126.92,3850,No,01/07/2027,Amos PM,https://www.rightmove.co.uk/properties/154884488
 "Coburn Street, Cathays, CF24 4BS",4,1,451,6,158.0,2739,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1408746727/cardiff/cathays/4-bedroom-student-house/coburn-street
@@ -307,6 +305,7 @@ Harriet Street Cardiff,7,3,637,8,147.69,4480,No,01/07/2027,Interlet Group,https:
 "Bedford Street, Roath, CF24 3DB",5,2,645,8,160.0,3467,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1065076956/cardiff/roath/5-bedroom-student-house/bedford-street
 "3 Bed, Cathays Terrace",3,1,645,8,115.38,1500,No,01/07/2027,Keylet,https://www.rightmove.co.uk/properties/95269869
 "3 Bed, Cathays Terrace",3,1,645,8,121.15,1575,No,01/07/2027,Keylet,https://www.rightmove.co.uk/properties/95195001
+"Minister Street, Cardiff(City), CF24",7,3,645,8,138.46,4200,No,01/07/2027,Amos PM,https://www.rightmove.co.uk/properties/143546672
 "Senghennydd Road Cathays, Cathays, CF24 4AG",6,2,646,8,162.0,4212,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1240035128/cardiff/cathays/6-bedroom-student-house/senghennydd-road-cathays
 "Senghennydd Road Cathays, Cathays, CF24 4AG",6,3,646,8,152.0,3952,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1849141199/cardiff/cathays/6-bedroom-student-house/senghennydd-road-cathays
 "Senghennydd Road Cathays, Cathays, CF24 4AG",6,3,646,8,152.0,3952,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/624627324/cardiff/cathays/6-bedroom-student-house/senghennydd-road-cathays
@@ -352,6 +351,7 @@ Thesiger Street Cardiff,7,3,668,8,138.46,4200,No,01/07/2027,Interlet Group,https
 "49a Colum Road, CF10",4,1,682,9,174,,No,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/31465
 "Letty Street, Cathays",7,3,682,9,118.68,3600,No,01/07/2027,Keylet,https://www.rightmove.co.uk/properties/94099032
 "Colum Road, Cathays, CF10 3EH",7,3,685,9,149.0,4520,Yes,03/07/2027,UniHomes,https://www.unihomes.co.uk/property/232230202/cardiff/cathays/7-bedroom-student-house/colum-road
+"Colum Road, Cardiff",7,3,685,9,126.92,3850,No,03/07/2027,JNR properties,https://www.rightmove.co.uk/properties/94081377
 "Richards Street, Cathays, CF24 4DB",4,2,685,9,172.0,2981,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/2070035671/cardiff/cathays/4-bedroom-student-house/richards-street
 "Richards Street Cathays, Cathays, CF24 4DB",7,3,685,9,156.0,4732,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1957438346/cardiff/cathays/7-bedroom-student-house/richards-street-cathays
 "Cathays Terrace Cathays, Cathays, CF24 4HT",6,3,687,9,150.0,3900,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/1837551092/cardiff/cathays/6-bedroom-student-house/cathays-terrace-cathays
@@ -472,8 +472,8 @@ Richards Street Cardiff,6,2,744,9,156.92,4080,No,01/07/2027,Interlet Group,https
 "Merthyr Street, Cardiff",6,2,770,10,138.46,3600,No,03/07/2027,Uniek Residential Limited,https://www.rightmove.co.uk/properties/168583148
 Merthyr Street Cardiff,5,2,770,10,150.0,3250,No,01/07/2027,Interlet Group,https://www.rightmove.co.uk/properties/94646925
 Merthyr Street Cardiff,5,2,770,10,145.38,3150,No,01/08/2027,Interlet Group,https://www.rightmove.co.uk/properties/94127415
-Merthyr Street Cardiff,4,1,770,10,144.23,2500,No,01/07/2027,Interlet Group,https://www.rightmove.co.uk/properties/94412415
 Merthyr Street Cardiff,4,1,770,10,138.46,2400,No,01/08/2027,Interlet Group,https://www.rightmove.co.uk/properties/94412418
+Merthyr Street Cardiff,4,1,770,10,144.23,2500,No,01/07/2027,Interlet Group,https://www.rightmove.co.uk/properties/94412415
 "Merthyr Street, Cathays",7,3,771,10,126.92,3850,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10422410
 "Merthyr Street, Cathays",7,3,771,10,126.92,3850,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10422771
 "Merthyr Street, Cathays, CF24",7,3,771,10,148,4489,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29358
@@ -612,8 +612,8 @@ Richards Street Cardiff,7,3,861,11,145.38,4410,No,01/07/2027,Interlet Group,http
 "Corner House, Cathays",6,2,867,11,121.15,3150,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Cathays/10201793
 "Corner House, Cathays, CF24",6,2,867,11,137,3562,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29285
 "Corner House, Cathays, CF24",6,2,867,11,145,3770,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/33685
-"Corner House, Cathays, CF24",6,2,867,11,141,3666,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32731
 "Corner House, Cathays, CF24",6,2,867,11,151,3926,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29250
+"Corner House, Cathays, CF24",6,2,867,11,141,3666,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32731
 "Corner House, Cathays, CF24",6,2,867,11,143,3718,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/29347
 "Corner House, Cathays, CF24",4,4,867,11,173,2999,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/30678
 "Corner House, Cathays, CF24",4,4,867,11,173,2999,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32732
@@ -746,6 +746,7 @@ Dalton Street Cardiff,5,3,930,12,138.46,3000,No,01/08/2027,Interlet Group,https:
 "Keppoch St, Roath",4,1,966,12,115.38,2000,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Roath/10200573
 "Keppoch Street, Roath, Cardiff",3,1,967,12,117.69,1530,No,01/07/2027,Cardiff Student Letting,https://www.rightmove.co.uk/properties/94550589
 "Strathnairn Street, Roath, CF24 3JN",5,2,971,12,164.0,3553,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/632713701/cardiff/roath/5-bedroom-student-house/strathnairn-street
+"Plasnewydd Place, Roath, Cardiff",7,3,971,12,115.38,3500,No,01/07/2027,The Living Room Letting Agency,https://www.rightmove.co.uk/properties/94400547
 "Plasnewydd Place, Roath, Cardiff",7,3,971,12,115.38,3500,No,01/07/2027,The Living Room Letting Agency,https://www.rightmove.co.uk/properties/94400547
 "Woodville Road, Cathays, CF24 4NW",6,2,972,12,154.0,4004,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/244101005/cardiff/cathays/6-bedroom-student-house/woodville-road
 Woodville Road Cardiff,5,2,973,12,133.85,2900,No,01/07/2027,Interlet Group,https://www.rightmove.co.uk/properties/94499409
@@ -1185,7 +1186,6 @@ Albany Road Cardiff,5,2,1511,19,115.38,2500,No,01/07/2027,Interlet Group,https:/
 "Mackintosh Place, Roath, CF24 4RT",7,3,1534,19,151.23,4587,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/845167766/cardiff/roath/7-bedroom-student-house/mackintosh-place
 "Allensbank Crescent, Heath",6,2,1535,19,121.15,3150,No,01/07/2027,CPS Homes,https://www.cpshomes.co.uk/renting/properties/Heath/10201490
 "Allensbank Crescent Heath, Heath, CF14 3PR",4,2,1535,19,148.0,2565,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/135466838/cardiff/heath/4-bedroom-student-house/allensbank-crescent-heath
-"Clun Terrace Cathays, Cathays, CF24 4RB",5,2,1536,19,152.0,3293,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/316998795/cardiff/cathays/5-bedroom-student-house/clun-terrace-cathays
 "Mackintosh Place, Roath, CF24 4RP",6,3,1538,19,143.0,3718,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1747370732/cardiff/roath/6-bedroom-student-house/mackintosh-place
 "Arabella Street, Roath, CF24 4SY",6,2,1540,19,139.0,3614,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1547135760/cardiff/roath/6-bedroom-student-house/arabella-street
 "Lochaber Street, Cathays, CF24 3LS",7,3,1542,19,138.0,4186,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/373208798/cardiff/cathays/7-bedroom-student-house/lochaber-street
@@ -1291,7 +1291,6 @@ Cross Place Cardiff,5,2,1687,21,121.15,2625,No,01/07/2027,Interlet Group,https:/
 "Llanishen Street, Heath, Cardiff, CF14 3QD",5,1,1919,24,113.08,2450,No,01/07/2027,Cardiff Student Letting,https://www.cardiffstudentletting.com/properties/2396
 "Llanishen Street, Cardiff",6,2,1920,24,126.92,3300,No,03/07/2027,Uniek Residential Limited,https://www.rightmove.co.uk/properties/154149206
 "Llanishen Street, Heath, Cardiff, CF14 3QD",5,2,1931,24,132.69,2875,No,10/07/2027,Lettings Angels,https://www.rightmove.co.uk/properties/94601844
-"13 Australia Road, CF14",4,2,1932,24,144,2496,Yes,01/07/2027,Housr,https://www.housr.com/en-gb/student-accommodation/cardiff/property/32314
 "Australia Road, Heath, CF14 3DA",5,2,1932,24,141.0,3055,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1941737610/cardiff/heath/5-bedroom-student-house/australia-road
 "Clodien Avenue, Heath, CF14",5,2,1936,24,152.31,3300,No,01/07/2027,2 Let 2,https://www.rightmove.co.uk/properties/94766460
 "Edington Avenue, Heath, Cardiff",4,1,1936,24,139.62,2420,No,01/08/2027,The Living Room Letting Agency,https://www.rightmove.co.uk/properties/94387461
