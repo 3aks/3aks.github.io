@@ -1,10 +1,11 @@
 ﻿Address,Bedrooms,Bathrooms,Walking distance to SU (m),Walk to SU (min),Price PPPW (£),Total Monthly (£),Bills Included,Available,Agent,URL
 "Stare Green, Coventry, CV4",4,3,1301,16,199.04,3450,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/95314812
-"Stare Green, Canley, Coventry",5,5,1335,17,196.0,4247,Yes,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95665860
+"Stare Green, Canley, Coventry",5,5,1335,17,196.0,4247,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95665860
 "Old Mill Avenue, Canley, Coventry, CV4",6,6,1426,18,160.38,4170,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95101002
 "Old Mill Avenue, 1st Floor flat, Canley, Coventry, CV4",6,6,1426,18,160.38,4170,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95063919
 "Kirby Corner Road, Coventry, CV4",7,7,1476,18,185.0,5612,No,01/07/2027,OpenRent,https://www.rightmove.co.uk/properties/94648035
 "Freeburn Causeway, Cannon Park, CV4 8FQ",4,1,1572,20,151.0,2617,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/1064234904/coventry/cannon-park/4-bedroom-student-house/freeburn-causeway
+"Sir Henry Parkes Road, Canley, Coventry",7,7,1577,20,148.35,4500,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95831229
 "Sir Henry Parkes Road, Canley, Coventry",5,2,1578,20,103.71,2247,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95489916
 "Leam Green, Coventry, CV4",4,4,1582,20,201.63,3495,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/94698342
 "Coventry, Cannon Park, CV4 8EJ",7,7,1586,20,167.0,5066,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1757982678/coventry/cannon-park/7-bedroom-student-house/coventry
@@ -12,10 +13,8 @@
 "Charter Avenue, Canley, Coventry, CV4",7,7,1611,20,123.63,3750,No,01/08/2027,Red Brick Sales & Lettings,https://www.rightmove.co.uk/properties/95790963
 "Charter Avenue, Canley, Coventry, CV4",4,1,1611,20,103.85,1800,No,01/09/2027,Red Brick Sales & Lettings,https://www.rightmove.co.uk/properties/95641980
 "Lichen Green, Coventry, CV4",3,3,1626,20,168.31,2188,No,14/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95233824
-"Sir Henry Parkes Road, Cannon Park, CV4 8GG",7,7,1656,21,182.0,5521,Yes,19/07/2027,UniHomes,https://www.unihomes.co.uk/property/2030942288/coventry/cannon-park/7-bedroom-student-house/sir-henry-parkes-road
 "Charter Avenue, Coventry",8,3,1663,21,116.25,4030,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95100372
 "Leam Green, Coventry, CV4",4,2,1667,21,179.71,3115,No,01/07/2027,OpenRent,https://www.rightmove.co.uk/properties/95082678
-"Charter Avenue, Cannon Park, CV4 8GE",7,7,1686,21,145.0,4398,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/2112098527/coventry/cannon-park/7-bedroom-student-house/charter-avenue
 "Charter Avenue, Canley, Coventry, CV4",8,3,1686,21,144.23,5000,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95202873
 "Freeburn Causeway, Coventry, CV3 8FQ",4,1,1696,21,124.04,2150,Yes,02/08/2027,Cloud9 Estates Ltd,https://www.rightmove.co.uk/properties/95743728
 "Charter Avenue, Coventry, CV4",6,6,1698,21,164.0,4264,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/94794348
@@ -24,12 +23,13 @@
 "Centenary Road, Coventry, CV4",4,3,1735,22,163.5,2834,Yes,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95488104
 "Freeburn Causeway, Coventry, CV4",3,1,1756,22,146.15,1900,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/95710560
 "Charter Avenue, Coventry, CV4",5,5,1756,22,168.46,3650,Yes,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95007729
-"Sir Henry Parkes Road, Canley, Coventry",4,2,1759,22,121.15,2100,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95490300
 "Charter Avenue, Coventry, CV4",3,2,1760,22,184.62,2400,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/94695297
 "Centenary Road, Coventry, CV4",6,6,1804,23,134.62,3500,No,01/08/2027,Red Brick Sales & Lettings,https://www.rightmove.co.uk/properties/95193438
+"Centenary Road, Cannon Park, CV4 8GF",7,7,1808,23,170.0,5157,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/472502936/coventry/cannon-park/7-bedroom-student-house/centenary-road
 "Coventry, Cannon Park, CV4 8GF",8,8,1808,23,185.0,6413,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/536086060/coventry/cannon-park/8-bedroom-student-house/coventry
 "Cannon Hill Road, Coventry, Coventry, CV4 7BX",5,4,1812,23,120.97,2621,No,15/09/2027,letlaunch,https://www.rightmove.co.uk/properties/94650504
 "Mitchell Avenue, Canley, Coventry",7,7,1851,23,161.37,4895,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95604030
+"Centenary Road, Canley, Coventry",7,7,1864,23,148.35,4500,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95830788
 "Charter Avenue, Coventry, CV4",8,8,1866,23,185.25,6422,No,01/07/2027,OpenRent,https://www.rightmove.co.uk/properties/95489835
 9 Bedroom house near Canley ,9,9,1902,24,170.0,6630,No,01/09/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/95691399
 "Tutbury Avenue, Canley, Coventry, CV4",6,6,1907,24,154.42,4015,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95269197
@@ -37,7 +37,6 @@
 "Coventry, Tile Hill, CV4 8DZ",8,8,1918,24,196.0,6795,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/494314037/coventry/tile-hill/8-bedroom-student-house/coventry
 "Charter Avenue, Coventry",9,9,1920,24,170.0,6630,No,01/09/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/95691441
 "Charter Avenue, Coventry",3,2,1920,24,146.15,1900,No,01/08/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/94768023
-"Mitchell Avenue, Cannon Park, CV4 8DW",7,7,1948,24,183.0,5551,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/526977343/coventry/cannon-park/7-bedroom-student-house/mitchell-avenue
 "Charter Avenue, Coventry, CV4",7,7,1953,24,154.95,4700,Yes,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95007735
 "Charter Avenue, Coventry, CV4",5,5,1955,24,168.0,3640,Yes,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95488101
 Large Student Property for Warwick Students.,8,8,1955,24,144.23,5000,No,01/07/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/128158628
@@ -47,12 +46,9 @@ Large Student Property for Warwick Students.,8,8,1955,24,144.23,5000,No,01/07/20
 "Charter Avenue, Canley, Coventry",7,3,1970,25,123.63,3750,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95490447
 "Sheriff Avenue, Coventry, CV4 8FE",6,6,1980,25,169.04,4395,No,18/08/2027,SBK Lettings Limited,https://www.rightmove.co.uk/properties/94962153
 "Sir Henry Parkes Road, Canley, Coventry, CV4",5,2,1998,25,120.0,2600,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95097249
-"Brambling Avenue, Coventry, CV4",4,3,2002,25,150.0,2600,No,01/07/2027,Belvoir,https://www.rightmove.co.uk/properties/95662146
 "Turnstone View, Coventry, West Midlands, CV4",4,3,2011,25,135.0,2340,No,02/08/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/95320596
 "Pershore Place, Coventry, CV4",4,2,2027,25,170.19,2950,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/94866381
 "Coventry, Chapelfields, CV4 8ER",7,7,2076,26,197.0,5976,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1417284202/coventry/chapelfields/7-bedroom-student-house/coventry
-"Robin Close, Tile Hill, CV4 8NJ",5,4,2079,26,168.0,3640,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/368198264/coventry/tile-hill/5-bedroom-student-house/robin-close
-"Charter Avenue, Coventry, CV4",7,7,2080,26,184.62,5600,Yes,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/95372349
 "Charter Avenue, Coventry, CV4",6,6,2106,26,173.08,4500,No,01/07/2027,OpenRent,https://www.rightmove.co.uk/properties/94535712
 "Flat 2 - Charter Avenue, Canley, Coventry, CV4",5,6,2137,27,155.77,3375,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95642505
 "Flat 1 - Charter Avenue, Canley, Coventry, CV4",6,7,2137,27,155.77,4050,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95642403
@@ -63,21 +59,18 @@ Large Student Property for Warwick Students.,8,8,1955,24,144.23,5000,No,01/07/20
 "Gerard Avenue, Canley, Coventry",6,6,2235,28,131.54,3420,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95239581
 "Coventry, Cannon Park, CV4 8FS",6,6,2260,28,150.0,3900,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/835012513/coventry/cannon-park/6-bedroom-student-house/coventry
 "Langwood Close, Coventry",5,5,2269,28,124.62,2700,No,01/09/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/95110104
-"Gerard Avenue, Tile Hill, CV4 8FZ",6,6,2285,29,154.0,4004,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/1886361984/coventry/tile-hill/6-bedroom-student-house/gerard-avenue
 "Founder Close, Coventry, West Midlands, CV4",5,2,2316,29,101.54,2200,No,01/08/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/95373189
-"Prior Deram Walk, Cannon Park, CV4 8FS",6,6,2316,29,173.0,4498,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/336366403/coventry/cannon-park/6-bedroom-student-house/prior-deram-walk
 "Prior Deram Walk, Coventry",5,2,2318,29,124.62,2700,Yes,20/09/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/94767426
 "Sir Henry Parkes Road, Coventry, CV5",5,5,2342,29,156.0,3380,Yes,20/09/2027,OpenRent,https://www.rightmove.co.uk/properties/94863549
-"Gerard Avenue, Canley, Coventry",5,5,2360,30,105.23,2280,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95747709
+"Sir Henry Parkes Road, Earlsdon, CV5 6BX",6,6,2376,30,162.0,4212,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/1877517686/coventry/earlsdon/6-bedroom-student-house/sir-henry-parkes-road
 "Cannon Park Road, Coventry, West Midlands, CV4",5,2,2397,30,133.85,2900,No,01/08/2027,Merrick Binch Lettings & Sales,https://www.rightmove.co.uk/properties/82032080
 "Cherry Tree Drive, Cannon Park, CV4 8LY",3,2,2423,30,158.0,2054,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/823654822/coventry/cannon-park/3-bedroom-student-house/cherry-tree-drive
 "John Rous Avenue, Coventry, CV4",4,1,2444,31,141.35,2450,Yes,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/94878894
-"Cherry Tree Drive, Charter Avenue Industrial Estate, Coventry",3,2,2458,31,127.0,1651,No,02/08/2027,Vesta Properties Agency,https://www.onthemarket.com/details/9631900/
 "Canley Road, Coventry ",5,2,2461,31,115.38,2500,No,01/08/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/153796340
 "Cherry Tree, Coventry",4,3,2475,31,167.31,2900,No,01/08/2027,Accord Lets,https://www.rightmove.co.uk/properties/94551099
 "Cherry Tree Drive, Coventry, CV4",4,3,2476,31,167.0,2895,No,01/08/2027,Accord Lets,https://www.onthemarket.com/details/18879304/
 "Scarborough Way, Coventry, CV4",7,7,2483,31,164.84,5000,Yes,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/95379894
-"John Rous Avenue, Canley, Coventry",7,7,2484,31,161.37,4895,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95591793
+"John Rous Avenue, Canley, Coventry",7,7,2484,31,148.35,4500,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95591793
 "Coventry, Tile Hill, CV4 8NB",4,3,2519,31,148.0,2565,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/32513610/coventry/tile-hill/4-bedroom-student-house/coventry
 "Cherry Tree Drive, Coventry, West Midlands, CV4",4,3,2543,32,121.15,2100,No,02/08/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/95373840
 "Cherry Tree Drive, Coventry, CV4",3,2,2543,32,132.69,1725,No,02/08/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/95325534
@@ -86,22 +79,21 @@ Large Student Property for Warwick Students.,8,8,1955,24,144.23,5000,No,01/07/20
 "Dilcock Way, Coventry, CV4",8,8,2626,33,173.08,6000,Yes,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/95379879
 "Charter Avenue, Canley, Coventry",5,2,2806,35,110.77,2400,No,01/09/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/94767525
 "Coventry, Cannon Park, CV4 7AR",5,2,2833,35,133.0,2882,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/954697467/coventry/cannon-park/5-bedroom-student-house/coventry
-"Ten Shilling Drive, Coventry, CV4 8GZ",5,3,2925,37,115.38,2500,Yes,10/08/2027,Cloud9 Estates Ltd,https://www.rightmove.co.uk/properties/95401791
+"Ten Shilling Drive, Westwood Heath, CV4 8GZ",5,3,3024,38,141.0,3055,Yes,10/08/2027,UniHomes,https://www.unihomes.co.uk/property/1987725484/coventry/westwood-heath/5-bedroom-student-house/ten-shilling-drive
 "Stanley Road, Earlsdon, Coventry, CV5",4,2,3682,46,113.37,1965,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95053569
 "Earlsdon Street, Earlsdon, Coventry, CV5",6,3,3736,47,120.0,3120,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95438328
 "Earlsdon Street, Earlsdon, Coventry, CV5",6,2,3736,47,96.92,2520,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95049465
 "Kingsland Avenue, Earlsdon, Coventry",4,2,3856,48,98.08,1700,No,01/08/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/94767867
 "Hearsall Lane, Earlsdon, Coventry, CV5",4,1,3897,49,94.62,1640,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95049846
 "Sir Thomas Whites Road, Chapelfields, CV5 8DR",4,2,4010,50,139.0,2409,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/929511512/coventry/chapelfields/4-bedroom-student-house/sir-thomas-whites-road
+"Kirby Road, Earlsdon, CV5 6HL",3,1,4126,52,147.0,1911,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1141343571/coventry/earlsdon/3-bedroom-student-house/kirby-road
 "Queensland Avenue, Earlsdon, CV5 8FH",5,3,4132,52,150.0,3250,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1058725057/coventry/earlsdon/5-bedroom-student-house/queensland-avenue
 "Earlsdon Avenue North, Coventry",4,2,4135,52,98.08,1700,No,01/08/2027,Envisage Sales & Lettings,https://www.rightmove.co.uk/properties/160503911
 "Sovereign Road, Earlsdon, Coventry, CV5",3,1,4136,52,114.23,1485,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95066223
 "Sir Thomas Whites Road, Coventry, CV5 8DQ",4,2,4154,52,103.85,1800,No,01/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94499145
 "Kingston Road, Earlsdon, Coventry, CV5",6,2,4166,52,97.12,2525,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95498409
 "Earlsdon Avenue North, Earlsdon, Coventry, CV5",4,2,4187,52,120.0,2080,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95265303
-"Highland Road, Coventry, CV5",4,1,4189,52,103.85,1800,Yes,01/07/2027,OpenRent,https://www.rightmove.co.uk/properties/95529192
 "Bristol Road, Earlsdon, CV5 6LL",3,1,4207,53,170.0,2210,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/130591007/coventry/earlsdon/3-bedroom-student-house/bristol-road
-Craven Street,4,4,4232,53,121.0,2097,No,02/08/2027,Vesta Properties Agency,https://www.onthemarket.com/details/4842599/
 "Craven Street, Earlsdon, CV5 8DU",4,4,4306,54,148.0,2565,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/1207628479/coventry/earlsdon/4-bedroom-student-house/craven-street
 "Dalehouse Lane, Kenilworth, Warwickshire, CV8",4,1,4326,54,112.5,1950,No,02/08/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/94691328
 "Melbourne Road, Earlsdon, CV5 6JP",3,1,4327,54,171.0,2223,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/1987663035/coventry/earlsdon/3-bedroom-student-house/melbourne-road
@@ -148,25 +140,26 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "Monks Road, Coventry, CV1",5,5,7066,88,138.46,3000,Yes,01/07/2027,OpenRent,https://www.rightmove.co.uk/properties/94433109
 "Knight Avenue, Coventry, West Midlands, CV1",6,,7068,88,132.69,3450,No,01/07/2027,1st Class Student Homes,https://www.rightmove.co.uk/properties/132825266
 "Irving Road, Coventry, West Midlands, CV1",3,,7070,88,129.23,1680,No,01/07/2027,1st Class Student Homes,https://www.rightmove.co.uk/properties/98132627
-"Northfield Road, Hillfields, CV12BQ",5,2,7080,88,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/254997-5-bed-house-hillfields-coventry
 "Northfield Road, Hillfields, CV12BQ",6,1,7080,88,175,4550,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/254999-6-bed-house-hillfields-coventry
+"Northfield Road, Hillfields, CV12BQ",5,2,7080,88,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/254997-5-bed-house-hillfields-coventry
+"Irving Road, Stoke, CV1 2AX",5,5,7080,88,162.0,3510,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/958350161/coventry/stoke/5-bedroom-student-house/irving-road
 "Northfield Road, Hillfields, CV12BQ",3,1,7088,89,105,1365,Yes,01/07/2027,Mercia Student Lets,https://www.accommodationforstudents.com/property/279030-3-bed-house-hillfields-coventry
 "Grafton Street, City Centre, CV1 2HW",5,5,7088,89,160.0,3467,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1417001811/coventry/city-centre/5-bedroom-student-house/grafton-street
 "David Road, Stoke, CV12BW",4,3,7089,89,110,1907,Yes,01/07/2027,Mercia Student Lets,https://www.accommodationforstudents.com/property/251350-4-bed-house-stoke-coventry
 "Irving Road, Hillfields, CV12AX",3,3,7107,89,129,1677,Yes,07/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255622-3-bed-house-hillfields-coventry
 "Irving Road, Hillfields, CV12AX",5,2,7107,89,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/255000-5-bed-house-hillfields-coventry
 "Irving Road, Hillfields, CV12AX",5,2,7107,89,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/254474-5-bed-house-hillfields-coventry
-"Irving Road, Hillfields, CV12AX",5,2,7107,89,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/252534-5-bed-house-hillfields-coventry
 "Irving Road, Hillfields, CV12AX",5,2,7107,89,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/252533-5-bed-house-hillfields-coventry
+"Irving Road, Hillfields, CV12AX",5,2,7107,89,145,3142,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/252534-5-bed-house-hillfields-coventry
 "Irving Road, City Centre, CV1 2AX",5,6,7108,89,154.0,3337,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1669080740/coventry/city-centre/5-bedroom-student-house/irving-road
 "Irving Road, Coventry",6,6,7109,89,126.92,3300,No,01/09/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95506152
+"Willowbank Mews, Hillfields, CV12BN",4,6,7110,89,129,2236,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275803-4-bed-house-hillfields-coventry
+"Willowbank Mews, Hillfields, CV12BN",4,2,7110,89,129,2236,No,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/274143-4-bed-house-hillfields-coventry
 "Willowbank Mews, Hillfields, CV12BN",5,6,7110,89,129,2795,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275802-5-bed-house-hillfields-coventry
 "Willowbank Mews, Hillfields, CV12BN",3,6,7110,89,129,1677,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275804-3-bed-house-hillfields-coventry
 "Willowbank Mews, Hillfields, CV12BN",6,6,7110,89,129,3354,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275801-6-bed-house-hillfields-coventry
-"Willowbank Mews, Hillfields, CV12BN",4,6,7110,89,129,2236,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275803-4-bed-house-hillfields-coventry
-"Willowbank Mews, Hillfields, CV12BN",4,2,7110,89,129,2236,No,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/274143-4-bed-house-hillfields-coventry
-"Willowbank Mews, Hillfields, CV12BN",9,6,7110,89,129,5031,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275799-9-bed-house-hillfields-coventry
 "Willowbank Mews, Hillfields, CV12BN",9,6,7110,89,129,5031,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275798-9-bed-house-hillfields-coventry
+"Willowbank Mews, Hillfields, CV12BN",9,6,7110,89,129,5031,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275799-9-bed-house-hillfields-coventry
 "Willowbank Mews, Hillfields, CV12BN",7,6,7110,89,129,3913,Yes,01/07/2027,Lettuce Student Accommodation,https://www.accommodationforstudents.com/property/275800-7-bed-house-hillfields-coventry
 "Gulson Road, Stoke, Coventry",6,6,7111,89,119.23,3100,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95143326
 "Irving Road, Hillfields, CV12AX",3,3,7112,89,165,2145,Yes,01/07/2027,Mercia Student Lets,https://www.accommodationforstudents.com/property/279018-3-bed-house-hillfields-coventry
@@ -175,10 +168,10 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "Gulson Road, City centre, CV12JD",5,5,7144,89,130,2817,Yes,01/07/2027,Mercia Student Lets,https://www.accommodationforstudents.com/property/131609-5-bed-house-city-centre-coventry
 "Terry Road, Coventry, West Midlands, CV1",4,5,7159,89,131.54,2280,No,01/07/2027,1st Class Student Homes,https://www.rightmove.co.uk/properties/115461734
 "Botoner Road, City Centre, CV1 2DA",4,4,7162,90,175.0,3033,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/775096119/coventry/city-centre/4-bedroom-student-house/botoner-road
-"Terry Road, Hillfields, CV12AW",5,6,7171,90,120,2600,Yes,01/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255695-5-bed-house-hillfields-coventry
 "Terry Road, Hillfields, CV12AW",5,5,7171,90,120,2600,Yes,07/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255692-5-bed-house-hillfields-coventry
-"Terry Road, Hillfields, CV12AW",5,6,7171,90,120,2600,Yes,07/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255690-5-bed-house-hillfields-coventry
+"Terry Road, Hillfields, CV12AW",5,6,7171,90,120,2600,Yes,01/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255695-5-bed-house-hillfields-coventry
 "Terry Road, Hillfields, CV12AW",5,6,7171,90,120,2600,Yes,07/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255694-5-bed-house-hillfields-coventry
+"Terry Road, Hillfields, CV12AW",5,6,7171,90,120,2600,Yes,07/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255690-5-bed-house-hillfields-coventry
 "Terry Road, Coventry, West Midlands, CV1",5,5,7174,90,126.92,2750,No,01/07/2027,1st Class Student Homes,https://www.rightmove.co.uk/properties/118134548
 "Terry Road, Whitley village, CV12BA",4,4,7178,90,127,2201,Yes,07/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255724-4-bed-house-whitley-village-coventry
 "Northfield Road, Hillfields, CV12BP",5,5,7178,90,120,2600,Yes,01/08/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255689-5-bed-house-hillfields-coventry
@@ -192,6 +185,7 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "St. Margaret Road, Stoke, CV1 2BT",4,4,7233,90,136.0,2357,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/1260125823/coventry/stoke/4-bedroom-student-house/st-margaret-road
 "St. Margaret Road, Stoke, CV1 2BT",4,4,7233,90,122.0,2115,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/661494083/coventry/stoke/4-bedroom-student-house/st-margaret-road
 "St. Margaret Road, Stoke, Coventry",5,5,7245,91,113.08,2450,No,02/08/2027,Prominence Estates,https://www.rightmove.co.uk/properties/95165184
+"Terry Road, Charterhouse, Coventry, CV1",3,1,7247,91,100.38,1305,No,01/08/2027,Wise Lettings,https://www.rightmove.co.uk/properties/95840784
 "Terry Road, Whitley village, CV12AZ",4,5,7291,91,130,2253,Yes,01/07/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/309871-4-bed-house-whitley-village-coventry
 "Humber Avenue, Coventry, West Midlands, CV1",5,5,7313,91,126.92,2750,No,01/07/2027,1st Class Student Homes,https://www.rightmove.co.uk/properties/115455434
 "Wren Street, Hillfields, CV24FT",6,6,7320,92,120,3120,Yes,10/09/2027,1st Class Student Homes,https://www.accommodationforstudents.com/property/255697-6-bed-house-hillfields-coventry
@@ -229,10 +223,8 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "Oxford Street, Leamington Spa, CV32",5,2,12661,158,114.23,2475,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/94534692
 "9 Hurley Close, Leamington Spa, Warwickshire, CV32",4,2,12681,159,168.0,2912,No,01/08/2027,Belvoir,https://www.rightmove.co.uk/properties/87183707
 "3a Oxford Street, Leamington Spa",5,2,12725,159,114.23,2475,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94517475
-"13 Oxford Street, Leamington Spa",6,2,12725,159,140.77,3660,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94510404
 "Oxford Street, Leamington Spa",5,2,12726,159,111.92,2425,No,01/08/2027,Handles Property,https://www.rightmove.co.uk/properties/94518498
 "21 Hill Street,Leamington Spa,CV32",4,1,12727,159,98.08,1700,No,01/08/2027,Belvoir,https://www.rightmove.co.uk/properties/32500778
-"Oxford Street, Town Centre, CV32 4RA",6,2,12731,159,166.0,4316,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/2017237442/leamington-spa/town-centre/6-bedroom-student-house/oxford-street
 "Oxford Street, Town Centre, CV32 4RA",6,2,12731,159,175.0,4550,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/2130716580/leamington-spa/town-centre/6-bedroom-student-house/oxford-street
 "Sheepcote Close, Leamington Spa, Warwickshire, CV32",6,2,12753,159,100.0,2600,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/155790482
 "Hill Street, Leamington Spa, Warwickshire, CV32",4,2,12756,159,132.69,2300,No,15/07/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/94392342
@@ -252,6 +244,7 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "68 Leicester Street, Leamington Spa",6,2,12879,161,126.92,3300,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94552191
 "60 Leicester Street, Leamington Spa, CV32 4TB",6,2,12879,161,135.0,3510,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94511430
 "76 Leicester Street, Leamington Spa, Warwickshire, CV32",6,1,12890,161,80.77,2100,No,01/09/2027,Belvoir,https://www.rightmove.co.uk/properties/86411894
+"74 Leicester Street, Leamington Spa, CV32 4TB",4,1,12894,161,83.65,1450,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95839578
 "Union Road, Leamington Spa, Warwickshire, CV32",7,3,12916,161,128.08,3885,No,14/07/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/94396917
 "24 Leicester Street, Leamington Spa",8,2,12938,162,100.38,3480,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94500645
 "Leicester Street, Leamington Spa, Warwickshire, CV32",4,1,12952,162,103.56,1795,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94846674
@@ -262,8 +255,8 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "Leicester Street, North Leamington, CV32 4TB",4,2,13050,163,125.0,2167,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1434383749/leamington-spa/north-leamington/4-bedroom-student-house/leicester-street
 "11 Newbold Street, CV32 4HN",6,3,13088,164,132.69,3450,No,01/08/2027,Prospero Properties,https://www.rightmove.co.uk/properties/94584372
 "King Street, Leamington Spa, CV32",5,2,13092,164,161.54,3500,No,14/07/2027,Leaders Lettings,https://www.rightmove.co.uk/properties/94403556
+"Newbold Street, Town Centre, CV32 4HN",6,2,13094,164,133.0,3458,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1307289830/leamington-spa/town-centre/6-bedroom-student-house/newbold-street
 "17, Newbold Street, Leamington Spa",6,2,13094,164,109.62,2850,No,01/08/2027,Handles Property,https://www.rightmove.co.uk/properties/94518156
-"Newbold Street, Town Centre, CV32 4HN",6,3,13099,164,156.0,4056,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/642878167/leamington-spa/town-centre/6-bedroom-student-house/newbold-street
 "20C Princes Street, Leamington Spa, Warwickshire, CV32",4,3,13103,164,162.0,2808,No,01/08/2027,Belvoir,https://www.rightmove.co.uk/properties/87183134
 "Campion Terrace, Town Centre, CV32 4SU",4,2,13103,164,132.0,2288,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1198578545/leamington-spa/town-centre/4-bedroom-student-house/campion-terrace
 "11 Hampton Grove, Leamington Spa, Warwickshire, CV32",4,2,13108,164,162.0,2808,No,01/08/2027,Belvoir,https://www.rightmove.co.uk/properties/87184523
@@ -278,7 +271,7 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "129 Greenwood Court, Upper Holly Walk, Leamington Spa, Warwickshire, CV32",4,2,13196,165,165.0,2860,No,01/08/2027,Belvoir,https://www.rightmove.co.uk/properties/128155763
 "Rugby Road, Leamington Spa, CV32",8,2,13206,165,103.85,3600,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94834776
 "Bedford Street, Leamington Spa",6,2,13209,165,129.23,3360,No,01/08/2027,Handles Property,https://www.rightmove.co.uk/properties/94756428
-"Cambridge Gardens, Upper Holly Walk, Leamington Spa, Warwickshire, CV32",5,2,13252,166,129.0,2795,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95262225
+"Cambridge Gardens, Upper Holly Walk, Leamington Spa, Warwickshire, CV32",5,3,13252,166,129.0,2795,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95262225
 "2 Cambridge Gardens, Leamington Spa",5,3,13401,168,129.0,2795,No,01/09/2027,Student Homes,https://www.rightmove.co.uk/properties/95667372
 "12 Station Approach, Leamington Spa",7,3,13541,169,140.77,4270,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94501788
 "2 Gloucester Street, Leamington Spa",7,2,13569,170,92.31,2800,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94653825
@@ -291,8 +284,6 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "11, Chapel Cross, Chapel Street, Leamington Spa",8,4,13664,171,126.92,4400,No,01/08/2027,Leamington Selection,https://www.rightmove.co.uk/properties/94619364
 "Chapel Cross, Town Centre, CV31 1EU",8,4,13664,171,148.0,5131,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1598647967/leamington-spa/town-centre/8-bedroom-student-house/chapel-cross
 "Russell Terrace, Leamington Spa, CV31 1FU",6,2,13689,171,100.0,2600,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95091444
-"Packington Place, Town Centre, CV31 1EP",3,2,13698,171,208.0,2704,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/101888499/leamington-spa/town-centre/3-bedroom-student-house/packington-place
-"Packington Place, Town Centre, CV31 1EP",4,2,13698,171,179.0,3103,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/497070149/leamington-spa/town-centre/4-bedroom-student-house/packington-place
 "Russell Terrace, Leamington Spa, Warwickshire, CV31",6,2,13705,171,100.0,2600,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/70177052
 "Clemens Street, Town Centre, CV31 2DL",6,2,13725,172,158.0,4108,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/576101881/leamington-spa/town-centre/6-bedroom-student-house/clemens-street
 "George Street, Leamington Spa, CV31",5,2,13738,172,144.0,3120,No,01/08/2027,Belvoir,https://www.onthemarket.com/details/14158727/
@@ -331,8 +322,6 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "38 Gordon Street, Leamington Spa",6,2,13850,173,165.0,4290,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94476555
 "Gordon Street, Leamington Spa, CV31",6,2,13851,173,130.77,3400,Yes,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95081082
 "Gordon Street, Leamington Spa, CV31",6,2,13851,173,126.92,3300,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/94904934
-"Gordon Street, Town Centre, CV31 1HR",6,2,13852,173,152.0,3952,Yes,01/09/2027,UniHomes,https://www.unihomes.co.uk/property/1063629667/leamington-spa/town-centre/6-bedroom-student-house/gordon-street
-"Gordon Street, Town Centre, CV31 1HR",6,2,13852,173,167.0,4342,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/2140970176/leamington-spa/town-centre/6-bedroom-student-house/gordon-street
 "6 bed HMO 43 Gordon St , CV31 1HR",6,2,13854,173,144.23,3750,No,01/08/2027,Prospero Properties,https://www.rightmove.co.uk/properties/94683393
 "Gordon Street, Leamington Spa, Warwickshire, CV31",4,1,13855,173,82.21,1425,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95758725
 "18 Plymouth Place, Leamington Spa",4,2,13869,173,173.08,3000,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94476102
@@ -368,11 +357,10 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "Tachbrook Road, South Leamington, CV31 3DT",5,2,14038,175,176.0,3813,Yes,15/08/2027,UniHomes,https://www.unihomes.co.uk/property/304952929/leamington-spa/south-leamington/5-bedroom-student-house/tachbrook-road
 "Tachbrook Road, South Leamington, CV31 3DT",4,1,14038,175,162.0,2808,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1839423983/leamington-spa/south-leamington/4-bedroom-student-house/tachbrook-road
 "Gundry Close, Town Centre, CV31 1LR",6,3,14048,176,132.0,3432,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/883545003/leamington-spa/town-centre/6-bedroom-student-house/gundry-close
+"Ranelagh Terrace, Town Centre, CV31 3BS",4,2,14062,176,170.0,2947,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/210974221/leamington-spa/town-centre/4-bedroom-student-house/ranelagh-terrace
 "Willes Road, Leamington Spa, Warwickshire, CV31",8,4,14063,176,115.24,3995,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/101784122
-"15 Ranelagh Terrace, Leamington Spa",4,2,14069,176,167.31,2900,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94477524
 "Tachbrook Road, South Leamington, CV31 3DT",3,1,14073,176,158.0,2054,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1977489501/leamington-spa/south-leamington/3-bedroom-student-house/tachbrook-road
 "Northcote Street, Town Centre, CV31 1DX",4,2,14083,176,173.0,2999,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/2067519690/leamington-spa/town-centre/4-bedroom-student-house/northcote-street
-"Ranelagh Terrace, Town Centre, CV31 3BS",4,2,14088,176,196.0,3397,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1262356605/leamington-spa/town-centre/4-bedroom-student-house/ranelagh-terrace
 "Ranelagh Terrace, Town Centre, CV31 3BS",4,1,14088,176,136.0,2357,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/2047230256/leamington-spa/town-centre/4-bedroom-student-house/ranelagh-terrace
 "Tachbrook Road, Leamington Spa, Warwickshire, CV31",5,2,14102,176,126.92,2750,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94788477
 "95 Radford Road, Leamington Spa",7,2,14116,176,121.15,3675,No,15/08/2027,Student Homes,https://www.rightmove.co.uk/properties/94463979
@@ -393,7 +381,7 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "Charlotte Street, Leamington Spa, Town Centre, CV31 3EB",5,2,14156,177,134.0,2903,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1278405532/leamington-spa/town-centre/5-bedroom-student-house/charlotte-street-leamington-spa
 "Charlotte Street, Town Centre, CV31 3EB",5,1,14156,177,142.0,3077,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1624680771/leamington-spa/town-centre/5-bedroom-student-house/charlotte-street
 "Tachbrook Road, Town Centre, CV31 3EA",5,2,14166,177,146.0,3163,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/24335296/leamington-spa/town-centre/5-bedroom-student-house/tachbrook-road
-"Charlottle Street, Leamington Spa, CV31",5,2,14175,177,122.31,2650,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95469183
+"Charlottle Street, Leamington Spa, CV31",5,2,14175,177,115.38,2500,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95469183
 "Charlotte Street, Leamington Spa, Warwickshire, CV31",9,3,14177,177,126.92,4950,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/63073187
 "175 Leam Terrace, Leamington Sps",3,1,14184,177,138.46,1800,No,15/08/2027,Student Homes,https://www.rightmove.co.uk/properties/94463838
 "Leam Terrace, Town Centre, CV31 1DW",4,1,14230,178,137.0,2375,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1211989662/leamington-spa/town-centre/4-bedroom-student-house/leam-terrace
@@ -407,10 +395,8 @@ Poppleton Close,7,6,6342,79,115.0,3488,No,02/08/2027,Vesta Properties Agency,htt
 "15 Aylesford Street, Leamington Spa",4,3,14268,178,163.85,2840,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94477413
 "13 Aylesford Street, Leamington Spa",4,3,14268,178,163.85,2840,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94477389
 "1 Aylesford Street, Leamington Spa, CV31 2AL",5,2,14268,178,161.54,3500,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94462314
-"Aylesford Street, Town Centre, CV31 2AL",5,3,14270,178,211.0,4572,Yes,05/07/2027,UniHomes,https://www.unihomes.co.uk/property/1709610569/leamington-spa/town-centre/5-bedroom-student-house/aylesford-street
 "Aylesford Street, Town Centre, CV31 2AL",5,2,14270,178,188.0,4073,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1281163634/leamington-spa/town-centre/5-bedroom-student-house/aylesford-street
 "2 Eagle Street, Leamington Spa",6,2,14273,178,124.62,3240,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94466877
-"Brunswick Street, South Leamington, CV31 2EH",4,2,14287,179,137.0,2375,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/944085692/leamington-spa/south-leamington/4-bedroom-student-house/brunswick-street
 "23 Aylesford Street, Leamington Spa",5,1,14290,179,117.69,2550,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94462620
 Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95744583
 "Claremont Road, Leamington Spa, Warwickshire, CV31",5,2,14293,179,92.08,1995,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95779865
@@ -427,16 +413,15 @@ Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https:/
 "110 Shrubland Street, Leamington Spa",6,2,14349,179,108.46,2820,No,05/08/2027,Student Homes,https://www.rightmove.co.uk/properties/94565385
 "6 Bed HMO 133 Tachbrook Road, CV31 3EE",6,2,14352,179,117.69,3060,No,01/08/2027,Prospero Properties,https://www.rightmove.co.uk/properties/94584435
 "149 Tachbrook Road, Leamington Spa",6,3,14353,179,144.23,3750,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94517457
-"Tachbrook Road, Town Centre, CV31 3EE",6,2,14353,179,141.0,3666,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/623220082/leamington-spa/town-centre/6-bedroom-student-house/tachbrook-road
 "Eagle Street, Town Centre, CV31 2AQ",3,1,14354,179,143.0,1859,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/224780243/leamington-spa/town-centre/3-bedroom-student-house/eagle-street
 "Tachbrook Road, South Leamington, CV31 3EE",6,2,14355,179,138.39,3598,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/342918600/leamington-spa/south-leamington/6-bedroom-student-house/tachbrook-road
+"Tachbrook Road, South Leamington, CV31 3EE",6,3,14355,179,169.0,4394,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/2071527582/leamington-spa/south-leamington/6-bedroom-student-house/tachbrook-road
 "29 Eagle Street, Leamington",5,1,14356,179,109.62,2375,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94524309
 "Shrubland Street, Town Centre, CV31 2AR",7,2,14356,179,134.0,4065,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1610075222/leamington-spa/town-centre/7-bedroom-student-house/shrubland-street
 "64 Tachbrook Street, Leamington Spa",4,1,14358,179,126.92,2200,Yes,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94550004
 "89 Tachbrook Street, Leamington Spa",4,1,14358,179,109.62,1900,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94515078
 "Tachbrook Street, Town Centre, CV31 2BG",4,1,14369,180,156.0,2704,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1015795774/leamington-spa/town-centre/4-bedroom-student-house/tachbrook-street
 "86 Shrubland Street, Leamington Spa",4,2,14372,180,126.92,2200,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94521525
-"48 Kingsway, Leamington Spa",9,4,14387,180,123.46,4815,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94514646
 "99 Clapham Terrace, Leamington Spa",5,1,14388,180,96.92,2100,No,01/08/2027,Student Homes,https://www.rightmove.co.uk/properties/95237124
 "Lee Road, South Leamington, CV31 3JQ",5,2,14397,180,146.0,3163,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/93583892/leamington-spa/south-leamington/5-bedroom-student-house/lee-road
 "Baker Avenue, Town Centre, CV31 3HB",6,2,14407,180,153.77,3998,Yes,02/08/2027,UniHomes,https://www.unihomes.co.uk/property/1027883508/leamington-spa/town-centre/6-bedroom-student-house/baker-avenue
@@ -446,11 +431,10 @@ Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https:/
 "6 Baker Avenue, Leamington Spa",4,1,14418,180,122.31,2120,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94463289
 "Tachbrook Road, Leamington Spa, CV31",7,3,14420,180,95.44,2895,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95143695
 "Tachbrook Road, Leamington Spa, Warwickshire, CV31",7,3,14422,180,95.6,2900,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/98771087
-"75 Tachbrook Street, Leamington Spa",5,1,14423,180,92.31,2000,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94530792
 "Leamington Spa, CV31",6,4,14432,180,126.92,3300,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94842366
 "Tachbrook Road, South Leamington, CV31 3BE",6,4,14432,180,150.0,3900,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1649991235/leamington-spa/south-leamington/6-bedroom-student-house/tachbrook-road
 "94, Tachbrook Street, Leamington Spa, CV31 2BH",4,,14435,180,86.25,1495,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95758200
-"Llewelyn Road Leamington Spa, CV31 2BJ",6,3,14448,181,111.54,2900,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95762301
+"Llewelyn Road Leamington Spa, CV31 2BJ",6,3,14448,181,113.46,2950,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95762301
 "Llewellyn Road, Leamington Spa, Warwickshire, CV31",6,2,14448,181,111.54,2900,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/63208574
 "Tachbrook Road, South Leamington, CV31 3BE",6,4,14449,181,160.0,4160,Yes,01/07/2027,UniHomes,https://www.unihomes.co.uk/property/579106768/leamington-spa/south-leamington/6-bedroom-student-house/tachbrook-road
 "Tachbrook Road, South Leamington, CV31 3BE",3,1,14449,181,139.0,1807,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/1095197215/leamington-spa/south-leamington/3-bedroom-student-house/tachbrook-road
@@ -460,7 +444,7 @@ Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https:/
 "Llewellyn Road, South Leamington, CV31 2BJ",5,2,14452,181,142.0,3077,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1333744248/leamington-spa/south-leamington/5-bedroom-student-house/llewellyn-road
 "Llewelyn Road, Leamington, Cv31 2Bj, South Leamington, CV31 2BJ",4,1,14452,181,180.0,3120,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/2078206664/leamington-spa/south-leamington/4-bedroom-student-house/llewelyn-road-leamington-cv31-2bj
 "Brunswick Street, Leamington Spa, Warwickshire, CV31",5,2,14456,181,121.15,2625,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/37949562
-"Brunswick Street, Leamington Spa, CV31",4,2,14456,181,115.38,2000,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95375625
+"Brunswick Street, Leamington Spa, CV31",4,2,14456,181,121.15,2100,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95375625
 "25 Llewellyn Road, CV31 2BJ",5,2,14456,181,116.54,2525,No,01/08/2027,Prospero Properties,https://www.rightmove.co.uk/properties/94635663
 "96 Brunswick Street, Leamington Spa, Warwickshire, CV31",5,2,14457,181,88.85,1925,No,01/08/2027,Belvoir,https://www.rightmove.co.uk/properties/69955748
 "Tachbrook Road, Leamington Spa, Warwickshire, CV31",6,4,14457,181,134.42,3495,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/115338500
@@ -471,8 +455,6 @@ Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https:/
 "Eagle Street, Leamington Spa, CV31",4,1,14461,181,109.62,1900,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/94905039
 "Hawthorn Road, Leamington Spa, Warwickshire, CV31",4,1,14462,181,103.56,1795,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95759043
 "36 Charles Gardner Road, Leamington Spa",4,1,14486,181,109.62,1900,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/95671722
-"Southlea Avenue, South Leamington, CV31 3JN",4,1,14488,181,133.0,2305,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1200596039/leamington-spa/south-leamington/4-bedroom-student-house/southlea-avenue
-"Eagle Street, Leamington Spa, CV31",7,2,14512,181,118.85,3605,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/94565118
 "123 Tachbrook Street, Leamington Spa",4,1,14517,181,126.92,2200,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94475916
 "Central Avenue, Leamington Spa, Warwickshire, CV31",6,2,14526,182,92.31,2400,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/98753369
 "15, Central Avenue, Leamington Spa, CV31 3EZ",6,,14527,182,92.31,2400,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95143392
@@ -488,14 +470,12 @@ Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https:/
 "St. Helens Road, Town Centre, CV31 3QQ",5,2,14573,182,145.0,3142,Yes,15/07/2027,UniHomes,https://www.unihomes.co.uk/property/729070665/leamington-spa/town-centre/5-bedroom-student-house/st-helens-road
 "14 St. Helens Road, Leamington Spa",6,2,14576,182,109.62,2850,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94550274
 "7 Elizabeth Road, Leamington Spa",6,2,14583,182,141.92,3690,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94463715
-"Kingsway, Leamington Spa",5,2,14592,182,126.92,2750,No,01/08/2027,Accord Lets,https://www.rightmove.co.uk/properties/94561110
 "Brunswick Street, Leamington Spa, Warwickshire, CV31",7,3,14592,182,121.15,3675,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/37948716
 "St. Helens Road, Leamington Spa, CV31",6,2,14623,183,114.23,2970,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/94534650
 "Alexandra Road, Leamington Spa, Warwickshire, CV31",6,3,14630,183,94.23,2450,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/38158134
 "27 Grosvenor Road, Leamington Spa",7,3,14663,183,122.31,3710,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94544286
 "St. Davids Close, Town Centre, CV31 1NN",5,2,14664,183,124.0,2687,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1529820838/leamington-spa/town-centre/5-bedroom-student-house/st-davids-close
-"8 St David's Close, Sydenham, Leamington Spa",5,2,14675,183,98.08,2125,No,01/08/2027,Student Homes,https://www.rightmove.co.uk/properties/94461753
-"Southway, Leamington Spa, CV31",4,2,14684,184,126.92,2200,No,01/08/2027,OpenRent,https://www.rightmove.co.uk/properties/95362515
+"Southway, Leamington Spa, CV31",4,2,14684,184,126.92,2200,No,01/09/2027,OpenRent,https://www.rightmove.co.uk/properties/95362515
 "Southway, Leamington Spa, Warwickshire, CV31",4,1,14686,184,121.15,2100,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/37950444
 "Wych Elm Drive, Leamington Spa, Warwickshire, CV31",8,3,14686,184,138.46,4800,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/37948323
 "63 Kingsway, Leamington Spa",5,2,14695,184,126.92,2750,No,15/07/2027,Student Homes,https://www.rightmove.co.uk/properties/94544418
@@ -506,10 +486,9 @@ Claremont Road,5,2,14292,179,92.08,1995,No,01/08/2027,Golden Key Estates,https:/
 "Southway, Leamington Spa",4,2,14746,184,121.15,2100,No,01/08/2027,Accord Lets,https://www.rightmove.co.uk/properties/94674627
 "5 Marloes Walk, Sydenham, Leamington Spa",5,1,14749,184,99.23,2150,No,15/08/2027,Student Homes,https://www.rightmove.co.uk/properties/94516152
 "Alexandra Road, Leamington Spa, Warwickshire, CV31",4,2,14757,184,114.23,1980,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94845285
-"Staunton Road, Leamington Spa, Warwickshire, CV31",6,2,14768,185,109.62,2850,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95761494
+"Staunton Road, Leamington Spa, Warwickshire, CV31",6,2,14768,185,115.19,2995,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/95761494
 "Staunton Road, Leamington Spa, Warwickshire, CV31",6,2,14768,185,109.62,2850,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/40196736
 48 ALEXANDRA ROAD,5,2,14774,185,114.23,2475,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94845990
-"St David's Close, Sydenham, Leamington Spa, Town Centre, CV31 1NN",5,2,14775,185,124.0,2687,Yes,01/08/2027,UniHomes,https://www.unihomes.co.uk/property/1945957557/leamington-spa/town-centre/5-bedroom-student-house/st-davids-close-sydenham-leamington-spa
 "8 Elizabeth Road, CV31 3LJ",5,2,14780,185,111.92,2425,No,01/08/2027,Prospero Properties,https://www.rightmove.co.uk/properties/94435917
 "50 ALEXANDRA ROAD, LEAMINGTON SPA",5,2,14782,185,114.23,2475,No,01/08/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94846461
 "Southway, Leamington Spa",4,1,14793,185,121.15,2100,No,01/09/2027,Golden Key Estates,https://www.rightmove.co.uk/properties/94821138
